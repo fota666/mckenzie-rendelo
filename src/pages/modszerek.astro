@@ -1,0 +1,212 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const methods = [
+  {
+    id: 'mckenzie',
+    title: 'McKenzie-módszer (MDT)',
+    subtitle: 'Fő szakterületünk',
+    image: '/images/modszerek/mckenzie.jpg',
+    featured: true,
+    description: 'A McKenzie-módszer egy részletes mozgásvizsgálatra épülő egyéni mozgásprogram, amely igen hatékony különböző eredetű gerincproblémák — gerincsérv, porckorongsérv — esetében.',
+    details: 'A módszert Robin McKenzie új-zélandi gyógytornász fejlesztette ki, és ma már több mint 40 országban alkalmazzák. Lényege, hogy a páciens aktív résztvevője saját gyógyulásának: célzott gyakorlatokkal és önkezelési stratégiákkal tartós eredményeket érünk el.',
+    howItWorks: [
+      'Alapos mozgásvizsgálat: ismételt speciális mozgások és pozíciók, miközben figyeljük a fájdalomválaszt',
+      'Egyénre szabott gyakorlatsor összeállítása',
+      'Önkezelési stratégia megtanítása — a páciens képessé válik saját panaszai kezelésére',
+      'Rendszeres kontroll és a program finomhangolása',
+    ],
+    conditions: ['Derékfájás (lumbágó)', 'Nyaki fájdalom', 'Porckorongsérv', 'Isiász', 'Végtagba sugárzó fájdalom', 'Gerinceredetű fejfájás'],
+  },
+  {
+    id: 'manualterapia',
+    title: 'Manuálterápia',
+    image: '/images/modszerek/manual.jpg',
+    description: 'Kézzel végzett diagnosztikai és terápiás fogások összessége, amelyek a mozgatórendszer működési zavarainak felismerésére és kezelésére irányulnak.',
+    details: 'Sérülések, gyulladások, degeneratív betegségek és életkorral járó változások esetén alkalmazzuk. A vizsgálat során felmérjük az izom-, szalag-, bőrreflex-reakciókat, az ízületi mechanikát és az izomfunkciót.',
+    subtypes: [
+      { name: 'Maitland manuálterápia', desc: 'Páciens-centrikus, bizonyítékokon alapuló módszer. Az ideg-, izom- és ízületi rendszer vizsgálatára épül. Specifikus tesztekkel azonosítjuk a fájdalmat okozó struktúrákat.' },
+      { name: 'Mulligan manuálterápia', desc: 'Az ízületek pozíciós hibáira épül. A terapeuta tartott pozícionálást alkalmaz, miközben a páciens aktívan mozog — fájdalommentes technika.' },
+    ],
+    conditions: ['Derékfájás', 'Nyaki és háti fájdalom', 'Vállpanaszok', 'Csípő-, térd-, bokafájdalom', 'Tenisz- és golfkönyök', 'Fagyott váll'],
+  },
+  {
+    id: 'stabilizacio',
+    title: 'Stabilizációs tréning',
+    image: '/images/modszerek/stabilizacio.jpg',
+    description: 'A gerinc stabilitásának megbomlása esetén a gerinc melletti mély izmok erejének helyreállítása, precíz irányítással.',
+    details: 'A tréning során a megrövidült izmok nyújtása és az optimális izom-ízületi egyensúly visszaállítása is megtörténik. A mély stabilizáló izmok célzott erősítése a tartós fájdalommentesség alapja.',
+    conditions: ['Porckorongsérv utáni állapot', 'Lumbágó', 'Instabil gerinc', 'Túlterhelt gerinc', 'Csigolyacsúszás (spondylolisthesis)'],
+  },
+  {
+    id: 'stretching',
+    title: 'Stretching — Gyógyászati nyújtás',
+    image: '/images/modszerek/stretching.jpg',
+    description: 'A fájdalom okozta izomfeszülések terápiás nyújtása és lazítása, az ízületi mozgásterjedelem bővítése mechanikus izomnyújtással.',
+    details: 'Az enyhe, elnyújtott stretching fenntartja a nyújtás hosszát, nyújtja a kötőszövetet, emelt szöveti hőmérsékletet biztosít, alacsony izom-elektromos aktivitás mellett jobb relaxációt eredményez.',
+    conditions: ['Izomgörcsök, izomfeszülés', 'Csökkent ízületi mozgásterjedelem', 'Izommerevség', 'Keringési zavarok', 'Regeneráció gyorsítása'],
+  },
+  {
+    id: 'taping',
+    title: 'Kineziológiai taping',
+    image: '/images/modszerek/taping.jpg',
+    description: 'Speciális ragasztószalag segítségével befolyásoljuk a mozgásszervrendszer működését. A szalag hatása 5-7 napig tart, gyógyszert nem tartalmaz.',
+    details: 'Japánban, Koreában és Németországban fejlesztették ki. A bőr, izom, ízületi tok receptorait, szalagokat és nyirokérrendszert befolyásolja. Hatékonysága a képzett szakember által végzett korrekt felhelyezéstől függ.',
+    conditions: ['Sportsérülések', 'Ficamok, rándulások', 'Tenisz- és golfkönyök', 'Tartáshibák', 'Ízületi mozgásproblémák', 'Fejfájás', 'Achilles-ín rehabilitáció'],
+  },
+  {
+    id: 'mutet-utani',
+    title: 'Műtét utáni rehabilitáció',
+    image: '/images/modszerek/mutet_utani_rehab.jpg',
+    description: 'A mozgásképesség visszaállítása, izomerősítés, nyújtás és a szükséges ízületi funkciók helyreállítása — egészen a sportolói szintig.',
+    details: 'A műtét előtti terápia felkészíti az ízületeket és izmokat. A műtét utáni terápia visszaállítja az erőt, a mozgást, és megelőzi a szövődményeket. Célunk a maximális felépülés, akár a sérülés előtti szintig.',
+    conditions: ['Csonttörések', 'Szalagszakadások', 'Gerinc-, csípő-, térdműtét', 'Sportsérülések', 'Bütyök, kalapácsujj', 'Alagút-szindróma', 'Nyakcsigolya ostor-sérülés'],
+  },
+  {
+    id: 'izuleti-fajdalmak',
+    title: 'Ízületi fájdalmak gyógytornája',
+    image: '/images/modszerek/izuleti_fajdalmak.jpg',
+    description: 'A fájdalom okait és eredetét megismerve egyéni mozgásterápia segítségével javítjuk az ízület mozgását, funkcióját és csökkentjük annak fájdalmát.',
+    details: 'Akut sportsérülések és a tartósan helytelen mozgás következményeinek kezelése. Passzív mozgatás, aktív erősítés és nyújtás kombinálása. Kiemelt figyelmet fordítunk az újrasérülés megelőzésére is.',
+    conditions: ['Térd fájdalom', 'Váll fájdalom', 'Csípő fájdalom', 'Boka fájdalom', 'Csukló fájdalom', 'Gerinceredetű ízületi panaszok'],
+  },
+  {
+    id: 'tartasjavitas',
+    title: 'Tartásjavítás',
+    image: '/images/modszerek/tartasjavitas.jpg',
+    description: 'A gerinc melletti izomzat erősítésével, tudatosítással és ergonómiai tanácsokkal érünk el jobb testtartást.',
+    details: 'A helytelen testtartás és az egyoldalú terhelés csökkenti a teherbíró képességet. Az ülőmunka, telefon- és laptophasználat okozta tartásproblémák korrekciója gyermekkorban is fontos.',
+    conditions: ['Irodai ülőmunka okozta panaszok', 'Váll- és nyakfájdalom', 'Derékfájás', 'Gyermekkori tartáshibák', 'Ergonómiai tanácsadás', 'Munkahelyi gyakorlatok'],
+  },
+  {
+    id: 'schroth',
+    title: 'Schroth-terápia',
+    image: '/images/modszerek/schroth.jpg',
+    description: 'A gerincferdülés (scoliosis), a Scheuermann-betegség és egyes tartáshibák speciális kezelési módszere, mely jól beépíthető a hétköznapi élet mozgásaiba.',
+    details: 'Katharina Schroth által kifejlesztett háromdimenziós scoliosis terápia (3DST). A hagyományos 2D megközelítéssel szemben a csigolyák rotációjából eredő bordapúpot is korrigálja. Aszimmetrikus pozíciókkal aktiválja a törzs izmait, háromdimenziós légzéssel korrigálja a rotációt és a görbületet.',
+    conditions: ['Gerincferdülés (scoliosis)', 'Scheuermann-betegség', 'Tartáshibák', 'Bordapúp korrekció'],
+  },
+];
+---
+
+<BaseLayout
+  title="Kezelési módszereink | McKenzie Gyógytorna Rendelő Budapest"
+  description="9 nemzetközileg elismert kezelési módszer: McKenzie-módszer, manuálterápia, stabilizációs tréning, Schroth-terápia, taping és több. Részletes leírások."
+>
+  <!-- Header -->
+  <section class="pt-32 pb-16 bg-gradient-to-br from-navy-950 via-navy-900 to-teal-700">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-heading text-4xl sm:text-5xl font-bold text-white">Kezelési módszereink</h1>
+      <p class="mt-4 text-gray-300 text-lg">9 nemzetközileg elismert eljárás, amelyek az Ön aktív közreműködésére épülnek</p>
+    </div>
+  </section>
+
+  <!-- Quick nav -->
+  <section class="sticky top-16 z-20 bg-white/90 backdrop-blur-md border-b border-gray-100 py-3 hidden lg:block">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap gap-2 justify-center">
+        {methods.map(m => (
+          <a href={`#${m.id}`} class="px-4 py-1.5 text-sm font-medium text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-all">
+            {m.title.split('—')[0].split('(')[0].trim()}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-warm-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+
+      {methods.map((m, i) => (
+        <article id={m.id} class="reveal scroll-mt-32">
+          {m.featured ? (
+            <!-- McKenzie kiemelt -->
+            <div class="bg-gradient-to-br from-navy-900 to-navy-800 rounded-3xl overflow-hidden shadow-2xl">
+              <div class="grid grid-cols-1 lg:grid-cols-2">
+                <div class="aspect-[4/3] lg:aspect-auto overflow-hidden">
+                  <img src={m.image} alt={m.title} class="w-full h-full object-cover" loading={i === 0 ? 'eager' : 'lazy'} />
+                </div>
+                <div class="p-8 lg:p-12 flex flex-col justify-center">
+                  <div class="inline-flex items-center gap-2 px-3 py-1 bg-gold-500/20 rounded-full mb-4 w-fit">
+                    <span class="text-gold-300 text-sm font-semibold">{m.subtitle}</span>
+                  </div>
+                  <h2 class="font-heading text-3xl lg:text-4xl font-bold text-white">{m.title}</h2>
+                  <p class="mt-4 text-gray-300 text-lg leading-relaxed">{m.description}</p>
+                  <p class="mt-4 text-gray-400 leading-relaxed">{m.details}</p>
+
+                  {m.howItWorks && (
+                    <div class="mt-6">
+                      <h3 class="text-teal-300 font-semibold text-sm uppercase tracking-wide mb-3">Hogyan működik?</h3>
+                      <ol class="space-y-2">
+                        {m.howItWorks.map((step, j) => (
+                          <li class="flex items-start gap-3 text-gray-300">
+                            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-300 flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">{j + 1}</span>
+                            <span>{step}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+
+                  <div class="mt-6 flex flex-wrap gap-2">
+                    {m.conditions.map(c => (
+                      <span class="px-3 py-1 bg-white/10 text-white/80 rounded-full text-sm">{c}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <!-- Normál módszer kártya -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100">
+              <div class={`grid grid-cols-1 lg:grid-cols-2 ${i % 2 === 0 ? '' : 'lg:grid-flow-dense'}`}>
+                <div class={`aspect-[4/3] lg:aspect-auto overflow-hidden ${i % 2 !== 0 ? 'lg:col-start-2' : ''}`}>
+                  <img src={m.image} alt={m.title} class="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div class="p-8 lg:p-10 flex flex-col justify-center">
+                  <h2 class="font-heading text-2xl lg:text-3xl font-bold text-navy-900">{m.title}</h2>
+                  <p class="mt-4 text-gray-600 text-lg leading-relaxed">{m.description}</p>
+                  <p class="mt-3 text-gray-500 leading-relaxed">{m.details}</p>
+
+                  {m.subtypes && (
+                    <div class="mt-6 space-y-4">
+                      {m.subtypes.map(sub => (
+                        <div class="pl-4 border-l-2 border-teal-300">
+                          <h4 class="font-heading font-bold text-navy-900">{sub.name}</h4>
+                          <p class="text-gray-500 text-sm mt-1">{sub.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <div class="mt-6">
+                    <h3 class="text-teal-600 font-semibold text-sm uppercase tracking-wide mb-2">Mikor ajánljuk?</h3>
+                    <div class="flex flex-wrap gap-1.5">
+                      {m.conditions.map(c => (
+                        <span class="px-3 py-1 bg-warm-100 text-navy-800 rounded-full text-sm">{c}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </article>
+      ))}
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="reveal font-heading text-3xl font-bold text-navy-900">Nem tudja, melyik módszer a megfelelő?</h2>
+      <p class="reveal stagger-1 mt-4 text-gray-500 text-lg">
+        Nem kell előre döntenie! Az első vizsgálat során felmérik állapotát, és az Önnek legmegfelelőbb kezelési tervet állítják össze terapeutáink.
+      </p>
+      <a href="/kapcsolat#idopontfoglalas" class="reveal stagger-2 mt-8 inline-flex items-center justify-center px-10 py-4 bg-gold-500 hover:bg-gold-600 text-white font-bold text-lg rounded-full transition-all hover:shadow-xl hover:shadow-gold-500/25 hover:-translate-y-0.5">
+        Időpontfoglalás
+      </a>
+    </div>
+  </section>
+</BaseLayout>

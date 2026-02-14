@@ -1,0 +1,504 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const terapeutak = [
+  {
+    name: 'Bognár Zsófia',
+    title: 'Gyógytornász',
+    diploma: '2016',
+    quals: [
+      'McKenzie A,B,C,D,E',
+      'Manuálterápiás diploma',
+      'Idegmobilizáció — Neurodinamika',
+      'Ízületi manipuláció',
+      'Lágyrész manuálterápia',
+      'Medical Tape technika',
+      'Gerinc stabilizációs tréning',
+    ],
+    langs: ['angol'],
+    photo: '/images/bognar_zsofia.jpg',
+    status: 'GYES',
+  },
+  {
+    name: 'Cseh Ágnes',
+    title: 'Gyógytornász',
+    diploma: '2015',
+    quals: [
+      'McKenzie A,B,C,D',
+      'Sportrehabilitációs tréner',
+      'Lágyrész manuálterápia',
+      'Gerinc stabilizáló tréning',
+      'Medence-csípő fájdalom kezelése',
+      'Ágyéki gerinc problémáinak kezelése',
+      'Nyak fájdalom kezelése',
+      'Lágyrész mobilizáció',
+      'Ízületi mobilizáció',
+      'Kinezio tape technikák',
+    ],
+    langs: ['angol'],
+    price: '14.000 Ft',
+    photo: '/images/cseh_agnes.jpg',
+  },
+  {
+    name: 'Dörnyeiné Rozs Mariann',
+    title: 'Gyógytornász',
+    diploma: '1987',
+    quals: [
+      'Manuálterapeuta diploma',
+      'McKenzie A,B,C,D,E végzettség',
+      'Schroth-terápia gerincferdülésre',
+      'Idegmobilizáció — Neurodinamika',
+      'Inkontinencia rehabilitáció',
+      'Ízületi és lágyrész mobilizáció',
+      'CranioSacralis terápia',
+    ],
+    langs: [],
+    photo: '/images/dornyeine_rozs_mariann.jpg',
+  },
+  {
+    name: 'Hanula Judit',
+    title: 'Gyógytornász',
+    diploma: '2004',
+    quals: [
+      'McKenzie A,B,C,D,E végzettség',
+      'Manuálterápiás diploma',
+      'Gerinc stabilizációs tréning',
+      'Terrier-féle lágyrészmobilizáció',
+    ],
+    langs: ['angol'],
+    photo: '/images/hanula_judit.jpg',
+    status: 'GYES',
+  },
+  {
+    name: 'Horváth Judit',
+    title: 'Gyógytornász',
+    diploma: '2009',
+    quals: [
+      'McKenzie A,B,C,D,E végzettség',
+      'McKenzie nemzetközi minősítő vizsga',
+      'Maitland manuálterápiás diploma',
+      'Mulligan manuálterápia',
+      'Lágyrész manuálterápia',
+      'Lumbális és nyaki stabilizáció',
+      'Kinezio-Tape technika',
+      'Idegmobilizáció — Neurodinamika',
+      'Inkontinencia rehabilitáció — Gátizomtorna',
+      'Hegkezelés',
+      'FDM terápia',
+      'Szülés utáni regeneráció',
+      'Állkapocsízületi kezelés',
+      'Vágus terápia',
+      'Mozgásszervi jógaterápia',
+    ],
+    langs: ['angol'],
+    price: '15.000 Ft',
+    photo: '/images/horvath_judit.jpg',
+  },
+  {
+    name: 'Horváthné Kucsera Ildikó',
+    title: 'Gyógytornász',
+    diploma: '2007',
+    quals: [
+      'McKenzie A,B,C,D,E végzettség',
+      'Gerincproblémák kezelése',
+      'Gerinc stabilizációs tréning',
+      'Tartásjavító gyógytorna',
+      'Ízületi fájdalmak kezelése',
+      'Kinesio-Tape technika',
+      'Maitland manuálterápiás diploma',
+      'Ortopédiai rehabilitáció',
+      'Nyaki fájdalmak kezelése',
+      'Schroth-féle scoliosis kezelés',
+    ],
+    langs: ['angol'],
+    price: '14.000 Ft',
+    photo: '/images/horvathne_kucsera_ildiko.jpg',
+  },
+  {
+    name: 'Jungwirth Sylvia',
+    title: 'Gyógytornász',
+    diploma: '1997 (Bécs)',
+    quals: [
+      'McKenzie A,B,C,D,E végzettség',
+      'Gerincproblémák kezelése',
+      'Gerinc stabilizációs tréning',
+      'Tartásjavító gyógytorna',
+      'Ízületi fájdalmak kezelése',
+      'Kinesio-Tape technika',
+      'Manuálterápiás diploma',
+      'Ortopédiai rehabilitáció',
+      'Lágyrész manuálterápia',
+      'Schroth-féle scoliosis kezelés',
+    ],
+    langs: ['német', 'angol', 'spanyol'],
+    price: '14.000 Ft',
+    photo: '/images/jungwirth_sylvia.png',
+  },
+  {
+    name: 'Kókai Zsuzsa',
+    title: 'Gyógytornász',
+    diploma: '2001',
+    quals: [
+      'McKenzie A,B,C,D,E végzettség',
+      'McKenzie nemzetközi minősítő vizsga',
+      'Lymphoedema kezelés',
+      'Manuálterápiás diploma',
+      'Lágyrész manuálterápia',
+      'Fitball tréner',
+      'Geriátriai továbbképzés',
+      'Ortopédiai rehabilitáció',
+      'Dynamic tape',
+      'Fascia release',
+    ],
+    langs: ['angol'],
+    price: '15.000 Ft',
+    photo: '/images/kokai_zsuzsa.jpg',
+  },
+  {
+    name: 'Lipták Noémi',
+    title: 'Gyógytornász, fizioterapeuta (BSc, MSc)',
+    diploma: 'BSc 2013, MSc 2019',
+    quals: [
+      'McKenzie A,B,C végzettség',
+      'Schroth-féle scoliosis kezelés — gerincferdülés',
+      'Gyermek fizikoterápia',
+      'Tartásjavítás',
+      'Gerincproblémák kezelése',
+      'Nyaki instabilitás kezelése',
+      'Lumbális instabilitás kezelése',
+      'Műtét utáni rehabilitáció',
+      'Nyújtó gyakorlatok',
+      'Sportsérülések kezelése',
+      'Stabilizáló torna',
+    ],
+    langs: ['angol', 'német'],
+    price: '14.000 Ft',
+    photo: '/images/liptak_noemi.jpg',
+  },
+  {
+    name: 'Nagy Tünde Éva',
+    title: 'Gyógytornász',
+    diploma: '1998',
+    quals: [
+      'McKenzie A,B,C,D,E végzettség',
+      'Manuálterapeuta vizsga',
+      'Schroth-terápia',
+      'Gerincproblémák kezelése',
+      'Gerinc instabilitás kezelése',
+      'Rehabilitációs szakgyógytornász',
+      'CranioSacralis kezelés',
+      'TRE nemzetközi provider',
+      'Terrier lágyrész mobilizáció',
+      'Viscerális manuálterápia 1-2',
+      'Taping továbbképzés',
+      'MBT instruktor',
+    ],
+    langs: ['angol'],
+    photo: '/images/nagy_tunde_eva.jpg',
+  },
+  {
+    name: 'Polyefkó Petra',
+    title: 'Gyógytornász',
+    diploma: '',
+    quals: [
+      'McKenzie A,B,C,D tanfolyamok',
+      'Gerinc stabilizáció',
+      'Porckorong problémák kezelése',
+      'Mulligan-féle manuálterápia',
+      'Tartásjavítás',
+      'Sportrehabilitáció',
+      'Deréksérülések kezelése',
+      'Állkapocsízületi diszfunkciók kezelése',
+      'Kinezio sporttape tanfolyam',
+      'Gerinctorna',
+      'Műtét utáni rehabilitáció',
+      'Sportsérülések kezelése',
+      'Geriátriai fizikoterápia',
+    ],
+    langs: ['angol'],
+    price: '14.000 Ft',
+    photo: '/images/polyefko_petra.png',
+  },
+  {
+    name: 'Pozsonyi Bognár Tímea',
+    title: 'Gyógytornász',
+    diploma: '2013',
+    quals: [
+      'McKenzie A,B,C,D,E végzettség',
+      'Gerincproblémák kezelése',
+      'Nyaki fájdalom kezelése',
+      'Ortopédiai rehabilitáció',
+      'Gerinc instabilitás kezelése',
+      'Tartásjavítás',
+      'Sportrehabilitáció',
+      'Lágyrész manuálterápia',
+      'Taping technikák',
+      'Medencefenék tréning',
+      'Szülés utáni torna',
+      'Pilates mozgásprogram',
+    ],
+    langs: ['angol'],
+    photo: '/images/pozsonyi_bognar_timea.jpg',
+    status: 'GYES',
+  },
+  {
+    name: 'Relle Éva',
+    title: 'Vezető gyógytornász',
+    diploma: '1992',
+    quals: [
+      'Magyarországi McKenzie Intézet vezetője (1993 óta)',
+      'McKenzie Nemzetközi Minősítő vizsga',
+      'McKenzie A,B,C,D,E végzettség',
+      'Idegmobilizáció — Neurodinamika',
+      'Gerinc Stabilizációs tréning',
+      'Manuálterapeuta Diploma',
+    ],
+    langs: ['angol', 'német'],
+    photo: '/images/relle_eva.jpg',
+  },
+  {
+    name: 'Szabó Éva Bernadett',
+    title: 'Gyógytornász',
+    diploma: '2019',
+    quals: [
+      'McKenzie A,B,C,D végzettség',
+      'McKenzie nemzetközi minősítő vizsga',
+      'Manuálterápia',
+      'Tartásjavítás',
+      'Nyaki fájdalom kezelése',
+      'Gerincproblémák kezelése',
+      'Gerinc stabilizációs tréning',
+      'Kinezio-Tape technika',
+      'Sportrehabilitáció',
+      'Schroth-féle scoliosis kezelés',
+      'Műtét utáni rehabilitáció',
+    ],
+    langs: ['angol'],
+    price: '14.000 Ft',
+    photo: '/images/szabo_eva_bernadett.png',
+  },
+  {
+    name: 'Takács Dóra',
+    title: 'Gyógytornász',
+    diploma: '2012',
+    quals: [
+      'McKenzie A,B,C,D,E végzettség',
+      'McKenzie nemzetközi minősítő vizsga',
+      'Lágyrész manuálterápia',
+      'Sportrehabilitáció',
+      'Nyaki fájdalom kezelése',
+      'Gerincproblémák kezelése',
+      'Gerinc stabilizációs tréning',
+      'Idegmobilizáció — Neurodinamika',
+      'Tape technika',
+      'Schroth-féle scoliosis kezelés',
+      'TRX Sport Medicine tréner',
+      'Manuálterápiás diploma',
+    ],
+    langs: ['angol', 'német'],
+    price: '15.000 Ft',
+    photo: '/images/takacs_dora.jpg',
+  },
+  {
+    name: 'Vágó Eszter',
+    title: 'Gyógytornász',
+    diploma: '2013, 2019',
+    quals: [
+      'McKenzie A,B,C,D végzettség',
+      'Manuálterápia',
+      'Gerincproblémák kezelése',
+      'Ortopédiai rehabilitáció',
+      'Lumbális instabilitás kezelése',
+      'Nyaki instabilitás kezelése',
+      'Stabilizációs tréning',
+      'Idegmobilizáció — Neurodinamika',
+      'Sportrehabilitáció',
+      'Tartásjavítás',
+      'Funkcionális betegsége vizsgálat',
+      'Kinezio-Tape technika',
+    ],
+    langs: ['angol'],
+    price: '14.000 Ft',
+    photo: '/images/vago_eszter.jpg',
+  },
+  {
+    name: 'Várhegyi Tímea',
+    title: 'Gyógytornász',
+    diploma: '2008',
+    quals: [
+      'McKenzie A,B,C,D,E végzettség',
+      'Manuálterápia',
+      'Gerincproblémák kezelése',
+      'Nyaki fájdalom kezelése',
+      'Ágyéki instabilitás kezelése',
+      'Sportrehabilitáció',
+      'Schroth-féle scoliosis kezelés',
+      'Tartásjavítás',
+      'Neurológiai rehabilitáció',
+      'Kismama torna',
+    ],
+    langs: ['angol'],
+    price: '14.000 Ft',
+    photo: '/images/varhegyi_timea.png',
+  },
+  {
+    name: 'Dr. Várköviné Gergely Éva',
+    title: 'Gyógytornász',
+    diploma: '2007',
+    quals: [
+      'McKenzie A,B,C,D,E végzettség',
+      'Maitland manuálterápia diploma',
+      'Gerincproblémák kezelése',
+      'Sportrehabilitáció',
+      'Nyaki fájdalom kezelése',
+      'Instabilitás kezelése',
+      'Kinezio-Tape technika',
+      'Schroth-féle scoliosis kezelés',
+      'Stabilizációs tréning',
+      'Funkcionális betegvizsgálat',
+    ],
+    langs: ['angol'],
+    price: '14.000 Ft',
+    photo: '/images/varkovine_gergely_eva.png',
+  },
+];
+
+const relleEva = terapeutak.find(t => t.name === 'Relle Éva')!;
+const active = terapeutak.filter(t => !t.status && t.name !== 'Relle Éva');
+const onLeave = terapeutak.filter(t => t.status);
+---
+
+<BaseLayout
+  title="Csapatunk — 18 képzett terapeuta | McKenzie Gyógytorna Rendelő Budapest"
+  description="Ismerje meg a McKenzie Gyógytorna Rendelő teljes csapatát. 18 nemzetközileg képzett gyógytornász, McKenzie A-E szintű képesítéssel."
+>
+  <!-- Hero -->
+  <section class="relative pt-32 pb-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-teal-700"></div>
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+    <div class="absolute top-20 right-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="inline-block text-teal-300 font-semibold text-sm tracking-widest uppercase mb-4">A rendelő csapata</span>
+      <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white">Minden terapeutánk<br/><span class="text-teal-300">McKenzie-képzett</span></h1>
+      <p class="mt-6 text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed">
+        Nálunk nem véletlenszerűen kerül hozzá a pácienshez egy terapeuta. Minden kollégánk McKenzie-képzett, és folyamatosan továbbképzi magát.
+      </p>
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-400">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl font-bold text-white font-heading">18</span>
+          <span>gyógytornász</span>
+        </div>
+        <div class="w-px h-6 bg-white/20"></div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl font-bold text-white font-heading">30+</span>
+          <span>év tapasztalat</span>
+        </div>
+        <div class="w-px h-6 bg-white/20"></div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl font-bold text-white font-heading">4</span>
+          <span>nyelven fogadunk</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Relle Éva — featured -->
+  <section class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal grid grid-cols-1 md:grid-cols-[280px_1fr] gap-10 items-start">
+        <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-xl">
+          <img src={relleEva.photo} alt={relleEva.name} class="w-full h-full object-cover object-top" />
+        </div>
+        <div>
+          <span class="text-teal-600 font-semibold text-sm tracking-widest uppercase">A rendelő vezetője</span>
+          <h2 class="font-heading text-3xl sm:text-4xl font-bold text-navy-900 mt-2">{relleEva.name}</h2>
+          <p class="text-teal-600 font-medium mt-1">{relleEva.title}</p>
+          <p class="mt-4 text-gray-500 leading-relaxed">
+            1993 óta a Magyarországi McKenzie Intézet vezetője. Nemzetközi McKenzie minősítő vizsgával, manuálterapeuta diplomával és több évtizedes tapasztalattal rendelkezik a gerinc eredetű fájdalmak kezelésében.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-2">
+            {relleEva.quals.map(q => (
+              <span class="px-3 py-1.5 bg-teal-50 text-teal-700 rounded-full text-xs font-medium">{q}</span>
+            ))}
+          </div>
+          {relleEva.langs.length > 0 && (
+            <p class="mt-4 text-gray-400 text-sm">Nyelvek: {relleEva.langs.join(', ')}</p>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team grid -->
+  <section class="py-20 bg-warm-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="reveal font-heading text-3xl sm:text-4xl font-bold text-navy-900">Terapeutáink</h2>
+        <p class="reveal stagger-1 mt-3 text-gray-500 text-lg">Az első konzultáción kiválasztjuk az Önhöz legjobban illő szakembert.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        {active.map((t, i) => (
+          <div class={`reveal stagger-${(i % 3) + 1} bg-white rounded-2xl overflow-hidden border border-gray-100`}>
+            <div class="aspect-[4/5] overflow-hidden">
+              <img src={t.photo} alt={t.name} class="w-full h-full object-cover object-top" loading={i < 6 ? 'eager' : 'lazy'} />
+            </div>
+            <div class="p-5">
+              <h3 class="font-heading text-lg font-bold text-navy-900">{t.name}</h3>
+              <p class="text-teal-600 text-sm mt-0.5">{t.title}</p>
+
+              <div class="mt-3 text-gray-500 text-sm leading-relaxed">
+                {t.diploma && <p>Diploma: {t.diploma}</p>}
+                {t.price && <p class="font-medium text-navy-900">{t.price} / alkalom</p>}
+                {t.langs.length > 0 && <p>Nyelvek: {t.langs.join(', ')}</p>}
+              </div>
+
+              <details class="mt-3 group">
+                <summary class="text-sm text-teal-600 cursor-pointer hover:text-teal-700 select-none">
+                  Képesítések ({t.quals.length})
+                </summary>
+                <ul class="mt-2 space-y-0.5 text-gray-500 text-xs">
+                  {t.quals.map(q => (
+                    <li class="pl-3 relative before:content-['·'] before:absolute before:left-0 before:text-gray-400">{q}</li>
+                  ))}
+                </ul>
+              </details>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- GYES -->
+      {onLeave.length > 0 && (
+        <div class="reveal border-t border-gray-200 pt-10">
+          <h3 class="font-heading text-lg text-gray-400 mb-4">Jelenleg szülési szabadságon</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {onLeave.map(t => (
+              <div class="flex items-center gap-3 p-3 bg-white/50 rounded-xl opacity-50">
+                <img src={t.photo} alt={t.name} class="w-12 h-12 rounded-full object-cover object-top" loading="lazy" />
+                <div>
+                  <p class="font-medium text-gray-600 text-sm">{t.name}</p>
+                  <p class="text-xs text-gray-400">{t.title}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative py-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-900 to-teal-700"></div>
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+    <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="reveal font-heading text-3xl sm:text-4xl font-bold text-white">Melyik terapeutánkhoz szeretne jönni?</h2>
+      <p class="reveal stagger-1 mt-4 text-gray-300 text-lg">Foglaljon időpontot, és az első alkalommal segítünk kiválasztani az Önhöz legjobban illő szakembert.</p>
+      <a href="/kapcsolat#idopontfoglalas" class="reveal stagger-2 inline-flex items-center justify-center mt-8 px-10 py-4 bg-gold-500 hover:bg-gold-600 text-white font-bold text-lg rounded-full transition-all hover:shadow-xl hover:shadow-gold-500/25 hover:-translate-y-0.5">
+        Időpontfoglalás
+      </a>
+    </div>
+  </section>
+</BaseLayout>

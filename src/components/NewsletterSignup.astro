@@ -1,0 +1,40 @@
+---
+// Hírlevél feliratkozás komponens — használható a Footerben vagy önálló szekcióként
+---
+
+<section class="py-20 bg-navy-950 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+
+  <div class="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="reveal">
+      <span class="text-teal-400 font-semibold text-sm tracking-widest uppercase">Hírlevél</span>
+      <h2 class="font-heading text-3xl sm:text-4xl font-bold text-white mt-3">
+        Heti tippek a fájdalommentes életért
+      </h2>
+      <p class="mt-4 text-gray-400 text-lg">
+        Iratkozzon fel hírlevelünkre, és kapjon heti rendszerességgel gyakorlatokat, tartásjavítási tippeket és szakmai cikkeket.
+      </p>
+    </div>
+
+    <form class="reveal stagger-1 mt-8 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto" data-netlify="true" name="newsletter" method="POST">
+      <input type="hidden" name="form-name" value="newsletter" />
+      <input
+        type="email"
+        name="email"
+        required
+        placeholder="Email címe"
+        class="flex-1 px-5 py-3.5 bg-white/10 border border-white/20 rounded-full text-white placeholder:text-gray-500 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition-all"
+      />
+      <button
+        type="submit"
+        class="px-8 py-3.5 bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-full transition-all hover:shadow-lg hover:shadow-teal-500/25 whitespace-nowrap"
+      >
+        Feliratkozás
+      </button>
+    </form>
+
+    <p class="reveal stagger-2 text-xs text-gray-600 mt-4">
+      Nem küldünk spam-et. Bármikor leiratkozhat egyetlen kattintással.
+    </p>
+  </div>
+</section>

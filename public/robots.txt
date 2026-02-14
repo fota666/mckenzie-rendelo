@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://mckenzie-rendelo.netlify.app/sitemap-index.xml

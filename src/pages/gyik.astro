@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const faqs = [
+  {
+    q: 'Mikor várható javulás?',
+    a: 'Szorgalmas pácienseinknél a legtöbb esetben már 1-2 kezelés után érezhető javulás tapasztalható. A teljes kezelési idő az állapot súlyosságától függ, általában 4-6 alkalom szükséges.'
+  },
+  {
+    q: 'Mennyi ideig tart egy kezelés?',
+    a: 'Az első alkalom 55 perc, amely tartalmazza a mozgásvizsgálatot és a kezelést. A további alkalmak 50-55 percesek.'
+  },
+  {
+    q: 'Mennyit kell várni időpontra?',
+    a: 'Várhatóan 1-2 napon belül tudunk Önnek időpontot biztosítani.'
+  },
+  {
+    q: 'Mennyibe kerül a kezelés?',
+    a: 'Egyéni kezelés 14.000-15.000 Ft / alkalom (55 perc). 5 alkalmas bérlet: 65.000 Ft (13.000 Ft / alkalom). A társadalombiztosítás jelenleg nem fedezi.'
+  },
+  {
+    q: 'Elszámolható egészségpénztárral?',
+    a: 'Igen, számlát adunk, amelyet az egészségpénztárnál lehet benyújtani. Kérjük, előzetesen egyeztessen a pénztárával a feltételekről.'
+  },
+  {
+    q: 'Kell beutaló a kezeléshez?',
+    a: 'Nem, magánrendelés lévén nem szükséges beutaló. Amennyiben rendelkezik korábbi orvosi leletekkel (MRI, röntgen), kérjük hozza magával.'
+  },
+  {
+    q: 'Mit vigyek magammal az első alkalomra?',
+    a: 'Korábbi orvosi leleteket, képalkotó vizsgálatokat (ha vannak), és kényelmes, mozgásra alkalmas ruházatot. Öltözővel és mosdóval rendelkezünk.'
+  },
+  {
+    q: 'Kaphatok otthoni gyakorlatokat?',
+    a: 'Kifejezetten támogatjuk az otthoni tornát! Minden páciensünk személyre szabott, írásos és/vagy rögzített gyakorlatsort kap, amelyet otthon is végezhet.'
+  },
+  {
+    q: 'Melyik rendelőt válasszam?',
+    a: 'Mindkét helyszínünkön egyformán képzett gyógytornászok dolgoznak. Válassza az Ön számára kényelmesebben megközelíthető rendelőt: Belváros (Sas u. 7.) vagy Bel-Buda (Bartók Béla út 34.).'
+  },
+  {
+    q: 'Mikor szükséges orvosi vizsgálat a gyógytorna előtt?',
+    a: 'Súlyos sérülés, baleset, vagy erős mozgáskorlátozottság esetén javasolt előbb orvosi vizsgálat. Ha a fájdalom mechanikus jellegű (bizonyos mozgásoknál fokozódik, nyugalomban csökken), általában közvetlenül megkezdhető a gyógytorna.'
+  }
+];
+
+// Schema.org FAQ
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="Gyakori kérdések | McKenzie Gyógytorna Rendelő Budapest"
+  description="Válaszok a leggyakoribb kérdésekre a gyógytorna kezelésről, árakról, időpontfoglalásról és a McKenzie-módszerről."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+
+  <!-- Header -->
+  <section class="pt-32 pb-16 bg-gradient-to-br from-navy-950 via-navy-900 to-teal-700">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-heading text-4xl sm:text-5xl font-bold text-white">Gyakori kérdések</h1>
+      <p class="mt-4 text-gray-300 text-lg">Válaszok a legfontosabb kérdésekre</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-warm-50">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="space-y-4">
+        {faqs.map((faq, i) => (
+          <details class={`reveal stagger-${(i % 4) + 1} group bg-white rounded-2xl border border-gray-100 overflow-hidden`}>
+            <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-teal-50 transition-colors">
+              <h3 class="font-heading text-lg font-semibold text-navy-900 pr-4">{faq.q}</h3>
+              <svg class="w-5 h-5 text-teal-600 shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-gray-600 leading-relaxed">
+              {faq.a}
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <div class="reveal mt-16 text-center">
+        <p class="text-gray-500 mb-4">Nem találta meg a választ a kérdésére?</p>
+        <a href="/kapcsolat" class="inline-flex items-center justify-center px-8 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all hover:shadow-lg hover:shadow-teal-600/25">
+          Kérdezzen bátran
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

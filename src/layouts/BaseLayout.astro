@@ -1,0 +1,101 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'McKenzie Gyógytorna Rendelő Budapest — Magyarország egyetlen McKenzie referenciarendelője. Derekfájás, nyakfájás, porckorongsérv kezelése 25+ év tapasztalattal.',
+  ogImage = '/images/og-default.jpg'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+
+  <!-- Canonical -->
+  <link rel="canonical" href={canonicalURL.href} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL.href} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+  <meta property="og:locale" content="hu_HU" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/logo.png" />
+
+  <title>{title}</title>
+
+  <!-- Schema.org - LocalBusiness -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "McKenzie Gyógytorna Rendelő",
+    "description": "Magyarország egyetlen McKenzie referenciarendelője. Gyógytorna, manuálterápia, stabilizációs tréning.",
+    "url": "https://mckenzie-rendelo.netlify.app",
+    "telephone": "+36304878284",
+    "priceRange": "14.000-15.000 Ft",
+    "address": [
+      {
+        "@type": "PostalAddress",
+        "streetAddress": "Sas u. 7.",
+        "addressLocality": "Budapest",
+        "postalCode": "1051",
+        "addressCountry": "HU"
+      },
+      {
+        "@type": "PostalAddress",
+        "streetAddress": "Bartók Béla út 34. I.em.1.",
+        "addressLocality": "Budapest",
+        "postalCode": "1111",
+        "addressCountry": "HU"
+      }
+    ],
+    "openingHours": "Mo-Fr 08:00-20:00",
+    "founder": {
+      "@type": "Person",
+      "name": "Relle Éva",
+      "jobTitle": "Vezető gyógytornász"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "47"
+    }
+  })} />
+</head>
+<body class="antialiased">
+  <Navbar />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <ScrollReveal />
+</body>
+</html>
