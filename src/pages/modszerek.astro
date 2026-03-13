@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
 
 const methods = [
   {
@@ -204,7 +205,7 @@ const methods = [
       <p class="reveal stagger-1 mt-4 text-gray-500 text-lg">
         Nem kell előre döntenie! Az első vizsgálat során felmérik állapotát, és az Önnek legmegfelelőbb kezelési tervet állítják össze terapeutáink.
       </p>
-      <a href="/kapcsolat#idopontfoglalas" class="reveal stagger-2 mt-8 inline-flex items-center justify-center px-10 py-4 bg-gold-500 hover:bg-gold-600 text-white font-bold text-lg rounded-full transition-all hover:shadow-xl hover:shadow-gold-500/25 hover:-translate-y-0.5">
+      <a href={`${base}kapcsolat#idopontfoglalas`} class="reveal stagger-2 mt-8 inline-flex items-center justify-center px-10 py-4 bg-gold-500 hover:bg-gold-600 text-white font-bold text-lg rounded-full transition-all hover:shadow-xl hover:shadow-gold-500/25 hover:-translate-y-0.5">
         Időpontfoglalás
       </a>
     </div>

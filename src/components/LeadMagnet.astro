@@ -1,5 +1,6 @@
 ---
 // Lead Magnet: Ingyenes reggeli torna & tartásjavítási program
+const base = import.meta.env.BASE_URL;
 ---
 
 <section class="py-28 bg-gradient-to-br from-teal-700 via-teal-600 to-teal-500 relative overflow-hidden">
@@ -85,7 +86,7 @@
               Kérem az ingyenes programot
             </button>
             <p class="text-xs text-gray-400 text-center">
-              Nem küldünk spam-et. Az adatkezelési tájékoztató <a href="/adatvedelmi-tajekoztato" class="underline hover:text-gray-600">itt</a> olvasható.
+              Nem küldünk spam-et. Az adatkezelési tájékoztató <a href={`${base}adatvedelmi-tajekoztato`} class="underline hover:text-gray-600">itt</a> olvasható.
             </p>
           </form>
 
