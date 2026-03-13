@@ -7,7 +7,7 @@ const methods = [
     id: 'mckenzie',
     title: 'McKenzie-módszer (MDT)',
     subtitle: 'Fő szakterületünk',
-    image: '/images/modszerek/mckenzie.jpg',
+    image: `${base}images/modszerek/mckenzie.jpg`,
     featured: true,
     description: 'A McKenzie-módszer egy részletes mozgásvizsgálatra épülő egyéni mozgásprogram, amely igen hatékony különböző eredetű gerincproblémák — gerincsérv, porckorongsérv — esetében.',
     details: 'A módszert Robin McKenzie új-zélandi gyógytornász fejlesztette ki, és ma már több mint 40 országban alkalmazzák. Lényege, hogy a páciens aktív résztvevője saját gyógyulásának: célzott gyakorlatokkal és önkezelési stratégiákkal tartós eredményeket érünk el.',
@@ -22,7 +22,7 @@ const methods = [
   {
     id: 'manualterapia',
     title: 'Manuálterápia',
-    image: '/images/modszerek/manual.jpg',
+    image: `${base}images/modszerek/manual.jpg`,
     description: 'Kézzel végzett diagnosztikai és terápiás fogások összessége, amelyek a mozgatórendszer működési zavarainak felismerésére és kezelésére irányulnak.',
     details: 'Sérülések, gyulladások, degeneratív betegségek és életkorral járó változások esetén alkalmazzuk. A vizsgálat során felmérjük az izom-, szalag-, bőrreflex-reakciókat, az ízületi mechanikát és az izomfunkciót.',
     subtypes: [
@@ -34,7 +34,7 @@ const methods = [
   {
     id: 'stabilizacio',
     title: 'Stabilizációs tréning',
-    image: '/images/modszerek/stabilizacio.jpg',
+    image: `${base}images/modszerek/stabilizacio.jpg`,
     description: 'A gerinc stabilitásának megbomlása esetén a gerinc melletti mély izmok erejének helyreállítása, precíz irányítással.',
     details: 'A tréning során a megrövidült izmok nyújtása és az optimális izom-ízületi egyensúly visszaállítása is megtörténik. A mély stabilizáló izmok célzott erősítése a tartós fájdalommentesség alapja.',
     conditions: ['Porckorongsérv utáni állapot', 'Lumbágó', 'Instabil gerinc', 'Túlterhelt gerinc', 'Csigolyacsúszás (spondylolisthesis)'],
@@ -42,7 +42,7 @@ const methods = [
   {
     id: 'stretching',
     title: 'Stretching — Gyógyászati nyújtás',
-    image: '/images/modszerek/stretching.jpg',
+    image: `${base}images/modszerek/stretching.jpg`,
     description: 'A fájdalom okozta izomfeszülések terápiás nyújtása és lazítása, az ízületi mozgásterjedelem bővítése mechanikus izomnyújtással.',
     details: 'Az enyhe, elnyújtott stretching fenntartja a nyújtás hosszát, nyújtja a kötőszövetet, emelt szöveti hőmérsékletet biztosít, alacsony izom-elektromos aktivitás mellett jobb relaxációt eredményez.',
     conditions: ['Izomgörcsök, izomfeszülés', 'Csökkent ízületi mozgásterjedelem', 'Izommerevség', 'Keringési zavarok', 'Regeneráció gyorsítása'],
@@ -50,7 +50,7 @@ const methods = [
   {
     id: 'taping',
     title: 'Kineziológiai taping',
-    image: '/images/modszerek/taping.jpg',
+    image: `${base}images/modszerek/taping.jpg`,
     description: 'Speciális ragasztószalag segítségével befolyásoljuk a mozgásszervrendszer működését. A szalag hatása 5-7 napig tart, gyógyszert nem tartalmaz.',
     details: 'Japánban, Koreában és Németországban fejlesztették ki. A bőr, izom, ízületi tok receptorait, szalagokat és nyirokérrendszert befolyásolja. Hatékonysága a képzett szakember által végzett korrekt felhelyezéstől függ.',
     conditions: ['Sportsérülések', 'Ficamok, rándulások', 'Tenisz- és golfkönyök', 'Tartáshibák', 'Ízületi mozgásproblémák', 'Fejfájás', 'Achilles-ín rehabilitáció'],
@@ -58,7 +58,7 @@ const methods = [
   {
     id: 'mutet-utani',
     title: 'Műtét utáni rehabilitáció',
-    image: '/images/modszerek/mutet_utani_rehab.jpg',
+    image: `${base}images/modszerek/mutet_utani_rehab.jpg`,
     description: 'A mozgásképesség visszaállítása, izomerősítés, nyújtás és a szükséges ízületi funkciók helyreállítása — egészen a sportolói szintig.',
     details: 'A műtét előtti terápia felkészíti az ízületeket és izmokat. A műtét utáni terápia visszaállítja az erőt, a mozgást, és megelőzi a szövődményeket. Célunk a maximális felépülés, akár a sérülés előtti szintig.',
     conditions: ['Csonttörések', 'Szalagszakadások', 'Gerinc-, csípő-, térdműtét', 'Sportsérülések', 'Bütyök, kalapácsujj', 'Alagút-szindróma', 'Nyakcsigolya ostor-sérülés'],
@@ -66,7 +66,7 @@ const methods = [
   {
     id: 'izuleti-fajdalmak',
     title: 'Ízületi fájdalmak gyógytornája',
-    image: '/images/modszerek/izuleti_fajdalmak.jpg',
+    image: `${base}images/modszerek/izuleti_fajdalmak.jpg`,
     description: 'A fájdalom okait és eredetét megismerve egyéni mozgásterápia segítségével javítjuk az ízület mozgását, funkcióját és csökkentjük annak fájdalmát.',
     details: 'Akut sportsérülések és a tartósan helytelen mozgás következményeinek kezelése. Passzív mozgatás, aktív erősítés és nyújtás kombinálása. Kiemelt figyelmet fordítunk az újrasérülés megelőzésére is.',
     conditions: ['Térd fájdalom', 'Váll fájdalom', 'Csípő fájdalom', 'Boka fájdalom', 'Csukló fájdalom', 'Gerinceredetű ízületi panaszok'],
@@ -74,7 +74,7 @@ const methods = [
   {
     id: 'tartasjavitas',
     title: 'Tartásjavítás',
-    image: '/images/modszerek/tartasjavitas.jpg',
+    image: `${base}images/modszerek/tartasjavitas.jpg`,
     description: 'A gerinc melletti izomzat erősítésével, tudatosítással és ergonómiai tanácsokkal érünk el jobb testtartást.',
     details: 'A helytelen testtartás és az egyoldalú terhelés csökkenti a teherbíró képességet. Az ülőmunka, telefon- és laptophasználat okozta tartásproblémák korrekciója gyermekkorban is fontos.',
     conditions: ['Irodai ülőmunka okozta panaszok', 'Váll- és nyakfájdalom', 'Derékfájás', 'Gyermekkori tartáshibák', 'Ergonómiai tanácsadás', 'Munkahelyi gyakorlatok'],
@@ -82,7 +82,7 @@ const methods = [
   {
     id: 'schroth',
     title: 'Schroth-terápia',
-    image: '/images/modszerek/schroth.jpg',
+    image: `${base}images/modszerek/schroth.jpg`,
     description: 'A gerincferdülés (scoliosis), a Scheuermann-betegség és egyes tartáshibák speciális kezelési módszere, mely jól beépíthető a hétköznapi élet mozgásaiba.',
     details: 'Katharina Schroth által kifejlesztett háromdimenziós scoliosis terápia (3DST). A hagyományos 2D megközelítéssel szemben a csigolyák rotációjából eredő bordapúpot is korrigálja. Aszimmetrikus pozíciókkal aktiválja a törzs izmait, háromdimenziós légzéssel korrigálja a rotációt és a görbületet.',
     conditions: ['Gerincferdülés (scoliosis)', 'Scheuermann-betegség', 'Tartáshibák', 'Bordapúp korrekció'],
