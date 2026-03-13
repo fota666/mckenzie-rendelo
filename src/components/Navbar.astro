@@ -1,4 +1,5 @@
 ---
+import StyleSwitcher from './StyleSwitcher.astro';
 const currentPath = Astro.url.pathname;
 const isHomePage = currentPath === '/';
 const navLinks = [
@@ -7,37 +8,36 @@ const navLinks = [
   { href: '/araink', label: 'Áraink' },
   { href: '/velemenyek', label: 'Vélemények' },
   { href: '/gyik', label: 'GYIK' },
-  { href: '/blog', label: 'Blog' },
   { href: '/kapcsolat', label: 'Kapcsolat' },
 ];
 ---
 
-<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" data-dark-hero={isHomePage ? 'true' : 'false'}>
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" data-page={isHomePage ? 'home' : 'inner'}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
-      <!-- Logo -->
       <a href="/" class="flex items-center gap-3 group">
-        <img src="/images/logo.png" alt="McKenzie Rendelő logó" class="w-10 h-10 rounded-lg object-contain navbar-logo transition-all duration-300" />
+        <img src="/images/logo.png" alt="McKenzie Rendelő logó" class="w-10 h-10 rounded-lg object-contain nav-logo transition-all duration-300" />
         <div class="hidden sm:block">
-          <span class="text-lg font-heading font-bold text-white navbar-scrolled:text-navy-900 transition-colors">McKenzie Rendelő</span>
-          <span class="block text-xs text-teal-300 navbar-scrolled:text-teal-600 font-medium tracking-wider uppercase transition-colors">Referenciarendelő</span>
+          <span class="text-lg font-heading font-bold nav-primary transition-colors duration-300">McKenzie Rendelő</span>
+          <span class="block text-xs font-medium tracking-wider uppercase nav-accent transition-colors duration-300">Referenciarendelő</span>
         </div>
       </a>
 
-      <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-1">
         {navLinks.map(link => (
-          <a href={link.href} class="px-3 py-2 text-sm font-medium text-white/80 navbar-scrolled:text-gray-600 hover:text-white navbar-scrolled:hover:text-teal-700 transition-colors rounded-lg hover:bg-white/10 navbar-scrolled:hover:bg-teal-50">
+          <a href={link.href} class="px-3 py-2 text-sm font-medium nav-link transition-colors duration-300 rounded-lg">
             {link.label}
           </a>
         ))}
         <a href="/kapcsolat#idopontfoglalas" class="ml-3 px-5 py-2.5 bg-gold-500 hover:bg-gold-600 text-white text-sm font-semibold rounded-full transition-all hover:shadow-lg hover:shadow-gold-500/25 hover:-translate-y-0.5">
           Időpontfoglalás
         </a>
+        <div class="ml-2">
+          <StyleSwitcher />
+        </div>
       </nav>
 
-      <!-- Mobile menu button -->
-      <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-white navbar-scrolled:text-gray-700" aria-label="Menü">
+      <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg nav-link" aria-label="Menü">
         <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -48,11 +48,10 @@ const navLinks = [
     </div>
   </div>
 
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-xl border-t border-gray-100">
+  <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-xl border-t border-warm-200">
     <div class="px-4 py-6 space-y-1">
       {navLinks.map(link => (
-        <a href={link.href} class="block px-4 py-3 text-gray-700 hover:text-teal-700 hover:bg-teal-50 rounded-xl font-medium transition-colors">
+        <a href={link.href} class="block px-4 py-3 text-navy-700 hover:text-teal-700 hover:bg-teal-50 rounded-xl font-medium transition-colors">
           {link.label}
         </a>
       ))}
@@ -66,44 +65,54 @@ const navLinks = [
 </header>
 
 <script>
-  // Scroll effect
   const navbar = document.getElementById('navbar');
-  const hasDarkHero = navbar?.dataset.darkHero === 'true';
+  const isHome = navbar?.dataset.page === 'home';
 
   const onScroll = () => {
-    if (!hasDarkHero || window.scrollY > 50) {
-      navbar?.classList.add('bg-white/95', 'backdrop-blur-lg', 'shadow-sm', 'scrolled');
-      navbar?.classList.remove('bg-transparent');
+    if (!isHome || window.scrollY > 50) {
+      navbar?.classList.add('is-solid');
     } else {
-      navbar?.classList.remove('bg-white/95', 'backdrop-blur-lg', 'shadow-sm', 'scrolled');
-      navbar?.classList.add('bg-transparent');
+      navbar?.classList.remove('is-solid');
     }
   };
   window.addEventListener('scroll', onScroll);
   onScroll();
 
-  // Mobile menu toggle
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
   const menuIcon = document.getElementById('menu-icon');
   const closeIcon = document.getElementById('close-icon');
   btn?.addEventListener('click', () => {
-    const open = menu?.classList.toggle('hidden');
+    menu?.classList.toggle('hidden');
     menuIcon?.classList.toggle('hidden');
     closeIcon?.classList.toggle('hidden');
   });
 </script>
 
 <style>
-  /* Override text colors when scrolled */
-  #navbar.scrolled a:not([class*="bg-gold"]) {
-    --tw-text-opacity: 1;
+  /* Home page at top: transparent, white text */
+  #navbar[data-page="home"]:not(.is-solid) .nav-primary { color: #fff; }
+  #navbar[data-page="home"]:not(.is-solid) .nav-accent { color: var(--color-teal-300); }
+  #navbar[data-page="home"]:not(.is-solid) .nav-link { color: rgba(255,255,255,0.7); }
+  #navbar[data-page="home"]:not(.is-solid) .nav-link:hover { color: #fff; background: rgba(255,255,255,0.08); }
+  #navbar[data-page="home"]:not(.is-solid) .nav-logo { filter: brightness(0) invert(1); }
+
+  /* Solid state (scrolled or inner pages) */
+  #navbar.is-solid,
+  #navbar[data-page="inner"] {
+    background: rgba(247, 249, 247, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
-  #navbar.scrolled .navbar-scrolled\:text-navy-900 { color: var(--color-navy-900); }
-  #navbar.scrolled .navbar-scrolled\:text-teal-600 { color: var(--color-teal-600); }
-  #navbar.scrolled .navbar-scrolled\:text-gray-600 { color: #4b5563; }
-  #navbar.scrolled .navbar-scrolled\:text-gray-700 { color: #374151; }
-  #navbar.scrolled .navbar-scrolled\:hover\:text-teal-700:hover { color: var(--color-teal-700); }
-  #navbar.scrolled .navbar-scrolled\:hover\:bg-teal-50:hover { background-color: var(--color-teal-50); }
-  #navbar.scrolled .navbar-logo { filter: invert(1); }
+  #navbar.is-solid .nav-primary,
+  #navbar[data-page="inner"] .nav-primary { color: var(--color-navy-900); }
+  #navbar.is-solid .nav-accent,
+  #navbar[data-page="inner"] .nav-accent { color: var(--color-teal-600); }
+  #navbar.is-solid .nav-link,
+  #navbar[data-page="inner"] .nav-link { color: var(--color-navy-700); }
+  #navbar.is-solid .nav-link:hover,
+  #navbar[data-page="inner"] .nav-link:hover { color: var(--color-teal-700); background: var(--color-teal-50); }
+  #navbar.is-solid .nav-logo,
+  #navbar[data-page="inner"] .nav-logo { filter: none; }
 </style>

@@ -1,44 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-  /* Premium Medical Color Palette */
-  --color-navy-950: #0a1628;
-  --color-navy-900: #0f2340;
-  --color-navy-800: #162e50;
-  --color-navy-700: #1e3a5f;
-  --color-navy-600: #2a4a73;
+  /* Palette B: Autoritatív Gyógyítás */
 
-  --color-teal-700: #004d27;
-  --color-teal-600: #006332;
-  --color-teal-500: #00733a;
-  --color-teal-400: #1a9c5a;
-  --color-teal-300: #4dbf82;
-  --color-teal-200: #93dbb3;
-  --color-teal-100: #cceedd;
-  --color-teal-50: #eaf7f0;
+  /* Deep Forest Green (primary dark tones) */
+  --color-navy-950: #061710;
+  --color-navy-900: #0A2118;
+  --color-navy-800: #0E3022;
+  --color-navy-700: #16422F;
+  --color-navy-600: #1F5940;
 
-  --color-gold-600: #a67c2e;
-  --color-gold-500: #c49b3c;
-  --color-gold-400: #d4b05c;
-  --color-gold-300: #e4c97e;
-  --color-gold-200: #f0dfa8;
-  --color-gold-100: #faf3e0;
+  /* Emerald Green (accent green) */
+  --color-teal-700: #1A6B42;
+  --color-teal-600: #228B54;
+  --color-teal-500: #2DA566;
+  --color-teal-400: #54BF82;
+  --color-teal-300: #7DD4A0;
+  --color-teal-200: #ADE5C2;
+  --color-teal-100: #D5F2DF;
+  --color-teal-50: #EBF9F0;
 
-  --color-warm-50: #fafaf8;
-  --color-warm-100: #f5f4f0;
-  --color-warm-200: #e8e6e0;
+  /* Copper / Bronze (premium accent) */
+  --color-gold-600: #9A5F2E;
+  --color-gold-500: #B8733A;
+  --color-gold-400: #CC8E56;
+  --color-gold-300: #DDAA7A;
+  --color-gold-200: #EECBA8;
+  --color-gold-100: #F8E6D0;
+
+  /* Light backgrounds */
+  --color-warm-50: #F7F9F7;
+  --color-warm-100: #EFF3EF;
+  --color-warm-200: #DCE4DC;
 
   /* Typography */
-  --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-}
-
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 400 900;
-  font-display: swap;
-  src: url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
 }
 
 html {
@@ -47,7 +44,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  color: #1a1a2e;
+  color: #1A2E24;
   background: var(--color-warm-50);
 }
 
@@ -70,7 +67,7 @@ h1, h2, h3, h4, h5 {
 .stagger-3 { transition-delay: 0.3s; }
 .stagger-4 { transition-delay: 0.4s; }
 
-/* Premium gradient text */
+/* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, var(--color-teal-600), var(--color-teal-400));
   -webkit-background-clip: text;
@@ -78,20 +75,20 @@ h1, h2, h3, h4, h5 {
   background-clip: text;
 }
 
-/* Gold accent line */
+/* Accent line */
 .gold-line::after {
   content: '';
   display: block;
-  width: 60px;
-  height: 3px;
+  width: 40px;
+  height: 2px;
   background: linear-gradient(90deg, var(--color-gold-500), var(--color-gold-300));
   margin-top: 1rem;
 }
 .gold-line-center::after {
   content: '';
   display: block;
-  width: 60px;
-  height: 3px;
+  width: 40px;
+  height: 2px;
   background: linear-gradient(90deg, var(--color-gold-500), var(--color-gold-300));
   margin: 1rem auto 0;
 }

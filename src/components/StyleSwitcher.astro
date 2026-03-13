@@ -1,0 +1,186 @@
+---
+const themes = [
+  { id: 'forest', label: 'Erdő', colors: ['#0A2118', '#228B54', '#B8733A'] },
+  { id: 'ocean', label: 'Óceán', colors: ['#0C1B2A', '#2A7AB5', '#C9952B'] },
+  { id: 'praxis', label: 'Praxis', colors: ['#1C1917', '#059669', '#D97706'] },
+];
+---
+
+<div class="style-switcher relative">
+  <button id="style-switcher-btn" class="flex items-center gap-2 px-3 py-2 rounded-full border border-current/15 text-sm font-medium nav-link transition-all duration-300 hover:scale-105" aria-label="Stílus váltás">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+    <span class="hidden sm:inline" id="theme-label">Erdő</span>
+  </button>
+
+  <div id="style-switcher-panel" class="hidden absolute top-full right-0 mt-2 bg-white rounded-2xl shadow-2xl shadow-black/15 border border-warm-200/80 p-4 min-w-[220px] z-50">
+    <p class="text-xs text-navy-700/40 uppercase tracking-wider font-semibold mb-3 px-1">Stílus választó</p>
+    {themes.map((theme) => (
+      <button
+        data-theme-id={theme.id}
+        class="theme-option w-full flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200 hover:bg-warm-100 group"
+      >
+        <div class="flex gap-1">
+          {theme.colors.map((color) => (
+            <div class="w-5 h-5 rounded-full border-2 border-white shadow-sm" style={`background:${color}`}></div>
+          ))}
+        </div>
+        <span class="text-sm font-medium text-navy-800 group-hover:text-navy-900">{theme.label}</span>
+        <div class="ml-auto w-4 h-4 rounded-full border-2 border-warm-300 theme-check flex items-center justify-center">
+          <div class="w-2 h-2 rounded-full bg-teal-600 scale-0 transition-transform duration-200 theme-dot"></div>
+        </div>
+      </button>
+    ))}
+  </div>
+</div>
+
+<script>
+  const THEMES: Record<string, Record<string, string>> = {
+    forest: {},
+    ocean: {
+      '--color-navy-950': '#070D18',
+      '--color-navy-900': '#0C1B2A',
+      '--color-navy-800': '#122A40',
+      '--color-navy-700': '#1A3D5C',
+      '--color-navy-600': '#245478',
+
+      '--color-teal-700': '#1A5F8C',
+      '--color-teal-600': '#2A7AB5',
+      '--color-teal-500': '#3A92CF',
+      '--color-teal-400': '#5DADD9',
+      '--color-teal-300': '#88C5E5',
+      '--color-teal-200': '#B3DAF0',
+      '--color-teal-100': '#D9EDF8',
+      '--color-teal-50':  '#ECF6FC',
+
+      '--color-gold-600': '#A67C1B',
+      '--color-gold-500': '#C9952B',
+      '--color-gold-400': '#DAAD48',
+      '--color-gold-300': '#E5C472',
+      '--color-gold-200': '#F0DBA0',
+      '--color-gold-100': '#F9F0D0',
+
+      '--color-warm-50':  '#F5F7FA',
+      '--color-warm-100': '#EBF0F5',
+      '--color-warm-200': '#D5DDE8',
+
+      '--font-heading': "'Playfair Display', Georgia, serif",
+    },
+    praxis: {
+      '--color-navy-950': '#0C0A09',
+      '--color-navy-900': '#1C1917',
+      '--color-navy-800': '#292524',
+      '--color-navy-700': '#44403C',
+      '--color-navy-600': '#57534E',
+
+      '--color-teal-700': '#047857',
+      '--color-teal-600': '#059669',
+      '--color-teal-500': '#10B981',
+      '--color-teal-400': '#34D399',
+      '--color-teal-300': '#6EE7B7',
+      '--color-teal-200': '#A7F3D0',
+      '--color-teal-100': '#D1FAE5',
+      '--color-teal-50':  '#ECFDF5',
+
+      '--color-gold-600': '#B45309',
+      '--color-gold-500': '#D97706',
+      '--color-gold-400': '#F59E0B',
+      '--color-gold-300': '#FBC94A',
+      '--color-gold-200': '#FDE68A',
+      '--color-gold-100': '#FEF3C7',
+
+      '--color-warm-50':  '#FAFAF9',
+      '--color-warm-100': '#F5F5F4',
+      '--color-warm-200': '#E7E5E4',
+
+      '--font-heading': "'Outfit', system-ui, sans-serif",
+    }
+  };
+
+  const FONT_URLS: Record<string, string> = {
+    ocean: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap',
+    praxis: 'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap',
+  };
+
+  const loadedFonts = new Set<string>();
+
+  function applyTheme(themeId: string) {
+    const root = document.documentElement;
+
+    // Reset to forest defaults by removing overrides
+    Object.keys(THEMES.ocean).forEach(prop => root.style.removeProperty(prop));
+    Object.keys(THEMES.praxis).forEach(prop => root.style.removeProperty(prop));
+
+    // Apply new theme
+    const vars = THEMES[themeId];
+    if (vars) {
+      Object.entries(vars).forEach(([prop, val]) => {
+        root.style.setProperty(prop, val);
+      });
+    }
+
+    // Load font if needed
+    if (FONT_URLS[themeId] && !loadedFonts.has(themeId)) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = FONT_URLS[themeId];
+      document.head.appendChild(link);
+      loadedFonts.add(themeId);
+    }
+
+    // Update UI
+    document.querySelectorAll('.theme-option').forEach(btn => {
+      const dot = btn.querySelector('.theme-dot') as HTMLElement;
+      const check = btn.querySelector('.theme-check') as HTMLElement;
+      if (btn.getAttribute('data-theme-id') === themeId) {
+        dot.style.transform = 'scale(1)';
+        check.style.borderColor = 'var(--color-teal-600)';
+      } else {
+        dot.style.transform = 'scale(0)';
+        check.style.borderColor = '';
+      }
+    });
+
+    const label = document.getElementById('theme-label');
+    const names: Record<string, string> = { forest: 'Erdő', ocean: 'Óceán', praxis: 'Praxis' };
+    if (label) label.textContent = names[themeId] || themeId;
+
+    localStorage.setItem('mck-theme', themeId);
+  }
+
+  // Toggle panel
+  const btn = document.getElementById('style-switcher-btn');
+  const panel = document.getElementById('style-switcher-panel');
+
+  btn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    panel?.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', () => {
+    panel?.classList.add('hidden');
+  });
+
+  panel?.addEventListener('click', (e) => e.stopPropagation());
+
+  // Theme buttons
+  document.querySelectorAll('.theme-option').forEach(optBtn => {
+    optBtn.addEventListener('click', () => {
+      const id = optBtn.getAttribute('data-theme-id');
+      if (id) applyTheme(id);
+    });
+  });
+
+  // Init
+  const saved = localStorage.getItem('mck-theme') || 'forest';
+  applyTheme(saved);
+</script>
+
+<style>
+  .style-switcher-panel {
+    animation: switcherIn 0.2s ease;
+  }
+  @keyframes switcherIn {
+    from { opacity: 0; transform: translateY(-4px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+</style>

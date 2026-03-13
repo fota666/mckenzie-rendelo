@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO & Weboldal Audit — McKenzie Gyógytorna Rendelő</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --c-bg: #FAFAFA;
+    --c-surface: #FFFFFF;
+    --c-border: #E5E7EB;
+    --c-text: #111827;
+    --c-text-2: #6B7280;
+    --c-text-3: #9CA3AF;
+    --c-red: #EF4444;
+    --c-red-bg: #FEF2F2;
+    --c-red-border: #FECACA;
+    --c-orange: #F59E0B;
+    --c-orange-bg: #FFFBEB;
+    --c-orange-border: #FDE68A;
+    --c-green: #10B981;
+    --c-green-bg: #ECFDF5;
+    --c-green-border: #A7F3D0;
+    --c-blue: #3B82F6;
+    --c-blue-bg: #EFF6FF;
+    --c-blue-border: #BFDBFE;
+    --c-purple: #8B5CF6;
+    --c-purple-bg: #F5F3FF;
+    --c-accent: #0F172A;
+    --font: 'Inter', system-ui, sans-serif;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --radius: 16px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+    --shadow-lg: 0 4px 24px rgba(0,0,0,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); color: var(--c-text); background: var(--c-bg); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+  /* ---- NAV ---- */
+  .topnav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--c-border);
+    padding: 0 2rem;
+  }
+  .topnav-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; gap: 2rem;
+    height: 56px; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .topnav-inner::-webkit-scrollbar { display: none; }
+  .topnav a {
+    white-space: nowrap; font-size: 13px; font-weight: 500;
+    color: var(--c-text-2); text-decoration: none;
+    padding: 4px 0; border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .topnav a:hover, .topnav a:focus { color: var(--c-text); border-color: var(--c-text); }
+
+  /* ---- HERO ---- */
+  .hero {
+    background: var(--c-accent);
+    color: white;
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; top: -50%; right: -20%; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px; padding: 6px 16px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); margin-bottom: 2rem;
+  }
+  .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #EF4444; }
+  .hero h1 {
+    font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.8rem);
+    font-weight: 600; line-height: 1.15; max-width: 700px; margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: rgba(255,255,255,0.5); }
+  .hero p { font-size: 1.1rem; color: rgba(255,255,255,0.5); max-width: 540px; line-height: 1.8; }
+  .hero-meta {
+    margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; flex-wrap: wrap; gap: 2rem;
+    font-size: 13px; color: rgba(255,255,255,0.35);
+  }
+  .hero-meta strong { color: rgba(255,255,255,0.7); font-weight: 600; }
+
+  /* ---- SECTIONS ---- */
+  .section { padding: 4rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-title {
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--c-text-3); margin-bottom: 0.5rem;
+  }
+  .section h2 {
+    font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 600; line-height: 1.2; margin-bottom: 1rem;
+  }
+  .section-desc { color: var(--c-text-2); font-size: 1.05rem; max-width: 600px; margin-bottom: 2.5rem; }
+
+  .section-alt { background: var(--c-surface); }
+
+  /* ---- SCORE ---- */
+  .score-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; margin-bottom: 3rem;
+  }
+  .score-card {
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--radius); padding: 1.5rem; text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .score-card .score {
+    font-size: 3rem; font-weight: 800; line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .score-card .score.bad { color: var(--c-red); }
+  .score-card .score.warn { color: var(--c-orange); }
+  .score-card .score.good { color: var(--c-green); }
+  .score-card .label { font-size: 13px; color: var(--c-text-2); font-weight: 500; }
+
+  /* ---- CARDS ---- */
+  .card {
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--radius); padding: 2rem;
+    box-shadow: var(--shadow); margin-bottom: 1rem;
+  }
+  .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .card p, .card li { color: var(--c-text-2); font-size: 0.95rem; }
+  .card ul { padding-left: 1.25rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  /* severity badges */
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; padding: 3px 10px; border-radius: 100px;
+  }
+  .badge-critical { background: var(--c-red-bg); color: var(--c-red); border: 1px solid var(--c-red-border); }
+  .badge-warning { background: var(--c-orange-bg); color: #B45309; border: 1px solid var(--c-orange-border); }
+  .badge-info { background: var(--c-blue-bg); color: var(--c-blue); border: 1px solid var(--c-blue-border); }
+  .badge-ok { background: var(--c-green-bg); color: #047857; border: 1px solid var(--c-green-border); }
+  .badge-opportunity { background: var(--c-purple-bg); color: var(--c-purple); border: 1px solid #DDD6FE; }
+
+  /* ---- ISSUE LIST ---- */
+  .issue {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .issue:last-child { border-bottom: none; }
+  .issue-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--c-bg); border: 1px solid var(--c-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: var(--c-text-2);
+    flex-shrink: 0;
+  }
+  .issue-body h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .issue-body p { font-size: 0.9rem; color: var(--c-text-2); }
+
+  /* ---- TABLE ---- */
+  .audit-table {
+    width: 100%; border-collapse: collapse; font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+  .audit-table th {
+    text-align: left; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--c-text-3); padding: 0.75rem 1rem;
+    border-bottom: 2px solid var(--c-border);
+  }
+  .audit-table td {
+    padding: 0.75rem 1rem; border-bottom: 1px solid var(--c-border);
+    vertical-align: top;
+  }
+  .audit-table tr:last-child td { border-bottom: none; }
+  .audit-table code {
+    font-size: 12px; background: var(--c-bg); padding: 2px 6px;
+    border-radius: 4px; color: var(--c-red); font-family: 'SF Mono', 'Consolas', monospace;
+  }
+
+  /* ---- NAME CHAOS ---- */
+  .name-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .name-card {
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--radius); padding: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  .name-card h4 {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--c-text-3); margin-bottom: 0.75rem;
+  }
+  .name-card ul { list-style: none; padding: 0; }
+  .name-card li {
+    font-size: 0.9rem; padding: 0.4rem 0;
+    border-bottom: 1px solid var(--c-border);
+    color: var(--c-text);
+  }
+  .name-card li:last-child { border-bottom: none; }
+
+  /* ---- OPPORTUNITY ---- */
+  .opp-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+  .opp-card {
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--radius); padding: 2rem;
+    box-shadow: var(--shadow);
+    position: relative;
+    border-top: 3px solid var(--c-purple);
+  }
+  .opp-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .opp-card p { color: var(--c-text-2); font-size: 0.9rem; }
+  .opp-tag {
+    display: inline-block; margin-top: 1rem;
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--c-green);
+  }
+
+  /* ---- VS TABLE ---- */
+  .vs-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .vs-table th {
+    text-align: left; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--c-text-3); padding: 0.75rem 1rem;
+    border-bottom: 2px solid var(--c-border);
+  }
+  .vs-table td {
+    padding: 0.75rem 1rem; border-bottom: 1px solid var(--c-border);
+    vertical-align: top;
+  }
+  .vs-table .check { color: var(--c-green); font-weight: 700; }
+  .vs-table .cross { color: var(--c-red); font-weight: 700; }
+
+  /* ---- FOOTER ---- */
+  .report-footer {
+    padding: 3rem 2rem; text-align: center;
+    color: var(--c-text-3); font-size: 13px;
+    border-top: 1px solid var(--c-border);
+  }
+
+  /* ---- UTILS ---- */
+  .mt-2 { margin-top: 2rem; }
+  .mt-3 { margin-top: 3rem; }
+  .mb-1 { margin-bottom: 1rem; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  @media (max-width: 768px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .hero { padding: 3rem 1.5rem 2.5rem; }
+    .section { padding: 3rem 1.5rem; }
+  }
+
+  .highlight-box {
+    background: linear-gradient(135deg, var(--c-purple-bg), #EDE9FE);
+    border: 1px solid #DDD6FE;
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  .highlight-box h3 { color: var(--c-purple); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a href="#osszefoglalas">Összefoglalás</a>
+    <a href="#technikai">Technikai hibák</a>
+    <a href="#seo">SEO hiányosságok</a>
+    <a href="#branding">Branding</a>
+    <a href="#tartalom">Tartalom</a>
+    <a href="#hianyzo">Hiányzó funkciók</a>
+    <a href="#jelenlegi-vs-uj">Jelenlegi vs. Új</a>
+    <a href="#kovetkezo-lepesek">Következő lépések</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Weboldal & SEO audit
+    </div>
+    <h1>McKenzie Gyógytorna Rendelő <em>— weboldal elemzés</em></h1>
+    <p>
+      A mckenzie.hu / gyogytornarendelo.hu jelenlegi állapotának részletes technikai, SEO és tartalmi elemzése, konkrét javaslatokkal az új weboldal alapjaihoz.
+    </p>
+    <div class="hero-meta">
+      <div><strong>Platform:</strong> Joomla CMS + SP Page Builder</div>
+      <div><strong>Domainek:</strong> mckenzie.hu, gyogytornarendelo.hu</div>
+      <div><strong>Dátum:</strong> 2026. március 13.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ÖSSZEFOGLALÁS -->
+<section id="osszefoglalas" class="section">
+  <div class="section-inner">
+    <div class="section-title">Összefoglalás</div>
+    <h2>Az oldal tartalma erős, a technikai megvalósítás gyenge</h2>
+    <p class="section-desc">
+      A rendelő 25+ éves szakmai tapasztalata és a részletes, informatív tartalom kiváló alapot ad. A fő problémák a technikai SEO, a branding konzisztencia és a hiányzó konverziós eszközök területén vannak.
+    </p>
+
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score good" style="font-size:1.6rem;">Kiváló</div>
+        <div class="label">Tartalom & szakmai háttér</div>
+      </div>
+      <div class="score-card">
+        <div class="score warn" style="font-size:1.6rem;">Fejleszthető</div>
+        <div class="label">Technikai SEO & branding</div>
+      </div>
+      <div class="score-card">
+        <div class="score" style="font-size:1.6rem;color:var(--c-purple);">Kihasználatlan</div>
+        <div class="label">Blog, hírlevél, CTA-k</div>
+      </div>
+    </div>
+
+    <!-- Ami jó -->
+    <div class="card" style="border-left: 4px solid var(--c-green);">
+      <h3>Ami jelenleg is jól működik</h3>
+      <ul>
+        <li><strong>Szövegek minősége</strong> — informatív, szakmailag hiteles, természetes magyar nyelvű tartalom</li>
+        <li><strong>18 gyógytornász</strong> részletes bemutatása végzettségekkel, szakterületekkel</li>
+        <li><strong>9 kezelési módszer</strong> alapos, részletes leírása</li>
+        <li><strong>Orvosi háttér szekció</strong> — ritka és bizalomépítő, 4 szakorvos megnevezve</li>
+        <li><strong>GYIK oldal</strong> — 7 releváns kérdés, hasznos válaszokkal</li>
+        <li><strong>Főoldal tartalma</strong> — világos kommunikáció: miben segítenek, miért válasszák őket</li>
+        <li><strong>Kiváló Google értékelések</strong> — Budai rendelő: 4.9 (73 vélemény), Belvárosi: 5.0 (68 vélemény). Ez ritka és nagyon erős bizalmi jel</li>
+        <li><strong>Árak transzparensek</strong> — 14-15.000 Ft/alkalom, bérlet kedvezmény feltüntetve</li>
+        <li><strong>Cookie consent</strong> — GDPR-kompatibilis, kategorizált</li>
+        <li><strong>Google Analytics + Ads</strong> — konverziókövetés működik</li>
+        <li><strong>Domain név</strong> — mckenzie.hu erős brand keresésekre</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIKAI HIBÁK -->
+<section id="technikai" class="section section-alt">
+  <div class="section-inner">
+    <div class="section-title">Technikai hibák</div>
+    <h2>Kritikus és súlyos hibák a jelenlegi oldalon</h2>
+    <p class="section-desc">
+      Ezek a hibák közvetlenül rontják a Google-ben való megjelenést és a felhasználói élményt.
+    </p>
+
+    <div class="card">
+      <div class="issue">
+        <span class="issue-num">1</span>
+        <div class="issue-body">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+            <h4>4 db halott link a főoldalon és a módszerek oldalon</h4>
+            <span class="badge badge-critical">Kritikus</span>
+          </div>
+          <p>A McKenzie, Manuálterápia, Stabilizáló tréning és Schroth terápia képekre kattintva <code>href="http://"</code> — a böngésző <code>about:blank#blocked</code> üzenetet ad. A legfontosabb szolgáltatások linkjei nem működnek.</p>
+        </div>
+      </div>
+      <div class="issue">
+        <span class="issue-num">2</span>
+        <div class="issue-body">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+            <h4>Hibás telefonszám link</h4>
+            <span class="badge badge-critical">Kritikus</span>
+          </div>
+          <p>A <code>tel:14-15000</code> link az árat tartalmazza telefonszám helyett. Mobilon rákattintva a telefon megpróbálja felhívni a "14-15000" számot.</p>
+        </div>
+      </div>
+      <div class="issue">
+        <span class="issue-num">3</span>
+        <div class="issue-body">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+            <h4>H1 heading hiányzik a főoldalról</h4>
+            <span class="badge badge-critical">Kritikus</span>
+          </div>
+          <p>Az oldal H2-vel kezdődik ("Móricz Zsigmond körtéri..."). A H1 a legfontosabb SEO elem — nélküle a Google nem érti, miről szól az oldal.</p>
+        </div>
+      </div>
+      <div class="issue">
+        <span class="issue-num">4</span>
+        <div class="issue-body">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+            <h4>Meta description hiányzik az összes oldalról</h4>
+            <span class="badge badge-critical">Kritikus</span>
+          </div>
+          <p>A Google találati oldal leírását a Google maga generálja, ami nem feltétlenül a legjobb szöveget választja ki. Minden oldalnál egyedi, kulcsszógazdag meta description kellene.</p>
+        </div>
+      </div>
+      <div class="issue">
+        <span class="issue-num">5</span>
+        <div class="issue-body">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+            <h4>Oldaltérkép link nyers XML fájlra mutat</h4>
+            <span class="badge badge-warning">Súlyos</span>
+          </div>
+          <p>A footer "Oldaltérkép" linkje a <code>/sitemap</code> XML fájlra vezet, ami a felhasználónak nyers kódot mutat. Ez a crawlereknek szól, nem az embereknek.</p>
+        </div>
+      </div>
+      <div class="issue">
+        <span class="issue-num">6</span>
+        <div class="issue-body">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+            <h4>Keyword stuffing a képek alt szövegeiben</h4>
+            <span class="badge badge-warning">Súlyos</span>
+          </div>
+          <p>A módszer-képeknél ugyanaz a 8 kulcsszó szerepel alt textként: "gyógytorna Budapest, gerincsérv, gerincferdülés, tartáshiba, műtét után, sportsérülés, mckenzie terápia, mozgásterápia". Ez Google büntetéshez vezethet és az akadálymentesítést is rontja.</p>
+        </div>
+      </div>
+      <div class="issue">
+        <span class="issue-num">7</span>
+        <div class="issue-body">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+            <h4>McKenzie módszer aloldal — hibás heading struktúra</h4>
+            <span class="badge badge-warning">Súlyos</span>
+          </div>
+          <p>A <code>/mckenzie-modszer</code> aloldalon nincs H1, és 9 db H2 van egymás után, flat struktúrában. A Google nem tudja értelmezni a tartalom hierarchiáját.</p>
+        </div>
+      </div>
+      <div class="issue">
+        <span class="issue-num">8</span>
+        <div class="issue-body">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+            <h4>Online bejelentkezési form — nincs label, nincs ARIA</h4>
+            <span class="badge badge-warning">Súlyos</span>
+          </div>
+          <p>A form mezőknél nincsenek <code>&lt;label&gt;</code> elemek, nincsenek ARIA attribútumok, a hibaüzenetek generikusak ("Invalid Input"). Képernyőolvasóval használhatatlan — egy magánklinikánál ez elfogadhatatlan.</p>
+        </div>
+      </div>
+      <div class="issue">
+        <span class="issue-num">9</span>
+        <div class="issue-body">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+            <h4>Adatvédelmi tájékoztató 2018-ból</h4>
+            <span class="badge badge-info">Közepes</span>
+          </div>
+          <p>A GDPR tájékoztató 8 éve nem frissült, a jogszabályi követelmények azóta változtak.</p>
+        </div>
+      </div>
+      <div class="issue">
+        <span class="issue-num">10</span>
+        <div class="issue-body">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+            <h4><code>html lang</code> attribútum hiányzik</h4>
+            <span class="badge badge-info">Közepes</span>
+          </div>
+          <p>Az oldal 3 nyelven elérhető (HU/DE/EN), de nincs <code>lang</code> attribútum a HTML elemen, és nincsenek <code>hreflang</code> tagek a nyelvváltáshoz.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEO HIÁNYOSSÁGOK -->
+<section id="seo" class="section">
+  <div class="section-inner">
+    <div class="section-title">SEO hiányosságok</div>
+    <h2>A Google nem látja azt, amit kellene</h2>
+    <p class="section-desc">
+      A fő kulcsszavak szinte egyike sem jelenik meg a legfontosabb SEO pozíciókban.
+    </p>
+
+    <div class="card mb-1">
+      <h3>Kulcsszó-pozíció elemzés</h3>
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Kulcsszó</th>
+            <th>Title tag</th>
+            <th>H1</th>
+            <th>Meta desc.</th>
+            <th>Szövegben</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>mckenzie módszer</strong></td>
+            <td>Részben</td>
+            <td class="cross">Nem (H1 hiányzik)</td>
+            <td class="cross">Nincs meta desc.</td>
+            <td class="check">Igen</td>
+          </tr>
+          <tr>
+            <td><strong>gyógytorna budapest</strong></td>
+            <td>Részben</td>
+            <td class="cross">Nem</td>
+            <td class="cross">Nincs</td>
+            <td>Csak alt-ban</td>
+          </tr>
+          <tr>
+            <td><strong>derékfájás kezelése</strong></td>
+            <td class="cross">Nem</td>
+            <td class="cross">Nem</td>
+            <td class="cross">Nincs</td>
+            <td class="check">Igen</td>
+          </tr>
+          <tr>
+            <td><strong>nyakfájás kezelése</strong></td>
+            <td class="cross">Nem</td>
+            <td class="cross">Nem</td>
+            <td class="cross">Nincs</td>
+            <td class="check">Igen</td>
+          </tr>
+          <tr>
+            <td><strong>porckorongsérv kezelés</strong></td>
+            <td class="cross">Nem</td>
+            <td class="cross">Nem</td>
+            <td class="cross">Nincs</td>
+            <td class="check">Igen</td>
+          </tr>
+          <tr>
+            <td><strong>manuálterápia budapest</strong></td>
+            <td class="cross">Nem</td>
+            <td class="cross">Nem</td>
+            <td class="cross">Nincs</td>
+            <td class="check">Igen</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.85rem;color:var(--c-text-3);margin-top:0.5rem;">A tartalom megvan, de a Google számára fontos helyeken (title, H1, meta description) nem jelennek meg a kulcsszavak.</p>
+    </div>
+
+    <div class="card mb-1">
+      <h3>Hiányzó strukturált adatok (Schema.org)</h3>
+      <p>A Google rich snippet-eket tud megjeleníteni a találati oldalon, ha az oldal strukturált adatokat tartalmaz. A jelenlegi oldalon <strong>egyik sem található</strong>:</p>
+      <ul class="mt-2">
+        <li><strong>LocalBusiness / MedicalBusiness</strong> — a rendelő neve, címe, telefonszáma, nyitvatartása strukturáltan</li>
+        <li><strong>FAQPage</strong> — a GYIK kérdések megjelennének közvetlenül a Google találatokban (a jelenlegi FAQ schema hibás: 7 kérdés egyetlen elembe van összesítve)</li>
+        <li><strong>Review / AggregateRating</strong> — a csillagos értékelés megjelenne a találatokban</li>
+        <li><strong>Person</strong> — a gyógytornászok kereshetőek lennének név szerint</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Hiányzó meta elemek</h3>
+      <div class="grid-2 mt-2">
+        <div>
+          <h4 style="font-size:0.85rem;color:var(--c-red);font-weight:600;margin-bottom:0.5rem;">Ami hiányzik</h4>
+          <ul>
+            <li>Meta description (minden oldalon)</li>
+            <li>Open Graph tagek (social share)</li>
+            <li>Twitter Card tagek</li>
+            <li>Canonical URL</li>
+            <li>Hreflang (3 nyelv!)</li>
+            <li>Schema.org JSON-LD</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size:0.85rem;color:var(--c-green);font-weight:600;margin-bottom:0.5rem;">Ami megvan</h4>
+          <ul>
+            <li>Title tag (de nem optimális)</li>
+            <li>Viewport meta</li>
+            <li>Sitemap.xml (17 URL)</li>
+            <li>Cookie consent</li>
+            <li>Google Analytics + Ads</li>
+            <li>Nyelvi váltás (HU/DE/EN)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDING KONZISZTENCIA -->
+<section id="branding" class="section section-alt">
+  <div class="section-inner">
+    <div class="section-title">Branding</div>
+    <h2>10+ különböző név ugyanarra a rendelőre</h2>
+    <p class="section-desc">
+      A Google helyi SEO-nál a NAP (Name, Address, Phone) konzisztenciája az egyik legfontosabb rangsorolási faktor. Jelenleg kaotikus a névhasználat.
+    </p>
+
+    <div class="name-grid">
+      <div class="name-card">
+        <h4>Google Maps</h4>
+        <ul>
+          <li>McKenzie Bel-Budai gyógytorna-rendelő</li>
+          <li>Belvárosi Gyógytorna-rendelő</li>
+        </ul>
+      </div>
+      <div class="name-card">
+        <h4>Weboldal — rendelők</h4>
+        <ul>
+          <li>Bel-budai gyógytorna-rendelő</li>
+          <li>Belvárosi gyógytorna-rendelő</li>
+          <li>Móricz Zsigmond körtéri és Belvárosi Gyógytorna Rendelőink</li>
+        </ul>
+      </div>
+      <div class="name-card">
+        <h4>Weboldal — vállalkozás</h4>
+        <ul>
+          <li>Gyógytorna és Gerinctorna magán Rendelőnkben</li>
+          <li>&copy; 2026 Relle Éva, Gyógytorna Magánrendelő</li>
+          <li>McKenzie-módszer referenciarendelő</li>
+          <li>Gyógytorna Magánrendelő</li>
+        </ul>
+      </div>
+      <div class="name-card">
+        <h4>Domainek & social</h4>
+        <ul>
+          <li>mckenzie.hu</li>
+          <li>gyogytornarendelo.hu</li>
+          <li>McKenzie Gyógytorna Rendelő <span style="color:var(--c-text-3);">(Facebook)</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight-box mt-3">
+      <h3>Miért probléma ez?</h3>
+      <p style="margin-top:0.5rem;color:var(--c-text-2);">
+        Ha a Google különböző neveket lát a Maps-ben, a weboldalon és a Facebookon, nem tudja biztosan összekötni őket egy entitásként. Ez <strong>gyengébb helyi rangsorolást</strong> eredményez. A páciensnek sem egyértelmű, hogy ugyanarról a rendelőről van-e szó. Két domain tovább fragmentálja a linkerőt (backlink-ek, domain authority).
+      </p>
+      <p style="margin-top:0.75rem;color:var(--c-text-2);">
+        <strong>Javaslat:</strong> Egyetlen hivatalos név minden felületen, pl. <em>"McKenzie Gyógytorna Rendelő"</em>, és egyetlen fő domain.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TARTALOM -->
+<section id="tartalom" class="section">
+  <div class="section-inner">
+    <div class="section-title">Tartalom</div>
+    <h2>Erős alapok, de elavuló részekkel</h2>
+
+    <div class="grid-2">
+      <div class="card" style="border-left: 4px solid var(--c-green);">
+        <h3>Erősségek</h3>
+        <ul>
+          <li>25+ év tapasztalat hitelesen kommunikálva</li>
+          <li>18 gyógytornász részletes profillal</li>
+          <li>9 módszer alapos leírása</li>
+          <li>Orvosi háttér szekció (4 szakorvos)</li>
+          <li>Valós vélemények ismert emberektől (Havas Henrik, Kulcsár Krisztián)</li>
+          <li>GYIK oldal releváns kérdésekkel</li>
+          <li>Világos kommunikáció: miben segítenek, miért válasszák őket</li>
+        </ul>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--c-orange);">
+        <h3>Gyengeségek</h3>
+        <ul>
+          <li><strong>Rólunk írták</strong> — legújabb sajtómegjelenés 2015-ből (11 éves!)</li>
+          <li><strong>3 gyógytornász GYES-en</strong> — de ez nincs vizuálisan kezelve, nem egyértelmű, hogy nem foglalható hozzájuk időpont</li>
+          <li><strong>Árak</strong> átláthatóak, de nem derül ki miért éri meg, mit kap a páciens az árért, és mi az árkülönbség oka a terapeuták között</li>
+          <li><strong>Kapcsolat oldalon</strong> nincs beágyazott térkép</li>
+          <li><strong>Nincs Google Review integráció</strong> — a vélemények statikusak, nem frissülnek</li>
+          <li><strong>Joomla + SP Page Builder</strong> — elavult platform, lassú, nehezen karbantartható</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIÁNYZÓ FUNKCIÓK -->
+<section id="hianyzo" class="section section-alt">
+  <div class="section-inner">
+    <div class="section-title">Hiányzó funkciók</div>
+    <h2>Ingyenes lehetőségek az ügyfélszerzésre</h2>
+    <p class="section-desc">
+      Az alábbi eszközök hirdetési költség nélkül, saját munkával növelik az inbound forgalmat és a konverziókat. Jelenleg egyik sem létezik az oldalon.
+    </p>
+
+    <div class="opp-grid">
+      <div class="opp-card">
+        <span class="badge badge-opportunity" style="margin-bottom:0.75rem;">Hirdetés nélkül</span>
+        <h3>Blog / Tartalommarketing</h3>
+        <p>
+          Jelenleg nincs egyetlen cikk sem az oldalon. Egy blog hosszú távon az egyik leghatékonyabb organikus SEO eszköz — minden cikk egy új belépési pont a Google keresésből. Munkaidőt igényel, de hirdetési költséget nem. Témák, amiket az emberek aktívan keresnek:
+        </p>
+        <ul style="margin-top:0.75rem;color:var(--c-text-2);font-size:0.9rem;">
+          <li>"Hogyan segít a McKenzie módszer porckorongsérvre?"</li>
+          <li>"5 otthoni gyakorlat derékfájás ellen"</li>
+          <li>"Mikor kell gyógytornászhoz menni nyakfájással?"</li>
+          <li>"Porckorongsérv: műtét vagy gyógytorna?"</li>
+        </ul>
+        <div class="opp-tag">Organikus forgalom hirdetés nélkül</div>
+      </div>
+
+      <div class="opp-card">
+        <span class="badge badge-opportunity" style="margin-bottom:0.75rem;">Hirdetés nélkül</span>
+        <h3>Hírlevél</h3>
+        <p>
+          Nincs email lista, nincs hírlevél. A páciensek egyszer jönnek, aztán eltűnnek. Egy heti tipp-email (otthoni gyakorlatok, tartásjavítás, ergonómia) tartja a kapcsolatot, és visszahozza őket — vagy ajánlják ismerőseiknek.
+        </p>
+        <ul style="margin-top:0.75rem;color:var(--c-text-2);font-size:0.9rem;">
+          <li>Feliratkozási form a főoldalon és a blogcikkek végén</li>
+          <li>Lead magnet: "5 napos reggeli gerinctorna" email-sorozat</li>
+          <li>Havi 1-2 hírlevél: tippek, új cikkek, szezonális tanácsok</li>
+        </ul>
+        <div class="opp-tag">Folyamatos visszatérő forgalom</div>
+      </div>
+
+      <div class="opp-card">
+        <span class="badge badge-opportunity" style="margin-bottom:0.75rem;">Közvetlen konverzió</span>
+        <h3>Erős CTA-k (Call to Action)</h3>
+        <p>
+          A jelenlegi oldalon nincs egyetlen kiemelkedő, vizuálisan erős cselekvésre ösztönző gomb sem. A "Jelentkezés" menüpont elbújik a navigációban.
+        </p>
+        <ul style="margin-top:0.75rem;color:var(--c-text-2);font-size:0.9rem;">
+          <li>Nagy, színes "Időpontfoglalás" gomb a hajtás felett, minden oldalon</li>
+          <li>Kattintható telefonszám (<code>tel:+36304878284</code>)</li>
+          <li>Sticky CTA sáv mobilon</li>
+          <li>Minden szekció végén visszatérő CTA</li>
+        </ul>
+        <div class="opp-tag">Azonnali hatás a bejelentkezések számára</div>
+      </div>
+
+      <div class="opp-card">
+        <span class="badge badge-opportunity" style="margin-bottom:0.75rem;">SEO + Bizalom</span>
+        <h3>Google & Facebook értékelések</h3>
+        <p>
+          A Google értékelések kiválóak — Budai rendelő: <strong>4.9 (73 vélemény)</strong>, Belvárosi: <strong>5.0 (68 vélemény)</strong>. Ez komoly bizalmi tőke, de sehol nem jelenik meg az oldalon. A "Rólunk írták" szekció statikus, a legfrissebb megjelenés 11 éves. Facebookon mindössze 2 értékelés van — itt is érdemes lenne aktívan kérni a páciensektől.
+        </p>
+        <ul style="margin-top:0.75rem;color:var(--c-text-2);font-size:0.9rem;">
+          <li>Valós Google értékelések beágyazása az oldalra</li>
+          <li>Review schema → csillagok a Google találatokban</li>
+          <li>Friss vélemények automatikus megjelenítése</li>
+          <li>Facebook értékelések aktív gyűjtése (jelenleg csak 2 db)</li>
+        </ul>
+        <div class="opp-tag">141 Google vélemény — ezt meg kell mutatni</div>
+      </div>
+
+      <div class="opp-card">
+        <span class="badge badge-opportunity" style="margin-bottom:0.75rem;">Helyi SEO</span>
+        <h3>Landing page-ek kulcsszavakra</h3>
+        <p>
+          Jelenleg nincs céloldal a legfontosabb keresési kifejezésekre. Minden egy általános "Módszerek" oldalra fut be.
+        </p>
+        <ul style="margin-top:0.75rem;color:var(--c-text-2);font-size:0.9rem;">
+          <li><code>/derekfajas-kezelese-budapest</code></li>
+          <li><code>/porckorongseru-kezeles</code></li>
+          <li><code>/nyakfajas-kezelese</code></li>
+          <li><code>/manualterapia-budapest</code></li>
+        </ul>
+        <div class="opp-tag">Célzott forgalom a legkeresettebb témákra</div>
+      </div>
+
+      <div class="opp-card">
+        <span class="badge badge-opportunity" style="margin-bottom:0.75rem;">Lead generálás</span>
+        <h3>Lead Magnet</h3>
+        <p>
+          Egy letölthető anyag (PDF vagy email-sorozat) cserébe az email címért. Az email lista építésének egyik leghatékonyabb módja.
+        </p>
+        <ul style="margin-top:0.75rem;color:var(--c-text-2);font-size:0.9rem;">
+          <li>"5 napos reggeli gerinctorna" email-sorozat</li>
+          <li>"Irodai dolgozók gerincvédő útmutatója" PDF</li>
+          <li>"Mikor kell orvoshoz menni derékfájással?" ellenőrzőlista</li>
+        </ul>
+        <div class="opp-tag">Email lista építés, automatizált ügyfélszerzés</div>
+      </div>
+    </div>
+
+    <div class="highlight-box mt-3">
+      <h3>Miért fontosak ezek?</h3>
+      <p style="margin-top:0.5rem;color:var(--c-text-2);">
+        Ezek az eszközök munkaidőt igényelnek, de hirdetési költséget nem. Egy jól megírt blogcikk <strong>évekig hoz látogatókat</strong> a Google-ből. Egy hírlevél <strong>meglévő kapcsolatokat tart melegen</strong>. Egy erős CTA a <strong>már ott lévő látogatókat konvertálja</strong>. A jelenlegi oldal ezekből semmit nem használ ki — itt van a legnagyobb növekedési lehetőség.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- JELENLEGI VS ÚJ -->
+<section id="jelenlegi-vs-uj" class="section">
+  <div class="section-inner">
+    <div class="section-title">Összehasonlítás</div>
+    <h2>Jelenlegi oldal vs. Új weboldal</h2>
+    <p class="section-desc">
+      Az új Astro-alapú weboldal a legtöbb technikai hiányosságot már orvosolja.
+    </p>
+
+    <div class="card">
+      <table class="vs-table">
+        <thead>
+          <tr>
+            <th style="width:35%;">Szempont</th>
+            <th style="width:30%;">Jelenlegi (Joomla)</th>
+            <th style="width:30%;">Új oldal (Astro)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Title tag</td>
+            <td>Van, de nem optimális</td>
+            <td class="check">Optimalizált + Budapest</td>
+          </tr>
+          <tr>
+            <td>Meta description</td>
+            <td class="cross">Hiányzik</td>
+            <td class="check">Egyedi, kulcsszógazdag</td>
+          </tr>
+          <tr>
+            <td>H1 heading</td>
+            <td class="cross">Hiányzik</td>
+            <td class="check">Van (1 db, helyes)</td>
+          </tr>
+          <tr>
+            <td>Heading hierarchia</td>
+            <td class="cross">Hibás (H1 nélkül)</td>
+            <td class="check">H1→H2→H3→H4</td>
+          </tr>
+          <tr>
+            <td>Képek alt text</td>
+            <td class="cross">Keyword stuffing / hiányzik</td>
+            <td class="check">Leíró, helyes</td>
+          </tr>
+          <tr>
+            <td>Open Graph (social)</td>
+            <td class="cross">Hiányzik</td>
+            <td class="check">Teljes (OG + Twitter)</td>
+          </tr>
+          <tr>
+            <td>Canonical URL</td>
+            <td class="cross">Hiányzik</td>
+            <td class="check">Dinamikusan generálva</td>
+          </tr>
+          <tr>
+            <td>Schema.org</td>
+            <td class="cross">Hiányzik</td>
+            <td class="check">MedicalBusiness JSON-LD</td>
+          </tr>
+          <tr>
+            <td><code>html lang</code></td>
+            <td class="cross">Hiányzik</td>
+            <td class="check">lang="hu"</td>
+          </tr>
+          <tr>
+            <td>Betűtípus betöltés</td>
+            <td class="cross">Nem optimalizált</td>
+            <td class="check">Preconnect + display:swap</td>
+          </tr>
+          <tr>
+            <td>CTA gombok</td>
+            <td class="cross">Gyenge / rejtett</td>
+            <td class="check">Erős, minden oldalon</td>
+          </tr>
+          <tr>
+            <td>Hírlevél</td>
+            <td class="cross">Nincs</td>
+            <td class="check">Feliratkozási form + Lead Magnet</td>
+          </tr>
+          <tr>
+            <td>Blog</td>
+            <td class="cross">Nincs</td>
+            <td>Tervben</td>
+          </tr>
+          <tr>
+            <td>Mobil élmény</td>
+            <td>Alapszintű responsive</td>
+            <td class="check">Mobile-first, modern</td>
+          </tr>
+          <tr>
+            <td>Sebesség</td>
+            <td class="cross">Joomla + sok JS</td>
+            <td class="check">Statikus HTML, minimális JS</td>
+          </tr>
+          <tr>
+            <td>Platform</td>
+            <td>Joomla CMS (elavuló)</td>
+            <td class="check">Astro 5 + Tailwind CSS 4</td>
+          </tr>
+          <tr>
+            <td>Cookie consent</td>
+            <td class="check">Van</td>
+            <td>Implementálandó</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- KÖVETKEZŐ LÉPÉSEK -->
+<section id="kovetkezo-lepesek" class="section section-alt">
+  <div class="section-inner">
+    <div class="section-title">Következő lépések</div>
+    <h2>Javasolt prioritások</h2>
+
+    <div class="card mb-1" style="border-left: 4px solid var(--c-red);">
+      <h3>1. fázis — Azonnali javítások (a jelenlegi oldalon)</h3>
+      <ul>
+        <li>4 db broken link javítása a módszereknél</li>
+        <li>Hibás <code>tel:14-15000</code> link törlése</li>
+        <li>Meta description hozzáadása minden oldalhoz</li>
+        <li>H1 tag javítása a főoldalon</li>
+      </ul>
+    </div>
+
+    <div class="card mb-1" style="border-left: 4px solid var(--c-blue);">
+      <h3>2. fázis — Új weboldal bevezetése</h3>
+      <ul>
+        <li>Branding egységesítése: egy név, egy domain</li>
+        <li>Összes tartalom migrálása (szövegek, gyógytornászok, módszerek)</li>
+        <li>Schema.org strukturált adatok minden oldalon</li>
+        <li>FAQ schema a GYIK oldalon</li>
+        <li>Google Review integráció</li>
+        <li>Cookie consent implementálása</li>
+        <li>Google Analytics + Ads átkötése</li>
+        <li>301 redirect-ek a régi URL-ekről</li>
+      </ul>
+    </div>
+
+    <div class="card mb-1" style="border-left: 4px solid var(--c-purple);">
+      <h3>3. fázis — Növekedés (organikus inbound)</h3>
+      <ul>
+        <li>Blog indítása heti 1-2 cikkel</li>
+        <li>Hírlevél rendszer beüzemelése</li>
+        <li>Lead magnet (email-sorozat / PDF)</li>
+        <li>Landing page-ek a fő kulcsszavakra</li>
+        <li>Google Business Profile optimalizálása mindkét rendelőnél</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="report-footer">
+  <p>McKenzie Gyógytorna Rendelő — SEO & Weboldal Audit Report</p>
+  <p style="margin-top:0.25rem;">Készült: 2026. március 13.</p>
+</footer>
+
+</body>
+</html>
