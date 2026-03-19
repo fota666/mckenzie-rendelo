@@ -4,8 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://fota666.github.io',
-  base: '/mckenzie-rendelo',
+  site: 'https://mckenzie-rendelo.hu',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()]

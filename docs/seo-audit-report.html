@@ -278,6 +278,48 @@
     margin: 2rem 0;
   }
   .highlight-box h3 { color: var(--c-purple); }
+
+  /* ---- PRINT / PDF ---- */
+  @media print {
+    @page { size: A4; margin: 15mm 18mm; }
+    html { font-size: 11px; }
+    body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    .topnav { display: none !important; }
+
+    .hero { padding: 2rem 0 1.5rem; break-after: avoid; }
+    .hero h1 { font-size: 2rem; margin-bottom: 0.75rem; }
+    .hero p { font-size: 0.95rem; }
+    .hero-meta { margin-top: 1.5rem; padding-top: 1rem; }
+
+    .section { padding: 1.5rem 0; }
+    .section h2 { font-size: 1.5rem; }
+    .section-desc { margin-bottom: 1.25rem; }
+
+    .card { padding: 1.25rem; margin-bottom: 0.75rem; box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+    .highlight-box { padding: 1.25rem; margin: 1rem 0; break-inside: avoid; }
+    .issue { padding: 0.75rem 0; }
+
+    .score-grid { gap: 0.5rem; margin-bottom: 1.5rem; }
+    .score-card { padding: 1rem; box-shadow: none; border: 1px solid #ddd; }
+    .score-card .score { font-size: 2rem; }
+
+    .audit-table td, .audit-table th { padding: 0.5rem 0.75rem; font-size: 0.8rem; }
+    .vs-table td, .vs-table th { padding: 0.5rem 0.75rem; font-size: 0.8rem; }
+
+    .name-grid { gap: 0.75rem; }
+    .name-card { padding: 1rem; box-shadow: none; }
+    .opp-grid { gap: 0.75rem; }
+    .opp-card { padding: 1.25rem; box-shadow: none; break-inside: avoid; }
+
+    .grid-2 { gap: 0.75rem; }
+
+    .report-footer { padding: 1.5rem 0; }
+
+    h2, h3, h4 { break-after: avoid; }
+    table { break-inside: avoid; }
+    .issue { break-inside: avoid; }
+  }
 </style>
 </head>
 <body>
@@ -287,11 +329,14 @@
   <div class="topnav-inner">
     <a href="#osszefoglalas">Összefoglalás</a>
     <a href="#technikai">Technikai hibák</a>
+    <a href="#sebesseg">Sebesség</a>
     <a href="#seo">SEO hiányosságok</a>
     <a href="#branding">Branding</a>
     <a href="#tartalom">Tartalom</a>
     <a href="#hianyzo">Hiányzó funkciók</a>
     <a href="#jelenlegi-vs-uj">Jelenlegi vs. Új</a>
+    <a href="#versenytarsak">Versenytársak</a>
+    <a href="#kulcsszavak">Kulcsszavak</a>
     <a href="#kovetkezo-lepesek">Következő lépések</a>
   </div>
 </nav>
@@ -469,6 +514,89 @@
           <p>Az oldal 3 nyelven elérhető (HU/DE/EN), de nincs <code>lang</code> attribútum a HTML elemen, és nincsenek <code>hreflang</code> tagek a nyelvváltáshoz.</p>
         </div>
       </div>
+      <div class="issue">
+        <span class="issue-num">11</span>
+        <div class="issue-body">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+            <h4>Mobil nézet nem reszponzív</h4>
+            <span class="badge badge-critical">Kritikus</span>
+          </div>
+          <p>Az oldal mobilon nehezen használható: a szövegek és gombok nem skálázódnak megfelelően, a navigáció nehézkes, a tartalom kilóg a képernyőről vagy túl kicsi. A Google 2019 óta <strong>mobile-first indexelést</strong> alkalmaz — a mobilos élmény határozza meg a rangsorolást. A látogatók több mint 60%-a mobilról érkezik, és ha az oldal nehezen kezelhető, azonnal továbblépnek. Ez közvetlenül rontja a bounce rate-et és ezáltal a Google pozíciót is.</p>
+        </div>
+      </div>
+      <div class="issue">
+        <span class="issue-num">12</span>
+        <div class="issue-body">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+            <h4>Két külön domain, átirányítás nélkül</h4>
+            <span class="badge badge-critical">Kritikus</span>
+          </div>
+          <p>A rendelő két domainen is elérhető (<strong>mckenzie.hu</strong> és <strong>gyogytornarendelo.hu</strong>), és egyik sem irányít át a másikra. Ez azt jelenti, hogy a Google két külön weboldalként indexeli őket — a linkerő (backlink-ek, domain authority) megoszlik a kettő között ahelyett, hogy egy erős domainre koncentrálódna. Ez <strong>duplicate content</strong> problémát is okoz: ha ugyanaz a tartalom két URL-en is elérhető, a Google nem tudja eldönteni, melyiket rangsorolja, és gyakran egyiket sem helyezi előre. <strong>Javaslat:</strong> egyetlen fő domain kiválasztása (pl. mckenzie.hu) és a másik 301-es átirányítása erre — ez azonnal összevonja a két domain SEO erejét.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGESPEED / TELJESÍTMÉNY -->
+<section id="sebesseg" class="section">
+  <div class="section-inner">
+    <div class="section-title">Oldal teljesítmény</div>
+    <h2>Oldalbetöltési sebesség — gyogytornarendelo.hu</h2>
+
+    <div class="card">
+      <h3>Core Web Vitals — részletek</h3>
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Metrika</th>
+            <th>Érték</th>
+            <th>Elvárt</th>
+            <th>Minősítés</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>LCP</strong> — Largest Contentful Paint</td>
+            <td><code>9.7 s</code></td>
+            <td>&lt; 2.5 s</td>
+            <td><span class="badge badge-critical">Kritikus</span></td>
+          </tr>
+          <tr>
+            <td><strong>FCP</strong> — First Contentful Paint</td>
+            <td><code>4.1 s</code></td>
+            <td>&lt; 1.8 s</td>
+            <td><span class="badge badge-critical">Kritikus</span></td>
+          </tr>
+          <tr>
+            <td><strong>TTI</strong> — Time to Interactive</td>
+            <td><code>14.9 s</code></td>
+            <td>&lt; 3.8 s</td>
+            <td><span class="badge badge-critical">Kritikus</span></td>
+          </tr>
+          <tr>
+            <td><strong>Speed Index</strong></td>
+            <td><code>4.7 s</code></td>
+            <td>&lt; 3.4 s</td>
+            <td><span class="badge badge-warning">Gyenge</span></td>
+          </tr>
+          <tr>
+            <td><strong>CLS</strong> — Cumulative Layout Shift</td>
+            <td><code>0.025</code></td>
+            <td>&lt; 0.1</td>
+            <td><span class="badge badge-ok">Jó</span></td>
+          </tr>
+          <tr>
+            <td><strong>TBT</strong> — Total Blocking Time</td>
+            <td><code>160 ms</code></td>
+            <td>&lt; 200 ms</td>
+            <td><span class="badge badge-ok">Jó</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.85rem;color:var(--c-text-3);margin-top:0.75rem;">
+        A fő probléma: mobilon <strong>9.7 másodperc</strong> mire megjelenik a fő tartalom, és <strong>14.9 másodperc</strong> mire az oldal interaktívvá válik. A Google 2021 óta a Core Web Vitals-t rangsorolási faktorként használja — a rossz LCP és TTI közvetlenül rontja a keresési pozíciókat. Az ok: elavult Joomla CMS, túl sok JavaScript, nem optimalizált képek. Egy modern statikus oldal (Astro) ezeket az értékeket ~1-2 másodpercre hozza le.
+      </p>
     </div>
   </div>
 </section>
@@ -891,8 +1019,352 @@
   </div>
 </section>
 
+<!-- VERSENYTÁRS-ELEMZÉS -->
+<section id="versenytarsak" class="section section-alt">
+  <div class="section-inner">
+    <div class="section-title">Versenytárs-elemzés</div>
+    <h2>Hol áll a McKenzie Rendelő a budapesti piacon?</h2>
+    <p class="section-desc">
+      7 budapesti magán gyógytorna rendelő összehasonlítása árak, online jelenlét, Google értékelések és szolgáltatások alapján.
+    </p>
+
+    <!-- Ár összehasonlítás -->
+    <div class="card mb-1">
+      <h3>Egyéni gyógytorna árak — 50–60 perces kezelés</h3>
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Rendelő</th>
+            <th>Ár / alkalom (50–60 perc)</th>
+            <th>Kategória</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Fizio-torna (Zugló)</td>
+            <td>13.000 Ft (50 perc)</td>
+            <td><span class="badge badge-ok">Kedvező</span></td>
+          </tr>
+          <tr style="background:var(--c-green-bg);">
+            <td><strong>McKenzie Rendelő</strong></td>
+            <td><strong>14.000–15.000 Ft</strong></td>
+            <td><span class="badge badge-ok">Kedvező</span></td>
+          </tr>
+          <tr>
+            <td>Budai Egészségközpont (BHC)</td>
+            <td>16.000 Ft (50 perc)</td>
+            <td><span class="badge badge-info">Közepes</span></td>
+          </tr>
+          <tr>
+            <td>Életerő Mozgásközpont</td>
+            <td>16.000 Ft (50 perc)</td>
+            <td><span class="badge badge-info">Közepes</span></td>
+          </tr>
+          <tr>
+            <td>Therapy4U</td>
+            <td>16.000–22.000 Ft (55 perc, terapeutától függ)</td>
+            <td><span class="badge badge-info">Közepes–Magas</span></td>
+          </tr>
+          <tr>
+            <td>Trehab Fizikoterápia</td>
+            <td>17.000 Ft</td>
+            <td><span class="badge badge-info">Közepes</span></td>
+          </tr>
+          <tr>
+            <td>BMM Mozgásszervi Klinika</td>
+            <td>17.000–30.000 Ft (55 perc, terapeutától függ)</td>
+            <td><span class="badge badge-warning">Magas–Prémium</span></td>
+          </tr>
+          <tr>
+            <td>Gyógytornászom.hu</td>
+            <td>18.000 Ft</td>
+            <td><span class="badge badge-warning">Magas</span></td>
+          </tr>
+          <tr>
+            <td>Budapest Fizio</td>
+            <td>18.000 Ft (55 perc)</td>
+            <td><span class="badge badge-warning">Magas</span></td>
+          </tr>
+          <tr>
+            <td>Fizio+ Mozgásközpont</td>
+            <td>18.500 Ft (50 perc)</td>
+            <td><span class="badge badge-warning">Magas</span></td>
+          </tr>
+          <tr>
+            <td>27 Sellő Mozgásszervi Centrum</td>
+            <td>19.000 Ft (50 perc)</td>
+            <td><span class="badge badge-warning">Magas</span></td>
+          </tr>
+          <tr>
+            <td>Sherlock Rehab</td>
+            <td>19.000–24.000 Ft</td>
+            <td><span class="badge badge-warning">Magas–Prémium</span></td>
+          </tr>
+          <tr>
+            <td>SpineArt</td>
+            <td>20.000 Ft (50 perc)</td>
+            <td><span class="badge badge-warning">Magas</span></td>
+          </tr>
+          <tr>
+            <td>MozgásKlinika</td>
+            <td>22.990 Ft (50 perc)</td>
+            <td><span class="badge badge-critical">Prémium</span></td>
+          </tr>
+          <tr>
+            <td>Liv Duna Medical Center</td>
+            <td>26.000 Ft (50 perc)</td>
+            <td><span class="badge badge-critical">Prémium</span></td>
+          </tr>
+          <tr>
+            <td>Dr. Rose Magánkórház</td>
+            <td>29.000 Ft</td>
+            <td><span class="badge badge-critical">Prémium</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.85rem;color:var(--c-text-3);margin-top:0.5rem;">
+        A McKenzie Rendelő <strong>a legkedvezőbb árkategóriában</strong> van a piacon (14–15.000 Ft), miközben szakmailag a legerősebb (egyetlen hivatalos Referencia Központ). A piaci átlag 50–60 perces egyéni gyógytornára: <strong>~18.500 Ft</strong>. A prémium magánkórházak (Dr. Rose, Duna Medical) ennek dupláját kérik.
+      </p>
+    </div>
+
+    <!-- Google értékelések -->
+    <div class="card mb-1">
+      <h3>Google értékelések (vélemények száma szerint)</h3>
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Rendelő</th>
+            <th>Google értékelés</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Liv Duna Medical Center</td>
+            <td>4,7 ★ (3.314 vélemény, teljes kórház)</td>
+          </tr>
+          <tr>
+            <td>Dr. Rose Magánkórház</td>
+            <td>4,5 ★ (1.055 vélemény, teljes kórház)</td>
+          </tr>
+          <tr>
+            <td>Sherlock Rehab</td>
+            <td>4,9–5,0 ★ (1.013 vélemény, 2 helyszín)</td>
+          </tr>
+          <tr>
+            <td>BMM Mozgásszervi Klinika</td>
+            <td>4,9 ★ (740 vélemény)</td>
+          </tr>
+          <tr>
+            <td>Budai Egészségközpont (BHC)</td>
+            <td>4,4 ★ (625 vélemény, teljes kórház)</td>
+          </tr>
+          <tr>
+            <td>MozgásKlinika</td>
+            <td>4,8–4,9 ★ (499 vélemény, 3 helyszín)</td>
+          </tr>
+          <tr>
+            <td>Gyógytornászom.hu</td>
+            <td>4,9–5,0 ★ (413 vélemény, 2 helyszín)</td>
+          </tr>
+          <tr>
+            <td>27 Sellő Mozgásszervi Centrum</td>
+            <td>4,9 ★ (166 vélemény)</td>
+          </tr>
+          <tr style="background:var(--c-green-bg);">
+            <td><strong>McKenzie Rendelő</strong></td>
+            <td><strong>4,9–5,0 ★ (141 vélemény)</strong></td>
+          </tr>
+          <tr>
+            <td>Fizio+ Mozgásközpont</td>
+            <td>4,9 ★ (80 vélemény)</td>
+          </tr>
+          <tr>
+            <td>Trehab Fizikoterápia</td>
+            <td>5,0 ★ (54 vélemény)</td>
+          </tr>
+          <tr>
+            <td>Therapy4U</td>
+            <td>4,6 ★ (43 vélemény)</td>
+          </tr>
+          <tr>
+            <td>Budapest Fizio</td>
+            <td>5,0 ★ (33 vélemény)</td>
+          </tr>
+          <tr>
+            <td>Fizio-torna (Zugló)</td>
+            <td>4,7 ★ (32 vélemény)</td>
+          </tr>
+          <tr>
+            <td>Életerő Mozgásközpont</td>
+            <td>4,9 ★ (29 vélemény)</td>
+          </tr>
+          <tr>
+            <td>SpineArt</td>
+            <td>4,9–5,0 ★ (18 vélemény, 2 helyszín)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:0.9rem;color:var(--c-text-2);margin-top:1.5rem;">
+      💡 A versenytársak többsége online időpontfoglalóval rendelkezik — érdemes megfontolni ennek bevezetését a McKenzie Rendelőnél is.
+    </p>
+  </div>
+</section>
+
+<!-- KULCSSZÓ-ELEMZÉS -->
+<section id="kulcsszavak" class="section">
+  <div class="section-inner">
+    <div class="section-title">Kulcsszó-elemzés</div>
+    <h2>A McKenzie Rendelő láthatatlan a Google-ban</h2>
+    <p class="section-desc">
+      A rendelő kizárólag a „mckenzie" specifikus keresésekre jelenik meg. A nagy forgalmú, általános kulcsszavakra — amiket a páciensek ténylegesen keresnek — nem látszik.
+    </p>
+
+    <div class="card mb-1">
+      <h3>Fő kulcsszavak — keresési volumen és pozíció</h3>
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Kulcsszó</th>
+            <th>Becsült havi keresés</th>
+            <th>Verseny</th>
+            <th>McKenzie pozíció</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>porckorongsérv kezelés</strong></td>
+            <td>5.000–8.000</td>
+            <td><span class="badge badge-critical">Magas</span></td>
+            <td class="cross">Nincs a top 10-ben</td>
+          </tr>
+          <tr>
+            <td><strong>derékfájás kezelése</strong></td>
+            <td>4.000–6.000</td>
+            <td><span class="badge badge-critical">Magas</span></td>
+            <td class="cross">Nincs a top 10-ben</td>
+          </tr>
+          <tr>
+            <td><strong>gyógytorna budapest</strong></td>
+            <td>3.000–5.000</td>
+            <td><span class="badge badge-critical">Magas</span></td>
+            <td class="cross">Nincs a top 10-ben</td>
+          </tr>
+          <tr>
+            <td><strong>nyakfájás kezelése</strong></td>
+            <td>2.000–3.500</td>
+            <td><span class="badge badge-warning">Közepes</span></td>
+            <td class="cross">Nincs a top 10-ben</td>
+          </tr>
+          <tr>
+            <td><strong>gerincfájás kezelése</strong></td>
+            <td>2.000–4.000</td>
+            <td><span class="badge badge-warning">Közepes</span></td>
+            <td class="cross">Nincs a top 10-ben</td>
+          </tr>
+          <tr>
+            <td><strong>manuálterápia budapest</strong></td>
+            <td>1.500–2.500</td>
+            <td><span class="badge badge-warning">Közepes</span></td>
+            <td class="cross">Nincs a top 10-ben</td>
+          </tr>
+          <tr>
+            <td><strong>porckorongsérv műtét nélkül</strong></td>
+            <td>1.500–3.000</td>
+            <td><span class="badge badge-warning">Közepes</span></td>
+            <td class="cross">Nincs a top 10-ben</td>
+          </tr>
+          <tr style="background:var(--c-green-bg);">
+            <td><strong>mckenzie módszer</strong></td>
+            <td>500–1.000</td>
+            <td><span class="badge badge-ok">Alacsony</span></td>
+            <td class="check">Top 3–5</td>
+          </tr>
+          <tr style="background:var(--c-green-bg);">
+            <td><strong>mckenzie gyakorlatok</strong></td>
+            <td>300–800</td>
+            <td><span class="badge badge-ok">Alacsony</span></td>
+            <td class="check">Top 5</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.85rem;color:var(--c-text-3);margin-top:0.75rem;">
+        A „porckorongsérv kezelés" a legnagyobb lehetőség: havi 5.000–8.000 keresés, és a McKenzie módszer kifejezetten erre lett kifejlesztve — mégis a versenytársak (budapestfizio.hu, mozgasklinika.hu, sulypont.hu) uralják a találatokat.
+      </p>
+    </div>
+
+    <div class="card mb-1">
+      <h3>Ki uralja a Google első oldalát?</h3>
+      <p style="margin-bottom:1rem;">A „gyógytorna budapest" keresésre a top 10 pozíciót ezek foglalják el — a McKenzie Rendelő nincs köztük:</p>
+      <ol style="color:var(--c-text-2);font-size:0.9rem;padding-left:1.5rem;">
+        <li><strong>gyogytornaszom.hu</strong> — 3 helyszín, garancia, erős SEO</li>
+        <li><strong>mozgasklinika.hu</strong> — 6 bp-i + 5 vidéki helyszín</li>
+        <li><strong>eleteromozgaskozpont.hu</strong> — csoportos + egyéni</li>
+        <li>bmm.hu — Budai Mozgásszervi Magánrendelő</li>
+        <li>mediogyogytorna.hu</li>
+        <li>szimmetriagyogytorna.hu</li>
+        <li>fizioplus.hu — McKenzie és Schroth terápia</li>
+        <li>fizio-torna.hu</li>
+        <li>bodybalance4you.hu</li>
+        <li>htmedicalcenter.hu</li>
+      </ol>
+    </div>
+
+    <div class="highlight-box mt-3">
+      <h3>Elszalasztott forgalom becslés</h3>
+      <div style="margin-top:1rem;color:var(--c-text-2);">
+        <table class="audit-table" style="margin-bottom:1rem;">
+          <thead>
+            <tr>
+              <th>Kulcsszó-csoport</th>
+              <th>Havi keresés</th>
+              <th>Elérhető kattintás (top 3)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Porckorongsérv variánsok</td>
+              <td>~10.000</td>
+              <td>1.500–2.500</td>
+            </tr>
+            <tr>
+              <td>Derékfájás variánsok</td>
+              <td>~7.000</td>
+              <td>1.050–1.750</td>
+            </tr>
+            <tr>
+              <td>Gyógytorna + Budapest</td>
+              <td>~5.000</td>
+              <td>750–1.250</td>
+            </tr>
+            <tr>
+              <td>Nyak- és gerincfájás</td>
+              <td>~6.500</td>
+              <td>975–1.625</td>
+            </tr>
+            <tr>
+              <td>Long-tail kulcsszavak</td>
+              <td>~5.500</td>
+              <td>1.100–1.650</td>
+            </tr>
+            <tr style="font-weight:700;border-top:2px solid var(--c-border);">
+              <td>Összesen</td>
+              <td>~34.000</td>
+              <td>~5.400–8.800 / hó</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          A McKenzie Rendelő havonta <strong>5.000–9.000 potenciális weboldal-látogatót szalaszt el</strong> azáltal, hogy a fő kulcsszavakra nem jelenik meg a Google első oldalán. Egy jól felépített SEO stratégiával — blog, landing page-ek, Schema.org — ez a forgalom elérhető hirdetési költség nélkül.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- KÖVETKEZŐ LÉPÉSEK -->
-<section id="kovetkezo-lepesek" class="section section-alt">
+<section id="kovetkezo-lepesek" class="section">
   <div class="section-inner">
     <div class="section-title">Következő lépések</div>
     <h2>Javasolt prioritások</h2>
