@@ -3,11 +3,19 @@ import { clinic } from '../data/clinic';
 const base = import.meta.env.BASE_URL;
 ---
 
-<!-- Phone-first booking bar: most visitors arrive on mobile and book by calling. -->
-<div class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[var(--color-paper)] border-t border-[var(--color-line)] px-4 py-3 grid grid-cols-2 gap-3" style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));">
-  <a href={`tel:${clinic.phone}`} class="btn btn-ghost !py-3">
+<!-- Phone-first booking bar. Hidden until the visitor scrolls past the first screen,
+     so it never doubles the hero buttons. -->
+<div id="mobile-cta" class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[var(--color-paper)] border-t border-[var(--color-line)] px-4 py-3 grid grid-cols-2 gap-3 translate-y-full transition-transform duration-300" style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));">
+  <a href={`tel:${clinic.phone}`} class="btn btn-primary !py-3 !px-3 whitespace-nowrap">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.5a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.5 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/></svg>
     Hívás
   </a>
-  <a href={`${base}kapcsolat#idopontfoglalas`} class="btn btn-primary !py-3">Időpontot kérek</a>
+  <a href={`${base}kapcsolat#visszahivas`} class="btn btn-ghost !py-3 !px-3 whitespace-nowrap">Visszahívás</a>
 </div>
+
+<script>
+  const bar = document.getElementById('mobile-cta');
+  const onScroll = () => bar?.classList.toggle('translate-y-full', window.scrollY < window.innerHeight * 0.8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>

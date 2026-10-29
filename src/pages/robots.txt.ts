@@ -7,7 +7,24 @@ export const GET: APIRoute = ({ site }) => {
 
   const body = isPreview
     ? `User-agent: *\nDisallow: /\n`
-    : `User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: ${new URL('sitemap-index.xml', site).href}\n`;
+    : [
+        'User-agent: *',
+        'Allow: /',
+        'Disallow: /v/',
+        '',
+        '# AI answer engines are explicitly welcome',
+        'User-agent: GPTBot',
+        'User-agent: OAI-SearchBot',
+        'User-agent: ChatGPT-User',
+        'User-agent: PerplexityBot',
+        'User-agent: ClaudeBot',
+        'User-agent: Google-Extended',
+        'Allow: /',
+        'Disallow: /v/',
+        '',
+        `Sitemap: ${new URL('sitemap-index.xml', site).href}`,
+        '',
+      ].join('\n');
 
   return new Response(body, {
     headers: { 'Content-Type': 'text/plain; charset=utf-8' },

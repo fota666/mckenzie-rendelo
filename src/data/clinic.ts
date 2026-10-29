@@ -2,6 +2,8 @@
 // The same values feed the visible page and the Schema.org markup, so search engines
 // and answer engines see one consistent entity (the audit found 10+ name variants).
 
+const NBSP = ' ';
+
 export const clinic = {
   name: 'McKenzie Gyógytorna Rendelő',
   legalName: 'Chef Egészségügyi és Szolgáltató Kft.',
@@ -9,8 +11,9 @@ export const clinic = {
   phone: '+36304878284',
   phoneDisplay: '(30) 487-8284',
   email: 'mck.relle@t-online.hu',
-  therapists: 15, // active; 3 more on GYES (see csapatunk.astro)
+  therapists: 15, // active; 3 more on GYES (see data/team.ts)
   bookingHours: 'Hétköznap 9:00-17:00', // phone line hours, as on the old kapcsolat page
+  bookingHoursShort: 'H-P 9-17 óra',
   hoursText: 'hétfőtől péntekig, 8:00 és 20:00 között',
   hours: { days: 'Hétfő-péntek', open: '08:00', close: '20:00', schema: 'Mo-Fr 08:00-20:00' },
   sameAs: [
@@ -21,7 +24,8 @@ export const clinic = {
     {
       id: 'belvaros',
       name: 'Belvárosi rendelő',
-      street: 'Sas u. 7.',
+      googleName: 'Belvárosi Gyógytorna-rendelő',
+      street: 'Sas u. 7. 2. em.',
       postalCode: '1051',
       district: 'V. kerület',
       transit: 'Arany János utca M3, kb. 5 perc gyalog',
@@ -29,12 +33,15 @@ export const clinic = {
       area: 'Bazilika környéke',
       bell: null,
       parking: 'Bazilika garázs, Gödör',
-      mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Budapest+Sas+u.+7',
-      rating: { value: 5.0, count: 68 },
+      geo: { lat: 47.4999675, lng: 19.0523906 },
+      mapsUrl: 'https://www.google.com/maps/place/Belv%C3%A1rosi+Gy%C3%B3gytorna-rendel%C5%91/@47.4999675,19.0523906,17z/data=!4m6!3m5!1s0x4741dc6ab4464053:0xb82144f0993e13d9!8m2!3d47.4999675!4d19.0523906',
+      // Google rating as shown on the Maps profile on 2026-10-29.
+      rating: { value: 5.0, count: 78, checked: '2026-10-29' },
     },
     {
       id: 'buda',
       name: 'Bel-budai rendelő',
+      googleName: 'McKenzie Bel-budai Gyógytorna-rendelő',
       street: 'Bartók Béla út 34. I. em. 1.',
       postalCode: '1111',
       district: 'XI. kerület',
@@ -43,14 +50,29 @@ export const clinic = {
       area: 'Móricz Zsigmond körtér',
       bell: '18-as kapucsengő',
       parking: 'Allee garázs, 6-8 perc',
-      mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Budapest+Bart%C3%B3k+B%C3%A9la+%C3%BAt+34',
-      rating: { value: 4.9, count: 73 },
+      geo: { lat: 47.4791083, lng: 19.051651 },
+      mapsUrl: 'https://www.google.com/maps/place/McKenzie+Bel-budai+Gy%C3%B3gytorna-rendel%C5%91/@47.4791083,19.051651,17z/data=!4m6!3m5!1s0x4741dc4d51a69d69:0xcf869fdf34a92480!8m2!3d47.4791083!4d19.051651',
+      rating: { value: 5.0, count: 103, checked: '2026-10-29' },
     },
   ],
   prices: {
-    single: { label: 'Egyéni kezelés', duration: '55 perc', amount: '14 000-15 000 Ft' },
-    pass: { label: '5 alkalmas bérlet', amount: '65 000 Ft', perVisit: '13 000 Ft / alkalom' },
+    single: {
+      label: 'Egyéni kezelés',
+      duration: '55 perc',
+      amount: `14${NBSP}000 vagy 15${NBSP}000${NBSP}Ft`,
+      note: 'a terapeutától függően',
+      min: 14000,
+      max: 15000,
+    },
+    pass: {
+      label: '5 alkalmas bérlet',
+      amount: `65${NBSP}000${NBSP}Ft`,
+      perVisit: `13${NBSP}000${NBSP}Ft / alkalom`,
+      saving: `5${NBSP}000-10${NBSP}000${NBSP}Ft megtakarítás a terapeuta díjától függően`,
+      value: 65000,
+    },
   },
 } as const;
 
 export const reviewTotal = clinic.locations.reduce((n, l) => n + l.rating.count, 0);
+export const ratingText = (v: number) => v.toFixed(1).replace('.', ',');

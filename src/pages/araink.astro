@@ -6,14 +6,14 @@ import { clinic } from '../data/clinic';
 const plans = [
   {
     ...clinic.prices.single,
-    note: 'alkalmanként, terapeutától függően',
+    note: `alkalmanként, ${clinic.prices.single.note}`,
     items: ['55 perces egyéni kezelés', 'Mozgásvizsgálat az első alkalommal', 'Személyre szabott gyakorlatsor', 'Otthoni gyakorlatok írásban', 'Szükség szerinti kontrollvizsgálat'],
     featured: false,
   },
   {
     ...clinic.prices.pass,
     note: clinic.prices.pass.perVisit,
-    items: ['Ugyanaz, mint az egyéni kezelés', '10 000 Ft megtakarítás öt alkalom esetén', 'Rugalmasan felhasználható', 'Mindkét rendelőben érvényes'],
+    items: ['Ugyanaz, mint az egyéni kezelés', clinic.prices.pass.saving, 'Rugalmasan felhasználható', 'Mindkét rendelőben érvényes'],
     featured: true,
   },
 ];
@@ -31,8 +31,8 @@ const notes = [
   description={`Egyéni gyógytorna ${clinic.prices.single.amount} / 55 perc, 5 alkalmas bérlet ${clinic.prices.pass.amount}. Egészségpénztárra számlát adunk, beutaló nem kell.`}
 >
   <PageHeader eyebrow="Árak">
-    <Fragment slot="title">Két díjtétel, rejtett költség nélkül.</Fragment>
-    Az árak tartalmazzák a mozgásvizsgálatot, a kezelést és az otthoni gyakorlatsort. Beutaló nem kell, egészségpénztárra számlát adunk.
+    <Fragment slot="title">Átlátható árak, rejtett költség nélkül.</Fragment>
+    A kezelés díja terapeutánként 14 000 vagy 15 000 Ft, ezt a csapat oldalán minden terapeutánál feltüntetjük. Az ár tartalmazza a mozgásvizsgálatot, a kezelést és az otthoni gyakorlatsort. Beutaló nem kell, egészségpénztárra számlát adunk.
   </PageHeader>
 
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 grid md:grid-cols-2 gap-6">

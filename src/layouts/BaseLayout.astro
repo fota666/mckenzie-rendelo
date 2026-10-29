@@ -27,8 +27,8 @@ const PRODUCTION_HOSTS = ['gyogytornarendelo.hu', 'www.gyogytornarendelo.hu', 'm
 const isPreview = !PRODUCTION_HOSTS.includes(Astro.site?.hostname ?? '');
 
 // One entity graph: the organisation, its two clinics and the lead therapist.
-// No aggregateRating here: self-served review stars on a LocalBusiness are not shown by Google
-// and the counts drift; the visible page links to the real Google reviews instead.
+// No aggregateRating: Google ignores self-served review stars on a LocalBusiness and forbids
+// marking up ratings collected elsewhere. The page shows the Google score and links the profiles.
 const orgId = `${siteRoot}#org`;
 const schema = {
   '@context': 'https://schema.org',
@@ -42,21 +42,42 @@ const schema = {
       logo: `${siteRoot}images/logo.png`,
       telephone: clinic.phone,
       email: clinic.email,
+      foundingDate: '1993',
       sameAs: clinic.sameAs,
-      medicalSpecialty: 'PhysicalTherapy',
+      medicalSpecialty: 'https://schema.org/Physiotherapy',
       founder: { '@id': `${siteRoot}#relle-eva` },
+      numberOfEmployees: { '@type': 'QuantitativeValue', value: clinic.therapists },
       subOrganization: clinic.locations.map((l) => ({ '@id': `${siteRoot}#${l.id}` })),
+      makesOffer: [
+        {
+          '@type': 'Offer',
+          name: `${clinic.prices.single.label}, ${clinic.prices.single.duration}`,
+          priceSpecification: { '@type': 'PriceSpecification', minPrice: clinic.prices.single.min, maxPrice: clinic.prices.single.max, priceCurrency: 'HUF' },
+          itemOffered: { '@type': 'MedicalTherapy', name: 'Egyéni gyógytorna McKenzie-módszerrel (mozgásvizsgálat, kezelés, otthoni gyakorlatsor)' },
+        },
+        {
+          '@type': 'Offer',
+          name: clinic.prices.pass.label,
+          price: clinic.prices.pass.value,
+          priceCurrency: 'HUF',
+          itemOffered: { '@type': 'MedicalTherapy', name: '5 egyéni gyógytorna-kezelés' },
+        },
+      ],
     },
     ...clinic.locations.map((l) => ({
-      '@type': ['MedicalClinic', 'Physiotherapy'],
+      '@type': 'MedicalClinic',
       '@id': `${siteRoot}#${l.id}`,
       name: `${clinic.name}, ${l.name}`,
+      alternateName: l.googleName,
       parentOrganization: { '@id': orgId },
-      url: siteRoot,
+      url: `${siteRoot}kapcsolat#${l.id}`,
       telephone: clinic.phone,
-      priceRange: clinic.prices.single.amount,
+      medicalSpecialty: 'https://schema.org/Physiotherapy',
+      priceRange: `${clinic.prices.single.min}-${clinic.prices.single.max} HUF`,
       openingHours: clinic.hours.schema,
       hasMap: l.mapsUrl,
+      sameAs: [l.mapsUrl],
+      geo: { '@type': 'GeoCoordinates', latitude: l.geo.lat, longitude: l.geo.lng },
       address: {
         '@type': 'PostalAddress',
         streetAddress: l.street,
@@ -69,14 +90,16 @@ const schema = {
       '@type': 'Person',
       '@id': `${siteRoot}#relle-eva`,
       name: 'Relle Éva',
-      jobTitle: 'Vezető gyógytornász',
+      jobTitle: 'Alapító, vezető gyógytornász',
       worksFor: { '@id': orgId },
+      knowsLanguage: ['hu', 'en', 'de'],
       hasCredential: {
         '@type': 'EducationalOccupationalCredential',
         name: 'McKenzie nemzetközi minősítővizsga (Credentialing Examination)',
-        recognizedBy: { '@type': 'Organization', name: 'McKenzie Institute International' },
+        recognizedBy: { '@type': 'Organization', name: 'McKenzie Institute International', url: 'https://www.mckenzieinstitute.org' },
       },
-      knowsLanguage: ['hu', 'en', 'de'],
+      memberOf: { '@type': 'Organization', name: 'Magyarországi McKenzie Intézet Alapítvány', url: 'https://hu.mckenzieinstitute.org' },
+      affiliation: { '@type': 'CollegeOrUniversity', name: 'Semmelweis Egyetem Egészségtudományi Kar' },
     },
   ],
 };

@@ -1,41 +1,44 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import CallbackForm from '../components/CallbackForm.astro';
 import { clinic } from '../data/clinic';
 import { firstVisit } from '../data/firstVisit';
 
 
 
 const mapQuery = (l: (typeof clinic.locations)[number]) =>
-  encodeURIComponent(`${l.postalCode} Budapest, ${l.street.split(' I.')[0]}`);
+  encodeURIComponent(`${l.googleName}, ${l.postalCode} Budapest`) + `&ll=${l.geo.lat},${l.geo.lng}&z=17`;
 ---
 
 <BaseLayout
   title="Kapcsolat és időpontfoglalás | McKenzie Gyógytorna Rendelő Budapest"
-  description={`Időpontfoglalás telefonon: ${clinic.phoneDisplay}. Két rendelő: 1051 Budapest, Sas u. 7. és 1111 Budapest, Bartók Béla út 34.`}
+  description={`Időpontfoglalás telefonon (${clinic.bookingHoursShort}): ${clinic.phoneDisplay}, vagy visszahívás-kérés. Két rendelő: 1051 Budapest, Sas u. 7. és 1111 Budapest, Bartók Béla út 34.`}
 >
   <PageHeader eyebrow="Kapcsolat">
-    <Fragment slot="title">Időpontot telefonon tud foglalni.</Fragment>
-    Hívjon minket, és általában 1-2 napon belül kap időpontot valamelyik rendelőnkbe. Mindkét rendelőben csak előzetes bejelentkezéssel fogadunk pácienseket.
+    <Fragment slot="title">Időpontot telefonon vagy visszahívással foglalhat.</Fragment>
+    Hívjon minket, vagy hagyja meg a számát, és általában 1-2 napon belül kap időpontot valamelyik rendelőnkbe. Mindkét rendelőben csak előzetes bejelentkezéssel fogadunk pácienseket.
   </PageHeader>
 
-  <section id="idopontfoglalas" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-    <div class="bg-[var(--color-teal-700)] text-white p-8 lg:p-14 grid lg:grid-cols-12 gap-8 items-center">
-      <div class="lg:col-span-7">
-        <p class="eyebrow text-[var(--color-teal-100)]">Időpontfoglalás telefonon</p>
-        <a href={`tel:${clinic.phone}`} class="mt-4 block font-heading text-5xl sm:text-6xl lg:text-7xl hover:text-[var(--color-gold-200)]">{clinic.phoneDisplay}</a>
-        <p class="mt-4 text-white/80">{clinic.bookingHours}</p>
-      </div>
-      <div class="lg:col-span-5 lg:text-right">
+  <section id="idopontfoglalas" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid lg:grid-cols-12 gap-6">
+    <div class="lg:col-span-5 bg-[var(--color-teal-700)] text-white p-8 lg:p-10 flex flex-col">
+      <p class="eyebrow text-[var(--color-teal-100)]">Időpontfoglalás telefonon</p>
+      <a href={`tel:${clinic.phone}`} class="mt-4 block font-heading text-5xl lg:text-6xl hover:text-[var(--color-gold-200)]">{clinic.phoneDisplay}</a>
+      <p class="mt-4 text-white/85">{clinic.bookingHours}</p>
+      <p class="mt-2 text-sm text-white/70">A kezelések {clinic.hoursText} vannak. Ha munkaidőben nem tud telefonálni, kérjen visszahívást.</p>
+      <div class="mt-auto pt-8">
         <a href={`tel:${clinic.phone}`} class="btn btn-copper">Hívás most <span aria-hidden="true">&rarr;</span></a>
         <p class="mt-4 text-sm text-white/70">E-mail: <a href={`mailto:${clinic.email}`} class="underline underline-offset-2">{clinic.email}</a></p>
       </div>
+    </div>
+    <div class="lg:col-span-7">
+      <CallbackForm />
     </div>
   </section>
 
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 lg:pb-28 grid md:grid-cols-2 gap-6">
     {clinic.locations.map((l) => (
-      <article class="bg-white border border-[var(--color-line)] flex flex-col">
+      <article id={l.id} class="scroll-mt-28 bg-white border border-[var(--color-line)] flex flex-col">
         <div class="aspect-[16/10] bg-[var(--color-paper-2)]">
           <iframe
             src={`https://www.google.com/maps?q=${mapQuery(l)}&output=embed`}
