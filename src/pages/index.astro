@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import FounderD4 from '../components/founder/FounderD4.astro';
 import SituationsB from '../components/situations/SituationsB.astro';
 import { clinic, reviewTotal } from '../data/clinic';
+import { firstVisit } from '../data/firstVisit';
 const base = import.meta.env.BASE_URL;
 
 const facts = [
@@ -14,12 +15,7 @@ const facts = [
   { value: '4,9 / 5,0', label: `Google-értékelés, ${reviewTotal} vélemény` },
 ];
 
-const firstVisit = [
-  { min: '0-10', video: null, title: 'Kikérdezés', body: 'Mikor kezdődött, mitől rosszabb, mitől jobb. Ha vannak leletei (MRI, röntgen), hozza magával.' },
-  { min: '10-30', video: 'vizsgalat', title: 'Mozgásvizsgálat', body: 'Ismételt mozgások és testhelyzetek, miközben figyeljük, hogyan változik a fájdalom helye és erőssége.' },
-  { min: '30-45', video: 'kezeles', title: 'Kezelés', body: 'A vizsgálat alapján McKenzie-gyakorlatok, szükség esetén manuális technikák.' },
-  { min: '45-55', video: 'otthon', title: 'Otthoni program', body: 'Írásban vagy videón megkapja a gyakorlatokat, és megbeszéljük, mikor jöjjön vissza.' },
-];
+
 
 const methods = [
   { id: 'mckenzie', name: 'McKenzie-módszer (MDT)', for: 'derékfájás, nyakfájás, isiász, porckorongsérv' },
