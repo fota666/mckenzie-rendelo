@@ -9,9 +9,9 @@ const base = import.meta.env.BASE_URL;
 <section class="bg-[var(--color-teal-50)]" data-sit-d>
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
     <p class="eyebrow">Kik jönnek hozzánk</p>
-    <h2 class="display mt-5 text-4xl lg:text-6xl text-[var(--color-navy-900)]">Melyik mondat igaz Önre?</h2>
+    <h2 class="display mt-5 text-3xl lg:text-5xl text-[var(--color-navy-900)]">Melyik mondat igaz Önre?</h2>
 
-    <div class="mt-12 grid sm:grid-cols-2 gap-3" role="group" aria-label="Helyzetek">
+    <div class="mt-8 grid sm:grid-cols-2 gap-3" role="group" aria-label="Helyzetek">
       {situations.map((s, i) => (
         <button
           data-target={`d-${s.id}`}

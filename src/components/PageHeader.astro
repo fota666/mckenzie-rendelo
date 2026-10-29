@@ -6,7 +6,7 @@ const { eyebrow } = Astro.props;
 <section>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 lg:pt-14 lg:pb-10">
     {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-    <h1 class="display mt-3 text-4xl sm:text-5xl lg:text-[3.5rem] text-[var(--color-navy-900)] max-w-4xl"><slot name="title" /></h1>
+    <h1 class="display mt-3 text-3xl sm:text-4xl lg:text-[2.75rem] text-[var(--color-navy-900)] max-w-4xl"><slot name="title" /></h1>
     <div class="mt-4 text-base lg:text-lg text-[var(--color-ink-2)] measure leading-relaxed"><slot /></div>
   </div>
 </section>

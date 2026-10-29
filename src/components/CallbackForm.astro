@@ -6,9 +6,9 @@ import { clinic } from '../data/clinic';
 const base = import.meta.env.BASE_URL;
 ---
 
-<form id="visszahivas" action={`${base}visszahivas.php`} method="post" class="scroll-mt-28 bg-white border border-[var(--color-line)] p-6 sm:p-8 lg:p-10" data-callback data-phone={clinic.phoneDisplay} novalidate>
+<form id="visszahivas" action={`${base}visszahivas.php`} method="post" class="scroll-mt-28 bg-white border border-[var(--color-line)] p-6 sm:p-8 lg:p-8" data-callback data-phone={clinic.phoneDisplay} novalidate>
   <p class="eyebrow">Visszahívás-kérés</p>
-  <h2 class="mt-3 font-heading text-3xl lg:text-4xl text-[var(--color-navy-900)]">Hagyja meg a számát, és visszahívjuk.</h2>
+  <h2 class="mt-3 font-heading text-2xl lg:text-3xl text-[var(--color-navy-900)]">Hagyja meg a számát, és visszahívjuk.</h2>
   <p class="mt-3 text-sm text-[var(--color-ink-2)]">Munkanapokon {clinic.bookingHours.replace('Hétköznap ', '')} között hívjuk vissza, általában még aznap vagy a következő munkanapon.</p>
 
   <div class="mt-8 grid sm:grid-cols-2 gap-5">

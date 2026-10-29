@@ -114,7 +114,7 @@ const methods = [
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     {methods.map((m, i) => (
-      <article id={m.id} class="scroll-mt-36 py-14 lg:py-20 border-b border-[var(--color-line)] grid lg:grid-cols-12 gap-10 lg:gap-16">
+      <article id={m.id} class="scroll-mt-36 py-14 lg:py-20 border-b border-[var(--color-line)] grid lg:grid-cols-12 gap-10 lg:gap-12">
         <div class={`lg:col-span-5 ${i % 2 ? 'lg:order-2' : ''}`}>
           <div class="aspect-[4/3] overflow-hidden bg-white lg:sticky lg:top-40">
             {m.featured ? (
@@ -126,7 +126,7 @@ const methods = [
         </div>
         <div class={`lg:col-span-7 ${i % 2 ? 'lg:order-1' : ''}`}>
           <p class="eyebrow">{String(i + 1).padStart(2, '0')} &middot; {m.featured ? m.subtitle : 'Módszer'}</p>
-          <h2 class="display mt-4 text-4xl lg:text-5xl text-[var(--color-navy-900)]">{m.title}</h2>
+          <h2 class="display mt-4 text-3xl lg:text-4xl text-[var(--color-navy-900)]">{m.title}</h2>
           <p class="mt-6 text-lg leading-relaxed text-[var(--color-ink)] measure">{m.description}</p>
           <p class="mt-4 leading-relaxed text-[var(--color-ink-2)] measure">{m.details}</p>
 
@@ -167,7 +167,7 @@ const methods = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid lg:grid-cols-12 gap-8 items-end">
       <div class="lg:col-span-8">
         <p class="eyebrow eyebrow-light">Kezelési terv</p>
-        <h2 class="display mt-5 text-4xl lg:text-5xl">Az első vizsgálat után a terapeuta állítja össze a kezelési tervet.</h2>
+        <h2 class="display mt-5 text-3xl lg:text-4xl">Az első vizsgálat után a terapeuta állítja össze a kezelési tervet.</h2>
       </div>
       <div class="lg:col-span-4 lg:text-right">
         <a href={`${base}kapcsolat#idopontfoglalas`} class="btn btn-copper">Időpontot kérek <span aria-hidden="true">&rarr;</span></a>

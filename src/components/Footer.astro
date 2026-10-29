@@ -15,7 +15,7 @@ const links = [
 
 <footer class="bg-[var(--color-navy-950)] text-white/80">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">
-    <div class="grid gap-12 lg:grid-cols-12">
+    <div class="grid gap-10 lg:grid-cols-12">
       <div class="lg:col-span-4">
         <div class="flex items-center gap-3 text-white">
           <LogoMark class="w-10 h-10" />
@@ -27,7 +27,7 @@ const links = [
         <p class="mt-6 text-sm leading-relaxed text-white/60 max-w-xs">
           {clinic.tagline}. {clinic.therapists} gyógytornász, két rendelő, rendelés {clinic.hoursText}.
         </p>
-        <a href={`tel:${clinic.phone}`} class="mt-6 inline-block font-heading text-3xl text-white hover:text-[var(--color-gold-300)]">{clinic.phoneDisplay}</a>
+        <a href={`tel:${clinic.phone}`} class="mt-6 inline-block font-heading text-2xl text-white hover:text-[var(--color-gold-300)]">{clinic.phoneDisplay}</a>
       </div>
 
       {clinic.locations.map((l) => (
@@ -48,7 +48,7 @@ const links = [
       </nav>
     </div>
 
-    <div class="mt-16 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 justify-between text-xs text-white/50">
+    <div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 justify-between text-xs text-white/50">
       <p>&copy; {year} {clinic.legalName} &middot; {clinic.name}</p>
       <div class="flex items-center gap-6">
         <a href={`${base}adatvedelmi-tajekoztato`} class="hover:text-white">Adatvédelmi tájékoztató</a>
