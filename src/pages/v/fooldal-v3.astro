@@ -4,6 +4,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import Section from '../../components/v3/Section.astro';
+import FounderD4 from '../../components/founder/FounderD4.astro';
 import { clinic, reviewTotal, ratingText } from '../../data/clinic';
 import { situations } from '../../data/situations';
 import { firstVisit } from '../../data/firstVisit';
@@ -21,8 +22,7 @@ const methods = [
 
 // Every active therapist, founder first (shared data, same order as the team page)
 const people = terapeutak
-  .filter((t) => !t.status)
-  .sort((a, b) => Number(b.name === founder.name) - Number(a.name === founder.name))
+  .filter((t) => !t.status && t.name !== founder.name)
   .map((t) => ({ name: t.name, role: t.name === founder.name ? 'Alapító, vezető gyógytornász' : t.title.split(',')[0], src: t.photo, top: t.name === founder.name, loc: locationOf[t.name] }));
 
 const facts = [
@@ -89,17 +89,20 @@ const faqs = [
     </ol>
   </Section>
 
-  <!-- 3. Who treats you: one grid of faces, the founder first -->
-  <Section eyebrow="Kik kezelik">
-    <Fragment slot="title">Relle Éva és {clinic.therapists - 1} gyógytornász, két rendelőben.</Fragment>
-    <Fragment slot="aside">Relle Éva 1993-ban alapította a rendelőt, és 2000 óta a Semmelweis Egyetemen is oktat. Minden terapeutánk McKenzie-képzésben részesült.</Fragment>
-    <ul class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-6">
+  <!-- 3a. Founder introduction with the clinic's philosophy (kept from the previous homepage) -->
+  <FounderD4 />
+
+  <!-- 3b. The team -->
+  <Section eyebrow="Csapatunk">
+    <Fragment slot="title">{clinic.therapists - 1} gyógytornász, két rendelőben.</Fragment>
+    <Fragment slot="aside">Minden terapeutánk McKenzie-képzésben részesült, és Relle Éva vezetésével ugyanazzal a vizsgálati módszerrel dolgozik. Telefonon a panasza alapján ajánlunk Önnek valakit.</Fragment>
+    <ul class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-x-4 gap-y-6">
       {people.map((p) => (
         <li>
           <div class="aspect-[4/5] overflow-hidden bg-[var(--color-paper-2)]">
             <img src={p.src} alt={p.name} class:list={['w-full object-cover object-top', p.top ? 'h-[108%]' : 'h-full']} loading="lazy" />
           </div>
-          <p class="mt-2 font-heading text-[1.15rem] sm:text-[1.3rem] leading-tight text-[var(--color-navy-900)]">{p.name}</p>
+          <p class="mt-2 font-heading text-[1.15rem] leading-tight text-[var(--color-navy-900)]">{p.name}</p>
           <p class="text-[13px] text-[var(--color-ink-2)]">{p.role}</p>
         </li>
       ))}
