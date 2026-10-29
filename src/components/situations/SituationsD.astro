@@ -1,0 +1,58 @@
+---
+// D: "which sentence is true for you" picker. First-person statements as big buttons on green,
+// the answer appears below as a reply. Works without JS: every answer is visible, JS collapses to one.
+import { situations } from '../../data/situations';
+import { clinic } from '../../data/clinic';
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="bg-[var(--color-teal-50)]" data-sit-d>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+    <p class="eyebrow">Kik jönnek hozzánk</p>
+    <h2 class="display mt-5 text-4xl lg:text-6xl text-[var(--color-navy-900)]">Melyik mondat igaz Önre?</h2>
+
+    <div class="mt-12 grid sm:grid-cols-2 gap-3" role="group" aria-label="Helyzetek">
+      {situations.map((s, i) => (
+        <button
+          data-target={`d-${s.id}`}
+          aria-pressed={i === 0 ? 'true' : 'false'}
+          class="text-left p-6 bg-white border-2 border-transparent hover:border-[var(--color-teal-300)] aria-pressed:border-[var(--color-teal-600)] aria-pressed:bg-[var(--color-teal-700)] aria-pressed:text-white transition-colors group"
+        >
+          <span class="block font-mono text-[0.7rem] uppercase tracking-wider text-[var(--color-teal-700)] group-aria-pressed:text-[var(--color-teal-100)]">{s.tag}</span>
+          <span class="block mt-2 font-heading text-2xl leading-snug">„{s.voice}”</span>
+        </button>
+      ))}
+    </div>
+
+    {situations.map((s, i) => (
+      <div id={`d-${s.id}`} data-answer class:list={['mt-6 bg-white border-l-4 border-[var(--color-teal-600)] p-8 lg:p-10 grid md:grid-cols-[1fr_14rem] gap-8 items-center', { 'js-hidden': i !== 0 }]}>
+        <div>
+          <p class="font-mono text-[0.7rem] uppercase tracking-wider text-[var(--color-ink-2)]">Amit ilyenkor csinálunk</p>
+          <p class="mt-3 text-lg leading-relaxed text-[var(--color-ink)]">{s.body}</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href={`tel:${clinic.phone}`} class="btn btn-primary !py-3">Időpontot kérek</a>
+            <a href={`${base}${s.link.path}`} class="btn btn-ghost !py-3">{s.link.label}</a>
+          </div>
+        </div>
+        <div class="hidden md:block aspect-square overflow-hidden bg-[var(--color-paper-2)]">
+          <img src={`${base}${s.media.image}`} alt={s.media.alt} class="w-full h-full object-cover" loading="lazy" />
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  :global(.js) [data-sit-d] .js-hidden { display: none; }
+</style>
+
+<script>
+  document.documentElement.classList.add('js');
+  document.querySelectorAll<HTMLElement>('[data-sit-d]').forEach((root) => {
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-target]')];
+    buttons.forEach((b) => b.addEventListener('click', () => {
+      buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      root.querySelectorAll<HTMLElement>('[data-answer]').forEach((a) => a.classList.toggle('js-hidden', a.id !== b.dataset.target));
+    }));
+  });
+</script>

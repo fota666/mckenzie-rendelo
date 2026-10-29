@@ -1,0 +1,35 @@
+---
+// C: photo cards on a dark band. Image on top, situation and answer below, whole card clickable.
+import { situations } from '../../data/situations';
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="bg-[var(--color-navy-950)] text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+    <div class="grid lg:grid-cols-12 gap-8 items-end">
+      <div class="lg:col-span-8">
+        <p class="eyebrow eyebrow-light">Kik jönnek hozzánk</p>
+        <h2 class="display mt-5 text-4xl lg:text-6xl">Négy helyzet, amellyel hozzánk fordulnak.</h2>
+      </div>
+      <p class="lg:col-span-4 text-white/65 leading-relaxed">Válassza ki, melyik hasonlít leginkább az Önére, és megmutatjuk, hogyan kezdünk hozzá.</p>
+    </div>
+
+    <ul class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {situations.map((s) => (
+        <li>
+          <a href={`${base}${s.link.path}`} class="group flex flex-col h-full bg-[var(--color-navy-900)] hover:bg-[var(--color-navy-800)] transition-colors">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src={`${base}${s.media.image}`} alt={s.media.alt} class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.03] transition duration-500" loading="lazy" />
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <p class="font-mono text-[0.7rem] uppercase tracking-wider text-[var(--color-teal-300)]">{s.tag}</p>
+              <h3 class="mt-3 font-heading text-[1.6rem] leading-snug">{s.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-white/60 flex-1">{s.body}</p>
+              <span class="mt-6 text-sm text-[var(--color-teal-300)] group-hover:text-white">{s.link.label} <span aria-hidden="true">&rarr;</span></span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

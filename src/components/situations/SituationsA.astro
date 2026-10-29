@@ -1,0 +1,68 @@
+---
+// A: tabbed selector. Left: the four situations as large selectable rows. Right: media + answer.
+import { situations } from '../../data/situations';
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32" data-sit-a>
+  <p class="eyebrow">Kik jönnek hozzánk</p>
+  <h2 class="display mt-5 text-4xl lg:text-6xl text-[var(--color-navy-900)] max-w-3xl">Melyik helyzet ismerős Önnek?</h2>
+
+  <div class="mt-14 grid lg:grid-cols-12 gap-8 lg:gap-12">
+    <div class="lg:col-span-5 border-t border-[var(--color-line)]" role="tablist" aria-label="Helyzetek">
+      {situations.map((s, i) => (
+        <button
+          role="tab"
+          id={`a-tab-${s.id}`}
+          aria-controls={`a-panel-${s.id}`}
+          aria-selected={i === 0 ? 'true' : 'false'}
+          class="group w-full text-left py-6 border-b border-[var(--color-line)] grid grid-cols-[2.5rem_1fr_auto] gap-3 items-baseline aria-selected:bg-white transition-colors px-3 -mx-3"
+        >
+          <span class="font-mono text-xs text-[var(--color-teal-600)]">{String(i + 1).padStart(2, '0')}</span>
+          <span>
+            <span class="block font-mono text-[0.7rem] uppercase tracking-wider text-[var(--color-ink-2)]">{s.tag}</span>
+            <span class="block mt-1.5 font-heading text-2xl leading-snug text-[var(--color-ink-2)] group-aria-selected:text-[var(--color-navy-900)]">{s.title}</span>
+          </span>
+          <span class="text-[var(--color-teal-600)] opacity-0 group-aria-selected:opacity-100" aria-hidden="true">&rarr;</span>
+        </button>
+      ))}
+    </div>
+
+    <div class="lg:col-span-7">
+      {situations.map((s, i) => (
+        <div role="tabpanel" id={`a-panel-${s.id}`} aria-labelledby={`a-tab-${s.id}`} hidden={i !== 0} class="lg:sticky lg:top-28">
+          <div class="aspect-[16/10] overflow-hidden bg-[var(--color-paper-2)]">
+            {s.media.video
+              ? <video src={`${base}video/${s.media.video}.mp4`} poster={`${base}${s.media.image}`} muted loop playsinline preload="none" class="w-full h-full object-cover" aria-label={s.media.alt}></video>
+              : <img src={`${base}${s.media.image}`} alt={s.media.alt} class="w-full h-full object-cover" loading="lazy" />}
+          </div>
+          <div class="bg-[var(--color-navy-900)] text-white p-8 lg:p-10">
+            <p class="text-lg leading-relaxed text-white/85 measure">{s.body}</p>
+            <a href={`${base}${s.link.path}`} class="link-arrow mt-6 text-white hover:!text-[var(--color-teal-300)]">{s.link.label} <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-sit-a]').forEach((root) => {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+    const show = (tab: HTMLButtonElement) => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        const panel = root.querySelector<HTMLElement>('#' + t.getAttribute('aria-controls'));
+        if (!panel) return;
+        panel.hidden = !on;
+        const v = panel.querySelector('video');
+        if (v) on && !matchMedia('(prefers-reduced-motion: reduce)').matches ? v.play().catch(() => {}) : v.pause();
+      });
+    };
+    tabs.forEach((t) => {
+      t.addEventListener('click', () => show(t));
+      t.addEventListener('mouseenter', () => matchMedia('(hover: hover)').matches && show(t));
+    });
+  });
+</script>
