@@ -8,7 +8,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: process.env.SITE_URL || 'https://redesign.mckenzie.hu',
   base: process.env.BASE_PATH || '/',
-  integrations: [sitemap()],
+  // /v/ holds internal layout drafts; keep them out of the sitemap.
+  integrations: [sitemap({ filter: (page) => !page.includes('/v/') })],
   vite: {
     plugins: [tailwindcss()]
   }

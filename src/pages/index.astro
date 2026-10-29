@@ -23,10 +23,6 @@ const methods = [
   { id: 'stabilizacio', name: 'Stabilizációs tréning', for: 'instabil vagy túlterhelt gerinc, lumbágó' },
   { id: 'schroth', name: 'Schroth-terápia', for: 'scoliosis, Scheuermann-betegség' },
   { id: 'mutet-utani', name: 'Műtét utáni rehabilitáció', for: 'gerinc-, csípő-, térdműtét, szalagszakadás' },
-  { id: 'tartasjavitas', name: 'Tartásjavítás', for: 'ülőmunka, gyermekkori tartáshiba' },
-  { id: 'taping', name: 'Kineziológiai taping', for: 'sportsérülés, ficam, tenisz- és golfkönyök' },
-  { id: 'stretching', name: 'Gyógyászati nyújtás', for: 'izomfeszülés, merevség' },
-  { id: 'izuleti-fajdalmak', name: 'Ízületi fájdalmak gyógytornája', for: 'térd, váll, csípő, boka, csukló' },
 ];
 
 const team = [
@@ -39,32 +35,21 @@ const team = [
 
 const reviews = [
   { text: 'Nincs gerincsérvből eredő kilátástalanság. A McKenzie-módszerrel gyakorlatilag visszakaptam az életem.', name: 'Kulcsár Krisztián', role: 'világbajnok vívó' },
-  { text: 'Két kezelés után már éreztem a javulást, az otthoni gyakorlatok rendszeres végzésével azóta is panaszmentes vagyok.', name: 'S. Attila', role: 'páciens' },
+  { text: 'A fájdalommentes életet jelenti az itt kapott kezelés. Professzionális ellátás, barátságos légkör, rendkívül hozzáértő gyógytornász!', name: 'Dr. Utassyné Kormos Zsuzsa', role: 'páciens' },
   { text: 'Mostanában semmi bajom. Mégis jövök. Kelleni kell valakinek. Testileg is, lelkileg is.', name: 'Havas Henrik', role: 'újságíró' },
 ];
 
-// Answer-first wording: each answer opens with the direct fact so answer engines can quote it.
+// Answer-first wording. The FAQPage markup lives on /gyik only, so the two pages do not compete.
 const faqs = [
   { q: 'Kell beutaló a McKenzie gyógytornához?', a: 'Nem kell beutaló, magánrendelésről van szó. Ha van korábbi MRI- vagy röntgenlelete, hozza magával az első alkalomra.' },
   { q: 'Mennyibe kerül egy kezelés?', a: `Egy 55 perces egyéni kezelés ${clinic.prices.single.amount}, ${clinic.prices.single.note}. Az 5 alkalmas bérlet ${clinic.prices.pass.amount}, ez ${clinic.prices.pass.perVisit}. A társadalombiztosítás nem fedezi a kezelés költségét, egészségpénztári elszámolásra alkalmas számlát adunk.` },
-  { q: 'Hány alkalom kell, hogy javuljon a derékfájásom?', a: 'A javulás üteme egyénenként eltér, ezért előre nem ígérünk alkalomszámot. Az első vizsgálat után a terapeuta elmondja, mire számíthat, és hány alkalmat javasol. Egy kezelési sor gyakran 4-6 alkalomból áll.' },
   { q: 'Hogyan foglalhatok időpontot, és mennyit kell várni?', a: `Telefonon foglalhat a ${clinic.phoneDisplay} számon, hétköznap 9 és 17 óra között, vagy kérhet visszahívást a weboldalon. Általában 1-2 napon belül tudunk időpontot adni. A kezelések hétköznap 8 és 20 óra között vannak, a V. és a XI. kerületi rendelőben.` },
   { q: 'Porckorongsérvvel is lehet gyógytornára jönni?', a: 'Igen. A porckorongsérv nagy része konzervatív kezelésre javul, ezért műtét előtt érdemes kipróbálni a McKenzie-módszert. Ha vizelet- vagy székletürítési zavar, gáttáji zsibbadás vagy gyorsan erősödő izomgyengeség jelentkezik, ne gyógytornára jöjjön, hanem azonnal forduljon orvoshoz.' },
-  { q: 'Mi a különbség a McKenzie-módszer és a hagyományos gyógytorna között?', a: 'A McKenzie-módszer egy vizsgálati eljárással kezdődik, amely megmutatja, melyik mozgásirány csökkenti a fájdalmat. A kezelés célja, hogy a páciens maga tudja kezelni a panaszát, ne a terapeutától függjön.' },
 ];
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-};
 ---
 
 <BaseLayout title="McKenzie Gyógytorna Rendelő Budapest | Derék- és nyakfájás kezelése">
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  </Fragment>
-
   <Hero />
 
   <!-- SITUATIONS -->
@@ -73,7 +58,7 @@ const faqSchema = {
   <FounderD4 />
 
   <!-- FACTS -->
-  <section class="border-y border-[var(--color-line)] bg-white">
+  <section class="border-y border-[var(--color-line)]">
     <dl class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 divide-x divide-[var(--color-line)]">
       {facts.map((f, i) => (
         <div class={`py-8 lg:py-10 ${i % 2 === 0 ? 'pr-4' : 'pl-6'} lg:px-8 ${i === 0 ? 'lg:pl-0' : ''} ${i > 1 ? 'border-t lg:border-t-0 border-[var(--color-line)]' : ''}`}>
@@ -123,7 +108,7 @@ const faqSchema = {
         <p class="eyebrow">Kezelési módszerek</p>
         <h2 class="display mt-5 text-3xl lg:text-4xl text-[var(--color-navy-900)]">A McKenzie-módszer a fő szakterületünk, emellett nyolc másik eljárást is alkalmazunk.</h2>
         <p class="mt-6 text-[var(--color-ink-2)] leading-relaxed measure">Nem kell előre eldöntenie, melyik módszerre van szüksége. Az első vizsgálat után a terapeuta javaslatot tesz a megfelelő módszerek kombinációjára.</p>
-        <div class="mt-7 aspect-[4/3] max-w-md overflow-hidden bg-[var(--color-paper-2)]">
+        <div class="hidden sm:block mt-7 aspect-[4/3] max-w-md overflow-hidden bg-[var(--color-paper-2)]">
           <LoopVideo name="stabilizacio" label="Vállstabilizáló gyakorlat gumiszalaggal, gyógytornász felügyeletével" class="w-full h-full object-cover" />
         </div>
       </div>
@@ -140,6 +125,9 @@ const faqSchema = {
             </a>
           </li>
         ))}
+        <li class="pt-5">
+          <a href={`${base}modszerek`} class="link-arrow text-[var(--color-navy-800)]">Mind a 9 módszer és a szakmai háttér <span aria-hidden="true">&rarr;</span></a>
+        </li>
       </ul>
     </div>
   </section>
@@ -173,7 +161,7 @@ const faqSchema = {
   </section>
 
   <!-- REVIEWS -->
-  <section class="bg-[var(--color-teal-50)]">
+  <section class="bg-[var(--color-paper-2)]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
     <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
       <div>
@@ -189,9 +177,9 @@ const faqSchema = {
         ))}
       </div>
     </div>
-    <div class="mt-7 grid md:grid-cols-3 gap-px bg-[var(--color-teal-100)] border border-[var(--color-teal-100)]">
-      {reviews.map((r) => (
-        <figure class="bg-white p-5 lg:p-7 flex flex-col">
+    <div class="mt-7 grid md:grid-cols-3 gap-px bg-[var(--color-line)] border border-[var(--color-line)]">
+      {reviews.map((r, i) => (
+        <figure class:list={[i === 2 && "max-md:hidden", "bg-white p-5 lg:p-7 flex flex-col"]}>
           <blockquote class="font-heading text-[1.5rem] leading-snug text-[var(--color-navy-900)] flex-1">„{r.text}”</blockquote>
           <figcaption class="mt-8 text-[15px]"><span class="font-medium">{r.name}</span> <span class="text-[var(--color-ink-2)]">&middot; {r.role}</span></figcaption>
         </figure>
@@ -205,7 +193,7 @@ const faqSchema = {
   </section>
 
   <!-- PRICES -->
-  <section class="bg-white border-y border-[var(--color-line)]">
+  <section class="border-y border-[var(--color-line)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid lg:grid-cols-12 gap-10">
       <div class="lg:col-span-4">
         <p class="eyebrow">Árak</p>

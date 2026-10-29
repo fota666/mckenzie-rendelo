@@ -173,3 +173,12 @@ html, body { overflow-x: clip; }
   .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
 }
+
+/* Horizontal chip rows scroll without a visible bar */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Cormorant at 400 looks grey on screens below ~32px; 500 by default, utilities still win. */
+@layer base {
+  h1, h2, h3, h4, .font-heading { font-weight: 500; }
+}

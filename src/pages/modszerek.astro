@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import LoopVideo from '../components/LoopVideo.astro';
+import ExpertBackground from '../components/ExpertBackground.astro';
 const base = import.meta.env.BASE_URL;
 
 const methods = [
@@ -11,8 +12,8 @@ const methods = [
     subtitle: 'Fő szakterületünk',
     image: `${base}images/modszerek/mckenzie.png`,
     featured: true,
-    description: 'A McKenzie-módszer részletes mozgásvizsgálatra épülő egyéni mozgásprogram, amely igen hatékony a különböző eredetű gerincproblémák, például a gerincsérv és a porckorongsérv esetében.',
-    details: 'A módszert Robin McKenzie új-zélandi gyógytornász fejlesztette ki, és ma már több mint 40 országban alkalmazzák. Lényege, hogy a páciens aktív résztvevője saját gyógyulásának: célzott gyakorlatokkal és önkezelési stratégiákkal tartós eredményeket érünk el.',
+    description: 'A McKenzie-módszer részletes mozgásvizsgálatra épülő egyéni mozgásprogram, amelyet elsősorban gerinceredetű panaszoknál, például derékfájásnál, nyakfájásnál és porckorongsérvnél alkalmazunk.',
+    details: 'A módszert Robin McKenzie új-zélandi gyógytornász fejlesztette ki, ma a McKenzie Institute International oktatja szerte a világon. Lényege, hogy a páciens aktív résztvevője saját gyógyulásának: a cél, hogy célzott gyakorlatokkal és önkezelési stratégiákkal maga is kezelni tudja a panaszát.',
     howItWorks: [
       'Alapos mozgásvizsgálat: ismételt speciális mozgások és testhelyzetek, miközben figyeljük a fájdalomra adott reakciót',
       'Egyénre szabott gyakorlatsor összeállítása',
@@ -29,7 +30,7 @@ const methods = [
     details: 'Sérülések, gyulladások, degeneratív betegségek és az életkorral járó változások esetén alkalmazzuk. A vizsgálat során felmérjük az izom-, a szalag- és a bőrreflexeket, valamint az ízületi mechanikát és az izomfunkciót.',
     subtypes: [
       { name: 'Maitland manuálterápia', desc: 'Páciensközpontú, bizonyítékokon alapuló módszer. Az idegrendszer, az izomzat és az ízületek vizsgálatára épül. Specifikus tesztekkel azonosítjuk a fájdalmat okozó struktúrákat.' },
-      { name: 'Mulligan manuálterápia', desc: 'Az ízületek helyzeti eltéréseire épül. A terapeuta egy adott helyzetben tartja az ízületet, miközben a páciens aktívan mozog. Fájdalommentes technika.' },
+      { name: 'Mulligan manuálterápia', desc: 'Az ízületek helyzeti eltéréseire épül. A terapeuta egy adott helyzetben tartja az ízületet, miközben a páciens aktívan mozog. A kivitelezés során a fájdalommentességre törekszünk.' },
     ],
     conditions: ['Derékfájás', 'Nyaki és háti fájdalom', 'Vállpanaszok', 'Csípő-, térd-, bokafájdalom', 'Tenisz- és golfkönyök', 'Fagyott váll'],
   },
@@ -38,7 +39,7 @@ const methods = [
     title: 'Stabilizációs tréning',
     image: `${base}images/modszerek/stabilizacio.png`,
     description: 'A gerinc stabilitásának megbomlása esetén a gerinc melletti mély izmok erejének helyreállítására törekszünk, precíz irányítással.',
-    details: 'A tréning során a megrövidült izmokat megnyújtjuk, és helyreállítjuk az optimális izom-ízületi egyensúlyt. A mély stabilizáló izmok célzott erősítése a tartós fájdalommentesség alapja.',
+    details: 'A tréning során a megrövidült izmokat megnyújtjuk, és helyreállítjuk az optimális izom-ízületi egyensúlyt. A mély stabilizáló izmok célzott erősítése segíthet megelőzni a panaszok visszatérését.',
     conditions: ['Porckorongsérv utáni állapot', 'Lumbágó', 'Instabil gerinc', 'Túlterhelt gerinc', 'Csigolyacsúszás (spondylolisthesis)'],
   },
   {
@@ -53,7 +54,7 @@ const methods = [
     id: 'taping',
     title: 'Kineziológiai taping',
     image: `${base}images/modszerek/taping.png`,
-    description: 'Speciális ragasztószalag segítségével befolyásoljuk a mozgásszervrendszer működését. A szalag hatása 5-7 napig tart, gyógyszert nem tartalmaz.',
+    description: 'Speciális ragasztószalag segítségével befolyásoljuk a mozgásszervrendszer működését. A szalag 5-7 napig viselhető, gyógyszert nem tartalmaz.',
     details: 'Japánban, Koreában és Németországban fejlesztették ki. A bőr, az izmok és az ízületi tok receptoraira, valamint a szalagokra és a nyirokrendszerre hat. Hatékonysága a képzett szakember által végzett korrekt felhelyezéstől függ.',
     conditions: ['Sportsérülések', 'Ficamok, rándulások', 'Tenisz- és golfkönyök', 'Tartáshibák', 'Ízületi mozgásproblémák', 'Fejfájás', 'Achilles-ín rehabilitáció'],
   },
@@ -102,8 +103,8 @@ const methods = [
   </PageHeader>
 
   <!-- In-page index -->
-  <nav class="sticky top-[80px] z-20 bg-[var(--color-paper)]/95 backdrop-blur border-b border-[var(--color-line)] hidden lg:block" aria-label="Módszerek">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-6 overflow-x-auto py-3 text-[15px] whitespace-nowrap">
+  <nav class="sticky top-[80px] z-20 bg-[var(--color-paper)]/95 backdrop-blur border-b border-[var(--color-line)]" aria-label="Módszerek">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-6 overflow-x-auto py-3 text-[15px] whitespace-nowrap no-scrollbar [mask-image:linear-gradient(90deg,#000_92%,transparent)]">
       {methods.map((m, i) => (
         <a href={`#${m.id}`} class="text-[var(--color-ink-2)] hover:text-[var(--color-teal-700)]">
           <span class="font-mono text-[0.78rem] text-[var(--color-teal-600)] mr-1.5">{String(i + 1).padStart(2, '0')}</span>{m.title.split('(')[0].trim()}
@@ -162,6 +163,8 @@ const methods = [
       </article>
     ))}
   </div>
+
+  <ExpertBackground />
 
   <section class="bg-[var(--color-navy-900)] text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid lg:grid-cols-12 gap-8 items-end">

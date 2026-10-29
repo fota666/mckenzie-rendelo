@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import ClosingCta from '../components/ClosingCta.astro';
 import { clinic } from '../data/clinic';
 const base = import.meta.env.BASE_URL;
 
@@ -11,7 +12,7 @@ const faqs = [
   },
   {
     q: 'Mennyi ideig tart egy kezelés?',
-    a: 'Az első alkalom 55 perc, amely tartalmazza a mozgásvizsgálatot és a kezelést. A további alkalmak 50-55 percesek.'
+    a: 'Az első alkalom 55 perc, ez tartalmazza a mozgásvizsgálatot és az első kezelést. A további alkalmak 50-55 percesek.'
   },
   {
     q: 'Hogyan foglalhatok időpontot, és mennyit kell várni?',
@@ -19,7 +20,7 @@ const faqs = [
   },
   {
     q: 'Mennyibe kerül a kezelés?',
-    a: 'Egyéni kezelés: 14 000 és 15 000 Ft között alkalmanként (55 perc). 5 alkalmas bérlet: 65 000 Ft (13 000 Ft alkalmanként). A társadalombiztosítás jelenleg nem fedezi.'
+    a: `Egyéni kezelés: ${clinic.prices.single.amount} alkalmanként, a terapeutától függően, az egyes terapeuták árát a Csapatunk oldalon találja. 5 alkalmas bérlet: ${clinic.prices.pass.amount} (${clinic.prices.pass.perVisit}). A társadalombiztosítás nem fedezi.`
   },
   {
     q: 'Elszámolható egészségpénztárral?',
@@ -40,6 +41,14 @@ const faqs = [
   {
     q: 'Melyik rendelőt válasszam?',
     a: 'Mindkét helyszínünkön egyformán képzett gyógytornászok dolgoznak. Válassza az Ön számára könnyebben megközelíthető rendelőt: Belváros (Sas u. 7.) vagy Bel-Buda (Bartók Béla út 34.).'
+  },
+  {
+    q: 'Porckorongsérvvel is lehet gyógytornára jönni?',
+    a: 'Igen. A porckorongsérv sok esetben konzervatív kezeléssel is javul, ezért műtét előtt érdemes kipróbálni a McKenzie-módszert, ha az orvos nem lát sürgős műtéti okot. Ha vizelet- vagy székletürítési zavar, gáttáji zsibbadás vagy gyorsan erősödő izomgyengeség jelentkezik, ne gyógytornára jöjjön, hanem azonnal forduljon orvoshoz.'
+  },
+  {
+    q: 'Mi a különbség a McKenzie-módszer és a hagyományos gyógytorna között?',
+    a: 'A McKenzie-módszer egy részletes mozgásvizsgálattal kezdődik: ismételt mozgások és testhelyzetek alatt figyeljük, hogyan változik a fájdalom. Ebből derül ki, milyen gyakorlatok segíthetnek. A kezelés célja, hogy a páciens maga is kezelni tudja a panaszát, és ne a terapeutától függjön.'
   },
   {
     q: 'Mikor szükséges orvosi vizsgálat a gyógytorna előtt?',
@@ -96,4 +105,5 @@ const faqSchema = {
       ))}
     </div>
   </section>
+  <ClosingCta />
 </BaseLayout>

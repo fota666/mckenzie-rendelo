@@ -1,0 +1,53 @@
+---
+// Short professional background on MDT for patients, referring doctors and answer engines.
+// Only general, well-established MDT concepts; team facts come from data/team.ts.
+import { credentialed } from '../data/team';
+
+const blocks = [
+  {
+    t: 'Mechanikai diagnózis és terápia',
+    d: 'A McKenzie-módszer hivatalos neve Mechanical Diagnosis and Therapy (MDT). Robin McKenzie (1931-2013) új-zélandi gyógytornász dolgozta ki. Nem egy gyakorlatsor, hanem egy vizsgálati és kezelési rendszer, amely a panaszt a mozgásra adott válasz alapján osztályozza.',
+  },
+  {
+    t: 'Ismételt mozgások és centralizáció',
+    d: 'A vizsgálat során ismételt mozgások és tartott testhelyzetek alatt figyeljük, hogyan változik a tünetek helye és erőssége. Kedvező jel a centralizáció: amikor a végtagba sugárzó fájdalom bizonyos mozgásokra visszahúzódik a gerinc felé.',
+  },
+  {
+    t: 'Osztályozás',
+    d: 'A mozgásvizsgálat alapján a panaszt mechanikai csoportba soroljuk (elmozdulásos, diszfunkciós vagy tartási szindróma), és ehhez igazítjuk a gyakorlatokat. Ha a vizsgálat nem talál mechanikai mintázatot, más módszert vagy orvosi kivizsgálást javaslunk.',
+  },
+  {
+    t: 'Képzés és minősítés',
+    d: 'A McKenzie Institute International több részből álló posztgraduális kurzussorozatot oktat. Ezt követi a nemzetközi minősítővizsga (Credentialing Examination), a legmagasabb szint a diploma (Dip. MDT).',
+  },
+];
+---
+
+<section id="szakmai-hatter" class="scroll-mt-32 border-t border-[var(--color-line)]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-4">
+      <p class="eyebrow">Szakmai háttér</p>
+      <h2 class="display mt-3 text-3xl lg:text-4xl text-[var(--color-navy-900)]">Mi a McKenzie-módszer (MDT)?</h2>
+      <p class="mt-4 text-[15px] leading-relaxed text-[var(--color-ink-2)]">Röviden azoknak, akik pontosan tudni szeretnék, mi történik a vizsgálaton, és orvosoknak, akik hozzánk küldenének pácienst.</p>
+    </div>
+    <div class="lg:col-span-8">
+      <dl class="grid sm:grid-cols-2 gap-x-10 gap-y-7">
+        {blocks.map((b) => (
+          <div class="border-t-2 border-[var(--color-teal-600)] pt-4">
+            <dt class="font-heading text-[1.5rem] text-[var(--color-navy-900)]">{b.t}</dt>
+            <dd class="mt-2 text-[15px] leading-relaxed text-[var(--color-ink-2)]">{b.d}</dd>
+          </div>
+        ))}
+      </dl>
+      <div class="mt-8 bg-[var(--color-paper-2)] p-6">
+        <p class="font-medium text-[var(--color-ink)]">Nálunk minden gyógytornász elvégezte a McKenzie-kurzusok legalább első három részét. A nemzetközi minősítővizsgát {credentialed.length} terapeutánk tette le:</p>
+        <p class="mt-2 text-[15px] text-[var(--color-ink-2)]">{credentialed.map((t) => t.name).join(', ')}.</p>
+        <p class="mt-4 text-[15px]">
+          <a href="https://www.mckenzieinstitute.org" target="_blank" rel="noopener" class="link-arrow text-[var(--color-navy-800)]">McKenzie Institute International <span aria-hidden="true">&rarr;</span></a>
+          <span class="mx-3 text-[var(--color-line)]">|</span>
+          <a href="https://hu.mckenzieinstitute.org" target="_blank" rel="noopener" class="link-arrow text-[var(--color-navy-800)]">Magyarországi McKenzie Intézet <span aria-hidden="true">&rarr;</span></a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -17,7 +17,7 @@ const base = import.meta.env.BASE_URL;
           <em class="text-[var(--color-gold-300)]">Derék- és nyakfájás</em> kezelése, amelyet otthon is folytathat.
         </h1>
         <p class="mt-5 text-lg text-white/75 measure leading-relaxed">
-          Az első 55 perces alkalommal megvizsgáljuk, mely mozgások hatására csökken a fájdalma, és olyan gyakorlatsort kap, amelyet egyedül is végezhet. Időpont általában 1-2 napon belül.
+          Az első 55 perces alkalommal megvizsgáljuk, hogyan változik a fájdalma különböző mozgásokra és testhelyzetekre, és ez alapján olyan gyakorlatsort kap, amelyet egyedül is végezhet. Időpont általában 1-2 napon belül.
         </p>
         <div class="mt-7 flex flex-col sm:flex-row gap-3">
           <a href={`tel:${clinic.phone}`} class="btn btn-copper font-mono">{clinic.phoneDisplay}</a>
@@ -25,7 +25,7 @@ const base = import.meta.env.BASE_URL;
         </div>
         <p class="mt-3 text-[15px] text-white/60">Telefonos foglalás {clinic.bookingHoursShort}, visszahívás-kérés bármikor.</p>
         <dl class="mt-6 pt-5 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-4 text-[15px]">
-          <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Ár</dt><dd class="mt-1 text-white/85">{clinic.prices.single.amount} / 55 perc</dd></div>
+          <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Ár</dt><dd class="mt-1 text-white/85">{clinic.prices.single.amount} / alkalom</dd></div>
           <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Rendelők</dt><dd class="mt-1 text-white/85">Sas utca (V.) &middot; Bartók Béla út (XI.)</dd></div>
           <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Beutaló</dt><dd class="mt-1 text-white/85">Nem kell</dd></div>
         </dl>

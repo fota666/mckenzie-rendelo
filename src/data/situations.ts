@@ -20,7 +20,7 @@ export const situations: Situation[] = [
     tag: 'Most fáj',
     title: 'Napok óta fáj a dereka vagy a nyaka, és nem múlik.',
     voice: 'Napok óta fáj a derekam vagy a nyakam, és nem múlik.',
-    body: 'Az első alkalommal ismételt mozgások segítségével kiderítjük, melyik irányú mozgás csökkenti a fájdalmat. Már az első alkalom után hazavisz egy gyakorlatot, amelyet otthon is végezhet.',
+    body: 'Az első alkalommal ismételt mozgások segítségével megnézzük, hogyan változik a fájdalom különböző mozgásokra. Már az első alkalom után hazavisz egy gyakorlatot, amelyet otthon is végezhet.',
     link: { path: 'modszerek#mckenzie', label: 'McKenzie-módszer' },
     methods: [{ path: 'modszerek#mckenzie', label: 'McKenzie-módszer' }],
     media: { video: 'vizsgalat', image: 'video/vizsgalat.jpg', alt: 'Gyógytornász a hát mozgását vizsgálja' },

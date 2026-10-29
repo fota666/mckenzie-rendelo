@@ -129,8 +129,8 @@ const tv = [
     {clinic.locations.map((l, i) => <>{i > 0 && ', '}<a href={l.mapsUrl} target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-[var(--color-teal-700)]">{l.name}: {ratingText(l.rating.value)} ({l.rating.count} vélemény)</a></>)}. A pontszámok a Google-profilokról származnak, utoljára 2026. októberben ellenőrizve.
   </PageHeader>
 
-  <section class="bg-[var(--color-teal-50)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-2 gap-px bg-[var(--color-teal-100)] border border-[var(--color-teal-100)]">
+  <section class="bg-[var(--color-paper-2)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-2 gap-px bg-[var(--color-line)] border border-[var(--color-line)]">
       {featured.map((r) => (
         <figure class="bg-white p-10 lg:p-10 flex flex-col">
           <blockquote class="font-heading text-[1.65rem] lg:text-[1.9rem] leading-snug text-[var(--color-navy-900)] flex-1">„{r.text}”</blockquote>
@@ -143,7 +143,8 @@ const tv = [
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
     <h2 class="display text-3xl lg:text-4xl text-[var(--color-navy-900)]">Pácienseink mondják</h2>
     <div class="mt-8 columns-1 md:columns-2 lg:columns-3 gap-6 [column-fill:_balance]">
-      {reviews.map((r) => (
+      {/* Mix the voices: reviews about one therapist go last so the page does not read as her ad. */}
+      {[...reviews].sort((a, b) => Number(/Eszt/.test(a.text)) - Number(/Eszt/.test(b.text))).map((r) => (
         <figure class="break-inside-avoid mb-6 bg-white border border-[var(--color-line)] p-7">
           <blockquote class="leading-relaxed text-[var(--color-ink)]">„{r.text}”</blockquote>
           <figcaption class="mt-5 pt-4 border-t border-[var(--color-line)] text-[15px]"><span class="font-medium">{r.name}</span> <span class="text-[var(--color-ink-2)]">&middot; {r.role}</span></figcaption>

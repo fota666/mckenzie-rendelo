@@ -30,6 +30,22 @@ const isPreview = !PRODUCTION_HOSTS.includes(Astro.site?.hostname ?? '');
 // No aggregateRating: Google ignores self-served review stars on a LocalBusiness and forbids
 // marking up ratings collected elsewhere. The page shows the Google score and links the profiles.
 const orgId = `${siteRoot}#org`;
+const SERVICES = [
+  'McKenzie-módszer (Mechanical Diagnosis and Therapy)', 'Manuálterápia (Maitland, Mulligan)', 'Stabilizációs tréning',
+  'Schroth-terápia', 'Műtét előtti és utáni rehabilitáció', 'Tartásjavítás', 'Kineziológiai taping', 'Gyógyászati nyújtás',
+  'Ízületi fájdalmak gyógytornája',
+];
+const pagePath = Astro.url.pathname.replace(base, '').replace(/\/$/, '');
+const breadcrumb = pagePath
+  ? {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Főoldal', item: siteRoot },
+        { '@type': 'ListItem', position: 2, name: title.split(' | ')[0], item: canonicalURL.href },
+      ],
+    }
+  : null;
+
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -75,6 +91,11 @@ const schema = {
       medicalSpecialty: 'https://schema.org/Physiotherapy',
       priceRange: `${clinic.prices.single.min}-${clinic.prices.single.max} HUF`,
       openingHours: clinic.hours.schema,
+      isAcceptingNewPatients: true,
+      paymentAccepted: 'Készpénz, bankkártya',
+      currenciesAccepted: 'HUF',
+      areaServed: { '@type': 'City', name: 'Budapest' },
+      availableService: SERVICES.map((name) => ({ '@type': 'MedicalTherapy', name })),
       hasMap: l.mapsUrl,
       sameAs: [l.mapsUrl],
       geo: { '@type': 'GeoCoordinates', latitude: l.geo.lat, longitude: l.geo.lng },
@@ -101,6 +122,7 @@ const schema = {
       memberOf: { '@type': 'Organization', name: 'Magyarországi McKenzie Intézet Alapítvány', url: 'https://hu.mckenzieinstitute.org' },
       affiliation: { '@type': 'CollegeOrUniversity', name: 'Semmelweis Egyetem Egészségtudományi Kar' },
     },
+    ...(breadcrumb ? [breadcrumb] : []),
   ],
 };
 ---

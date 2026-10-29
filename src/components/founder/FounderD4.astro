@@ -23,7 +23,7 @@ const base = import.meta.env.BASE_URL;
           <a href={`${base}csapatunk`} class="link-arrow text-[15px] text-[var(--color-navy-800)]">A csapat <span aria-hidden="true">&rarr;</span></a>
         </div>
       </div>
-      <div class="hidden md:block overflow-hidden bg-[var(--color-paper-2)]">
+      <div class="order-first md:order-none aspect-[4/3] md:aspect-auto overflow-hidden bg-[var(--color-paper-2)]">
         <img src={`${base}${founder.photo}`} alt={founder.name} class="w-full h-[108%] object-cover object-top" loading="lazy" />
       </div>
     </div>
