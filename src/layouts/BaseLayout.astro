@@ -18,6 +18,10 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Only the production domains are indexable; previews (redesign subdomain, GitHub Pages) stay out of search.
+const PRODUCTION_HOSTS = ['gyogytornarendelo.hu', 'www.gyogytornarendelo.hu', 'mckenzie.hu', 'www.mckenzie.hu'];
+const isPreview = !PRODUCTION_HOSTS.includes(Astro.site?.hostname ?? '');
 ---
 
 <!DOCTYPE html>
@@ -26,6 +30,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
+
+  {isPreview && <meta name="robots" content="noindex, nofollow" />}
 
   <!-- Canonical -->
   <link rel="canonical" href={canonicalURL.href} />
