@@ -4,7 +4,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import Section from '../../components/v3/Section.astro';
-import LoopVideo from '../../components/LoopVideo.astro';
 import { clinic, reviewTotal, ratingText } from '../../data/clinic';
 import { situations } from '../../data/situations';
 import { firstVisit } from '../../data/firstVisit';
@@ -87,9 +86,7 @@ const faqs = [
             <p class="mt-2 text-[var(--color-ink-2)] leading-relaxed">{step.body}</p>
           </div>
           <div class="hidden sm:block aspect-[4/3] overflow-hidden bg-[var(--color-paper-2)]">
-            {step.video
-              ? <LoopVideo name={step.video} label={step.title} class="w-full h-full object-cover" />
-              : <div class="h-full flex items-center justify-center p-3 text-center text-[13px] text-[var(--color-ink-2)]">MRI, röntgen, zárójelentés</div>}
+            <img src={`${base}images/rendelo/${step.photo}.jpg`} alt={`${step.title} a rendelőben`} class="w-full h-full object-cover" loading="lazy" />
           </div>
         </li>
       ))}
@@ -134,6 +131,17 @@ const faqs = [
         </a>
       </li>
     </ul>
+    <div class="mt-10 pt-8 border-t border-[var(--color-line)]">
+      <h3 class="font-heading text-[1.5rem] text-[var(--color-navy-900)]">Ilyen a rendelő</h3>
+      <p class="mt-1 text-[15px] text-[var(--color-ink-2)]">Világos kezelőszobák bordásfallal, kezelőággyal és eszközökkel, öltözővel és mosdóval.</p>
+      <ul class="mt-5 grid grid-cols-2 sm:max-w-md gap-3">
+        {['rendelo-bordasfal', 'rendelo-szoba'].map((p) => (
+          <li class="aspect-[3/4] overflow-hidden bg-[var(--color-paper-2)]">
+            <img src={`${base}images/rendelo/${p}.jpg`} alt="A rendelő kezelőszobája" class="w-full h-full object-cover" loading="lazy" />
+          </li>
+        ))}
+      </ul>
+    </div>
   </Section>
 
   <!-- 4. Proof and price -->
