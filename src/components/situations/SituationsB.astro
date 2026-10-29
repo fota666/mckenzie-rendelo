@@ -4,13 +4,13 @@ import { situations } from '../../data/situations';
 const base = import.meta.env.BASE_URL;
 ---
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
   <p class="eyebrow">Kik jönnek hozzánk</p>
   <h2 class="display mt-5 text-3xl lg:text-5xl text-[var(--color-navy-900)]">Négy helyzet, amellyel hozzánk fordulnak.</h2>
 
-  <ol class="mt-10 border-t-2 border-[var(--color-navy-900)]">
+  <ol class="mt-7 border-t-2 border-[var(--color-navy-900)]">
     {situations.map((s, i) => (
-      <li class="group grid lg:grid-cols-12 gap-4 lg:gap-8 py-7 border-b border-[var(--color-line)]">
+      <li class="group grid lg:grid-cols-12 gap-4 lg:gap-8 py-5 border-b border-[var(--color-line)]">
         <span class="lg:col-span-1 font-heading text-4xl text-[var(--color-teal-600)] leading-none">{i + 1}</span>
         <div class="lg:col-span-5">
           <p class="font-mono text-[0.7rem] uppercase tracking-wider text-[var(--color-ink-2)]">{s.tag}</p>
