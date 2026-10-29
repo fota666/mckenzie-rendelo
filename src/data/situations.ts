@@ -9,6 +9,8 @@ export interface Situation {
   voice: string;
   body: string;
   link: { path: string; label: string };
+  /** Condition landing pages for this situation. */
+  pages?: { path: string; label: string }[];
   /** Every method this situation leads to, in the order we use them, with when it applies. */
   methods: { path: string; label: string; when?: string }[];
   media: { video?: string; image: string; alt: string };
@@ -23,6 +25,7 @@ export const situations: Situation[] = [
     body: 'Az első alkalommal ismételt mozgások segítségével megnézzük, hogyan változik a fájdalom különböző mozgásokra. Már az első alkalom után hazavisz egy gyakorlatot, amelyet otthon is végezhet.',
     link: { path: 'modszerek#mckenzie', label: 'McKenzie-módszer' },
     methods: [{ path: 'modszerek#mckenzie', label: 'McKenzie-módszer' }],
+    pages: [{ path: 'derekfajas', label: 'Derékfájás' }, { path: 'nyakfajas', label: 'Nyakfájás' }, { path: 'isiasz', label: 'Isiász' }],
     media: { video: 'vizsgalat', image: 'video/vizsgalat.jpg', alt: 'Gyógytornász a hát mozgását vizsgálja' },
   },
   {
@@ -37,6 +40,7 @@ export const situations: Situation[] = [
       { path: 'modszerek#stabilizacio', label: 'Stabilizációs tréning', when: 'megelőzés' },
       { path: 'modszerek#tartasjavitas', label: 'Tartásjavítás', when: 'megelőzés' },
     ],
+    pages: [{ path: 'derekfajas', label: 'Derékfájás' }, { path: 'nyakfajas', label: 'Nyakfájás' }],
     media: { video: 'stabilizacio', image: 'video/stabilizacio.jpg', alt: 'Stabilizáló gyakorlat gumiszalaggal' },
   },
   {
@@ -50,6 +54,7 @@ export const situations: Situation[] = [
       { path: 'modszerek#mckenzie', label: 'McKenzie-módszer', when: 'konzervatív kezelés' },
       { path: 'modszerek#mutet-utani', label: 'Műtét előtti és utáni rehabilitáció', when: 'ha műtét lesz' },
     ],
+    pages: [{ path: 'porckorongserv', label: 'Porckorongsérv' }, { path: 'isiasz', label: 'Isiász' }],
     media: { video: 'kezeles', image: 'video/kezeles.jpg', alt: 'Manuális kezelés fekvő páciensen' },
   },
   {

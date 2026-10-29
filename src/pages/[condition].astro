@@ -1,0 +1,118 @@
+---
+// Condition landing pages: /derekfajas, /nyakfajas, /porckorongserv, /isiasz
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/v3/Section.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+import { conditions, conditionBySlug, type Condition } from '../data/conditions';
+import { clinic } from '../data/clinic';
+
+export function getStaticPaths() {
+  return conditions.map((c) => ({ params: { condition: c.slug } }));
+}
+
+const c = conditionBySlug[Astro.params.condition as string] as Condition;
+const base = import.meta.env.BASE_URL;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const orgId = `${new URL(base, Astro.site).href}#org`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'MedicalWebPage',
+      url: pageUrl,
+      name: c.h1,
+      description: c.metaDescription,
+      inLanguage: 'hu',
+      about: { '@type': 'MedicalCondition', name: c.name },
+      audience: { '@type': 'Patient' },
+      publisher: { '@id': orgId },
+      lastReviewed: '2026-10-29',
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: c.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={c.metaTitle} description={c.metaDescription}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </Fragment>
+
+  <PageHeader eyebrow={c.name}>
+    <Fragment slot="title">{c.h1}</Fragment>
+    {c.answer}
+  </PageHeader>
+
+  <Section eyebrow="Mikor jöjjön">
+    <Fragment slot="title">Mikor segíthet a gyógytorna?</Fragment>
+    <div class="grid lg:grid-cols-2 gap-x-12 gap-y-10">
+      <div>
+        <h3 class="font-heading text-[1.5rem] text-[var(--color-navy-900)]">Jöjjön hozzánk, ha</h3>
+        <ul class="mt-3 border-t border-[var(--color-line)]">
+          {c.whenToCome.map((w) => <li class="py-3 border-b border-[var(--color-line)] leading-relaxed">{w}</li>)}
+        </ul>
+      </div>
+      <div class="bg-[var(--color-paper-2)] p-6 lg:p-8 self-start">
+        <h3 class="font-heading text-[1.5rem] text-[var(--color-navy-900)]">Előbb forduljon orvoshoz, ha</h3>
+        <ul class="mt-3 space-y-2.5 text-[15px] leading-relaxed text-[var(--color-ink)]">
+          {c.redFlags.map((r) => <li class="pl-4 border-l-2 border-[var(--color-gold-500)]">{r}</li>)}
+        </ul>
+        <p class="mt-4 text-[13px] text-[var(--color-ink-2)]">Ezekben az esetekben sürgős orvosi vizsgálat szükséges, nem gyógytorna.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section eyebrow="Hogyan kezeljük">
+    <Fragment slot="title">Vizsgálat, gyakorlatok, önkezelés.</Fragment>
+    <Fragment slot="aside">
+      Módszerek: {c.methods.map((m, i) => <>{i > 0 && ', '}<a href={`${base}${m.path}`} class="underline underline-offset-4 hover:text-[var(--color-teal-700)]">{m.label}</a></>)}.
+    </Fragment>
+    <ol class="grid md:grid-cols-3 gap-x-8 gap-y-8">
+      {c.approach.map((a, i) => (
+        <li class="border-t-2 border-[var(--color-teal-600)] pt-4">
+          <p class="text-[13px] font-medium text-[var(--color-teal-700)]">{i + 1}. lépés</p>
+          <h3 class="mt-1 font-heading text-[1.6rem] text-[var(--color-navy-900)]">{a.title}</h3>
+          <p class="mt-2 text-[var(--color-ink-2)] leading-relaxed">{a.text}</p>
+        </li>
+      ))}
+    </ol>
+    <div class="mt-10 grid lg:grid-cols-2 gap-x-12 gap-y-6 border-t border-[var(--color-line)] pt-8">
+      <div>
+        <h3 class="font-heading text-[1.5rem] text-[var(--color-navy-900)]">Mennyi idő, hány alkalom?</h3>
+        <p class="mt-2 text-[var(--color-ink-2)] leading-relaxed">{c.timeline}</p>
+      </div>
+      <div>
+        <h3 class="font-heading text-[1.5rem] text-[var(--color-navy-900)]">Ár és foglalás</h3>
+        <p class="mt-2 text-[var(--color-ink-2)] leading-relaxed">
+          Egyéni kezelés {clinic.prices.single.range} ({clinic.prices.single.duration}), 5 alkalmas bérlet {clinic.prices.pass.amount}. Beutaló nem kell. Telefonon {clinic.phoneDisplay}, {clinic.bookingHours.toLowerCase()}, vagy <a href={`${base}kapcsolat#visszahivas`} class="underline underline-offset-4 hover:text-[var(--color-teal-700)]">visszahívás-kérés</a>.
+        </p>
+        <p class="mt-2 text-[15px] text-[var(--color-ink-2)]">Rendelők: {clinic.locations.map((l, i) => <>{i > 0 && ', '}{l.postalCode} Budapest, {l.street} ({l.transit.split(',')[0]})</>)}.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section eyebrow="Gyakori kérdések">
+    <Fragment slot="title">Kérdések: {c.name.toLowerCase()}</Fragment>
+    <div class="border-t border-[var(--color-line)] max-w-3xl">
+      {c.faqs.map((f, i) => (
+        <details class="faq border-b border-[var(--color-line)]" open={i === 0}>
+          <summary class="flex justify-between gap-6 py-5">
+            <h3 class="font-heading text-[1.5rem] leading-snug text-[var(--color-navy-900)]">{f.q}</h3>
+            <span class="plus text-2xl leading-none text-[var(--color-teal-600)]" aria-hidden="true">+</span>
+          </summary>
+          <p class="pb-6 -mt-1 text-[var(--color-ink-2)] leading-relaxed measure">{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <p class="mt-8 text-[15px] text-[var(--color-ink-2)]">
+      Kapcsolódó: {c.related.map((slug, i) => <>{i > 0 && ' · '}<a href={`${base}${slug}`} class="underline underline-offset-4 hover:text-[var(--color-teal-700)]">{conditionBySlug[slug].name}</a></>)}
+    </p>
+  </Section>
+
+  <ClosingCta />
+</BaseLayout>

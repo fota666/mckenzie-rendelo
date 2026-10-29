@@ -28,6 +28,7 @@ ${loc}
 
 ## Oldalak
 - [Kezelési módszerek](${root}modszerek): McKenzie-módszer, manuálterápia, stabilizációs tréning, Schroth-terápia, műtét előtti és utáni rehabilitáció, tartásjavítás, kineziológiai taping
+- [Derékfájás](${root}derekfajas), [Nyakfájás](${root}nyakfajas), [Porckorongsérv](${root}porckorongserv), [Isiász](${root}isiasz): mikor segít a gyógytorna, mikor kell előbb orvos, hogyan kezeljük, ár
 - [Csapatunk](${root}csapatunk): terapeuták rendelővel, képesítéssel, nyelvvel és árral
 - [Árak](${root}araink)
 - [Vélemények](${root}velemenyek)

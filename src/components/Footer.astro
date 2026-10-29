@@ -11,6 +11,12 @@ const links = [
   { href: `${base}gyik`, label: 'Gyakori kérdések' },
   { href: `${base}kapcsolat`, label: 'Kapcsolat' },
 ];
+const conditionLinks = [
+  { href: `${base}derekfajas`, label: 'Derékfájás' },
+  { href: `${base}nyakfajas`, label: 'Nyakfájás' },
+  { href: `${base}porckorongserv`, label: 'Porckorongsérv' },
+  { href: `${base}isiasz`, label: 'Isiász' },
+];
 ---
 
 <footer class="bg-[var(--color-navy-950)] text-white/80">
@@ -44,6 +50,10 @@ const links = [
         <p class="eyebrow eyebrow-light mb-4">Oldalak</p>
         <ul class="space-y-2">
           {links.map((l) => <li><a href={l.href} class="hover:text-white">{l.label}</a></li>)}
+        </ul>
+        <p class="eyebrow eyebrow-light mt-8 mb-4">Panaszok</p>
+        <ul class="space-y-2">
+          {conditionLinks.map((l) => <li><a href={l.href} class="hover:text-white">{l.label}</a></li>)}
         </ul>
       </nav>
     </div>
