@@ -10,7 +10,7 @@ export const GET: APIRoute = ({ site }) => {
 
   const body = `# ${clinic.name}
 
-> ${clinic.tagline}. Gyógytorna derékfájásra, nyakfájásra, porckorongsérvre és gerincferdülésre McKenzie-módszerrel (MDT), két budapesti rendelőben. Vezető gyógytornász: Relle Éva, McKenzie Dip. MDT.
+> ${clinic.tagline}. Gyógytorna derékfájásra, nyakfájásra, porckorongsérvre és gerincferdülésre McKenzie-módszerrel (MDT), két budapesti rendelőben. Vezető gyógytornász: Relle Éva, 1993 óta a Magyarországi McKenzie Intézet vezetője.
 
 ## Tények
 - ${clinic.therapists} gyógytornász

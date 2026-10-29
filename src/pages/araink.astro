@@ -1,110 +1,69 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
-const base = import.meta.env.BASE_URL;
+import { clinic } from '../data/clinic';
+
+const plans = [
+  {
+    ...clinic.prices.single,
+    note: 'alkalmanként, terapeutától függően',
+    items: ['55 perces egyéni kezelés', 'Mozgásvizsgálat az első alkalommal', 'Személyre szabott gyakorlatsor', 'Otthoni gyakorlatok írásban', 'Szükség szerinti kontrollvizsgálat'],
+    featured: false,
+  },
+  {
+    ...clinic.prices.pass,
+    note: clinic.prices.pass.perVisit,
+    items: ['Ugyanaz, mint az egyéni kezelés', '10 000 Ft megtakarítás az 5 alkalmon', 'Rugalmasan felhasználható', 'Mindkét rendelőben érvényes'],
+    featured: true,
+  },
+];
+
+const notes = [
+  { t: 'Társadalombiztosítás', d: 'A TB jelenleg nem fedezi a kezelés költségét. Magánbiztosítónál érdemes előre érdeklődni.' },
+  { t: 'Egészségpénztár', d: 'Számlát adunk, amit az egészségpénztárnál visszatérítésre be lehet nyújtani.' },
+  { t: 'Fizetés', d: 'Készpénzzel és bankkártyával is fizethet.' },
+  { t: 'Lemondás', d: 'Kérjük, az időpontot legalább 24 órával korábban mondja le telefonon.' },
+];
 ---
 
 <BaseLayout
   title="Gyógytorna árak 2026 | McKenzie Gyógytorna Rendelő Budapest"
-  description="McKenzie gyógytorna kezelés árak: 14-15.000 Ft / alkalom (55 perc). 5 alkalmas bérlet: 65.000 Ft. Egészségpénztári elszámolás lehetséges."
+  description={`Egyéni gyógytorna ${clinic.prices.single.amount} / 55 perc, 5 alkalmas bérlet ${clinic.prices.pass.amount}. Egészségpénztárra számlát adunk, beutaló nem kell.`}
 >
-  <!-- Header -->
   <PageHeader eyebrow="Árak">
-    <Fragment slot="title">Gyógytorna árak 2026</Fragment>
-    Átlátható, tisztességes árazás — nincsenek rejtett költségek
+    <Fragment slot="title">Két díjtétel, rejtett költség nélkül.</Fragment>
+    Az árak tartalmazzák a mozgásvizsgálatot, a kezelést és az otthoni gyakorlatsort. Beutaló nem kell, egészségpénztárra számlát adunk.
   </PageHeader>
 
-  <section class="py-20 bg-warm-50">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-
-      <!-- Pricing cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Egyéni -->
-        <div class="reveal bg-white rounded-3xl p-8 lg:p-10 shadow-lg border border-gray-100">
-          <span class="text-teal-600 font-semibold text-sm tracking-widest uppercase">Egyéni kezelés</span>
-          <div class="mt-4">
-            <span class="font-heading text-5xl font-bold text-navy-900">14-15.000</span>
-            <span class="text-gray-500 text-xl ml-1">Ft</span>
-          </div>
-          <p class="text-gray-500 mt-2">/ alkalom</p>
-
-          <div class="mt-8 space-y-4">
-            {[
-              '55 perces egyéni kezelés',
-              'Mozgásvizsgálat az első alkalommal',
-              'Személyre szabott gyakorlatsor',
-              'Otthoni gyakorlatok (írásban)',
-              'Szükség szerinti kontroll vizsgálat',
-            ].map(item => (
-              <div class="flex items-start gap-3">
-                <svg class="w-5 h-5 text-teal-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-gray-700">{item}</span>
-              </div>
-            ))}
-          </div>
-
-          <a href={`${base}kapcsolat#idopontfoglalas`} class="mt-8 block text-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all hover:shadow-lg">
-            Időpontfoglalás
-          </a>
-        </div>
-
-        <!-- Bérlet -->
-        <div class="reveal stagger-1 relative bg-gradient-to-br from-navy-900 to-navy-800 rounded-3xl p-8 lg:p-10 shadow-xl overflow-hidden">
-          <div class="absolute top-4 right-4 px-3 py-1 bg-gold-500 rounded-full">
-            <span class="text-white text-xs font-bold">KEDVEZMÉNYES</span>
-          </div>
-
-          <span class="text-teal-300 font-semibold text-sm tracking-widest uppercase">5 alkalmas bérlet</span>
-          <div class="mt-4">
-            <span class="font-heading text-5xl font-bold text-white">65.000</span>
-            <span class="text-gray-400 text-xl ml-1">Ft</span>
-          </div>
-          <p class="text-teal-300 mt-2">13.000 Ft / alkalom</p>
-
-          <div class="mt-8 space-y-4">
-            {[
-              'Mindent, amit az egyéni kezelés',
-              '5 alkalom kedvezményes áron',
-              '10.000 Ft megtakarítás',
-              'Rugalmas felhasználás',
-              'Mindkét helyszínen érvényes',
-            ].map(item => (
-              <div class="flex items-start gap-3">
-                <svg class="w-5 h-5 text-gold-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span class="text-gray-300">{item}</span>
-              </div>
-            ))}
-          </div>
-
-          <a href={`${base}kapcsolat#idopontfoglalas`} class="mt-8 block text-center px-6 py-3 bg-gold-500 hover:bg-gold-600 text-white font-semibold rounded-full transition-all hover:shadow-lg hover:shadow-gold-500/25">
-            Bérlet vásárlás
-          </a>
-        </div>
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 grid md:grid-cols-2 gap-6">
+    {plans.map((p) => (
+      <div class={`p-8 lg:p-12 flex flex-col ${p.featured ? 'bg-[var(--color-teal-50)] border-2 border-[var(--color-teal-600)]' : 'bg-white border border-[var(--color-line)]'}`}>
+        <p class={`font-mono text-xs uppercase tracking-wider ${p.featured ? 'text-[var(--color-teal-700)]' : 'text-[var(--color-ink-2)]'}`}>{p.label}{p.featured && ' · kedvezményes'}</p>
+        <p class="mt-6 font-heading text-6xl lg:text-7xl text-[var(--color-navy-900)]">{p.amount}</p>
+        <p class="mt-2 text-sm text-[var(--color-ink-2)]">{p.note}</p>
+        <ul class="mt-10 border-t border-[var(--color-line)] flex-1">
+          {p.items.map((it) => (
+            <li class="py-3 border-b border-[var(--color-line)] flex gap-3">
+              <span class="text-[var(--color-teal-600)]" aria-hidden="true">&#10003;</span>{it}
+            </li>
+          ))}
+        </ul>
+        <a href={`tel:${clinic.phone}`} class={`btn mt-10 self-start ${p.featured ? 'btn-primary' : 'btn-ghost'}`}>{p.featured ? 'Bérletet kérek' : 'Időpontot kérek'} <span class="font-mono">{clinic.phoneDisplay}</span></a>
       </div>
+    ))}
+  </section>
 
-      <!-- Extra info -->
-      <div class="reveal mt-12 bg-white rounded-2xl p-8 border border-gray-100">
-        <h3 class="font-heading text-xl font-bold text-navy-900 mb-4">Tudnivalók</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
-          <div>
-            <h4 class="font-semibold text-navy-900 mb-1">Társadalombiztosítás</h4>
-            <p class="text-gray-600">A TB jelenleg nem fedezi a kezelés költségét. Magánbiztosítóknál érdemes előzetesen érdeklődni.</p>
+  <section class="border-t border-[var(--color-line)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid lg:grid-cols-12 gap-10">
+      <h2 class="lg:col-span-4 display text-4xl text-[var(--color-navy-900)]">Tudnivalók</h2>
+      <dl class="lg:col-span-8 grid sm:grid-cols-2 gap-x-10 gap-y-8">
+        {notes.map((n) => (
+          <div class="border-t-2 border-[var(--color-teal-600)] pt-4">
+            <dt class="font-heading text-2xl text-[var(--color-navy-900)]">{n.t}</dt>
+            <dd class="mt-2 text-[var(--color-ink-2)] leading-relaxed">{n.d}</dd>
           </div>
-          <div>
-            <h4 class="font-semibold text-navy-900 mb-1">Egészségpénztár</h4>
-            <p class="text-gray-600">Számlát adunk, amelyet az egészségpénztáránál lehet benyújtani visszatérítésre.</p>
-          </div>
-          <div>
-            <h4 class="font-semibold text-navy-900 mb-1">Fizetési módok</h4>
-            <p class="text-gray-600">Készpénz és bankkártya egyaránt elfogadott.</p>
-          </div>
-          <div>
-            <h4 class="font-semibold text-navy-900 mb-1">Lemondás</h4>
-            <p class="text-gray-600">Kérjük, az időpont lemondását 24 órával korábban jelezze telefonon.</p>
-          </div>
-        </div>
-      </div>
-
+        ))}
+      </dl>
     </div>
   </section>
 </BaseLayout>

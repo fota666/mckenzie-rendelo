@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import { clinic, reviewTotal } from '../data/clinic';
 const base = import.meta.env.BASE_URL;
 
 const starSvg = '<svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
@@ -99,7 +100,7 @@ const press = [
     quote: 'A McKenzie-módszer a gerincproblémák speciális vizsgálati és kezelési rendszere.',
   },
   {
-    title: 'McKenzie-módszer — Egyszerű mozdulatokkal a fájdalommentes életért',
+    title: 'McKenzie-módszer: Egyszerű mozdulatokkal a fájdalommentes életért',
     source: 'Phoenix Pharma',
     issue: '2010. május',
     quote: '',
@@ -121,141 +122,72 @@ const tv = [
 
 <BaseLayout
   title="Vélemények és sajtó | McKenzie Gyógytorna Rendelő Budapest"
-  description="Pácienseink véleményei, sajtómegjelenések és TV szereplések. 5.0 Google értékelés. Havas Henrik, Kulcsár Krisztián és számos elégedett páciens ajánlása."
+  description={`${reviewTotal} Google-értékelés a két rendelőről, páciensvélemények, sajtómegjelenések és TV-szereplések.`}
 >
-  <!-- Header -->
   <PageHeader eyebrow="Vélemények">
-    <Fragment slot="title">Vélemények & Sajtó</Fragment>
-    <div class="flex items-center justify-center gap-3 mt-6">
-        <div class="flex">
-          {[1,2,3,4,5].map(() => (
-            <svg class="w-7 h-7 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          ))}
-        </div>
-        <span class="text-white font-semibold text-xl">5.0</span>
-        <span class="text-gray-300 text-lg">a Google-on</span>
-      </div>
-      <p class="mt-4 text-gray-400">Ismert személyiségek és elégedett páciensek ajánlásával</p>
+    <Fragment slot="title">{reviewTotal} Google-értékelés, és amit a páciensek leírtak.</Fragment>
+    {clinic.locations.map((l, i) => <>{i > 0 && ', '}{l.name}: {l.rating.value.toFixed(1).replace('.', ',')} ({l.rating.count} vélemény)</>)}.
   </PageHeader>
 
-  <!-- KIEMELT VÉLEMÉNYEK -->
-  <section class="py-20 bg-warm-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="bg-[var(--color-teal-50)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24 grid lg:grid-cols-2 gap-px bg-[var(--color-teal-100)] border border-[var(--color-teal-100)]">
+      {featured.map((r) => (
+        <figure class="bg-white p-10 lg:p-14 flex flex-col">
+          <blockquote class="font-heading text-3xl lg:text-[2.1rem] leading-snug text-[var(--color-navy-900)] flex-1">„{r.text}”</blockquote>
+          <figcaption class="mt-10 text-sm"><span class="font-medium">{r.name}</span> <span class="text-[var(--color-ink-2)]">&middot; {r.role}</span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
 
-      <!-- Big 2 featured -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-        {featured.map((f, i) => (
-          <div class={`reveal stagger-${i + 1} relative bg-white rounded-3xl p-10 border-2 border-gold-200 shadow-xl`}>
-            <div class="absolute -top-4 -left-2">
-              <svg class="w-16 h-16 text-gold-200" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H0z"/></svg>
-            </div>
-            <div class="relative">
-              <div class="flex items-center gap-1 mb-6">
-                {[1,2,3,4,5].map(() => <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
-              </div>
-              <blockquote class="text-gray-800 text-lg leading-relaxed italic font-heading">
-                &bdquo;{f.text}&rdquo;
-              </blockquote>
-              <div class="mt-8 flex items-center gap-4">
-                <div class={`w-14 h-14 rounded-full flex items-center justify-center font-bold text-lg ${f.color === 'navy' ? 'bg-navy-100 text-navy-700' : 'bg-teal-100 text-teal-700'}`}>
-                  {f.initials}
-                </div>
-                <div>
-                  <p class="font-bold text-navy-900 text-lg">{f.name}</p>
-                  <p class="text-gray-500">{f.role}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+    <h2 class="display text-4xl lg:text-5xl text-[var(--color-navy-900)]">Pácienseink mondják</h2>
+    <div class="mt-12 columns-1 md:columns-2 lg:columns-3 gap-6 [column-fill:_balance]">
+      {reviews.map((r) => (
+        <figure class="break-inside-avoid mb-6 bg-white border border-[var(--color-line)] p-7">
+          <blockquote class="leading-relaxed text-[var(--color-ink)]">„{r.text}”</blockquote>
+          <figcaption class="mt-5 pt-4 border-t border-[var(--color-line)] text-sm"><span class="font-medium">{r.name}</span> <span class="text-[var(--color-ink-2)]">&middot; {r.role}</span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-paper-2)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4">
+        <p class="eyebrow">Sajtó és TV</p>
+        <h2 class="display mt-5 text-4xl lg:text-5xl text-[var(--color-navy-900)]">Ahol a McKenzie-módszerről beszéltünk.</h2>
       </div>
-
-      <!-- Páciens vélemények -->
-      <div class="mb-6">
-        <h2 class="reveal font-heading text-3xl font-bold text-navy-900 gold-line">Pácienseink mondják</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-        {reviews.map((r, i) => (
-          <div class={`reveal stagger-${(i % 3) + 1} bg-white rounded-2xl p-7 border border-gray-100 hover:shadow-lg hover:border-teal-200 transition-all duration-300`}>
-            <div class="flex items-center gap-1 mb-4">
-              {[1,2,3,4,5].map(() => <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
-            </div>
-            <blockquote class="text-gray-600 leading-relaxed italic">
-              &bdquo;{r.text}&rdquo;
-            </blockquote>
-            <div class="mt-5 flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full bg-warm-200 flex items-center justify-center text-gray-600 font-bold text-xs shrink-0">
-                {r.initials}
-              </div>
+      <div class="lg:col-span-8">
+        <ul class="border-t border-[var(--color-line)]">
+          {press.map((p) => (
+            <li class="py-6 border-b border-[var(--color-line)] grid sm:grid-cols-[12rem_1fr] gap-2 sm:gap-6">
+              <p class="font-mono text-xs uppercase tracking-wider text-[var(--color-teal-700)] pt-1.5">{p.source}<br /><span class="text-[var(--color-ink-2)] normal-case tracking-normal">{p.issue}</span></p>
               <div>
-                <p class="font-semibold text-navy-900 text-sm">{r.name}</p>
-                <p class="text-xs text-gray-500">{r.role}</p>
+                <h3 class="font-heading text-2xl text-[var(--color-navy-900)]">{p.title}</h3>
+                {p.quote && <p class="mt-2 text-[var(--color-ink-2)] italic">„{p.quote}”</p>}
               </div>
-            </div>
-          </div>
-        ))}
+            </li>
+          ))}
+        </ul>
+        <h3 class="mt-14 font-mono text-xs uppercase tracking-wider text-[var(--color-ink-2)]">TV-szereplések</h3>
+        <ul class="mt-4 grid sm:grid-cols-3 gap-4">
+          {tv.map((t) => (
+            <li class="bg-white border border-[var(--color-line)] p-5">
+              <p class="font-heading text-xl text-[var(--color-navy-900)]">{t.title}</p>
+              <p class="mt-1 text-sm text-[var(--color-ink-2)]">{t.date}</p>
+            </li>
+          ))}
+        </ul>
       </div>
+    </div>
+  </section>
 
-      <!-- SAJTÓMEGJELENÉSEK -->
-      <div class="mb-8">
-        <h2 class="reveal font-heading text-3xl font-bold text-navy-900 gold-line">Sajtómegjelenések</h2>
-        <p class="reveal stagger-1 mt-3 text-gray-500">Országos lapokban és magazinokban jelentek meg cikkeink</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-16">
-        {press.map((p, i) => (
-          <div class={`reveal stagger-${(i % 2) + 1} bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-shadow`}>
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-xl bg-navy-50 flex items-center justify-center shrink-0">
-                <svg class="w-6 h-6 text-navy-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
-              </div>
-              <div>
-                <h3 class="font-heading font-bold text-navy-900">{p.title}</h3>
-                <p class="text-sm text-teal-600 font-medium mt-1">{p.source}</p>
-                <p class="text-xs text-gray-400 mt-0.5">{p.issue}</p>
-                {p.quote && (
-                  <p class="text-gray-500 text-sm italic mt-3">&bdquo;{p.quote}&rdquo;</p>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <!-- TV SZEREPLÉSEK -->
-      <div class="mb-8">
-        <h2 class="reveal font-heading text-3xl font-bold text-navy-900 gold-line">TV szereplések</h2>
-        <p class="reveal stagger-1 mt-3 text-gray-500">MTV1 Családbarát Magazinműsor — szakértői szereplések</p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-16">
-        {tv.map((t, i) => (
-          <div class={`reveal stagger-${i + 1} bg-white rounded-2xl p-6 border border-gray-100 text-center`}>
-            <div class="w-14 h-14 mx-auto rounded-full bg-teal-50 flex items-center justify-center mb-4">
-              <svg class="w-7 h-7 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-            </div>
-            <h3 class="font-heading font-bold text-navy-900">{t.title}</h3>
-            <p class="text-sm text-gray-500 mt-1">MTV1 Családbarát</p>
-            <p class="text-xs text-gray-400 mt-1">{t.date}</p>
-          </div>
-        ))}
-      </div>
-
-      <!-- CTA -->
-      <div class="reveal text-center py-8">
-        <div class="bg-gradient-to-br from-navy-900 to-navy-800 rounded-3xl p-10 lg:p-14 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-60 h-60 bg-teal-500/10 rounded-full blur-3xl"></div>
-          <div class="relative">
-            <h2 class="font-heading text-3xl font-bold text-white">Csatlakozzon elégedett pácienseinkhez</h2>
-            <p class="mt-4 text-gray-300 text-lg max-w-xl mx-auto">
-              Foglaljon időpontot, és tapasztalja meg Ön is a különbséget.
-            </p>
-            <a href={`${base}kapcsolat#idopontfoglalas`} class="mt-8 inline-flex items-center justify-center px-10 py-4 bg-gold-500 hover:bg-gold-600 text-white font-bold text-lg rounded-full transition-all hover:shadow-xl hover:shadow-gold-500/25 hover:-translate-y-0.5">
-              Időpontfoglalás
-            </a>
-          </div>
-        </div>
+  <section class="bg-[var(--color-navy-900)] text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 grid lg:grid-cols-12 gap-8 items-end">
+      <h2 class="lg:col-span-8 display text-4xl lg:text-5xl">Időpontot általában 1-2 napon belül tudunk adni.</h2>
+      <div class="lg:col-span-4 lg:text-right">
+        <a href={`tel:${clinic.phone}`} class="btn btn-copper font-mono">{clinic.phoneDisplay}</a>
       </div>
     </div>
   </section>

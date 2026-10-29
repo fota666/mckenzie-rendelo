@@ -9,7 +9,8 @@ export const clinic = {
   phone: '+36304878284',
   phoneDisplay: '(30) 487-8284',
   email: 'mck.relle@t-online.hu',
-  therapists: 18,
+  therapists: 15, // active; 3 more on GYES (see csapatunk.astro)
+  bookingHours: 'Hétköznap 9:00-17:00', // phone line hours, as on the old kapcsolat page
   hours: { days: 'Hétfő-péntek', open: '08:00', close: '20:00', schema: 'Mo-Fr 08:00-20:00' },
   sameAs: [
     'https://www.facebook.com/p/McKenzie-Gy%C3%B3gytorna-Rendel%C5%91-100063646028294/',
@@ -23,7 +24,10 @@ export const clinic = {
       postalCode: '1051',
       district: 'V. kerület',
       transit: 'Arany János utca M3, kb. 5 perc gyalog',
-      parking: 'Bazilika garázs',
+      transitMore: 'Deák Ferenc tér M1, M2, M3, 6-8 perc gyalog',
+      area: 'Bazilika környéke',
+      bell: null,
+      parking: 'Bazilika garázs, Gödör',
       mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Budapest+Sas+u.+7',
       rating: { value: 5.0, count: 68 },
     },
@@ -34,7 +38,10 @@ export const clinic = {
       postalCode: '1111',
       district: 'XI. kerület',
       transit: 'Móricz Zsigmond körtér M4, kb. 5 perc gyalog',
-      parking: 'Allee garázs',
+      transitMore: 'Villamos: 6, 19, 41, 47, 48, 49, 56, 61',
+      area: 'Móricz Zsigmond körtér',
+      bell: '18-as kapucsengő',
+      parking: 'Allee garázs, 6-8 perc',
       mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Budapest+Bart%C3%B3k+B%C3%A9la+%C3%BAt+34',
       rating: { value: 4.9, count: 73 },
     },

@@ -114,9 +114,9 @@ h1, h2, h3, h4, h5, .font-heading, .display {
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-gold-600);
+  color: var(--color-teal-700);
 }
-.eyebrow-light { color: var(--color-gold-300); }
+.eyebrow-light { color: var(--color-teal-300); }
 
 .display {
   font-family: var(--font-heading);
@@ -137,7 +137,7 @@ h1, h2, h3, h4, h5, .font-heading, .display {
   padding-bottom: 1px;
   transition: gap 0.2s ease;
 }
-.link-arrow:hover { gap: 0.7em; }
+.link-arrow:hover { gap: 0.7em; color: var(--color-teal-700); }
 
 .btn {
   display: inline-flex;
@@ -150,12 +150,14 @@ h1, h2, h3, h4, h5, .font-heading, .display {
   font-size: 0.95rem;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-.btn-primary { background: var(--color-navy-900); color: #fff; }
-.btn-primary:hover { background: var(--color-navy-700); }
+.btn-primary { background: var(--color-teal-700); color: #fff; }
+.btn-primary:hover { background: var(--color-teal-600); }
+.btn-dark { background: var(--color-navy-900); color: #fff; }
+.btn-dark:hover { background: var(--color-navy-700); }
 .btn-copper { background: var(--color-gold-500); color: #fff; }
 .btn-copper:hover { background: var(--color-gold-600); }
 .btn-ghost { border: 1px solid var(--color-line); color: var(--color-ink); background: transparent; }
-.btn-ghost:hover { border-color: var(--color-ink); }
+.btn-ghost:hover { border-color: var(--color-teal-600); color: var(--color-teal-700); }
 
 /* FAQ disclosure */
 .faq summary { list-style: none; cursor: pointer; }

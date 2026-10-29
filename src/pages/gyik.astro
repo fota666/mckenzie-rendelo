@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import { clinic } from '../data/clinic';
 const base = import.meta.env.BASE_URL;
 
 const faqs = [
@@ -71,36 +72,28 @@ const faqSchema = {
 
   <!-- Header -->
   <PageHeader eyebrow="Gyakori kérdések">
-    <Fragment slot="title">Gyakori kérdések</Fragment>
-    Válaszok a legfontosabb kérdésekre
+    <Fragment slot="title">Amit az első alkalom előtt kérdezni szoktak.</Fragment>
+    Árak, beutaló, a kezelés hossza és menete, egészségpénztár.
   </PageHeader>
 
-  <!-- FAQ -->
-  <section class="py-20 bg-warm-50">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="space-y-4">
-        {faqs.map((faq, i) => (
-          <details class={`reveal stagger-${(i % 4) + 1} group bg-white rounded-2xl border border-gray-100 overflow-hidden`}>
-            <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-teal-50 transition-colors">
-              <h3 class="font-heading text-lg font-semibold text-navy-900 pr-4">{faq.q}</h3>
-              <svg class="w-5 h-5 text-teal-600 shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </summary>
-            <div class="px-6 pb-6 text-gray-600 leading-relaxed">
-              {faq.a}
-            </div>
-          </details>
-        ))}
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-12 gap-12">
+    <aside class="lg:col-span-4">
+      <div class="lg:sticky lg:top-28 bg-[var(--color-teal-700)] text-white p-8">
+        <p class="eyebrow text-[var(--color-teal-100)]">Nem találja a választ?</p>
+        <p class="mt-4 font-heading text-3xl leading-snug">Kérdezze meg telefonon, mielőtt időpontot kér.</p>
+        <a href={`tel:${clinic.phone}`} class="btn btn-copper mt-8 font-mono">{clinic.phoneDisplay}</a>
       </div>
-
-      <!-- CTA -->
-      <div class="reveal mt-16 text-center">
-        <p class="text-gray-500 mb-4">Nem találta meg a választ a kérdésére?</p>
-        <a href={`${base}kapcsolat`} class="inline-flex items-center justify-center px-8 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all hover:shadow-lg hover:shadow-teal-600/25">
-          Kérdezzen bátran
-        </a>
-      </div>
+    </aside>
+    <div class="lg:col-span-8 border-t border-[var(--color-line)]">
+      {faqs.map((faq, i) => (
+        <details class="faq border-b border-[var(--color-line)]" open={i === 0}>
+          <summary class="flex justify-between gap-6 py-6">
+            <h2 class="font-heading text-xl lg:text-2xl text-[var(--color-navy-900)]">{faq.q}</h2>
+            <span class="plus text-2xl leading-none text-[var(--color-teal-600)]" aria-hidden="true">+</span>
+          </summary>
+          <p class="pb-7 -mt-1 text-[var(--color-ink-2)] leading-relaxed measure">{faq.a}</p>
+        </details>
+      ))}
     </div>
   </section>
 </BaseLayout>
