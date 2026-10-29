@@ -2,28 +2,34 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { clinic } from '../data/clinic';
+const base = import.meta.env.BASE_URL;
 
-const plans = [
+// A clinic price list, not a SaaS pricing table: two lines, what is included, practical notes.
+const rows = [
   {
-    ...clinic.prices.single,
-    display: clinic.prices.single.range,
-    note: `alkalmanként, ${clinic.prices.single.note}`,
-    items: ['55 perces egyéni kezelés', 'Mozgásvizsgálat az első alkalommal', 'Személyre szabott gyakorlatsor', 'Otthoni gyakorlatok írásban', 'Szükség szerinti kontrollvizsgálat'],
-    featured: false,
+    name: clinic.prices.single.label,
+    meta: clinic.prices.single.duration,
+    detail: 'Mozgásvizsgálat, kezelés és személyre szabott otthoni gyakorlatsor.',
+    price: clinic.prices.single.range,
+    priceNote: clinic.prices.single.note,
+    link: { href: `${base}csapatunk`, label: 'Árak terapeutánként' },
   },
   {
-    ...clinic.prices.pass,
-    note: clinic.prices.pass.perVisit,
-    items: ['Ugyanaz, mint az egyéni kezelés', clinic.prices.pass.saving, 'Rugalmasan felhasználható', 'Mindkét rendelőben érvényes'],
-    featured: true,
+    name: clinic.prices.pass.label,
+    meta: 'kedvezményes',
+    detail: `${clinic.prices.pass.perVisit}, ${clinic.prices.pass.saving}. Rugalmasan felhasználható, mindkét rendelőben érvényes.`,
+    price: clinic.prices.pass.amount,
+    priceNote: '5 egyéni kezelés',
+    link: null,
   },
 ];
 
 const notes = [
-  { t: 'Társadalombiztosítás', d: 'A TB jelenleg nem fedezi a kezelés költségét. Magánbiztosítónál érdemes előre érdeklődni.' },
-  { t: 'Egészségpénztár', d: 'Számlát adunk, amelyet visszatérítés céljából be lehet nyújtani az egészségpénztárhoz.' },
-  { t: 'Fizetés', d: 'Készpénzzel és bankkártyával is fizethet.' },
-  { t: 'Lemondás', d: 'Kérjük, az időpontot legalább 24 órával korábban mondja le telefonon.' },
+  { t: 'Beutaló', d: 'Nem kell, magánrendelésről van szó.' },
+  { t: 'Társadalombiztosítás', d: 'A TB nem fedezi. Magánbiztosítónál érdemes előre érdeklődni.' },
+  { t: 'Egészségpénztár', d: 'Számlát adunk, amelyet visszatérítés céljából be lehet nyújtani.' },
+  { t: 'Fizetés', d: 'Készpénzzel és bankkártyával.' },
+  { t: 'Lemondás', d: 'Legalább 24 órával korábban, telefonon.' },
 ];
 ---
 
@@ -33,38 +39,48 @@ const notes = [
 >
   <PageHeader eyebrow="Árak">
     <Fragment slot="title">Átlátható árak, rejtett költség nélkül.</Fragment>
-    A kezelés díja terapeutánként 14 000 vagy 15 000 Ft, ezt a csapat oldalán minden terapeutánál feltüntetjük. Az ár tartalmazza a mozgásvizsgálatot, a kezelést és az otthoni gyakorlatsort. Beutaló nem kell, egészségpénztárra számlát adunk.
+    Egyéni kezelés vagy kedvezményes bérlet. Az ár tartalmaz mindent, ami az 55 percben történik.
   </PageHeader>
 
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 lg:pb-20 grid md:grid-cols-2 gap-6">
-    {plans.map((p) => (
-      <div class={`p-7 lg:p-10 flex flex-col ${p.featured ? 'bg-[var(--color-teal-50)] border-2 border-[var(--color-teal-600)]' : 'bg-white border border-[var(--color-line)]'}`}>
-        <p class={`font-mono text-xs uppercase tracking-wider ${p.featured ? 'text-[var(--color-teal-700)]' : 'text-[var(--color-ink-2)]'}`}>{p.label}{p.featured && ' · kedvezményes'}</p>
-        <p class="mt-4 font-heading text-4xl sm:text-5xl whitespace-nowrap text-[var(--color-navy-900)]">{p.display ?? p.amount}</p>
-        <p class="mt-2 text-sm text-[var(--color-ink-2)]">{p.note}</p>
-        <ul class="mt-8 border-t border-[var(--color-line)] flex-1">
-          {p.items.map((it) => (
-            <li class="py-3 border-b border-[var(--color-line)] flex gap-3">
-              <span class="text-[var(--color-teal-600)]" aria-hidden="true">&#10003;</span>{it}
-            </li>
-          ))}
-        </ul>
-        <a href={`tel:${clinic.phone}`} class={`btn mt-10 self-start ${p.featured ? 'btn-primary' : 'btn-ghost'}`}>{p.featured ? 'Bérletet kérek' : 'Időpontot kérek'} <span class="font-mono">{clinic.phoneDisplay}</span></a>
-      </div>
-    ))}
-  </section>
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 lg:pb-20 grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+    <div class="lg:col-span-7">
+      <h2 class="font-mono text-xs uppercase tracking-wider text-[var(--color-ink-2)]">Árlista</h2>
+      <ul class="mt-3 border-t-2 border-[var(--color-navy-900)]">
+        {rows.map((r) => (
+          <li class="py-7 border-b border-[var(--color-line)] grid sm:grid-cols-[1fr_auto] gap-x-8 gap-y-3">
+            <div>
+              <p class="font-heading text-2xl lg:text-3xl text-[var(--color-navy-900)]">{r.name} <span class="font-mono text-xs uppercase tracking-wider text-[var(--color-teal-700)] align-middle">{r.meta}</span></p>
+              <p class="mt-2 text-[var(--color-ink-2)] leading-relaxed max-w-md">{r.detail}</p>
+              {r.link && <a href={r.link.href} class="link-arrow mt-3 text-sm text-[var(--color-navy-800)]">{r.link.label} <span aria-hidden="true">&rarr;</span></a>}
+            </div>
+            <div class="sm:text-right">
+              <p class="font-heading text-3xl lg:text-4xl whitespace-nowrap text-[var(--color-navy-900)]">{r.price}</p>
+              <p class="text-sm text-[var(--color-ink-2)]">{r.priceNote}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
 
-  <section class="border-t border-[var(--color-line)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid lg:grid-cols-12 gap-10">
-      <h2 class="lg:col-span-4 display text-4xl text-[var(--color-navy-900)]">Tudnivalók</h2>
-      <dl class="lg:col-span-8 grid sm:grid-cols-2 gap-x-10 gap-y-8">
+      <h2 class="mt-14 font-mono text-xs uppercase tracking-wider text-[var(--color-ink-2)]">Tudnivalók</h2>
+      <dl class="mt-3 border-t border-[var(--color-line)]">
         {notes.map((n) => (
-          <div class="border-t-2 border-[var(--color-teal-600)] pt-4">
-            <dt class="font-heading text-2xl text-[var(--color-navy-900)]">{n.t}</dt>
-            <dd class="mt-2 text-[var(--color-ink-2)] leading-relaxed">{n.d}</dd>
+          <div class="py-4 border-b border-[var(--color-line)] grid grid-cols-[10rem_1fr] sm:grid-cols-[12rem_1fr] gap-4">
+            <dt class="font-medium text-[var(--color-ink)]">{n.t}</dt>
+            <dd class="text-[var(--color-ink-2)]">{n.d}</dd>
           </div>
         ))}
       </dl>
     </div>
+
+    <aside class="lg:col-span-5 lg:sticky lg:top-28 bg-[var(--color-teal-700)] text-white p-8 lg:p-10">
+      <p class="eyebrow text-[var(--color-teal-100)]">Időpontfoglalás</p>
+      <a href={`tel:${clinic.phone}`} class="mt-3 block font-heading text-5xl hover:text-[var(--color-gold-200)]">{clinic.phoneDisplay}</a>
+      <p class="mt-2 text-white/85">{clinic.bookingHours}</p>
+      <p class="mt-4 text-sm text-white/70 leading-relaxed">Általában 1-2 napon belül tudunk időpontot adni. Ha munkaidőben nem tud telefonálni, kérjen visszahívást.</p>
+      <div class="mt-8 flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3">
+        <a href={`tel:${clinic.phone}`} class="btn btn-copper">Hívás most</a>
+        <a href={`${base}kapcsolat#visszahivas`} class="btn border border-white/30 hover:border-white">Visszahívást kérek</a>
+      </div>
+    </aside>
   </section>
 </BaseLayout>
