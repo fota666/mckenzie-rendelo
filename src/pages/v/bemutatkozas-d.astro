@@ -1,0 +1,34 @@
+---
+// Internal comparison page: four takes on variant D (letter card), none overlapping the hero.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import FounderD1 from '../../components/founder/FounderD1.astro';
+import FounderD2 from '../../components/founder/FounderD2.astro';
+import FounderD3 from '../../components/founder/FounderD3.astro';
+import FounderD4 from '../../components/founder/FounderD4.astro';
+
+const variants = [
+  { key: 'D1', name: 'Kettéosztott, széltől szélig', note: 'Bal fele a levélszöveg papíron, a jobb felét kitölti a portré, kártya és árnyék nélkül.' },
+  { key: 'D2', name: 'Kártya saját sávon', note: 'Az eredeti D kártya, de a hero alatt, egy meleg bézs sáv közepén.' },
+  { key: 'D3', name: 'Kártya zöld sávon, portré balra', note: 'Zöld felső vonal, a portré balra, jobbra külön oszlopban a képesítések.' },
+  { key: 'D4', name: 'Sötét sáv, filozófia felül', note: 'A hero hangulatát viszi tovább: fent nagyban a filozófia-mondat, alatta a kártya.' },
+];
+---
+
+<BaseLayout title="Bemutatkozás, D változatok">
+  {variants.map((v) => (
+    <>
+      <div class="bg-[var(--color-gold-100)] border-y border-[var(--color-gold-300)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap gap-x-4 items-baseline">
+          <p class="font-mono text-sm font-medium">Változat {v.key}: {v.name}</p>
+          <p class="text-sm text-[var(--color-ink-2)]">{v.note}</p>
+        </div>
+      </div>
+      <Hero compact />
+      {v.key === 'D1' && <FounderD1 />}
+      {v.key === 'D2' && <FounderD2 />}
+      {v.key === 'D3' && <FounderD3 />}
+      {v.key === 'D4' && <FounderD4 />}
+    </>
+  ))}
+</BaseLayout>
