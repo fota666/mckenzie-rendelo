@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
 ---
 
 <BaseLayout
@@ -7,12 +8,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   description="Foglaljon időpontot McKenzie gyógytorna kezelésre Budapesten. Két helyszín: Belváros (Sas u. 7.) és Bel-Buda (Bartók Béla út 34.). Telefon: (30) 487-8284."
 >
   <!-- Header -->
-  <section class="pt-32 pb-16 bg-gradient-to-br from-navy-950 via-navy-900 to-teal-700">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="font-heading text-4xl sm:text-5xl font-bold text-white">Kapcsolat & Időpontfoglalás</h1>
-      <p class="mt-4 text-gray-300 text-lg">Válassza ki az Önnek megfelelő helyszínt</p>
-    </div>
-  </section>
+  <PageHeader eyebrow="Kapcsolat">
+    <Fragment slot="title">Kapcsolat & Időpontfoglalás</Fragment>
+    Válassza ki az Önnek megfelelő helyszínt
+  </PageHeader>
 
   <!-- Phone CTA -->
   <section id="idopontfoglalas" class="relative -mt-8 z-10">

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -8,16 +9,12 @@ const base = import.meta.env.BASE_URL;
   description="A McKenzie Gyógytorna Rendelő adatvédelmi tájékoztatója a személyes adatok kezeléséről."
 >
   <!-- Header -->
-  <section class="pt-32 pb-16 bg-gradient-to-br from-navy-950 via-navy-900 to-teal-700">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="font-heading text-4xl sm:text-5xl font-bold text-white">Adatvédelmi tájékoztató</h1>
-      <p class="mt-4 text-gray-300 text-lg">
-        <a href="http://www.gyogytornarendelo.hu" class="hover:text-white underline underline-offset-4">www.gyogytornarendelo.hu</a>
+  <PageHeader eyebrow="Jogi információk">
+    <Fragment slot="title">Adatvédelmi tájékoztató</Fragment>
+    <a href="http://www.gyogytornarendelo.hu" class="link-arrow">www.gyogytornarendelo.hu</a>
         &nbsp;
-        <a href="http://www.mckenzie.hu" class="hover:text-white underline underline-offset-4">www.mckenzie.hu</a>
-      </p>
-    </div>
-  </section>
+        <a href="http://www.mckenzie.hu" class="link-arrow">www.mckenzie.hu</a>
+  </PageHeader>
 
   <!-- Content -->
   <section class="py-20 bg-warm-50">

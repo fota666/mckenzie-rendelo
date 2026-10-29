@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
 const base = import.meta.env.BASE_URL;
 
 const faqs = [
@@ -69,12 +70,10 @@ const faqSchema = {
   </Fragment>
 
   <!-- Header -->
-  <section class="pt-32 pb-16 bg-gradient-to-br from-navy-950 via-navy-900 to-teal-700">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="font-heading text-4xl sm:text-5xl font-bold text-white">Gyakori kérdések</h1>
-      <p class="mt-4 text-gray-300 text-lg">Válaszok a legfontosabb kérdésekre</p>
-    </div>
-  </section>
+  <PageHeader eyebrow="Gyakori kérdések">
+    <Fragment slot="title">Gyakori kérdések</Fragment>
+    Válaszok a legfontosabb kérdésekre
+  </PageHeader>
 
   <!-- FAQ -->
   <section class="py-20 bg-warm-50">

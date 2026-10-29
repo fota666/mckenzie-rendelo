@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -8,12 +9,10 @@ const base = import.meta.env.BASE_URL;
   description="McKenzie gyógytorna kezelés árak: 14-15.000 Ft / alkalom (55 perc). 5 alkalmas bérlet: 65.000 Ft. Egészségpénztári elszámolás lehetséges."
 >
   <!-- Header -->
-  <section class="pt-32 pb-16 bg-gradient-to-br from-navy-950 via-navy-900 to-teal-700">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="font-heading text-4xl sm:text-5xl font-bold text-white">Gyógytorna árak 2026</h1>
-      <p class="mt-4 text-gray-300 text-lg">Átlátható, tisztességes árazás — nincsenek rejtett költségek</p>
-    </div>
-  </section>
+  <PageHeader eyebrow="Árak">
+    <Fragment slot="title">Gyógytorna árak 2026</Fragment>
+    Átlátható, tisztességes árazás — nincsenek rejtett költségek
+  </PageHeader>
 
   <section class="py-20 bg-warm-50">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -33,9 +33,17 @@
   --color-warm-100: #EFF3EF;
   --color-warm-200: #DCE4DC;
 
+  /* Paper (v2 neutral surfaces, slightly warm) */
+  --color-paper: #FAF8F4;
+  --color-paper-2: #F2EEE6;
+  --color-ink: #13261C;
+  --color-ink-2: #45564C;
+  --color-line: #E3DED3;
+
   /* Typography */
   --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
 }
 
 html {
@@ -50,6 +58,11 @@ body {
 
 h1, h2, h3, h4, h5 {
   font-family: var(--font-heading);
+}
+
+/* Cormorant defaults to old-style figures ("18" reads as "I8"); prices and stats need lining ones. */
+h1, h2, h3, h4, h5, .font-heading, .display {
+  font-variant-numeric: lining-nums;
 }
 
 /* Reveal animations */
@@ -91,4 +104,66 @@ h1, h2, h3, h4, h5 {
   height: 2px;
   background: linear-gradient(90deg, var(--color-gold-500), var(--color-gold-300));
   margin: 1rem auto 0;
+}
+
+/* ---- v2 primitives ---- */
+
+/* Small mono label above headings */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
+}
+.eyebrow-light { color: var(--color-gold-300); }
+
+.display {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+.measure { max-width: 62ch; }
+
+/* Underlined text link with arrow */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-weight: 500;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+  transition: gap 0.2s ease;
+}
+.link-arrow:hover { gap: 0.7em; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.btn-primary { background: var(--color-navy-900); color: #fff; }
+.btn-primary:hover { background: var(--color-navy-700); }
+.btn-copper { background: var(--color-gold-500); color: #fff; }
+.btn-copper:hover { background: var(--color-gold-600); }
+.btn-ghost { border: 1px solid var(--color-line); color: var(--color-ink); background: transparent; }
+.btn-ghost:hover { border-color: var(--color-ink); }
+
+/* FAQ disclosure */
+.faq summary { list-style: none; cursor: pointer; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .plus { transition: transform 0.2s ease; }
+.faq[open] summary .plus { transform: rotate(45deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
 }

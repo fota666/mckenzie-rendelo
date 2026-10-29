@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
 const base = import.meta.env.BASE_URL;
 
 const methods = [
@@ -95,15 +96,13 @@ const methods = [
   description="9 nemzetközileg elismert kezelési módszer: McKenzie-módszer, manuálterápia, stabilizációs tréning, Schroth-terápia, taping és több. Részletes leírások."
 >
   <!-- Header -->
-  <section class="pt-32 pb-16 bg-gradient-to-br from-navy-950 via-navy-900 to-teal-700">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="font-heading text-4xl sm:text-5xl font-bold text-white">Kezelési módszereink</h1>
-      <p class="mt-4 text-gray-300 text-lg">9 nemzetközileg elismert eljárás, amelyek az Ön aktív közreműködésére épülnek</p>
-    </div>
-  </section>
+  <PageHeader eyebrow="Kezelési módszerek">
+    <Fragment slot="title">Kezelési módszereink</Fragment>
+    9 nemzetközileg elismert eljárás, amelyek az Ön aktív közreműködésére épülnek
+  </PageHeader>
 
   <!-- Quick nav -->
-  <section class="sticky top-16 z-20 bg-white/90 backdrop-blur-md border-b border-gray-100 py-3 hidden lg:block">
+  <section class="sticky top-[72px] z-20 bg-white/90 backdrop-blur-md border-b border-gray-100 py-3 hidden lg:block">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-wrap gap-2 justify-center">
         {methods.map(m => (
