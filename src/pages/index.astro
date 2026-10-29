@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LoopVideo from '../components/LoopVideo.astro';
+import SituationsB from '../components/situations/SituationsB.astro';
 import { clinic, reviewTotal } from '../data/clinic';
 const base = import.meta.env.BASE_URL;
 
@@ -9,34 +10,6 @@ const facts = [
   { value: String(clinic.therapists), label: 'gyógytornász két rendelőben' },
   { value: '1-2', label: 'napos várakozási idő' },
   { value: '4,9 / 5,0', label: `Google-értékelés, ${reviewTotal} vélemény` },
-];
-
-// Entry points by situation, not by method name: patients search for their pain, not for "MDT".
-const situations = [
-  {
-    tag: 'Most fáj',
-    title: 'Napok óta fáj a dereka vagy a nyaka, és nem múlik.',
-    body: 'Az első alkalommal ismételt mozgások segítségével kiderítjük, melyik irányú mozgás csökkenti a fájdalmat. Már az első alkalom után hazavisz egy gyakorlatot, amelyet otthon is végezhet.',
-    link: { href: `${base}modszerek#mckenzie`, label: 'McKenzie-módszer' },
-  },
-  {
-    tag: 'Évek óta visszatér',
-    title: 'A fájdalom újra és újra előjön, a gyógyszer csak tompítja.',
-    body: 'Megkeressük, mi váltja ki a visszaesést, és megtanítjuk, hogyan kezelje a következő rohamot maga. Ehhez stabilizációs tréninget és tartásjavítást kapcsolunk.',
-    link: { href: `${base}modszerek#stabilizacio`, label: 'Stabilizációs tréning' },
-  },
-  {
-    tag: 'Porckorongsérv',
-    title: 'Az MRI-vizsgálat sérvet mutatott ki, és most felmerült a műtét lehetősége.',
-    body: 'A sérv nem jelent automatikusan műtétet. Megnézzük, javul-e az állapota konzervatív kezelés hatására, és ha műtétre kerül sor, felkészítjük rá, majd segítjük a műtét utáni rehabilitációját.',
-    link: { href: `${base}modszerek#mutet-utani`, label: 'Műtét előtti és utáni rehabilitáció' },
-  },
-  {
-    tag: 'Gerincferdülés',
-    title: 'Gyermeknél vagy felnőttnél scoliosist, Scheuermann-betegséget állapítottak meg.',
-    body: 'Háromdimenziós Schroth-gyakorlatokkal és légzéstechnikával dolgozunk a gerincgörbület és a bordapúp korrekcióján, otthon is végezhető programmal.',
-    link: { href: `${base}modszerek#schroth`, label: 'Schroth-terápia' },
-  },
 ];
 
 const firstVisit = [
@@ -138,24 +111,7 @@ const faqSchema = {
   </section>
 
   <!-- SITUATIONS -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24 lg:pt-24 lg:pb-32">
-    <div class="grid lg:grid-cols-12 gap-8">
-      <div class="lg:col-span-4">
-        <p class="eyebrow">Kik jönnek hozzánk</p>
-        <h2 class="display mt-5 text-4xl lg:text-5xl text-[var(--color-navy-900)]">Négy helyzet, amellyel hozzánk fordulnak.</h2>
-      </div>
-      <div class="lg:col-span-8 grid sm:grid-cols-2 gap-px bg-[var(--color-line)] border border-[var(--color-line)]">
-        {situations.map((s) => (
-          <article class="bg-[var(--color-paper)] p-7 lg:p-9 flex flex-col border-t-2 border-transparent hover:border-[var(--color-teal-600)] transition-colors">
-            <p class="font-mono text-[0.7rem] tracking-wider uppercase text-[var(--color-teal-700)]">{s.tag}</p>
-            <h3 class="mt-4 font-heading text-2xl leading-snug text-[var(--color-navy-900)]">{s.title}</h3>
-            <p class="mt-4 text-[0.95rem] leading-relaxed text-[var(--color-ink-2)] flex-1">{s.body}</p>
-            <a href={s.link.href} class="link-arrow mt-6 self-start text-sm text-[var(--color-navy-800)]">{s.link.label} <span aria-hidden="true">&rarr;</span></a>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
+  <SituationsB />
 
   <!-- FIRST VISIT -->
   <section class="bg-[var(--color-navy-900)] text-white">
