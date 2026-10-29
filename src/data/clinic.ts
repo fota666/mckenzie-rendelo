@@ -60,6 +60,7 @@ export const clinic = {
       label: 'Egyéni kezelés',
       duration: '55 perc',
       amount: `14${NBSP}000 vagy 15${NBSP}000${NBSP}Ft`,
+      range: `14${NBSP}000-15${NBSP}000${NBSP}Ft`,
       note: 'a terapeutától függően',
       min: 14000,
       max: 15000,

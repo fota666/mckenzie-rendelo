@@ -20,7 +20,7 @@ const mapQuery = (l: (typeof clinic.locations)[number]) =>
     Hívjon minket, vagy hagyja meg a számát, és általában 1-2 napon belül kap időpontot valamelyik rendelőnkbe. Mindkét rendelőben csak előzetes bejelentkezéssel fogadunk pácienseket.
   </PageHeader>
 
-  <section id="idopontfoglalas" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid lg:grid-cols-12 gap-6">
+  <section id="idopontfoglalas" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16 grid lg:grid-cols-12 gap-6">
     <div class="lg:col-span-5 bg-[var(--color-teal-700)] text-white p-8 lg:p-10 flex flex-col">
       <p class="eyebrow text-[var(--color-teal-100)]">Időpontfoglalás telefonon</p>
       <a href={`tel:${clinic.phone}`} class="mt-4 block font-heading text-5xl lg:text-6xl hover:text-[var(--color-gold-200)]">{clinic.phoneDisplay}</a>
@@ -65,7 +65,7 @@ const mapQuery = (l: (typeof clinic.locations)[number]) =>
   </section>
 
   <section class="bg-[var(--color-navy-900)] text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <p class="eyebrow eyebrow-light">Az első alkalom</p>
       <h2 class="display mt-5 text-4xl lg:text-5xl max-w-2xl">Mire számítson az első 55 percben?</h2>
       <ol class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-white/15">

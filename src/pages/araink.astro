@@ -6,6 +6,7 @@ import { clinic } from '../data/clinic';
 const plans = [
   {
     ...clinic.prices.single,
+    display: clinic.prices.single.range,
     note: `alkalmanként, ${clinic.prices.single.note}`,
     items: ['55 perces egyéni kezelés', 'Mozgásvizsgálat az első alkalommal', 'Személyre szabott gyakorlatsor', 'Otthoni gyakorlatok írásban', 'Szükség szerinti kontrollvizsgálat'],
     featured: false,
@@ -35,13 +36,13 @@ const notes = [
     A kezelés díja terapeutánként 14 000 vagy 15 000 Ft, ezt a csapat oldalán minden terapeutánál feltüntetjük. Az ár tartalmazza a mozgásvizsgálatot, a kezelést és az otthoni gyakorlatsort. Beutaló nem kell, egészségpénztárra számlát adunk.
   </PageHeader>
 
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 grid md:grid-cols-2 gap-6">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 lg:pb-20 grid md:grid-cols-2 gap-6">
     {plans.map((p) => (
-      <div class={`p-8 lg:p-12 flex flex-col ${p.featured ? 'bg-[var(--color-teal-50)] border-2 border-[var(--color-teal-600)]' : 'bg-white border border-[var(--color-line)]'}`}>
+      <div class={`p-7 lg:p-10 flex flex-col ${p.featured ? 'bg-[var(--color-teal-50)] border-2 border-[var(--color-teal-600)]' : 'bg-white border border-[var(--color-line)]'}`}>
         <p class={`font-mono text-xs uppercase tracking-wider ${p.featured ? 'text-[var(--color-teal-700)]' : 'text-[var(--color-ink-2)]'}`}>{p.label}{p.featured && ' · kedvezményes'}</p>
-        <p class="mt-6 font-heading text-6xl lg:text-7xl text-[var(--color-navy-900)]">{p.amount}</p>
+        <p class="mt-4 font-heading text-4xl sm:text-5xl whitespace-nowrap text-[var(--color-navy-900)]">{p.display ?? p.amount}</p>
         <p class="mt-2 text-sm text-[var(--color-ink-2)]">{p.note}</p>
-        <ul class="mt-10 border-t border-[var(--color-line)] flex-1">
+        <ul class="mt-8 border-t border-[var(--color-line)] flex-1">
           {p.items.map((it) => (
             <li class="py-3 border-b border-[var(--color-line)] flex gap-3">
               <span class="text-[var(--color-teal-600)]" aria-hidden="true">&#10003;</span>{it}
@@ -54,7 +55,7 @@ const notes = [
   </section>
 
   <section class="border-t border-[var(--color-line)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid lg:grid-cols-12 gap-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid lg:grid-cols-12 gap-10">
       <h2 class="lg:col-span-4 display text-4xl text-[var(--color-navy-900)]">Tudnivalók</h2>
       <dl class="lg:col-span-8 grid sm:grid-cols-2 gap-x-10 gap-y-8">
         {notes.map((n) => (
