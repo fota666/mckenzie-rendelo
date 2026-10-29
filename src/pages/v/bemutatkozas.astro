@@ -1,0 +1,34 @@
+---
+// Internal comparison page: four layouts for Relle Éva's introduction right under the hero.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import FounderA from '../../components/founder/FounderA.astro';
+import FounderB from '../../components/founder/FounderB.astro';
+import FounderC from '../../components/founder/FounderC.astro';
+import FounderD from '../../components/founder/FounderD.astro';
+
+const variants = [
+  { key: 'A', name: 'Portré és történet', note: 'Nagy portré balra, cím, bemutatkozás, filozófia-idézet, képesítések, aláírásszerű név.' },
+  { key: 'B', name: 'Idézet zöld sávon', note: 'A filozófia-mondat nagyban, kerek portré, alatta a bemutatkozás.' },
+  { key: 'C', name: 'Idővonal', note: 'Kis portré és cím, alatta 1992-től máig négy lépésben.' },
+  { key: 'D', name: 'Levélkártya a hero-ra csúsztatva', note: 'A hero aljára rálógó kártya, mint egy személyes üzenet, jobbra a portré.' },
+];
+---
+
+<BaseLayout title="Bemutatkozás, 4 változat">
+  {variants.map((v) => (
+    <>
+      <div class="bg-[var(--color-gold-100)] border-y border-[var(--color-gold-300)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap gap-x-4 items-baseline">
+          <p class="font-mono text-sm font-medium">Változat {v.key}: {v.name}</p>
+          <p class="text-sm text-[var(--color-ink-2)]">{v.note}</p>
+        </div>
+      </div>
+      <Hero compact />
+      {v.key === 'A' && <FounderA />}
+      {v.key === 'B' && <FounderB />}
+      {v.key === 'C' && <FounderC />}
+      {v.key === 'D' && <FounderD />}
+    </>
+  ))}
+</BaseLayout>

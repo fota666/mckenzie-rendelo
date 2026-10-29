@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LoopVideo from '../components/LoopVideo.astro';
+import Hero from '../components/Hero.astro';
 import SituationsB from '../components/situations/SituationsB.astro';
 import { clinic, reviewTotal } from '../data/clinic';
 const base = import.meta.env.BASE_URL;
@@ -67,27 +68,7 @@ const faqSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   </Fragment>
 
-  <!-- HERO -->
-  <section class="relative isolate overflow-hidden bg-[var(--color-navy-950)] text-white">
-    <LoopVideo name="hero" eager label="Gyógytornász manuális kezelést végez egy oldalt fekvő páciensen" class="absolute inset-0 -z-20 w-full h-full object-cover" />
-    <div class="absolute inset-0 -z-10 bg-[var(--color-navy-950)]/75 lg:bg-transparent lg:bg-[linear-gradient(90deg,rgba(6,23,16,0.92)_0%,rgba(6,23,16,0.7)_45%,rgba(6,23,16,0.15)_100%)]"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 lg:pt-36 lg:pb-28 min-h-[min(82vh,860px)] flex items-end">
-      <div class="max-w-3xl">
-        <p class="eyebrow eyebrow-light">McKenzie referenciarendelő &middot; Budapest V. és XI. kerület</p>
-        <h1 class="display mt-6 text-[2.75rem] sm:text-6xl lg:text-[5.25rem]">
-          <em class="text-[var(--color-gold-300)]">Derék- és nyakfájás</em> kezelése, amelyet otthon is folytathat.
-        </h1>
-        <p class="mt-8 text-lg text-white/75 measure leading-relaxed">
-          Az első 55 perces alkalommal megvizsgáljuk, mely mozgások hatására csökken a fájdalma, és olyan gyakorlatsort kap, amelyet egyedül is végezhet. Időpont általában 1-2 napon belül.
-        </p>
-        <div class="mt-10 flex flex-col sm:flex-row gap-3">
-          <a href={`${base}kapcsolat#idopontfoglalas`} class="btn btn-copper">Időpontot kérek <span aria-hidden="true">&rarr;</span></a>
-          <a href={`tel:${clinic.phone}`} class="btn border border-white/30 hover:border-white font-mono">{clinic.phoneDisplay}</a>
-        </div>
-        <p class="mt-6 text-sm text-white/55">Beutaló nem kell. Rendelés {clinic.hoursText}.</p>
-      </div>
-    </div>
-  </section>
+  <Hero />
 
   <!-- FACTS -->
   <section class="border-y border-[var(--color-line)] bg-white">
