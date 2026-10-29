@@ -54,11 +54,10 @@ const faqs = [
     <Fragment slot="aside">Válassza ki, melyik hasonlít az Önére. Mindegyiknél leírjuk, hogyan kezdünk hozzá, és melyik módszer segít.</Fragment>
     <ol class="border-t border-[var(--color-line)]">
       {situations.map((s, i) => (
-        <li class="py-6 border-b border-[var(--color-line)] grid sm:grid-cols-[2.5rem_1fr] gap-x-4 gap-y-2">
-          <span class="font-mono text-[13px] text-[var(--color-teal-700)] pt-1.5">{String(i + 1).padStart(2, '0')}</span>
-          <div>
-            <h3 class="font-heading text-[1.5rem] leading-snug text-[var(--color-navy-900)]">{s.title}</h3>
-            <p class="mt-2 text-[var(--color-ink-2)] leading-relaxed">{s.body}</p>
+        <li class="py-7 border-b border-[var(--color-line)] grid lg:grid-cols-12 gap-x-10 gap-y-3">
+          <h3 class="lg:col-span-5 font-heading text-[1.6rem] leading-snug text-[var(--color-navy-900)]"><span class="text-[var(--color-teal-700)] mr-2">{i + 1}.</span>{s.title}</h3>
+          <div class="lg:col-span-7">
+            <p class="text-[var(--color-ink-2)] leading-relaxed">{s.body}</p>
             <p class="mt-3 text-[15px]">
               {s.methods.map((m, j) => (
                 <>{j > 0 && <span class="text-[var(--color-ink-2)]"> &middot; </span>}<a href={`${base}${m.path}`} class="text-[var(--color-teal-700)] underline underline-offset-4 decoration-[var(--color-teal-100)] hover:decoration-[var(--color-teal-700)]">{m.label}</a>{m.when && <span class="text-[var(--color-ink-2)]"> ({m.when})</span>}</>
@@ -77,69 +76,45 @@ const faqs = [
       Fő módszerünk a McKenzie-módszer, mellette {methods.slice(1).map((m, j) => <>{j > 0 && ', '}<a href={`${base}modszerek#${m.id}`} class="underline underline-offset-4 hover:text-[var(--color-teal-700)]">{m.name}</a></>)} és további négy eljárás.
       <a href={`${base}modszerek`} class="link-arrow mt-4 text-[var(--color-navy-800)]">Mind a 9 módszer és a szakmai háttér <span aria-hidden="true">&rarr;</span></a>
     </Fragment>
-    <ol class="border-t border-[var(--color-line)]">
-      {firstVisit.map((step) => (
-        <li class="py-6 border-b border-[var(--color-line)] grid grid-cols-[4.5rem_1fr] sm:grid-cols-[5.5rem_1fr_10rem] gap-x-5 gap-y-2 items-start">
-          <span class="font-mono text-[13px] text-[var(--color-teal-700)] pt-1.5">{step.min}. perc</span>
-          <div>
-            <h3 class="font-heading text-[1.5rem] leading-snug text-[var(--color-navy-900)]">{step.title}</h3>
-            <p class="mt-2 text-[var(--color-ink-2)] leading-relaxed">{step.body}</p>
-          </div>
-          <div class="hidden sm:block aspect-[4/3] overflow-hidden bg-[var(--color-paper-2)]">
+    <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+      {firstVisit.map((step, i) => (
+        <li>
+          <div class="aspect-[4/3] overflow-hidden bg-[var(--color-paper-2)]">
             <img src={`${base}images/rendelo/${step.photo}.jpg`} alt={`${step.title} a rendelőben`} class="w-full h-full object-cover" loading="lazy" />
           </div>
+          <p class="mt-4 text-[13px] font-medium text-[var(--color-teal-700)]">{i + 1}. lépés &middot; {step.min}. perc</p>
+          <h3 class="mt-1 font-heading text-[1.6rem] leading-snug text-[var(--color-navy-900)]">{step.title}</h3>
+          <p class="mt-2 text-[15px] text-[var(--color-ink-2)] leading-relaxed">{step.body}</p>
         </li>
       ))}
     </ol>
   </Section>
 
-  <!-- 3. Who treats you: founder, facts, team -->
+  <!-- 3. Who treats you: one grid of faces, the founder first -->
   <Section eyebrow="Kik kezelik">
     <Fragment slot="title">Relle Éva és {clinic.therapists - 1} gyógytornász, két rendelőben.</Fragment>
-    <Fragment slot="aside">„{founder.philosophy}” <span class="block mt-2 text-[13px]">A rendelő filozófiája</span></Fragment>
-    <div class="grid sm:grid-cols-[13rem_1fr] gap-6 pb-8 border-b border-[var(--color-line)]">
-      <div class="aspect-[4/5] overflow-hidden bg-[var(--color-paper-2)]">
-        <img src={`${base}${founder.photo}`} alt={founder.name} class="w-full h-[108%] object-cover object-top" loading="lazy" />
-      </div>
-      <div>
-        <h3 class="font-heading text-[1.75rem] text-[var(--color-navy-900)]">{founder.name}</h3>
-        <p class="text-[15px] text-[var(--color-ink-2)]">{founder.role}</p>
-        <p class="mt-3 leading-relaxed text-[var(--color-ink)]">{founder.intro}</p>
-        <dl class="mt-5 grid grid-cols-3 gap-4">
-          {facts.map((f) => (
-            <div class="flex flex-col">
-              <dd class="font-heading text-3xl text-[var(--color-navy-900)]">{f.value}</dd>
-              <dt class="text-[13px] text-[var(--color-ink-2)]">{f.label}</dt>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </div>
-    <ul class="mt-8 grid grid-cols-3 sm:grid-cols-6 gap-3">
-      {team.map((t) => (
+    <Fragment slot="aside">Relle Éva 1993-ban alapította a rendelőt, és 2000 óta a Semmelweis Egyetemen is oktat. Minden terapeutánk McKenzie-képzésben részesült.</Fragment>
+    <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-6">
+      {[{ name: founder.name, role: 'Alapító, vezető gyógytornász', src: `${base}${founder.photo}`, top: true }, ...team.map((t) => ({ name: t.name, role: 'Gyógytornász', src: `${base}images/${t.img}`, top: false }))].map((p) => (
         <li>
-          <div class="aspect-[3/4] overflow-hidden bg-[var(--color-paper-2)]">
-            <img src={`${base}images/${t.img}`} alt={t.name} class="w-full h-full object-cover" loading="lazy" />
+          <div class="aspect-[4/5] overflow-hidden bg-[var(--color-paper-2)]">
+            <img src={p.src} alt={p.name} class:list={['w-full object-cover object-top', p.top ? 'h-[108%]' : 'h-full']} loading="lazy" />
           </div>
-          <p class="mt-1.5 text-[13px] text-[var(--color-ink-2)]">{t.name}</p>
+          <p class="mt-2 font-heading text-[1.3rem] leading-tight text-[var(--color-navy-900)]">{p.name}</p>
+          <p class="text-[13px] text-[var(--color-ink-2)]">{p.role}</p>
         </li>
       ))}
-      <li>
-        <a href={`${base}csapatunk`} class="aspect-[3/4] flex flex-col justify-end p-3 bg-[var(--color-paper-2)] text-[var(--color-navy-900)] hover:bg-[var(--color-line)] transition-colors">
-          <span class="font-heading text-3xl">+{clinic.therapists - team.length - 1}</span>
-          <span class="text-[13px] text-[var(--color-ink-2)]">a teljes csapat &rarr;</span>
-        </a>
-      </li>
     </ul>
-    <div class="mt-10 pt-8 border-t border-[var(--color-line)]">
-      <h3 class="font-heading text-[1.5rem] text-[var(--color-navy-900)]">A rendelőben</h3>
-      <ul class="mt-4 grid grid-cols-2 sm:max-w-md gap-3">
-        {['rendelo-bordasfal', 'rendelo-szoba'].map((p) => (
-          <li class="aspect-[3/4] overflow-hidden bg-[var(--color-paper-2)]">
-            <img src={`${base}images/rendelo/${p}.jpg`} alt="A rendelő kezelőszobája" class="w-full h-full object-cover" loading="lazy" />
-          </li>
+    <div class="mt-8 pt-6 border-t border-[var(--color-line)] flex flex-wrap items-end justify-between gap-6">
+      <dl class="flex gap-10">
+        {facts.map((f) => (
+          <div class="flex flex-col">
+            <dd class="font-heading text-3xl text-[var(--color-navy-900)]">{f.value}</dd>
+            <dt class="text-[13px] text-[var(--color-ink-2)]">{f.label}</dt>
+          </div>
         ))}
-      </ul>
+      </dl>
+      <a href={`${base}csapatunk`} class="link-arrow text-[var(--color-navy-800)]">Mind a {clinic.therapists} terapeuta, rendelő, szakterület és ár szerint <span aria-hidden="true">&rarr;</span></a>
     </div>
   </Section>
 
@@ -151,7 +126,8 @@ const faqs = [
         <a href={l.mapsUrl} target="_blank" rel="noopener" class="link-arrow mr-5 text-[var(--color-navy-800)]">{l.name}: {l.rating.count} vélemény <span aria-hidden="true">&rarr;</span></a>
       ))}
     </Fragment>
-    <div class="grid sm:grid-cols-2 gap-6 pb-8 border-b border-[var(--color-line)]">
+    <div class="grid lg:grid-cols-12 gap-x-12 gap-y-10">
+    <div class="lg:col-span-7 grid sm:grid-cols-2 gap-6">
       {reviews.map((r) => (
         <figure>
           <blockquote class="font-heading text-[1.4rem] leading-snug text-[var(--color-navy-900)]">„{r.text}”</blockquote>
@@ -159,15 +135,16 @@ const faqs = [
         </figure>
       ))}
     </div>
-    <ul class="mt-2">
-      <li class="py-5 border-b border-[var(--color-line)] flex flex-wrap justify-between gap-x-6 gap-y-1">
+    <div class="lg:col-span-5">
+    <ul class="border-t border-[var(--color-line)]">
+      <li class="py-5 border-b border-[var(--color-line)] grid grid-cols-[1fr_auto] items-baseline gap-x-6">
         <div>
           <h3 class="font-heading text-[1.5rem] text-[var(--color-navy-900)]">{clinic.prices.single.label}</h3>
           <p class="text-[15px] text-[var(--color-ink-2)]">{clinic.prices.single.duration}, {clinic.prices.single.note}</p>
         </div>
         <p class="font-heading text-[1.75rem] whitespace-nowrap text-[var(--color-navy-900)]">{clinic.prices.single.range}</p>
       </li>
-      <li class="py-5 border-b border-[var(--color-line)] flex flex-wrap justify-between gap-x-6 gap-y-1">
+      <li class="py-5 border-b border-[var(--color-line)] grid grid-cols-[1fr_auto] items-baseline gap-x-6">
         <div>
           <h3 class="font-heading text-[1.5rem] text-[var(--color-navy-900)]">{clinic.prices.pass.label}</h3>
           <p class="text-[15px] text-[var(--color-ink-2)]">{clinic.prices.pass.perVisit}, {clinic.prices.pass.saving}</p>
@@ -176,6 +153,8 @@ const faqs = [
       </li>
     </ul>
     <p class="mt-4 text-[15px] text-[var(--color-ink-2)]">Beutaló nem kell. Egészségpénztárra számlát adunk. <a href={`${base}araink`} class="underline underline-offset-4 hover:text-[var(--color-teal-700)]">Árak és tudnivalók</a> &middot; <a href={`${base}velemenyek`} class="underline underline-offset-4 hover:text-[var(--color-teal-700)]">Összes vélemény</a></p>
+    </div>
+    </div>
   </Section>
 
   <!-- 5. Questions and booking -->
@@ -189,7 +168,7 @@ const faqs = [
         <a href={`${base}kapcsolat#visszahivas`} class="btn border border-white/30 hover:border-white text-white">Visszahívást kérek</a>
       </span>
     </Fragment>
-    <div class="border-t border-white/15">
+    <div class="grid lg:grid-cols-2 gap-x-12 border-t border-white/15">
       {faqs.map((f, i) => (
         <details class="faq border-b border-white/15" open={i === 0}>
           <summary class="flex justify-between gap-6 py-5">
@@ -199,7 +178,7 @@ const faqs = [
           <p class="pb-6 -mt-1 text-white/75 leading-relaxed measure">{f.a}</p>
         </details>
       ))}
-      <a href={`${base}gyik`} class="link-arrow mt-6 text-white">További kérdések <span aria-hidden="true">&rarr;</span></a>
     </div>
+    <a href={`${base}gyik`} class="link-arrow mt-6 text-white">További kérdések <span aria-hidden="true">&rarr;</span></a>
   </Section>
 </BaseLayout>

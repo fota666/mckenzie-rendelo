@@ -120,7 +120,7 @@ h1, h2, h3, h4, h5, .font-heading, .display {
 
 /* Long Hungarian compounds ("McKenzie-képzésben") must never push the page wider on phones. */
 html, body { overflow-x: clip; }
-.display, h1, h2, h3 { overflow-wrap: break-word; hyphens: auto; }
+.display, h1, h2, h3 { overflow-wrap: break-word; hyphens: manual; }
 
 .display {
   font-family: var(--font-heading);

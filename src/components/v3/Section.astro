@@ -1,6 +1,6 @@
 ---
-// One section pattern for the whole site: label + heading on the left (4/12, sticky on desktop),
-// content on the right (8/12). Same padding everywhere. Only two tones: paper or dark.
+// One section pattern for the whole site. Header row on top (heading left, short intro right,
+// bottom-aligned), content full width below. Same padding everywhere. Two tones: paper or dark.
 interface Props {
   id?: string;
   eyebrow: string;
@@ -8,18 +8,21 @@ interface Props {
 }
 const { id, eyebrow, tone = 'paper' } = Astro.props;
 const dark = tone === 'dark';
+const hasAside = Astro.slots.has('aside');
 ---
 
 <section id={id} class:list={['scroll-mt-24', dark ? 'bg-[var(--color-navy-900)] text-white' : 'border-t border-[var(--color-line)]']}>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-12 gap-x-12 gap-y-8">
-    <header class="lg:col-span-4">
-      <div class="lg:sticky lg:top-28">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
+    <header class="grid lg:grid-cols-12 gap-x-12 gap-y-4 items-end">
+      <div class="lg:col-span-7">
         <p class:list={['eyebrow', dark && 'eyebrow-light']}>{eyebrow}</p>
         <h2 class:list={['display mt-3 text-3xl lg:text-[2.5rem]', !dark && 'text-[var(--color-navy-900)]']}><slot name="title" /></h2>
-        <div class:list={['mt-4 text-[15px] leading-relaxed', dark ? 'text-white/70' : 'text-[var(--color-ink-2)]']}><slot name="aside" /></div>
       </div>
+      {hasAside && (
+        <div class:list={['lg:col-span-5 text-[15px] leading-relaxed', dark ? 'text-white/70' : 'text-[var(--color-ink-2)]']}><slot name="aside" /></div>
+      )}
     </header>
-    <div class="lg:col-span-8">
+    <div class="mt-10">
       <slot />
     </div>
   </div>
