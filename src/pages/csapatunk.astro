@@ -402,10 +402,10 @@ const locName = (id: string) => clinic.locations.find((l) => l.id === id)?.name 
       <p class="mt-6 text-lg leading-relaxed text-[var(--color-ink-2)] measure">1993-ban alapította a rendelőt. A Magyarországi McKenzie Intézet kuratóriumának tagja, 2000 óta a Semmelweis Egyetem Egészségtudományi Karán is oktat.</p>
       <ul class="mt-8 grid sm:grid-cols-2 gap-x-8 border-t border-[var(--color-line)]">
         {relleEva.quals.map((q) => (
-          <li class="py-3 border-b border-[var(--color-line)] text-[0.95rem]">{q}</li>
+          <li class="py-3 border-b border-[var(--color-line)] text-base">{q}</li>
         ))}
       </ul>
-      <p class="mt-6 font-mono text-xs uppercase tracking-wider text-[var(--color-ink-2)]">Nyelvek: magyar, {relleEva.langs.join(', ')}</p>
+      <p class="mt-6 font-mono text-[13px] uppercase tracking-wider text-[var(--color-ink-2)]">Nyelvek: magyar, {relleEva.langs.join(', ')}</p>
     </div>
   </section>
 
@@ -415,9 +415,9 @@ const locName = (id: string) => clinic.locations.find((l) => l.id === id)?.name 
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
         <h2 class="display text-3xl lg:text-4xl text-[var(--color-navy-900)]">Terapeutáink</h2>
         <div class="flex flex-wrap gap-2" role="group" aria-label="Szűrés rendelőre">
-          <button data-filter="all" aria-pressed="true" class="px-4 py-2 text-sm border border-[var(--color-line)] bg-white aria-pressed:bg-[var(--color-teal-700)] aria-pressed:text-white aria-pressed:border-[var(--color-teal-700)]">Mindkét rendelő</button>
+          <button data-filter="all" aria-pressed="true" class="px-4 py-2 text-[15px] border border-[var(--color-line)] bg-white aria-pressed:bg-[var(--color-teal-700)] aria-pressed:text-white aria-pressed:border-[var(--color-teal-700)]">Mindkét rendelő</button>
           {clinic.locations.map((l) => (
-            <button data-filter={l.id} aria-pressed="false" class="px-4 py-2 text-sm border border-[var(--color-line)] bg-white aria-pressed:bg-[var(--color-teal-700)] aria-pressed:text-white aria-pressed:border-[var(--color-teal-700)]">{l.name}</button>
+            <button data-filter={l.id} aria-pressed="false" class="px-4 py-2 text-[15px] border border-[var(--color-line)] bg-white aria-pressed:bg-[var(--color-teal-700)] aria-pressed:text-white aria-pressed:border-[var(--color-teal-700)]">{l.name}</button>
           ))}
         </div>
       </div>
@@ -428,24 +428,24 @@ const locName = (id: string) => clinic.locations.find((l) => l.id === id)?.name 
             <div class="aspect-[4/5] overflow-hidden bg-white">
               <img src={t.photo} alt={t.name} class="w-full h-full object-cover" loading="lazy" />
             </div>
-            <p class="mt-3 font-mono text-[0.68rem] uppercase tracking-wider text-[var(--color-teal-700)]">{locName(locationOf[t.name])}</p>
-            <h3 class="mt-1 font-heading text-xl sm:text-2xl leading-tight text-[var(--color-navy-900)]">{t.name}</h3>
-            <p class="mt-1 text-xs sm:text-sm text-[var(--color-ink-2)]">{t.title}{t.diploma && <> &middot; diploma {t.diploma}</>}</p>
-            {t.price && <p class="mt-1 text-sm font-medium text-[var(--color-ink)] whitespace-nowrap">{t.price} / 55 perc</p>}
-            <details class="faq mt-3 text-sm">
+            <p class="mt-3 font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-700)]">{locName(locationOf[t.name])}</p>
+            <h3 class="mt-1 font-heading text-[1.35rem] sm:text-[1.65rem] leading-tight text-[var(--color-navy-900)]">{t.name}</h3>
+            <p class="mt-1 text-[13px] sm:text-sm text-[var(--color-ink-2)]">{t.title}{t.diploma && <> &middot; diploma {t.diploma}</>}</p>
+            {t.price && <p class="mt-1 text-[15px] font-medium text-[var(--color-ink)] whitespace-nowrap">{t.price} / 55 perc</p>}
+            <details class="faq mt-3 text-[15px]">
               <summary class="text-[var(--color-teal-700)] py-1">Képesítések ({t.quals.length})</summary>
               <ul class="mt-2 space-y-1.5">
                 {t.quals.map((q) => <li class="pl-3 border-l-2 border-[var(--color-teal-100)]">{q}</li>)}
               </ul>
             </details>
-            <p class="hidden sm:block mt-2 text-sm text-[var(--color-ink-2)]">{short(t.quals).join(' · ')}</p>
-            {t.langs.length > 0 && <p class="mt-2 font-mono text-[0.66rem] uppercase tracking-wider text-[var(--color-ink-2)]">Nyelv: {t.langs.join(', ')}</p>}
+            <p class="hidden sm:block mt-2 text-[15px] text-[var(--color-ink-2)]">{short(t.quals).join(' · ')}</p>
+            {t.langs.length > 0 && <p class="mt-2 font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-ink-2)]">Nyelv: {t.langs.join(', ')}</p>}
           </li>
         ))}
       </ul>
 
       {onLeave.length > 0 && (
-        <p class="mt-10 pt-6 border-t border-[var(--color-line)] text-sm text-[var(--color-ink-2)]">
+        <p class="mt-10 pt-6 border-t border-[var(--color-line)] text-[15px] text-[var(--color-ink-2)]">
           Jelenleg GYES-en: {onLeave.map((t) => t.name).join(', ')}.
         </p>
       )}

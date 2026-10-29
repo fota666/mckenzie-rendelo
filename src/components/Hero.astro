@@ -23,11 +23,11 @@ const base = import.meta.env.BASE_URL;
           <a href={`tel:${clinic.phone}`} class="btn btn-copper font-mono">{clinic.phoneDisplay}</a>
           <a href={`${base}kapcsolat#visszahivas`} class="btn border border-white/30 hover:border-white">Visszahívást kérek <span aria-hidden="true">&rarr;</span></a>
         </div>
-        <p class="mt-3 text-sm text-white/60">Telefonos foglalás {clinic.bookingHoursShort}, visszahívás-kérés bármikor.</p>
-        <dl class="mt-6 pt-5 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-          <div><dt class="font-mono text-[0.7rem] uppercase tracking-wider text-[var(--color-teal-300)]">Ár</dt><dd class="mt-1 text-white/85">{clinic.prices.single.amount} / 55 perc</dd></div>
-          <div><dt class="font-mono text-[0.7rem] uppercase tracking-wider text-[var(--color-teal-300)]">Rendelők</dt><dd class="mt-1 text-white/85">Sas utca (V.) &middot; Bartók Béla út (XI.)</dd></div>
-          <div><dt class="font-mono text-[0.7rem] uppercase tracking-wider text-[var(--color-teal-300)]">Beutaló</dt><dd class="mt-1 text-white/85">Nem kell</dd></div>
+        <p class="mt-3 text-[15px] text-white/60">Telefonos foglalás {clinic.bookingHoursShort}, visszahívás-kérés bármikor.</p>
+        <dl class="mt-6 pt-5 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-4 text-[15px]">
+          <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Ár</dt><dd class="mt-1 text-white/85">{clinic.prices.single.amount} / 55 perc</dd></div>
+          <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Rendelők</dt><dd class="mt-1 text-white/85">Sas utca (V.) &middot; Bartók Béla út (XI.)</dd></div>
+          <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Beutaló</dt><dd class="mt-1 text-white/85">Nem kell</dd></div>
         </dl>
       </div>
     </div>

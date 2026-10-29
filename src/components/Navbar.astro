@@ -21,7 +21,7 @@ const isActive = (href: string) => path === href.replace(/\/$/, '');
         <LogoMark class="w-12 h-12" />
         <span class="leading-tight">
           <span class="block font-heading text-[1.7rem] font-semibold tracking-tight">McKenzie</span>
-          <span class="block font-mono text-[0.7rem] tracking-[0.18em] uppercase text-[var(--color-ink-2)]">Gyógytorna Rendelő</span>
+          <span class="block font-mono text-[0.78rem] tracking-[0.18em] uppercase text-[var(--color-ink-2)]">Gyógytorna Rendelő</span>
         </span>
       </a>
 
@@ -38,8 +38,8 @@ const isActive = (href: string) => path === href.replace(/\/$/, '');
       </nav>
 
       <div class="hidden lg:flex items-center gap-5">
-        <a href={`tel:${clinic.phone}`} class="hidden xl:inline font-mono text-sm whitespace-nowrap text-[var(--color-ink)] hover:text-[var(--color-teal-700)]">{clinic.phoneDisplay}</a>
-        <a href={`${base}kapcsolat#idopontfoglalas`} class="btn btn-primary !py-2.5 !px-5 text-sm whitespace-nowrap">Időpontot kérek</a>
+        <a href={`tel:${clinic.phone}`} class="hidden xl:inline font-mono text-[15px] whitespace-nowrap text-[var(--color-ink)] hover:text-[var(--color-teal-700)]">{clinic.phoneDisplay}</a>
+        <a href={`${base}kapcsolat#idopontfoglalas`} class="btn btn-primary !py-2.5 !px-5 text-[15px] whitespace-nowrap">Időpontot kérek</a>
       </div>
 
       <button id="mobile-menu-btn" class="lg:hidden p-2 -mr-2 text-[var(--color-ink)]" aria-label="Menü" aria-expanded="false" aria-controls="mobile-menu">

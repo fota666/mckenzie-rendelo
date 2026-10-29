@@ -18,10 +18,10 @@ const base = import.meta.env.BASE_URL;
           aria-selected={i === 0 ? 'true' : 'false'}
           class="group w-full text-left py-6 border-b border-[var(--color-line)] grid grid-cols-[2.5rem_1fr_auto] gap-3 items-baseline aria-selected:bg-white transition-colors px-3 -mx-3"
         >
-          <span class="font-mono text-xs text-[var(--color-teal-600)]">{String(i + 1).padStart(2, '0')}</span>
+          <span class="font-mono text-[13px] text-[var(--color-teal-600)]">{String(i + 1).padStart(2, '0')}</span>
           <span>
-            <span class="block font-mono text-[0.7rem] uppercase tracking-wider text-[var(--color-ink-2)]">{s.tag}</span>
-            <span class="block mt-1.5 font-heading text-2xl leading-snug text-[var(--color-ink-2)] group-aria-selected:text-[var(--color-navy-900)]">{s.title}</span>
+            <span class="block font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-ink-2)]">{s.tag}</span>
+            <span class="block mt-1.5 font-heading text-[1.65rem] leading-snug text-[var(--color-ink-2)] group-aria-selected:text-[var(--color-navy-900)]">{s.title}</span>
           </span>
           <span class="text-[var(--color-teal-600)] opacity-0 group-aria-selected:opacity-100" aria-hidden="true">&rarr;</span>
         </button>

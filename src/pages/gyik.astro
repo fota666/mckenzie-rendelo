@@ -80,7 +80,7 @@ const faqSchema = {
     <aside class="lg:col-span-4">
       <div class="lg:sticky lg:top-28 bg-[var(--color-teal-700)] text-white p-6">
         <p class="eyebrow text-[var(--color-teal-100)]">Nem találja a választ?</p>
-        <p class="mt-4 font-heading text-2xl leading-snug">Kérdezze meg telefonon, mielőtt időpontot kér.</p>
+        <p class="mt-4 font-heading text-[1.65rem] leading-snug">Kérdezze meg telefonon, mielőtt időpontot kér.</p>
         <a href={`tel:${clinic.phone}`} class="btn btn-copper mt-8 font-mono">{clinic.phoneDisplay}</a>
       </div>
     </aside>
@@ -88,8 +88,8 @@ const faqSchema = {
       {faqs.map((faq, i) => (
         <details class="faq border-b border-[var(--color-line)]" open={i === 0}>
           <summary class="flex justify-between gap-6 py-6">
-            <h2 class="font-heading text-xl lg:text-2xl text-[var(--color-navy-900)]">{faq.q}</h2>
-            <span class="plus text-2xl leading-none text-[var(--color-teal-600)]" aria-hidden="true">+</span>
+            <h2 class="font-heading text-[1.35rem] lg:text-[1.75rem] text-[var(--color-navy-900)]">{faq.q}</h2>
+            <span class="plus text-[1.65rem] leading-none text-[var(--color-teal-600)]" aria-hidden="true">+</span>
           </summary>
           <p class="pb-7 -mt-1 text-[var(--color-ink-2)] leading-relaxed measure">{faq.a}</p>
         </details>

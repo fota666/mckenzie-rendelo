@@ -111,7 +111,7 @@ h1, h2, h3, h4, h5, .font-heading, .display {
 /* Small mono label above headings */
 .eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-teal-700);

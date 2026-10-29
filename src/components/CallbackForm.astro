@@ -8,27 +8,27 @@ const base = import.meta.env.BASE_URL;
 
 <form id="visszahivas" action={`${base}visszahivas.php`} method="post" class="scroll-mt-28 bg-white border border-[var(--color-line)] p-6 sm:p-8 lg:p-8" data-callback data-phone={clinic.phoneDisplay} novalidate>
   <p class="eyebrow">Visszahívás-kérés</p>
-  <h2 class="mt-3 font-heading text-2xl lg:text-3xl text-[var(--color-navy-900)]">Hagyja meg a számát, és visszahívjuk.</h2>
-  <p class="mt-3 text-sm text-[var(--color-ink-2)]">Munkanapokon {clinic.bookingHours.replace('Hétköznap ', '')} között hívjuk vissza, általában még aznap vagy a következő munkanapon.</p>
+  <h2 class="mt-3 font-heading text-[1.65rem] lg:text-3xl text-[var(--color-navy-900)]">Hagyja meg a számát, és visszahívjuk.</h2>
+  <p class="mt-3 text-[15px] text-[var(--color-ink-2)]">Munkanapokon {clinic.bookingHours.replace('Hétköznap ', '')} között hívjuk vissza, általában még aznap vagy a következő munkanapon.</p>
 
   <div class="mt-8 grid sm:grid-cols-2 gap-5">
     <label class="block">
-      <span class="text-sm font-medium">Név *</span>
+      <span class="text-[15px] font-medium">Név *</span>
       <input name="nev" required maxlength="100" autocomplete="name" class="mt-1.5 w-full border border-[var(--color-line)] bg-[var(--color-paper)] px-3.5 py-3 focus:outline-none focus:border-[var(--color-teal-600)]" />
     </label>
     <label class="block">
-      <span class="text-sm font-medium">Telefonszám *</span>
+      <span class="text-[15px] font-medium">Telefonszám *</span>
       <input name="telefon" type="tel" required maxlength="40" autocomplete="tel" inputmode="tel" placeholder="+36 30 123 4567" class="mt-1.5 w-full border border-[var(--color-line)] bg-[var(--color-paper)] px-3.5 py-3 focus:outline-none focus:border-[var(--color-teal-600)]" />
     </label>
     <label class="block">
-      <span class="text-sm font-medium">Melyik rendelő?</span>
+      <span class="text-[15px] font-medium">Melyik rendelő?</span>
       <select name="rendelo" class="mt-1.5 w-full border border-[var(--color-line)] bg-[var(--color-paper)] px-3.5 py-3 focus:outline-none focus:border-[var(--color-teal-600)]">
         <option value="mindegy">Mindegy</option>
         {clinic.locations.map((l) => <option value={l.name}>{l.name} ({l.district})</option>)}
       </select>
     </label>
     <label class="block">
-      <span class="text-sm font-medium">Mikor hívjuk?</span>
+      <span class="text-[15px] font-medium">Mikor hívjuk?</span>
       <select name="mikor" class="mt-1.5 w-full border border-[var(--color-line)] bg-[var(--color-paper)] px-3.5 py-3 focus:outline-none focus:border-[var(--color-teal-600)]">
         <option value="mindegy">Mindegy</option>
         <option value="délelőtt">Délelőtt</option>
@@ -36,23 +36,23 @@ const base = import.meta.env.BASE_URL;
       </select>
     </label>
     <label class="block sm:col-span-2">
-      <span class="text-sm font-medium">Röviden a panaszáról (nem kötelező)</span>
+      <span class="text-[15px] font-medium">Röviden a panaszáról (nem kötelező)</span>
       <textarea name="panasz" rows="3" maxlength="600" placeholder="Pl. három hete fáj a derekam, ülőmunkát végzek." class="mt-1.5 w-full border border-[var(--color-line)] bg-[var(--color-paper)] px-3.5 py-3 focus:outline-none focus:border-[var(--color-teal-600)]"></textarea>
-      <span class="mt-1 block text-xs text-[var(--color-ink-2)]">Csak annyit írjon, amennyit szükségesnek tart. A részleteket telefonon megbeszéljük.</span>
+      <span class="mt-1 block text-[13px] text-[var(--color-ink-2)]">Csak annyit írjon, amennyit szükségesnek tart. A részleteket telefonon megbeszéljük.</span>
     </label>
   </div>
 
   <!-- Honeypot, hidden from people -->
   <div class="hidden" aria-hidden="true"><label>Weboldal <input name="website" tabindex="-1" autocomplete="off" /></label></div>
 
-  <label class="mt-6 flex gap-3 items-start text-sm">
+  <label class="mt-6 flex gap-3 items-start text-[15px]">
     <input type="checkbox" name="hozzajarulas" value="igen" required class="mt-1 accent-[var(--color-teal-700)]" />
     <span>Hozzájárulok, hogy a rendelő a megadott adataimat a visszahíváshoz kezelje. <a href={`${base}adatvedelmi-tajekoztato`} class="underline underline-offset-2 hover:text-[var(--color-teal-700)]">Adatvédelmi tájékoztató</a></span>
   </label>
 
   <div class="mt-8 flex flex-wrap items-center gap-4">
     <button type="submit" class="btn btn-primary">Visszahívást kérek</button>
-    <p class="text-sm" role="status" aria-live="polite" data-status></p>
+    <p class="text-[15px]" role="status" aria-live="polite" data-status></p>
   </div>
 </form>
 

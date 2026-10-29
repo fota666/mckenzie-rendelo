@@ -20,18 +20,18 @@ const links = [
         <div class="flex items-center gap-3 text-white">
           <LogoMark class="w-10 h-10" />
           <span class="leading-tight">
-            <span class="block font-heading text-2xl font-semibold">McKenzie</span>
-            <span class="block font-mono text-[0.62rem] tracking-[0.18em] uppercase text-white/60">Gyógytorna Rendelő</span>
+            <span class="block font-heading text-[1.65rem] font-semibold">McKenzie</span>
+            <span class="block font-mono text-[0.72rem] tracking-[0.18em] uppercase text-white/60">Gyógytorna Rendelő</span>
           </span>
         </div>
-        <p class="mt-6 text-sm leading-relaxed text-white/60 max-w-xs">
+        <p class="mt-6 text-[15px] leading-relaxed text-white/60 max-w-xs">
           {clinic.tagline}. {clinic.therapists} gyógytornász, két rendelő, rendelés {clinic.hoursText}.
         </p>
-        <a href={`tel:${clinic.phone}`} class="mt-6 inline-block font-heading text-2xl text-white hover:text-[var(--color-gold-300)]">{clinic.phoneDisplay}</a>
+        <a href={`tel:${clinic.phone}`} class="mt-6 inline-block font-heading text-[1.65rem] text-white hover:text-[var(--color-gold-300)]">{clinic.phoneDisplay}</a>
       </div>
 
       {clinic.locations.map((l) => (
-        <address class="not-italic lg:col-span-3 text-sm space-y-1.5">
+        <address class="not-italic lg:col-span-3 text-[15px] space-y-1.5">
           <p class="eyebrow eyebrow-light mb-4">{l.name}</p>
           <p class="text-white">{l.postalCode} Budapest, {l.street}</p>
           <p>{l.transit}</p>
@@ -40,7 +40,7 @@ const links = [
         </address>
       ))}
 
-      <nav class="lg:col-span-2 text-sm" aria-label="Lábléc navigáció">
+      <nav class="lg:col-span-2 text-[15px]" aria-label="Lábléc navigáció">
         <p class="eyebrow eyebrow-light mb-4">Oldalak</p>
         <ul class="space-y-2">
           {links.map((l) => <li><a href={l.href} class="hover:text-white">{l.label}</a></li>)}
@@ -48,7 +48,7 @@ const links = [
       </nav>
     </div>
 
-    <div class="mt-7 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 justify-between text-xs text-white/50">
+    <div class="mt-7 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 justify-between text-[13px] text-white/50">
       <p>&copy; {year} {clinic.legalName} &middot; {clinic.name}</p>
       <div class="flex items-center gap-6">
         <a href={`${base}adatvedelmi-tajekoztato`} class="hover:text-white">Adatvédelmi tájékoztató</a>

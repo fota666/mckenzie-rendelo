@@ -44,24 +44,24 @@ const notes = [
 
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 lg:pb-20 grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
     <div class="lg:col-span-7">
-      <h2 class="font-mono text-xs uppercase tracking-wider text-[var(--color-ink-2)]">Árlista</h2>
+      <h2 class="font-mono text-[13px] uppercase tracking-wider text-[var(--color-ink-2)]">Árlista</h2>
       <ul class="mt-3 border-t-2 border-[var(--color-navy-900)]">
         {rows.map((r) => (
           <li class="py-7 border-b border-[var(--color-line)] grid sm:grid-cols-[1fr_auto] gap-x-8 gap-y-3">
             <div>
-              <p class="font-heading text-2xl lg:text-3xl text-[var(--color-navy-900)]">{r.name} <span class="font-mono text-xs uppercase tracking-wider text-[var(--color-teal-700)] align-middle">{r.meta}</span></p>
+              <p class="font-heading text-[1.65rem] lg:text-3xl text-[var(--color-navy-900)]">{r.name} <span class="font-mono text-[13px] uppercase tracking-wider text-[var(--color-teal-700)] align-middle">{r.meta}</span></p>
               <p class="mt-2 text-[var(--color-ink-2)] leading-relaxed max-w-md">{r.detail}</p>
-              {r.link && <a href={r.link.href} class="link-arrow mt-3 text-sm text-[var(--color-navy-800)]">{r.link.label} <span aria-hidden="true">&rarr;</span></a>}
+              {r.link && <a href={r.link.href} class="link-arrow mt-3 text-[15px] text-[var(--color-navy-800)]">{r.link.label} <span aria-hidden="true">&rarr;</span></a>}
             </div>
             <div class="sm:text-right">
-              <p class="font-heading text-2xl lg:text-3xl whitespace-nowrap text-[var(--color-navy-900)]">{r.price}</p>
-              <p class="text-sm text-[var(--color-ink-2)]">{r.priceNote}</p>
+              <p class="font-heading text-[1.65rem] lg:text-3xl whitespace-nowrap text-[var(--color-navy-900)]">{r.price}</p>
+              <p class="text-[15px] text-[var(--color-ink-2)]">{r.priceNote}</p>
             </div>
           </li>
         ))}
       </ul>
 
-      <h2 class="mt-10 font-mono text-xs uppercase tracking-wider text-[var(--color-ink-2)]">Tudnivalók</h2>
+      <h2 class="mt-10 font-mono text-[13px] uppercase tracking-wider text-[var(--color-ink-2)]">Tudnivalók</h2>
       <dl class="mt-3 border-t border-[var(--color-line)]">
         {notes.map((n) => (
           <div class="py-4 border-b border-[var(--color-line)] grid grid-cols-[10rem_1fr] sm:grid-cols-[12rem_1fr] gap-4">
@@ -76,7 +76,7 @@ const notes = [
       <p class="eyebrow text-[var(--color-teal-100)]">Időpontfoglalás</p>
       <a href={`tel:${clinic.phone}`} class="mt-3 block font-heading text-4xl hover:text-[var(--color-gold-200)]">{clinic.phoneDisplay}</a>
       <p class="mt-2 text-white/85">{clinic.bookingHours}</p>
-      <p class="mt-4 text-sm text-white/70 leading-relaxed">Általában 1-2 napon belül tudunk időpontot adni. Ha munkaidőben nem tud telefonálni, kérjen visszahívást.</p>
+      <p class="mt-4 text-[15px] text-white/70 leading-relaxed">Általában 1-2 napon belül tudunk időpontot adni. Ha munkaidőben nem tud telefonálni, kérjen visszahívást.</p>
       <div class="mt-8 flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3">
         <a href={`tel:${clinic.phone}`} class="btn btn-copper">Hívás most</a>
         <a href={`${base}kapcsolat#visszahivas`} class="btn border border-white/30 hover:border-white">Visszahívást kérek</a>

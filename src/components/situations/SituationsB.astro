@@ -13,17 +13,17 @@ const base = import.meta.env.BASE_URL;
       <li class="group grid lg:grid-cols-12 gap-4 lg:gap-8 py-5 border-b border-[var(--color-line)]">
         <span class="lg:col-span-1 font-heading text-4xl text-[var(--color-teal-600)] leading-none">{i + 1}</span>
         <div class="lg:col-span-5">
-          <p class="font-mono text-[0.7rem] uppercase tracking-wider text-[var(--color-ink-2)]">{s.tag}</p>
-          <h3 class="mt-2 font-heading text-2xl lg:text-[1.75rem] leading-tight text-[var(--color-navy-900)]">{s.title}</h3>
+          <p class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-ink-2)]">{s.tag}</p>
+          <h3 class="mt-2 font-heading text-[1.65rem] lg:text-[1.9rem] leading-tight text-[var(--color-navy-900)]">{s.title}</h3>
         </div>
         <div class="lg:col-span-6 lg:pt-6">
           <p class="text-[var(--color-ink-2)] leading-relaxed">{s.body}</p>
-          <p class="mt-5 font-mono text-[0.7rem] uppercase tracking-wider text-[var(--color-ink-2)]">{s.methods.length > 1 ? 'Módszerek' : 'Módszer'}</p>
+          <p class="mt-5 font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-ink-2)]">{s.methods.length > 1 ? 'Módszerek' : 'Módszer'}</p>
           <ul class="mt-2 flex flex-wrap gap-2">
             {s.methods.map((m) => (
               <li>
-                <a href={`${base}${m.path}`} class="inline-flex items-baseline gap-1.5 px-3 py-1.5 text-sm bg-[var(--color-teal-50)] text-[var(--color-teal-700)] border border-[var(--color-teal-100)] hover:bg-[var(--color-teal-700)] hover:text-white hover:border-[var(--color-teal-700)] transition-colors">
-                  {m.label}{m.when && <span class="text-xs opacity-70">({m.when})</span>} <span aria-hidden="true">&rarr;</span>
+                <a href={`${base}${m.path}`} class="inline-flex items-baseline gap-1.5 px-3 py-1.5 text-[15px] bg-[var(--color-teal-50)] text-[var(--color-teal-700)] border border-[var(--color-teal-100)] hover:bg-[var(--color-teal-700)] hover:text-white hover:border-[var(--color-teal-700)] transition-colors">
+                  {m.label}{m.when && <span class="text-[13px] opacity-70">({m.when})</span>} <span aria-hidden="true">&rarr;</span>
                 </a>
               </li>
             ))}
