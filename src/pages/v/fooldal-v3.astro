@@ -8,6 +8,7 @@ import { clinic, reviewTotal, ratingText } from '../../data/clinic';
 import { situations } from '../../data/situations';
 import { firstVisit } from '../../data/firstVisit';
 import { founder } from '../../data/founder';
+import { terapeutak, locationOf } from '../../data/team';
 const base = import.meta.env.BASE_URL;
 
 const methods = [
@@ -18,13 +19,11 @@ const methods = [
   { id: 'mutet-utani', name: 'műtét utáni rehabilitáció' },
 ];
 
-const team = [
-  { name: 'Lipták Noémi', img: 'liptak_noemi.jpg' },
-  { name: 'Vágó Eszter', img: 'vago_eszter.jpg' },
-  { name: 'Cseh Ágnes', img: 'cseh_agnes.jpg' },
-  { name: 'Takács Dóra', img: 'takacs_dora.jpg' },
-  { name: 'Kókai Zsuzsa', img: 'kokai_zsuzsa.jpg' },
-];
+// Every active therapist, founder first (shared data, same order as the team page)
+const people = terapeutak
+  .filter((t) => !t.status)
+  .sort((a, b) => Number(b.name === founder.name) - Number(a.name === founder.name))
+  .map((t) => ({ name: t.name, role: t.name === founder.name ? 'Alapító, vezető gyógytornász' : t.title.split(',')[0], src: t.photo, top: t.name === founder.name, loc: locationOf[t.name] }));
 
 const facts = [
   { value: '1993', label: 'óta működik a rendelő' },
@@ -94,13 +93,13 @@ const faqs = [
   <Section eyebrow="Kik kezelik">
     <Fragment slot="title">Relle Éva és {clinic.therapists - 1} gyógytornász, két rendelőben.</Fragment>
     <Fragment slot="aside">Relle Éva 1993-ban alapította a rendelőt, és 2000 óta a Semmelweis Egyetemen is oktat. Minden terapeutánk McKenzie-képzésben részesült.</Fragment>
-    <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-6">
-      {[{ name: founder.name, role: 'Alapító, vezető gyógytornász', src: `${base}${founder.photo}`, top: true }, ...team.map((t) => ({ name: t.name, role: 'Gyógytornász', src: `${base}images/${t.img}`, top: false }))].map((p) => (
+    <ul class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-6">
+      {people.map((p) => (
         <li>
           <div class="aspect-[4/5] overflow-hidden bg-[var(--color-paper-2)]">
             <img src={p.src} alt={p.name} class:list={['w-full object-cover object-top', p.top ? 'h-[108%]' : 'h-full']} loading="lazy" />
           </div>
-          <p class="mt-2 font-heading text-[1.3rem] leading-tight text-[var(--color-navy-900)]">{p.name}</p>
+          <p class="mt-2 font-heading text-[1.15rem] sm:text-[1.3rem] leading-tight text-[var(--color-navy-900)]">{p.name}</p>
           <p class="text-[13px] text-[var(--color-ink-2)]">{p.role}</p>
         </li>
       ))}
@@ -114,7 +113,7 @@ const faqs = [
           </div>
         ))}
       </dl>
-      <a href={`${base}csapatunk`} class="link-arrow text-[var(--color-navy-800)]">Mind a {clinic.therapists} terapeuta, rendelő, szakterület és ár szerint <span aria-hidden="true">&rarr;</span></a>
+      <a href={`${base}csapatunk`} class="link-arrow text-[var(--color-navy-800)]">Terapeuták rendelő, szakterület és ár szerint <span aria-hidden="true">&rarr;</span></a>
     </div>
   </Section>
 
@@ -168,15 +167,19 @@ const faqs = [
         <a href={`${base}kapcsolat#visszahivas`} class="btn border border-white/30 hover:border-white text-white">Visszahívást kérek</a>
       </span>
     </Fragment>
-    <div class="grid lg:grid-cols-2 gap-x-12 border-t border-white/15">
-      {faqs.map((f, i) => (
-        <details class="faq border-b border-white/15" open={i === 0}>
-          <summary class="flex justify-between gap-6 py-5">
-            <h3 class="font-heading text-[1.5rem] leading-snug">{f.q}</h3>
-            <span class="plus text-2xl leading-none text-[var(--color-gold-300)]" aria-hidden="true">+</span>
-          </summary>
-          <p class="pb-6 -mt-1 text-white/75 leading-relaxed measure">{f.a}</p>
-        </details>
+    <div class="grid lg:grid-cols-2 gap-x-12 items-start">
+      {[faqs.slice(0, Math.ceil(faqs.length / 2)), faqs.slice(Math.ceil(faqs.length / 2))].map((col, c) => (
+        <div class="border-t border-white/15">
+          {col.map((f, i) => (
+            <details class="faq border-b border-white/15" open={c === 0 && i === 0}>
+              <summary class="flex justify-between gap-6 py-5">
+                <h3 class="font-heading text-[1.5rem] leading-snug">{f.q}</h3>
+                <span class="plus text-2xl leading-none text-[var(--color-gold-300)]" aria-hidden="true">+</span>
+              </summary>
+              <p class="pb-6 -mt-1 text-white/75 leading-relaxed measure">{f.a}</p>
+            </details>
+          ))}
+        </div>
       ))}
     </div>
     <a href={`${base}gyik`} class="link-arrow mt-6 text-white">További kérdések <span aria-hidden="true">&rarr;</span></a>
