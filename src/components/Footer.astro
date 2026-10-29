@@ -25,7 +25,7 @@ const links = [
           </span>
         </div>
         <p class="mt-6 text-sm leading-relaxed text-white/60 max-w-xs">
-          {clinic.tagline}. {clinic.therapists} gyógytornász, két rendelő, {clinic.hours.days.toLowerCase()} {clinic.hours.open}-{clinic.hours.close}.
+          {clinic.tagline}. {clinic.therapists} gyógytornász, két rendelő, rendelés {clinic.hoursText}.
         </p>
         <a href={`tel:${clinic.phone}`} class="mt-6 inline-block font-heading text-3xl text-white hover:text-[var(--color-gold-300)]">{clinic.phoneDisplay}</a>
       </div>

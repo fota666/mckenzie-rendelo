@@ -114,7 +114,7 @@ const press = [
 ];
 
 const tv = [
-  { title: 'Esés megelőzés', date: '2014. november 10.' },
+  { title: 'Esésmegelőzés', date: '2014. november 10.' },
   { title: 'Csontrikula', date: '2015. január 15.' },
   { title: 'Térdsérülések', date: '2015. október 13.' },
 ];
@@ -125,7 +125,7 @@ const tv = [
   description={`${reviewTotal} Google-értékelés a két rendelőről, páciensvélemények, sajtómegjelenések és TV-szereplések.`}
 >
   <PageHeader eyebrow="Vélemények">
-    <Fragment slot="title">{reviewTotal} Google-értékelés, és amit a páciensek leírtak.</Fragment>
+    <Fragment slot="title">{reviewTotal} Google-értékelés és a páciensek írásos véleményei.</Fragment>
     {clinic.locations.map((l, i) => <>{i > 0 && ', '}{l.name}: {l.rating.value.toFixed(1).replace('.', ',')} ({l.rating.count} vélemény)</>)}.
   </PageHeader>
 

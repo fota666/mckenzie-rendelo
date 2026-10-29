@@ -11,10 +11,10 @@ const methods = [
     subtitle: 'Fő szakterületünk',
     image: `${base}images/modszerek/mckenzie.png`,
     featured: true,
-    description: 'A McKenzie-módszer egy részletes mozgásvizsgálatra épülő egyéni mozgásprogram, amely igen hatékony különböző eredetű gerincproblémák (gerincsérv, porckorongsérv) esetében.',
+    description: 'A McKenzie-módszer részletes mozgásvizsgálatra épülő egyéni mozgásprogram, amely igen hatékony a különböző eredetű gerincproblémák, például a gerincsérv és a porckorongsérv esetében.',
     details: 'A módszert Robin McKenzie új-zélandi gyógytornász fejlesztette ki, és ma már több mint 40 országban alkalmazzák. Lényege, hogy a páciens aktív résztvevője saját gyógyulásának: célzott gyakorlatokkal és önkezelési stratégiákkal tartós eredményeket érünk el.',
     howItWorks: [
-      'Alapos mozgásvizsgálat: ismételt speciális mozgások és pozíciók, miközben figyeljük a fájdalomválaszt',
+      'Alapos mozgásvizsgálat: ismételt speciális mozgások és testhelyzetek, miközben figyeljük a fájdalomra adott reakciót',
       'Egyénre szabott gyakorlatsor összeállítása',
       'Önkezelési stratégia megtanítása: a páciens képessé válik saját panaszai kezelésére',
       'Rendszeres kontroll és a program finomhangolása',
@@ -25,11 +25,11 @@ const methods = [
     id: 'manualterapia',
     title: 'Manuálterápia',
     image: `${base}images/modszerek/manual.png`,
-    description: 'Kézzel végzett diagnosztikai és terápiás fogások összessége, amelyek a mozgatórendszer működési zavarainak felismerésére és kezelésére irányulnak.',
-    details: 'Sérülések, gyulladások, degeneratív betegségek és életkorral járó változások esetén alkalmazzuk. A vizsgálat során felmérjük az izom-, szalag-, bőrreflex-reakciókat, az ízületi mechanikát és az izomfunkciót.',
+    description: 'Kézzel végzett diagnosztikai és terápiás fogások összessége, amelyek a mozgásszervrendszer működési zavarainak felismerésére és kezelésére irányulnak.',
+    details: 'Sérülések, gyulladások, degeneratív betegségek és az életkorral járó változások esetén alkalmazzuk. A vizsgálat során felmérjük az izom-, a szalag- és a bőrreflexeket, valamint az ízületi mechanikát és az izomfunkciót.',
     subtypes: [
-      { name: 'Maitland manuálterápia', desc: 'Páciens-centrikus, bizonyítékokon alapuló módszer. Az ideg-, izom- és ízületi rendszer vizsgálatára épül. Specifikus tesztekkel azonosítjuk a fájdalmat okozó struktúrákat.' },
-      { name: 'Mulligan manuálterápia', desc: 'Az ízületek pozíciós hibáira épül. A terapeuta tartott pozícionálást alkalmaz, miközben a páciens aktívan mozog. Fájdalommentes technika.' },
+      { name: 'Maitland manuálterápia', desc: 'Páciensközpontú, bizonyítékokon alapuló módszer. Az idegrendszer, az izomzat és az ízületek vizsgálatára épül. Specifikus tesztekkel azonosítjuk a fájdalmat okozó struktúrákat.' },
+      { name: 'Mulligan manuálterápia', desc: 'Az ízületek helyzeti eltéréseire épül. A terapeuta egy adott helyzetben tartja az ízületet, miközben a páciens aktívan mozog. Fájdalommentes technika.' },
     ],
     conditions: ['Derékfájás', 'Nyaki és háti fájdalom', 'Vállpanaszok', 'Csípő-, térd-, bokafájdalom', 'Tenisz- és golfkönyök', 'Fagyott váll'],
   },
@@ -37,16 +37,16 @@ const methods = [
     id: 'stabilizacio',
     title: 'Stabilizációs tréning',
     image: `${base}images/modszerek/stabilizacio.png`,
-    description: 'A gerinc stabilitásának megbomlása esetén a gerinc melletti mély izmok erejének helyreállítása, precíz irányítással.',
-    details: 'A tréning során a megrövidült izmok nyújtása és az optimális izom-ízületi egyensúly visszaállítása is megtörténik. A mély stabilizáló izmok célzott erősítése a tartós fájdalommentesség alapja.',
+    description: 'A gerinc stabilitásának megbomlása esetén a gerinc melletti mély izmok erejének helyreállítására törekszünk, precíz irányítással.',
+    details: 'A tréning során a megrövidült izmokat megnyújtjuk, és helyreállítjuk az optimális izom-ízületi egyensúlyt. A mély stabilizáló izmok célzott erősítése a tartós fájdalommentesség alapja.',
     conditions: ['Porckorongsérv utáni állapot', 'Lumbágó', 'Instabil gerinc', 'Túlterhelt gerinc', 'Csigolyacsúszás (spondylolisthesis)'],
   },
   {
     id: 'stretching',
     title: 'Gyógyászati nyújtás (stretching)',
     image: `${base}images/modszerek/stretching.png`,
-    description: 'A fájdalom okozta izomfeszülések terápiás nyújtása és lazítása, az ízületi mozgásterjedelem bővítése mechanikus izomnyújtással.',
-    details: 'Az enyhe, elnyújtott stretching fenntartja a nyújtás hosszát, nyújtja a kötőszövetet, emelt szöveti hőmérsékletet biztosít, alacsony izom-elektromos aktivitás mellett jobb relaxációt eredményez.',
+    description: 'A fájdalom okozta izomfeszülések terápiás nyújtása és lazítása, valamint az ízületi mozgásterjedelem növelése mechanikus izomnyújtással.',
+    details: 'Az enyhe, elnyújtott stretching fenntartja a nyújtás hatását, nyújtja a kötőszövetet, növeli a szövetek hőmérsékletét, és alacsony izom-elektromos aktivitás mellett elősegíti az izmok ellazulását.',
     conditions: ['Izomgörcsök, izomfeszülés', 'Csökkent ízületi mozgásterjedelem', 'Izommerevség', 'Keringési zavarok', 'Regeneráció gyorsítása'],
   },
   {
@@ -54,24 +54,24 @@ const methods = [
     title: 'Kineziológiai taping',
     image: `${base}images/modszerek/taping.png`,
     description: 'Speciális ragasztószalag segítségével befolyásoljuk a mozgásszervrendszer működését. A szalag hatása 5-7 napig tart, gyógyszert nem tartalmaz.',
-    details: 'Japánban, Koreában és Németországban fejlesztették ki. A bőr, izom, ízületi tok receptorait, szalagokat és nyirokérrendszert befolyásolja. Hatékonysága a képzett szakember által végzett korrekt felhelyezéstől függ.',
+    details: 'Japánban, Koreában és Németországban fejlesztették ki. A bőr, az izmok és az ízületi tok receptoraira, valamint a szalagokra és a nyirokrendszerre hat. Hatékonysága a képzett szakember által végzett korrekt felhelyezéstől függ.',
     conditions: ['Sportsérülések', 'Ficamok, rándulások', 'Tenisz- és golfkönyök', 'Tartáshibák', 'Ízületi mozgásproblémák', 'Fejfájás', 'Achilles-ín rehabilitáció'],
   },
   {
     id: 'mutet-utani',
     title: 'Műtét utáni rehabilitáció',
     image: `${base}images/modszerek/mutet_utani_rehab.png`,
-    description: 'A mozgásképesség visszaállítása, izomerősítés, nyújtás és a szükséges ízületi funkciók helyreállítása, egészen a sportolói szintig.',
-    details: 'A műtét előtti terápia felkészíti az ízületeket és izmokat. A műtét utáni terápia visszaállítja az erőt, a mozgást, és megelőzi a szövődményeket. Célunk a maximális felépülés, akár a sérülés előtti szintig.',
+    description: 'A cél a mozgásképesség visszaállítása, az izmok erősítése és a szükséges ízületi funkciók helyreállítása, egészen a sportolói szintig.',
+    details: 'A műtét előtti terápia felkészíti az ízületeket és az izmokat. A műtét utáni terápia visszaállítja az erőt és a mozgásképességet, valamint megelőzi a szövődményeket. Célunk a maximális felépülés, akár a sérülés előtti szintig.',
     conditions: ['Csonttörések', 'Szalagszakadások', 'Gerinc-, csípő-, térdműtét', 'Sportsérülések', 'Bütyök, kalapácsujj', 'Alagút-szindróma', 'Nyakcsigolya ostor-sérülés'],
   },
   {
     id: 'izuleti-fajdalmak',
     title: 'Ízületi fájdalmak gyógytornája',
     image: `${base}images/modszerek/izuleti_fajdalmak.png`,
-    description: 'A fájdalom okait és eredetét megismerve egyéni mozgásterápia segítségével javítjuk az ízület mozgását, funkcióját és csökkentjük annak fájdalmát.',
+    description: 'A fájdalom okainak és eredetének feltárása után egyéni mozgásterápia segítségével javítjuk az ízület mozgását és funkcióját, valamint csökkentjük az ízületi fájdalmat.',
     details: 'Akut sportsérülések és a tartósan helytelen mozgás következményeinek kezelése. Passzív mozgatás, aktív erősítés és nyújtás kombinálása. Kiemelt figyelmet fordítunk az újrasérülés megelőzésére is.',
-    conditions: ['Térd fájdalom', 'Váll fájdalom', 'Csípő fájdalom', 'Boka fájdalom', 'Csukló fájdalom', 'Gerinceredetű ízületi panaszok'],
+    conditions: ['Térdfájdalom', 'Vállfájdalom', 'Csípőfájdalom', 'Bokafájdalom', 'Csuklófájdalom', 'Gerinceredetű ízületi panaszok'],
   },
   {
     id: 'tartasjavitas',
@@ -85,8 +85,8 @@ const methods = [
     id: 'schroth',
     title: 'Schroth-terápia',
     image: `${base}images/modszerek/schroth.png`,
-    description: 'A gerincferdülés (scoliosis), a Scheuermann-betegség és egyes tartáshibák speciális kezelési módszere, mely jól beépíthető a hétköznapi élet mozgásaiba.',
-    details: 'Katharina Schroth által kifejlesztett háromdimenziós scoliosis terápia (3DST). A hagyományos 2D megközelítéssel szemben a csigolyák rotációjából eredő bordapúpot is korrigálja. Aszimmetrikus pozíciókkal aktiválja a törzs izmait, háromdimenziós légzéssel korrigálja a rotációt és a görbületet.',
+    description: 'A gerincferdülés (scoliosis), a Scheuermann-betegség és egyes tartáshibák speciális kezelési módszere, amely jól beilleszthető a mindennapi mozgásba.',
+    details: 'A Katharina Schroth által kifejlesztett háromdimenziós scoliosisterápia (3DST). A hagyományos 2D megközelítéssel szemben a csigolyák rotációjából eredő bordapúpot is korrigálja. Aszimmetrikus pozíciókkal aktiválja a törzs izmait, háromdimenziós légzéssel korrigálja a rotációt és a görbületet.',
     conditions: ['Gerincferdülés (scoliosis)', 'Scheuermann-betegség', 'Tartáshibák', 'Bordapúp korrekció'],
   },
 ];
@@ -97,7 +97,7 @@ const methods = [
   description="9 kezelési módszer: McKenzie-módszer, manuálterápia, stabilizációs tréning, Schroth-terápia, kineziológiai taping és műtét utáni rehabilitáció. Mikor melyiket ajánljuk."
 >
   <PageHeader eyebrow="Kezelési módszerek">
-    <Fragment slot="title">Kilenc módszer, egy vizsgálattal kezdve.</Fragment>
+    <Fragment slot="title">Kilenc módszer, a kezelést egy vizsgálat előzi meg.</Fragment>
     A McKenzie-módszer a fő szakterületünk. Az első alkalom vizsgálata alapján a terapeuta dönti el, melyik módszert kombinálja vele, ezt nem kell előre kiválasztania.
   </PageHeader>
 

@@ -11,6 +11,7 @@ export const clinic = {
   email: 'mck.relle@t-online.hu',
   therapists: 15, // active; 3 more on GYES (see csapatunk.astro)
   bookingHours: 'Hétköznap 9:00-17:00', // phone line hours, as on the old kapcsolat page
+  hoursText: 'hétfőtől péntekig, 8:00 és 20:00 között',
   hours: { days: 'Hétfő-péntek', open: '08:00', close: '20:00', schema: 'Mo-Fr 08:00-20:00' },
   sameAs: [
     'https://www.facebook.com/p/McKenzie-Gy%C3%B3gytorna-Rendel%C5%91-100063646028294/',

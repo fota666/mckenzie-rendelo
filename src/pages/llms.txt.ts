@@ -14,7 +14,7 @@ export const GET: APIRoute = ({ site }) => {
 
 ## Tények
 - ${clinic.therapists} gyógytornász
-- Nyitvatartás: ${clinic.hours.days} ${clinic.hours.open}-${clinic.hours.close}
+- Rendelés: ${clinic.hoursText}
 - Időpont általában 1-2 napon belül, beutaló nem kell
 - Telefon: ${clinic.phoneDisplay}
 - ${clinic.prices.single.label} (${clinic.prices.single.duration}): ${clinic.prices.single.amount}
