@@ -40,7 +40,7 @@ export const situations: Situation[] = [
       { path: 'modszerek#stabilizacio', label: 'Stabilizációs tréning', when: 'megelőzés' },
       { path: 'modszerek#tartasjavitas', label: 'Tartásjavítás', when: 'megelőzés' },
     ],
-    pages: [{ path: 'derekfajas', label: 'Derékfájás' }, { path: 'nyakfajas', label: 'Nyakfájás' }],
+    pages: [{ path: 'derekfajas', label: 'Derékfájás' }, { path: 'nyakfajas', label: 'Nyakfájás' }, { path: 'ulomunka-tartashibak', label: 'Ülőmunka okozta fájdalom' }],
     media: { video: 'stabilizacio', image: 'video/stabilizacio.jpg', alt: 'Stabilizáló gyakorlat gumiszalaggal' },
   },
   {
@@ -54,7 +54,7 @@ export const situations: Situation[] = [
       { path: 'modszerek#mckenzie', label: 'McKenzie-módszer', when: 'konzervatív kezelés' },
       { path: 'modszerek#mutet-utani', label: 'Műtét előtti és utáni rehabilitáció', when: 'ha műtét lesz' },
     ],
-    pages: [{ path: 'porckorongserv', label: 'Porckorongsérv' }, { path: 'isiasz', label: 'Isiász' }],
+    pages: [{ path: 'porckorongserv', label: 'Porckorongsérv' }, { path: 'isiasz', label: 'Isiász' }, { path: 'muteti-rehabilitacio', label: 'Műtét előtt és után' }],
     media: { video: 'kezeles', image: 'video/kezeles.jpg', alt: 'Manuális kezelés fekvő páciensen' },
   },
   {
@@ -68,6 +68,7 @@ export const situations: Situation[] = [
       { path: 'modszerek#schroth', label: 'Schroth-terápia' },
       { path: 'modszerek#tartasjavitas', label: 'Tartásjavítás', when: 'kiegészítő' },
     ],
+    pages: [{ path: 'gerincferdules', label: 'Gerincferdülés' }],
     media: { image: 'images/modszerek/schroth.png', alt: 'Schroth-terápia gyakorlat' },
   },
 ];

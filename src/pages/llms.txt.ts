@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { clinic, reviewTotal, ratingText } from '../data/clinic';
+import { conditions } from '../data/conditions';
 
 // Plain-text summary for AI answer engines (llmstxt.org convention).
 // Only facts that are also visible on the site, from the same data files.
@@ -8,6 +9,8 @@ export const GET: APIRoute = ({ site }) => {
   const loc = clinic.locations
     .map((l) => `- ${l.name} (Google: ${l.googleName}): ${l.postalCode} Budapest, ${l.street} (${l.district}). ${l.transit}. Parkolás: ${l.parking}. Google-értékelés: ${ratingText(l.rating.value)} (${l.rating.count} vélemény). Térkép: ${l.mapsUrl}`)
     .join('\n');
+
+  const pages = conditions.map((c) => `- [${c.name}](${root}${c.slug}): mikor segít a gyógytorna, mikor kell előbb orvos, hogyan kezeljük`).join('\n');
 
   const body = `# ${clinic.name}
 
@@ -28,7 +31,7 @@ ${loc}
 
 ## Oldalak
 - [Kezelési módszerek](${root}modszerek): McKenzie-módszer, manuálterápia, stabilizációs tréning, Schroth-terápia, műtét előtti és utáni rehabilitáció, tartásjavítás, kineziológiai taping
-- [Derékfájás](${root}derekfajas), [Nyakfájás](${root}nyakfajas), [Porckorongsérv](${root}porckorongserv), [Isiász](${root}isiasz): mikor segít a gyógytorna, mikor kell előbb orvos, hogyan kezeljük, ár
+${pages}
 - [Csapatunk](${root}csapatunk): terapeuták rendelővel, képesítéssel, nyelvvel és árral
 - [Árak](${root}araink)
 - [Vélemények](${root}velemenyek)

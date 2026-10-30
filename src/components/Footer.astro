@@ -1,6 +1,7 @@
 ---
 import LogoMark from './LogoMark.astro';
 import { clinic } from '../data/clinic';
+import { conditions } from '../data/conditions';
 const base = import.meta.env.BASE_URL;
 const year = new Date().getFullYear();
 const links = [
@@ -11,12 +12,7 @@ const links = [
   { href: `${base}gyik`, label: 'Gyakori kérdések' },
   { href: `${base}kapcsolat`, label: 'Kapcsolat' },
 ];
-const conditionLinks = [
-  { href: `${base}derekfajas`, label: 'Derékfájás' },
-  { href: `${base}nyakfajas`, label: 'Nyakfájás' },
-  { href: `${base}porckorongserv`, label: 'Porckorongsérv' },
-  { href: `${base}isiasz`, label: 'Isiász' },
-];
+const conditionLinks = conditions.map((c) => ({ href: `${base}${c.slug}`, label: c.name }));
 ---
 
 <footer class="bg-[var(--color-navy-950)] text-white/80">
