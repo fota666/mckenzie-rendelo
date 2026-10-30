@@ -19,20 +19,16 @@ const complaints = [
 ---
 
   <!-- HERO: full-bleed loop. On large screens the clip fills the right 62% and fades into the dark copy side. -->
-  <section class="relative isolate overflow-hidden bg-[var(--color-navy-950)] text-white">
+  <section class="relative isolate overflow-hidden bg-[var(--color-navy-950)] text-white flex flex-col">
     {compact ? (
       <>
         <LoopVideo name="hero" eager label="Gyógytornász manuális kezelést végez egy oldalt fekvő páciensen" class="absolute inset-0 -z-20 w-full h-full object-cover" />
         <div class="absolute inset-0 -z-10 bg-[var(--color-navy-950)]/75"></div>
       </>
     ) : (
-      <>
-        <LoopVideo name="rendelo/derekfajas-hasonfekvo-mobilizalas" eager label="Gyógytornász hasonfekvő páciens derekát kezeli a rendelőben" class="absolute inset-y-0 right-0 -z-20 w-full lg:w-[62%] h-full object-cover" />
-        <div class="absolute inset-0 -z-10 bg-[var(--color-navy-950)]/72 lg:bg-transparent lg:bg-[linear-gradient(90deg,#061710_0%,#061710_40%,rgba(6,23,16,0.7)_62%,rgba(6,23,16,0.08)_100%)]"></div>
-        <div class="absolute inset-x-0 bottom-0 h-24 -z-10 bg-gradient-to-t from-[var(--color-navy-950)]/80 to-transparent"></div>
-      </>
+      <div class="hidden lg:block absolute inset-0 -z-10 bg-[linear-gradient(90deg,#061710_0%,#061710_40%,rgba(6,23,16,0.7)_62%,rgba(6,23,16,0.08)_100%)]"></div>
     )}
-    <div class:list={["max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center", compact ? "pt-16 pb-16" : "pt-16 pb-14 lg:pt-20 lg:pb-20 min-h-[min(78vh,760px)]"]}>
+    <div class:list={["w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center", compact ? "pt-16 pb-16" : "pt-12 pb-10 lg:pt-20 lg:pb-20 lg:min-h-[min(78vh,760px)]"]}>
       <div class="max-w-3xl">
         <p class="eyebrow eyebrow-light">Gyógytorna Budapesten &middot; V. és XI. kerület &middot; 1993 óta</p>
         <h1 class="display mt-4 text-[2.25rem] sm:text-5xl lg:text-[3.4rem]">
@@ -66,4 +62,10 @@ const complaints = [
         </dl>
       </div>
     </div>
+    {!compact && (
+      <div class="relative aspect-[4/3] sm:aspect-[2/1] lg:aspect-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[62%] lg:-z-20 overflow-hidden">
+        <LoopVideo name="rendelo/derekfajas-hasonfekvo-mobilizalas" eager label="Gyógytornász hasonfekvő páciens derekát kezeli a rendelőben" class="absolute inset-0 w-full h-full object-cover" />
+        <div class="lg:hidden absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[var(--color-navy-950)] to-transparent"></div>
+      </div>
+    )}
   </section>
