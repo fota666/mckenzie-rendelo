@@ -4,16 +4,26 @@ import { clinic } from '../data/clinic';
 interface Props { compact?: boolean }
 const { compact = false } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const complaints = [
+  { href: 'derekfajas', label: 'Derékfájás' },
+  { href: 'nyakfajas', label: 'Nyakfájás' },
+  { href: 'porckorongserv', label: 'Porckorongsérv' },
+  { href: 'isiasz', label: 'Isiász' },
+];
 ---
 
-  <!-- HERO -->
+  <!-- HERO: copy on the left, one vertical clip on the right (below the copy on phones) -->
   <section class="relative isolate overflow-hidden bg-[var(--color-navy-950)] text-white">
-    <LoopVideo name="hero" eager label="Gyógytornász manuális kezelést végez egy oldalt fekvő páciensen" class="absolute inset-0 -z-20 w-full h-full object-cover" />
-    <div class="absolute inset-0 -z-10 bg-[var(--color-navy-950)]/75 lg:bg-transparent lg:bg-[linear-gradient(90deg,rgba(6,23,16,0.92)_0%,rgba(6,23,16,0.7)_45%,rgba(6,23,16,0.15)_100%)]"></div>
-    <div class:list={["max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-end", compact ? "pt-16 pb-16" : "pt-16 pb-14 lg:pt-24 lg:pb-16 min-h-[min(70vh,720px)]"]}>
-      <div class="max-w-3xl">
+    {compact && (
+      <>
+        <LoopVideo name="hero" eager label="Gyógytornász manuális kezelést végez egy oldalt fekvő páciensen" class="absolute inset-0 -z-20 w-full h-full object-cover" />
+        <div class="absolute inset-0 -z-10 bg-[var(--color-navy-950)]/75"></div>
+      </>
+    )}
+    <div class:list={["max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:gap-14", compact ? "pt-16 pb-16" : "pt-12 pb-12 lg:pt-16 lg:pb-16 lg:grid-cols-12 items-center"]}>
+      <div class:list={[compact ? "max-w-3xl" : "lg:col-span-7"]}>
         <p class="eyebrow eyebrow-light">McKenzie referenciarendelő &middot; Budapest V. és XI. kerület</p>
-        <h1 class="display mt-4 text-[2.25rem] sm:text-5xl lg:text-[4rem]">
+        <h1 class="display mt-4 text-[2.25rem] sm:text-5xl lg:text-[3.6rem]">
           <em class="text-[var(--color-gold-300)]">Derék- és nyakfájás</em> kezelése, amelyet otthon is folytathat.
         </h1>
         <p class="mt-5 text-lg text-white/75 measure leading-relaxed">
@@ -29,6 +39,19 @@ const base = import.meta.env.BASE_URL;
           <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Rendelők</dt><dd class="mt-1 text-white/85">Sas utca (V.) &middot; Bartók Béla út (XI.)</dd></div>
           <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Beutaló</dt><dd class="mt-1 text-white/85">Nem kell</dd></div>
         </dl>
+        {!compact && (
+          <p class="mt-5 text-[15px] text-white/70">
+            Panasza:
+            {complaints.map((c, i) => <>{i > 0 && <span class="text-white/30"> &middot; </span>} <a href={`${base}${c.href}`} class="underline underline-offset-4 decoration-white/30 hover:decoration-white">{c.label}</a></>)}
+          </p>
+        )}
       </div>
+      {!compact && (
+        <div class="lg:col-span-5">
+          <div class="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none overflow-hidden bg-[var(--color-navy-900)]">
+            <LoopVideo name="rendelo/derekfajas-hasonfekvo-mobilizalas" eager label="Gyógytornász hasonfekvő páciens derekát kezeli a rendelőben" class="absolute inset-0 w-full h-full object-cover" />
+          </div>
+        </div>
+      )}
     </div>
   </section>

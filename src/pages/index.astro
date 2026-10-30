@@ -1,249 +1,227 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import LoopVideo from '../components/LoopVideo.astro';
 import Hero from '../components/Hero.astro';
+import LoopVideo from '../components/LoopVideo.astro';
+import Section from '../components/v3/Section.astro';
 import FounderD4 from '../components/founder/FounderD4.astro';
-import SituationsB from '../components/situations/SituationsB.astro';
 import { clinic, reviewTotal, ratingText } from '../data/clinic';
+import { situations } from '../data/situations';
 import { firstVisit } from '../data/firstVisit';
+import { founder } from '../data/founder';
+import { terapeutak, locationOf } from '../data/team';
 const base = import.meta.env.BASE_URL;
+
+const methods = [
+  { id: 'mckenzie', name: 'McKenzie-módszer' },
+  { id: 'manualterapia', name: 'manuálterápia' },
+  { id: 'stabilizacio', name: 'stabilizációs tréning' },
+  { id: 'schroth', name: 'Schroth-terápia' },
+  { id: 'mutet-utani', name: 'műtét utáni rehabilitáció' },
+];
+
+// Every active therapist, founder first (shared data, same order as the team page)
+const people = terapeutak
+  .filter((t) => !t.status && t.name !== founder.name)
+  .map((t) => ({ name: t.name, role: t.name === founder.name ? 'Alapító, vezető gyógytornász' : t.title.split(',')[0], src: t.photo, top: t.name === founder.name, loc: locationOf[t.name] }));
 
 const facts = [
   { value: '1993', label: 'óta működik a rendelő' },
-  { value: String(clinic.therapists), label: 'gyógytornász két rendelőben' },
-  { value: '1-2', label: 'napos várakozási idő' },
-  { value: ratingText(clinic.locations[0].rating.value), label: `átlag a Google-on, ${reviewTotal} vélemény` },
-];
-
-
-
-const methods = [
-  { id: 'mckenzie', name: 'McKenzie-módszer (MDT)', for: 'derékfájás, nyakfájás, isiász, porckorongsérv' },
-  { id: 'manualterapia', name: 'Manuálterápia (Maitland, Mulligan)', for: 'ízületi mozgásbeszűkülés, váll, csípő, térd' },
-  { id: 'stabilizacio', name: 'Stabilizációs tréning', for: 'instabil vagy túlterhelt gerinc, lumbágó' },
-  { id: 'schroth', name: 'Schroth-terápia', for: 'scoliosis, Scheuermann-betegség' },
-  { id: 'mutet-utani', name: 'Műtét utáni rehabilitáció', for: 'gerinc-, csípő-, térdműtét, szalagszakadás' },
-];
-
-const team = [
-  { name: 'Lipták Noémi', img: 'liptak_noemi.jpg' },
-  { name: 'Vágó Eszter', img: 'vago_eszter.jpg' },
-  { name: 'Cseh Ágnes', img: 'cseh_agnes.jpg' },
-  { name: 'Takács Dóra', img: 'takacs_dora.jpg' },
-  { name: 'Kókai Zsuzsa', img: 'kokai_zsuzsa.jpg' },
+  { value: String(clinic.therapists), label: 'gyógytornász' },
+  { value: '1-2', label: 'nap az első időpontig' },
 ];
 
 const reviews = [
   { text: 'Nincs gerincsérvből eredő kilátástalanság. A McKenzie-módszerrel gyakorlatilag visszakaptam az életem.', name: 'Kulcsár Krisztián', role: 'világbajnok vívó' },
   { text: 'A fájdalommentes életet jelenti az itt kapott kezelés. Professzionális ellátás, barátságos légkör, rendkívül hozzáértő gyógytornász!', name: 'Dr. Utassyné Kormos Zsuzsa', role: 'páciens' },
-  { text: 'Mostanában semmi bajom. Mégis jövök. Kelleni kell valakinek. Testileg is, lelkileg is.', name: 'Havas Henrik', role: 'újságíró' },
 ];
 
-// Answer-first wording. The FAQPage markup lives on /gyik only, so the two pages do not compete.
+const speaks = (lang: string) => terapeutak.filter((t) => !t.status && t.langs.includes(lang));
+const english = speaks('angol').length;
+const german = speaks('német').map((t) => t.name);
+
 const faqs = [
-  { q: 'Kell beutaló a McKenzie gyógytornához?', a: 'Nem kell beutaló, magánrendelésről van szó. Ha van korábbi MRI- vagy röntgenlelete, hozza magával az első alkalomra.' },
-  { q: 'Mennyibe kerül egy kezelés?', a: `Egy 55 perces egyéni kezelés ${clinic.prices.single.amount}, ${clinic.prices.single.note}. Az 5 alkalmas bérlet ${clinic.prices.pass.amount}, ez ${clinic.prices.pass.perVisit}. A társadalombiztosítás nem fedezi a kezelés költségét, egészségpénztári elszámolásra alkalmas számlát adunk.` },
-  { q: 'Hogyan foglalhatok időpontot, és mennyit kell várni?', a: `Telefonon foglalhat a ${clinic.phoneDisplay} számon, hétköznap 9 és 17 óra között, vagy kérhet visszahívást a weboldalon. Általában 1-2 napon belül tudunk időpontot adni. A kezelések hétköznap 8 és 20 óra között vannak, a V. és a XI. kerületi rendelőben.` },
-  { q: 'Porckorongsérvvel is lehet gyógytornára jönni?', a: 'Igen. A porckorongsérv nagy része konzervatív kezelésre javul, ezért műtét előtt érdemes kipróbálni a McKenzie-módszert. Ha vizelet- vagy székletürítési zavar, gáttáji zsibbadás vagy gyorsan erősödő izomgyengeség jelentkezik, ne gyógytornára jöjjön, hanem azonnal forduljon orvoshoz.' },
+  { q: 'Mi az a McKenzie-módszer?', a: 'A McKenzie-módszer (MDT, Mechanical Diagnosis and Therapy) részletes mozgásvizsgálatra épülő gyógytorna gerinc- és végtagpanaszokra. Ismételt mozgásokkal és testhelyzetekkel megnézzük, hogyan változik a fájdalom, ebből áll össze az a gyakorlatsor, amelyet otthon egyedül is végezhet.' },
+  { q: 'Kell beutaló?', a: 'Nem kell, magánrendelésről van szó. Ha van korábbi MRI- vagy röntgenlelete, hozza magával.' },
+  { q: 'Hogyan foglalhatok időpontot?', a: `Telefonon a ${clinic.phoneDisplay} számon, hétköznap 9 és 17 óra között, vagy kérjen visszahívást. Általában 1-2 napon belül kap időpontot, a kezelések hétköznap 8 és 20 óra között vannak.` },
+  { q: 'Porckorongsérvvel is jöhetek?', a: 'Igen, a sérv sok esetben konzervatív kezeléssel is javul. Vizelet- vagy székletürítési zavar, gáttáji zsibbadás vagy gyorsan erősödő gyengeség esetén viszont azonnal orvoshoz forduljon.' },
+  { q: 'Hány alkalom kell, és mikor javulok?', a: 'A javulás üteme egyénenként eltér, ezért előre nem ígérünk alkalomszámot. Az első vizsgálat után a terapeuta elmondja, mire számíthat. Egy kezelési sor gyakran 4-6 alkalomból áll.' },
+  { q: 'Fáj a kezelés?', a: 'A vizsgálat és a gyakorlatok alatt folyamatosan figyeljük, hogyan változik a fájdalma, és úgy választjuk meg a mozgásokat, hogy ne erősítsék a panaszt. Ha valami kellemetlen, szóljon, és módosítunk.' },
+  { q: 'Mit vegyek fel?', a: 'Kényelmes, mozgásra alkalmas ruhát. Öltöző és mosdó mindkét rendelőben van.' },
+  { q: 'Mi van, ha le kell mondanom?', a: 'Kérjük, legalább 24 órával korábban jelezze telefonon.' },
+  { q: 'Beszélnek angolul vagy németül?', a: `Igen. ${english} terapeutánk beszél angolul, németül ${german.join(', ')}. Telefonon kérjen időpontot hozzájuk.` },
+  { q: 'Ülőmunka okozta nyak- és derékfájásra is érdemes jönni?', a: 'Igen. A vizsgálat megmutatja, mely testhelyzetek váltják ki a panaszt, és tartásjavító gyakorlatokat, ergonómiai tanácsokat is kap az íróasztali munkához.' },
+  { q: 'Gyermeket is kezelnek?', a: 'Igen, gerincferdülés (Schroth-terápia) és gyermekkori tartáshibák esetén is. Időpontkéréskor jelezze, hogy gyermeknek kéri, és megfelelő terapeutát ajánlunk.' },
+  { q: 'Elszámolható egészségpénztárral?', a: 'Igen, számlát adunk, amelyet az egészségpénztárnál be lehet nyújtani. A TB nem fedezi a kezelést.' },
 ];
-
 ---
 
 <BaseLayout title="McKenzie Gyógytorna Rendelő Budapest | Derék- és nyakfájás kezelése">
   <Hero />
 
-  <!-- SITUATIONS -->
-  <SituationsB />
+  <!-- 1. Situations -->
+  <Section eyebrow="Kik jönnek hozzánk">
+    <Fragment slot="title">Négy helyzet, amellyel hozzánk fordulnak.</Fragment>
+    <Fragment slot="aside">Válassza ki, melyik hasonlít az Önére. Mindegyiknél leírjuk, hogyan kezdünk hozzá, és melyik módszer segít.</Fragment>
+    <ol class="border-t border-[var(--color-line)]">
+      {situations.map((s, i) => (
+        <li class="py-7 border-b border-[var(--color-line)] grid lg:grid-cols-12 gap-x-10 gap-y-3">
+          <h3 class="lg:col-span-5 font-heading text-[1.6rem] leading-snug text-[var(--color-navy-900)]"><span class="text-[var(--color-teal-700)] mr-2">{i + 1}.</span>{s.title}</h3>
+          <div class="lg:col-span-7">
+            <p class="text-[var(--color-ink-2)] leading-relaxed">{s.body}</p>
+            <p class="mt-3 text-[15px]">
+              {s.methods.map((m, j) => (
+                <>{j > 0 && <span class="text-[var(--color-ink-2)]"> &middot; </span>}<a href={`${base}${m.path}`} class="text-[var(--color-teal-700)] underline underline-offset-4 decoration-[var(--color-teal-100)] hover:decoration-[var(--color-teal-700)]">{m.label}</a>{m.when && <span class="text-[var(--color-ink-2)]"> ({m.when})</span>}</>
+              ))}
+            </p>
+            {s.pages && (
+              <p class="mt-2 text-[15px] text-[var(--color-ink-2)]">Bővebben: {s.pages.map((pg, k) => <>{k > 0 && ' · '}<a href={`${base}${pg.path}`} class="link-arrow text-[var(--color-navy-800)]">{pg.label}</a></>)}</p>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </Section>
 
+  <!-- 2. How we work: first visit + method -->
+  <Section eyebrow="Hogyan dolgozunk">
+    <Fragment slot="title">Az első 55 perc: vizsgálat, kezelés és saját gyakorlatsor.</Fragment>
+    <Fragment slot="aside">
+      Fő módszerünk a McKenzie-módszer, mellette {methods.slice(1).map((m, j) => <>{j > 0 && ', '}<a href={`${base}modszerek#${m.id}`} class="underline underline-offset-4 hover:text-[var(--color-teal-700)]">{m.name}</a></>)} és további négy eljárás.
+      <a href={`${base}modszerek`} class="link-arrow mt-4 text-[var(--color-navy-800)]">Mind a 9 módszer és a szakmai háttér <span aria-hidden="true">&rarr;</span></a>
+    </Fragment>
+    <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+      {firstVisit.map((step, i) => (
+        <li>
+          <div class="relative aspect-[3/4] overflow-hidden bg-[var(--color-paper-2)]">
+            <LoopVideo name={`rendelo/${step.clip}`} label={`${step.title}: ${step.alt}`} class="absolute inset-0 w-full h-full object-cover" />
+          </div>
+          <p class="mt-4 text-[13px] font-medium text-[var(--color-teal-700)]">{i + 1}. lépés &middot; {step.min}. perc</p>
+          <h3 class="mt-1 font-heading text-[1.6rem] leading-snug text-[var(--color-navy-900)]">{step.title}</h3>
+          <p class="mt-2 text-[15px] text-[var(--color-ink-2)] leading-relaxed">{step.body}</p>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <!-- 3a. Founder introduction with the clinic's philosophy (kept from the previous homepage) -->
   <FounderD4 />
 
-  <!-- FACTS -->
-  <section class="border-y border-[var(--color-line)]">
-    <dl class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 divide-x divide-[var(--color-line)]">
-      {facts.map((f, i) => (
-        <div class={`py-8 lg:py-10 ${i % 2 === 0 ? 'pr-4' : 'pl-6'} lg:px-8 ${i === 0 ? 'lg:pl-0' : ''} ${i > 1 ? 'border-t lg:border-t-0 border-[var(--color-line)]' : ''}`}>
-          <dd class="font-heading text-3xl sm:text-4xl lg:text-5xl whitespace-nowrap text-[var(--color-navy-900)]">{f.value}</dd>
-          <dt class="mt-2 font-mono text-[0.82rem] tracking-wider uppercase text-[var(--color-ink-2)]">{f.label}</dt>
-        </div>
-      ))}
-    </dl>
-  </section>
-
-  <!-- FIRST VISIT -->
-  <section class="bg-[var(--color-navy-900)] text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-      <div class="grid lg:grid-cols-12 gap-8 items-end">
-        <div class="lg:col-span-7">
-          <p class="eyebrow eyebrow-light">Az első alkalom</p>
-          <h2 class="display mt-5 text-3xl lg:text-4xl">55 perc, és hazaviszi a saját gyakorlatsorát.</h2>
-        </div>
-        <p class="lg:col-span-5 text-white/70 leading-relaxed">Kényelmes, mozgásra alkalmas ruhát hozzon. Öltöző és mosdó mindkét rendelőben van.</p>
-      </div>
-      <ol class="mt-8 sm:mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6 sm:gap-y-8">
-        {firstVisit.map((step, i) => (
-          <li>
-            <div class="hidden sm:block aspect-[4/3] overflow-hidden bg-[var(--color-navy-800)]">
-              {step.video ? (
-                <LoopVideo name={step.video} label={step.title} class="w-full h-full object-cover" />
-              ) : (
-                <div class="h-full p-5 flex flex-col justify-end">
-                  <p class="font-heading text-[1.35rem] leading-tight">Hozza magával a leleteit.</p>
-                  <p class="mt-3 text-[15px] text-white/60">MRI-leletet, röntgenleletet és korábbi zárójelentést, ha van.</p>
-                </div>
-              )}
-            </div>
-            <p class="sm:mt-6 font-mono text-[13px] tracking-wider text-[var(--color-teal-300)]">{String(i + 1).padStart(2, '0')} &middot; {step.min}. perc</p>
-            <h3 class="mt-3 font-heading text-[1.65rem]">{step.title}</h3>
-            <p class="mt-3 text-[15px] leading-relaxed text-white/65">{step.body}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <!-- METHODS -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-    <div class="grid lg:grid-cols-12 gap-10">
-      <div class="lg:col-span-5">
-        <p class="eyebrow">Kezelési módszerek</p>
-        <h2 class="display mt-5 text-3xl lg:text-4xl text-[var(--color-navy-900)]">A McKenzie-módszer a fő szakterületünk, emellett nyolc másik eljárást is alkalmazunk.</h2>
-        <p class="mt-6 text-[var(--color-ink-2)] leading-relaxed measure">Nem kell előre eldöntenie, melyik módszerre van szüksége. Az első vizsgálat után a terapeuta javaslatot tesz a megfelelő módszerek kombinációjára.</p>
-        <div class="hidden sm:block mt-7 aspect-[4/3] max-w-md overflow-hidden bg-[var(--color-paper-2)]">
-          <LoopVideo name="stabilizacio" label="Vállstabilizáló gyakorlat gumiszalaggal, gyógytornász felügyeletével" class="w-full h-full object-cover" />
-        </div>
-      </div>
-      <ul class="lg:col-span-7 border-t border-[var(--color-line)]">
-        {methods.map((m, i) => (
-          <li class="border-b border-[var(--color-line)]">
-            <a href={`${base}modszerek#${m.id}`} class="group grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-4 py-4 hover:bg-white transition-colors px-2 -mx-2">
-              <span class="font-mono text-[13px] text-[var(--color-teal-600)]">{String(i + 1).padStart(2, '0')}</span>
-              <span>
-                <span class="block font-heading text-[1.65rem] text-[var(--color-navy-900)]">{m.name}</span>
-                <span class="block mt-1 text-[15px] text-[var(--color-ink-2)]">{m.for}</span>
-              </span>
-              <span aria-hidden="true" class="text-[var(--color-ink-2)] group-hover:text-[var(--color-navy-900)] group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </a>
-          </li>
-        ))}
-        <li class="pt-5">
-          <a href={`${base}modszerek`} class="link-arrow text-[var(--color-navy-800)]">Mind a 9 módszer és a szakmai háttér <span aria-hidden="true">&rarr;</span></a>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- TEAM -->
-  <section class="bg-[var(--color-paper-2)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 grid lg:grid-cols-12 gap-10 items-center">
-      <div class="lg:col-span-5">
-        <p class="eyebrow">Csapatunk</p>
-        <h2 class="display mt-5 text-3xl lg:text-4xl text-[var(--color-navy-900)]">{clinic.therapists} gyógytornász Relle Éva vezetésével.</h2>
-        <p class="mt-6 text-[var(--color-ink-2)] leading-relaxed measure">Minden terapeutánk McKenzie-képzésben részesült. Mindkét rendelőben egyformán képzett gyógytornászok dolgoznak, a terapeuták képesítéseit és nyelveit a csapat oldalán találja.</p>
-        <a href={`${base}csapatunk`} class="link-arrow mt-8 text-[var(--color-navy-800)]">A teljes csapat <span aria-hidden="true">&rarr;</span></a>
-      </div>
-      <ul class="lg:col-span-7 grid grid-cols-3 gap-3">
-        {team.map((t) => (
-          <li>
-            <div class="aspect-[3/4] overflow-hidden bg-white">
-              <img src={`${base}images/${t.img}`} alt={t.name} class="w-full h-full object-cover" loading="lazy" />
-            </div>
-            <p class="mt-2 text-[13px] text-[var(--color-ink-2)]">{t.name}</p>
-          </li>
-        ))}
+  <!-- 3b. The team -->
+  <Section eyebrow="Csapatunk">
+    <Fragment slot="title">{clinic.therapists - 1} gyógytornász, két rendelőben.</Fragment>
+    <Fragment slot="aside">Minden terapeutánk McKenzie-képzésben részesült, és Relle Éva vezetésével ugyanazzal a vizsgálati módszerrel dolgozik. Telefonon a panasza alapján ajánlunk Önnek valakit.</Fragment>
+    <img src={`${base}images/csapat/csapat-csoportkep.jpg`} alt="A McKenzie Gyógytorna Rendelő teljes gyógytornász csapata a rendelőben" class="w-full aspect-[16/9] object-cover object-[50%_18%] mb-8" loading="lazy" width="2000" height="1336" />
+    <ul class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-x-4 gap-y-6">
+      {people.map((p) => (
         <li>
-          <a href={`${base}csapatunk`} class="aspect-[3/4] flex flex-col justify-end p-4 bg-[var(--color-teal-700)] text-white hover:bg-[var(--color-teal-600)] transition-colors">
-            <span class="font-heading text-3xl">+{clinic.therapists - team.length - 1}</span>
-            <span class="text-[13px] text-white/70">további terapeuta</span>
-          </a>
+          <div class="aspect-[4/5] overflow-hidden bg-[var(--color-paper-2)]">
+            <img src={p.src} alt={p.name} class:list={['w-full object-cover object-top', p.top ? 'h-[108%]' : 'h-full']} loading="lazy" />
+          </div>
+          <p class="mt-2 font-heading text-[1.15rem] leading-tight text-[var(--color-navy-900)]">{p.name}</p>
+          <p class="text-[13px] text-[var(--color-ink-2)]">{p.role}</p>
         </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <section class="bg-[var(--color-paper-2)]">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-      <div>
-        <p class="eyebrow">Vélemények</p>
-        <h2 class="display mt-5 text-3xl lg:text-4xl text-[var(--color-navy-900)]">{reviewTotal} Google-értékelés a két rendelőről.</h2>
-      </div>
-      <div class="flex gap-8 font-mono text-[15px]">
-        {clinic.locations.map((l) => (
-          <a href={l.mapsUrl} target="_blank" rel="noopener" class="group">
-            <span class="font-heading text-[1.65rem] text-[var(--color-navy-900)]">{ratingText(l.rating.value)}</span><br/>
-            <span class="text-[13px] uppercase tracking-wider text-[var(--color-ink-2)] group-hover:text-[var(--color-teal-700)]">{l.name.split(' ')[0]} &middot; {l.rating.count} vélemény &rarr;</span>
-          </a>
+      ))}
+    </ul>
+    <div class="mt-8 pt-6 border-t border-[var(--color-line)] flex flex-wrap items-end justify-between gap-6">
+      <dl class="flex gap-10">
+        {facts.map((f) => (
+          <div class="flex flex-col">
+            <dd class="font-heading text-3xl text-[var(--color-navy-900)]">{f.value}</dd>
+            <dt class="text-[13px] text-[var(--color-ink-2)]">{f.label}</dt>
+          </div>
         ))}
-      </div>
+      </dl>
+      <a href={`${base}csapatunk`} class="link-arrow text-[var(--color-navy-800)]">Terapeuták rendelő, szakterület és ár szerint <span aria-hidden="true">&rarr;</span></a>
     </div>
-    <div class="mt-7 grid md:grid-cols-3 gap-px bg-[var(--color-line)] border border-[var(--color-line)]">
-      {reviews.map((r, i) => (
-        <figure class:list={[i === 2 && "max-md:hidden", "bg-white p-5 lg:p-7 flex flex-col"]}>
-          <blockquote class="font-heading text-[1.5rem] leading-snug text-[var(--color-navy-900)] flex-1">„{r.text}”</blockquote>
-          <figcaption class="mt-8 text-[15px]"><span class="font-medium">{r.name}</span> <span class="text-[var(--color-ink-2)]">&middot; {r.role}</span></figcaption>
+  </Section>
+
+  <!-- 4. Proof and price -->
+  <Section eyebrow="Vélemények és árak">
+    <Fragment slot="title">{ratingText(clinic.locations[0].rating.value)} a Google-on, {reviewTotal} véleményből.</Fragment>
+    <Fragment slot="aside">
+      {clinic.locations.map((l) => (
+        <a href={l.mapsUrl} target="_blank" rel="noopener" class="link-arrow mr-5 text-[var(--color-navy-800)]">{l.name}: {l.rating.count} vélemény <span aria-hidden="true">&rarr;</span></a>
+      ))}
+    </Fragment>
+    <div class="grid lg:grid-cols-12 gap-x-12 gap-y-10">
+    <div class="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+      {reviews.map((r) => (
+        <figure>
+          <blockquote class="font-heading text-[1.4rem] leading-snug text-[var(--color-navy-900)]">„{r.text}”</blockquote>
+          <figcaption class="mt-3 text-[15px]"><span class="font-medium">{r.name}</span> <span class="text-[var(--color-ink-2)]">&middot; {r.role}</span></figcaption>
         </figure>
       ))}
     </div>
-    <div class="mt-7 flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
-      <a href={`${base}velemenyek`} class="link-arrow text-[var(--color-navy-800)]">Összes vélemény <span aria-hidden="true">&rarr;</span></a>
-      {clinic.locations.map((l) => <a href={l.mapsUrl} target="_blank" rel="noopener" class="link-arrow text-[var(--color-navy-800)]">{l.name} a Google-on <span aria-hidden="true">&rarr;</span></a>)}
-    </div>
-  </div>
-  </section>
-
-  <!-- PRICES -->
-  <section class="border-y border-[var(--color-line)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid lg:grid-cols-12 gap-10">
-      <div class="lg:col-span-4">
-        <p class="eyebrow">Árak</p>
-        <h2 class="display mt-5 text-3xl lg:text-4xl text-[var(--color-navy-900)]">Átlátható árak, rejtett költség nélkül.</h2>
-      </div>
-      <div class="lg:col-span-8 grid sm:grid-cols-2 gap-6">
-        <div class="border border-[var(--color-line)] p-5">
-          <p class="font-mono text-[13px] uppercase tracking-wider text-[var(--color-ink-2)]">{clinic.prices.single.label} &middot; {clinic.prices.single.duration}</p>
-          <p class="mt-4 font-heading text-3xl lg:text-4xl whitespace-nowrap text-[var(--color-navy-900)]">{clinic.prices.single.range}</p>
-          <p class="mt-4 text-[15px] text-[var(--color-ink-2)]">Alkalmanként, {clinic.prices.single.note}. Mozgásvizsgálat, kezelés és otthoni gyakorlatsor.</p>
+    <div class="lg:col-span-5">
+    <ul class="border-t border-[var(--color-line)]">
+      <li class="py-5 border-b border-[var(--color-line)] grid grid-cols-[1fr_auto] items-baseline gap-x-6">
+        <div>
+          <h3 class="font-heading text-[1.5rem] text-[var(--color-navy-900)]">{clinic.prices.single.label}</h3>
+          <p class="text-[15px] text-[var(--color-ink-2)]">{clinic.prices.single.duration}, {clinic.prices.single.note}</p>
         </div>
-        <div class="border-2 border-[var(--color-teal-600)] p-5 bg-[var(--color-teal-50)]">
-          <p class="font-mono text-[13px] uppercase tracking-wider text-[var(--color-teal-700)]">{clinic.prices.pass.label}</p>
-          <p class="mt-4 font-heading text-3xl lg:text-4xl whitespace-nowrap text-[var(--color-navy-900)]">{clinic.prices.pass.amount}</p>
-          <p class="mt-4 text-[15px] text-[var(--color-ink-2)]">{clinic.prices.pass.perVisit}, {clinic.prices.pass.saving}. Egészségpénztárra számlát adunk.</p>
+        <p class="font-heading text-[1.75rem] whitespace-nowrap text-[var(--color-navy-900)]">{clinic.prices.single.range}</p>
+      </li>
+      <li class="py-5 border-b border-[var(--color-line)] grid grid-cols-[1fr_auto] items-baseline gap-x-6">
+        <div>
+          <h3 class="font-heading text-[1.5rem] text-[var(--color-navy-900)]">{clinic.prices.pass.label}</h3>
+          <p class="text-[15px] text-[var(--color-ink-2)]">{clinic.prices.pass.perVisit}, {clinic.prices.pass.saving}</p>
         </div>
+        <p class="font-heading text-[1.75rem] whitespace-nowrap text-[var(--color-navy-900)]">{clinic.prices.pass.amount}</p>
+      </li>
+    </ul>
+    <p class="mt-4 text-[15px] text-[var(--color-ink-2)]">Beutaló nem kell. Egészségpénztárra számlát adunk. <a href={`${base}araink`} class="underline underline-offset-4 hover:text-[var(--color-teal-700)]">Árak és tudnivalók</a> &middot; <a href={`${base}velemenyek`} class="underline underline-offset-4 hover:text-[var(--color-teal-700)]">Összes vélemény</a></p>
+    </div>
+    </div>
+  </Section>
+
+  <!-- 4b. Where -->
+  <Section eyebrow="Rendelőink">
+    <Fragment slot="title">Két rendelő, a Bazilikánál és a Móricz Zsigmond körtérnél.</Fragment>
+    <Fragment slot="aside">Mindkét rendelőben {clinic.hoursText} rendelünk, előzetes bejelentkezéssel.</Fragment>
+    <div class="grid md:grid-cols-2 lg:grid-cols-[1fr_1fr_15rem] gap-x-10 gap-y-8">
+      {clinic.locations.map((l) => (
+        <div class="border-t-2 border-[var(--color-navy-900)] pt-5">
+          <h3 class="font-heading text-[1.75rem] text-[var(--color-navy-900)]">{l.name} <span class="text-[15px] font-sans text-[var(--color-ink-2)]">{l.district}</span></h3>
+          <dl class="mt-3 grid grid-cols-[8rem_1fr] gap-y-2 text-[15px]">
+            <dt class="text-[var(--color-ink-2)]">Cím</dt><dd>{l.postalCode} Budapest, {l.street}{l.bell && <>, {l.bell}</>}</dd>
+            <dt class="text-[var(--color-ink-2)]">Tömegközlekedés</dt><dd>{l.transit}<br />{l.transitMore}</dd>
+            <dt class="text-[var(--color-ink-2)]">Parkolás</dt><dd>{l.parking}</dd>
+          </dl>
+          <a href={l.mapsUrl} target="_blank" rel="noopener" class="link-arrow mt-4 text-[15px] text-[var(--color-navy-800)]">Útvonaltervezés <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      ))}
+      <div class="relative aspect-[3/4] md:col-span-2 lg:col-span-1 max-w-xs lg:max-w-none overflow-hidden bg-[var(--color-paper-2)]">
+        <LoopVideo name="rendelo/rendelo-bejaras" label="Bejárás a rendelőben: öltöző, váró és a kezelők" class="absolute inset-0 w-full h-full object-cover" />
       </div>
     </div>
-  </section>
+  </Section>
 
-  <!-- FAQ -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 grid lg:grid-cols-12 gap-10">
-    <div class="lg:col-span-4">
-      <p class="eyebrow">Gyakori kérdések</p>
-      <h2 class="display mt-5 text-3xl lg:text-4xl text-[var(--color-navy-900)]">Amit az első hívás előtt kérdezni szoktak.</h2>
-      <a href={`${base}gyik`} class="link-arrow mt-8 text-[var(--color-navy-800)]">További kérdések <span aria-hidden="true">&rarr;</span></a>
-    </div>
-    <div class="lg:col-span-8 border-t border-[var(--color-line)]">
-      {faqs.map((f, i) => (
-        <details class="faq border-b border-[var(--color-line)]" open={i === 0}>
-          <summary class="flex justify-between gap-6 py-4">
-            <h3 class="font-heading text-[1.35rem] lg:text-[1.75rem] text-[var(--color-navy-900)]">{f.q}</h3>
-            <span class="plus text-[1.65rem] leading-none text-[var(--color-teal-600)]" aria-hidden="true">+</span>
-          </summary>
-          <p class="pb-7 -mt-1 text-[var(--color-ink-2)] leading-relaxed measure">{f.a}</p>
-        </details>
+  <!-- 5. Questions and booking -->
+  <Section eyebrow="Kérdések és foglalás" tone="dark">
+    <Fragment slot="title">Hívjon, vagy kérjen visszahívást.</Fragment>
+    <Fragment slot="aside">
+      <a href={`tel:${clinic.phone}`} class="block font-heading text-4xl text-white hover:text-[var(--color-gold-200)]">{clinic.phoneDisplay}</a>
+      <span class="block mt-1">{clinic.bookingHours}. Általában 1-2 napon belül kap időpontot.</span>
+      <span class="mt-6 flex flex-wrap gap-3">
+        <a href={`tel:${clinic.phone}`} class="btn btn-copper">Hívás</a>
+        <a href={`${base}kapcsolat#visszahivas`} class="btn border border-white/30 hover:border-white text-white">Visszahívást kérek</a>
+      </span>
+    </Fragment>
+    <div class="grid lg:grid-cols-2 gap-x-12 items-start">
+      {[faqs.slice(0, Math.ceil(faqs.length / 2)), faqs.slice(Math.ceil(faqs.length / 2))].map((col, c) => (
+        <div class="border-t border-white/15">
+          {col.map((f, i) => (
+            <details class="faq border-b border-white/15" open={c === 0 && i === 0}>
+              <summary class="flex justify-between gap-6 py-5">
+                <h3 class="font-heading text-[1.5rem] leading-snug">{f.q}</h3>
+                <span class="plus text-2xl leading-none text-[var(--color-gold-300)]" aria-hidden="true">+</span>
+              </summary>
+              <p class="pb-6 -mt-1 text-white/75 leading-relaxed measure">{f.a}</p>
+            </details>
+          ))}
+        </div>
       ))}
     </div>
-  </section>
-
-  <!-- CTA (addresses live in the footer right below) -->
-  <section class="bg-[var(--color-navy-900)] text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-      <p class="eyebrow eyebrow-light">Időpontfoglalás</p>
-      <h2 class="display mt-5 text-3xl lg:text-5xl max-w-3xl">Hívjon hétköznap 9 és 17 óra között, vagy kérjen visszahívást.</h2>
-      <p class="mt-6 text-white/70 measure">Általában 1-2 napon belül tudunk időpontot adni valamelyik rendelőnkbe.</p>
-      <div class="mt-7 flex flex-col sm:flex-row gap-3">
-        <a href={`tel:${clinic.phone}`} class="btn btn-copper font-mono text-base">{clinic.phoneDisplay}</a>
-        <a href={`${base}kapcsolat#visszahivas`} class="btn border border-white/25 hover:border-white text-white">Visszahívást kérek</a>
-      </div>
-    </div>
-  </section>
+    <a href={`${base}gyik`} class="link-arrow mt-6 text-white">További kérdések <span aria-hidden="true">&rarr;</span></a>
+  </Section>
 </BaseLayout>

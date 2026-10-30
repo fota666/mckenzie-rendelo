@@ -5,6 +5,8 @@
 
 export interface Condition {
   slug: string;
+  /** Loop in /video/rendelo shown next to the steps. */
+  clip: { name: string; label: string };
   name: string;            // as patients search it
   h1: string;
   metaTitle: string;
@@ -30,6 +32,7 @@ const commonRedFlags = [
 export const conditions: Condition[] = [
   {
     slug: 'derekfajas',
+    clip: { name: 'derekfajas-hasonfekvo-mobilizalas', label: 'Hasonfekvő páciens derekának kezelése a rendelőben' },
     name: 'Derékfájás',
     h1: 'Derékfájás gyógytorna Budapesten, McKenzie-módszerrel',
     metaTitle: 'Derékfájás gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
@@ -64,6 +67,7 @@ export const conditions: Condition[] = [
   },
   {
     slug: 'nyakfajas',
+    clip: { name: 'nyak-mckenzie-onkezeles', label: 'Ülve végzett nyaki mozgásvizsgálat és gyakorlat' },
     name: 'Nyakfájás',
     h1: 'Nyakfájás gyógytorna Budapesten, McKenzie-módszerrel',
     metaTitle: 'Nyakfájás gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
@@ -103,6 +107,7 @@ export const conditions: Condition[] = [
   },
   {
     slug: 'porckorongserv',
+    clip: { name: 'derek-nyak-ulve-gyakorlat', label: 'Ülve végzett derék- és nyakgyakorlatok a terapeuta mellett' },
     name: 'Porckorongsérv',
     h1: 'Porckorongsérv gyógytorna Budapesten, műtét előtt és után',
     metaTitle: 'Porckorongsérv gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
@@ -135,6 +140,7 @@ export const conditions: Condition[] = [
   },
   {
     slug: 'isiasz',
+    clip: { name: 'csipo-mobilizalas-hanyatt', label: 'Hanyatt fekvő páciens csípőjének és lábának mozgatása' },
     name: 'Isiász',
     h1: 'Isiász gyógytorna Budapesten, McKenzie-módszerrel',
     metaTitle: 'Isiász gyógytorna Budapest | McKenzie Gyógytorna Rendelő',

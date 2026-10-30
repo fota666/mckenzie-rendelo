@@ -6,6 +6,8 @@ export interface Therapist {
   price?: string; photo: string; status?: string;
 }
 
+// PLACEHOLDER: the 12 new portraits in images/csapat/ were assigned to therapists at random.
+// Swap the files (same file names) once the real order is known.
 export const terapeutak: Therapist[] = [
   {
     name: 'Bognár Zsófia',
@@ -42,7 +44,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '14 000 Ft',
-    photo: `${base}images/cseh_agnes.jpg`,
+    photo: `${base}images/csapat/cseh_agnes.jpg`,
   },
   {
     name: 'Dörnyeiné Rozs Mariann',
@@ -98,7 +100,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '15 000 Ft',
-    photo: `${base}images/horvath_judit.jpg`,
+    photo: `${base}images/csapat/horvath_judit.jpg`,
   },
   {
     name: 'Horváthné Kucsera Ildikó',
@@ -118,7 +120,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '14 000 Ft',
-    photo: `${base}images/horvathne_kucsera_ildiko.jpg`,
+    photo: `${base}images/csapat/horvathne_kucsera_ildiko.jpg`,
   },
   {
     name: 'Jungwirth Sylvia',
@@ -138,7 +140,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['német', 'angol', 'spanyol'],
     price: '14 000 Ft',
-    photo: `${base}images/jungwirth_sylvia.png`,
+    photo: `${base}images/csapat/jungwirth_sylvia.jpg`,
   },
   {
     name: 'Kókai Zsuzsa',
@@ -179,7 +181,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol', 'német'],
     price: '14 000 Ft',
-    photo: `${base}images/liptak_noemi.jpg`,
+    photo: `${base}images/csapat/liptak_noemi.jpg`,
   },
   {
     name: 'Nagy Tünde Éva',
@@ -201,7 +203,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '14 000 Ft', // PLACEHOLDER: price not on the old site, confirm with the clinic
-    photo: `${base}images/nagy_tunde_eva.jpg`,
+    photo: `${base}images/csapat/nagy_tunde_eva.jpg`,
   },
   {
     name: 'Polyefkó Petra',
@@ -262,7 +264,7 @@ export const terapeutak: Therapist[] = [
       'Manuálterapeuta-diploma',
     ],
     langs: ['angol', 'német'],
-    photo: `${base}images/relle_eva.jpg`,
+    photo: `${base}images/csapat/relle_eva.jpg`,
   },
   {
     name: 'Szabó Éva Bernadett',
@@ -283,7 +285,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '14 000 Ft',
-    photo: `${base}images/szabo_eva_bernadett.png`,
+    photo: `${base}images/csapat/szabo_eva_bernadett.jpg`,
   },
   {
     name: 'Takács Dóra',
@@ -305,7 +307,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol', 'német'],
     price: '15 000 Ft',
-    photo: `${base}images/takacs_dora.jpg`,
+    photo: `${base}images/csapat/takacs_dora.jpg`,
   },
   {
     name: 'Vágó Eszter',
@@ -327,7 +329,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '14 000 Ft',
-    photo: `${base}images/vago_eszter.jpg`,
+    photo: `${base}images/csapat/vago_eszter.jpg`,
   },
   {
     name: 'Várhegyi Tímea',
@@ -347,7 +349,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '14 000 Ft',
-    photo: `${base}images/varhegyi_timea.png`,
+    photo: `${base}images/csapat/varhegyi_timea.jpg`,
   },
   {
     name: 'Dr. Várköviné Gergely Éva',
@@ -367,7 +369,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '14 000 Ft',
-    photo: `${base}images/varkovine_gergely_eva.png`,
+    photo: `${base}images/csapat/varkovine_gergely_eva.jpg`,
   },
 ];
 

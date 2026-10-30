@@ -8,6 +8,7 @@ const base = import.meta.env.BASE_URL;
 const methods = [
   {
     id: 'mckenzie',
+    clip: { name: 'nyak-mckenzie-onkezeles', label: 'Ülve végzett nyaki mozgásvizsgálat McKenzie-módszerrel' },
     title: 'McKenzie-módszer (MDT)',
     subtitle: 'Fő szakterületünk',
     image: `${base}images/modszerek/mckenzie.png`,
@@ -24,6 +25,7 @@ const methods = [
   },
   {
     id: 'manualterapia',
+    clip: { name: 'vall-manualis-kezeles', label: 'Váll manuális kezelése a rendelőben' },
     title: 'Manuálterápia',
     image: `${base}images/modszerek/manual.png`,
     description: 'Kézzel végzett diagnosztikai és terápiás fogások összessége, amelyek a mozgásszervrendszer működési zavarainak felismerésére és kezelésére irányulnak.',
@@ -36,6 +38,7 @@ const methods = [
   },
   {
     id: 'stabilizacio',
+    clip: { name: 'stabilizacio-labdan-negykezlabon', label: 'Stabilizáló gyakorlat labdán, terapeuta irányításával' },
     title: 'Stabilizációs tréning',
     image: `${base}images/modszerek/stabilizacio.png`,
     description: 'A gerinc stabilitásának megbomlása esetén a gerinc melletti mély izmok erejének helyreállítására törekszünk, precíz irányítással.',
@@ -44,6 +47,7 @@ const methods = [
   },
   {
     id: 'stretching',
+    clip: { name: 'mellkasi-nyujtas-hengerrel', label: 'Mellkasi nyújtás habhengeren' },
     title: 'Gyógyászati nyújtás (stretching)',
     image: `${base}images/modszerek/stretching.png`,
     description: 'A fájdalom okozta izomfeszülések terápiás nyújtása és lazítása, valamint az ízületi mozgásterjedelem növelése mechanikus izomnyújtással.',
@@ -68,6 +72,7 @@ const methods = [
   },
   {
     id: 'izuleti-fajdalmak',
+    clip: { name: 'csipo-mobilizalas-ovvel', label: 'Csípő mobilizálása övvel' },
     title: 'Ízületi fájdalmak gyógytornája',
     image: `${base}images/modszerek/izuleti_fajdalmak.png`,
     description: 'A fájdalom okainak és eredetének feltárása után egyéni mozgásterápia segítségével javítjuk az ízület mozgását és funkcióját, valamint csökkentjük az ízületi fájdalmat.',
@@ -76,6 +81,7 @@ const methods = [
   },
   {
     id: 'tartasjavitas',
+    clip: { name: 'ulomunka-tartaskorrekcio', label: 'Tartáskorrekció íróasztali munka közben' },
     title: 'Tartásjavítás',
     image: `${base}images/modszerek/tartasjavitas.png`,
     description: 'A gerinc melletti izomzat erősítésével, tudatosítással és ergonómiai tanácsokkal érünk el jobb testtartást.',
@@ -117,8 +123,10 @@ const methods = [
     {methods.map((m, i) => (
       <article id={m.id} class="scroll-mt-36 py-14 lg:py-20 border-b border-[var(--color-line)] grid lg:grid-cols-12 gap-10 lg:gap-12">
         <div class={`lg:col-span-5 ${i % 2 ? 'lg:order-2' : ''}`}>
-          <div class="aspect-[4/3] overflow-hidden bg-white lg:sticky lg:top-40">
-            {m.featured ? (
+          <div class:list={['relative overflow-hidden bg-white lg:sticky lg:top-40', m.clip ? 'aspect-[3/4] max-w-xs lg:max-w-none' : 'aspect-[4/3]']}>
+            {m.clip ? (
+              <LoopVideo name={`rendelo/${m.clip.name}`} label={m.clip.label} class="absolute inset-0 w-full h-full object-cover" />
+            ) : m.featured ? (
               <img src={`${base}images/rendelo/mckenzie-gyakorlat.jpg`} alt="Hasra fekvő gerincnyújtó McKenzie-gyakorlat gyógytornász irányításával a rendelőben" class="w-full h-full object-cover" loading="eager" />
             ) : (
               <img src={m.image} alt={m.title} class="w-full h-full object-cover" loading={i < 2 ? 'eager' : 'lazy'} />

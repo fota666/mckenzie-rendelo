@@ -10,7 +10,7 @@
 export const founder = {
   name: 'Relle Éva',
   role: 'Alapító, vezető gyógytornász',
-  photo: 'images/relle_eva.jpg',
+  photo: 'images/csapat/relle_eva.jpg',
   headline: 'Relle Éva 1993-ban alapította a rendelőt, hogy a McKenzie-módszer itthon is elérhető legyen.',
   intro:
     'Az alapító gyógytornász 1992-ben diplomázott, és letette a McKenzie nemzetközi minősítővizsgát. A Magyarországi McKenzie Intézet kuratóriumának tagja, 2000 óta a Semmelweis Egyetem Egészségtudományi Karán is oktat. A rendelőben ma 15 gyógytornász dolgozik a vezetésével, két budapesti helyszínen.',
