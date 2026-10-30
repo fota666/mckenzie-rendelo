@@ -33,7 +33,7 @@ const conditionLinks = conditions.map((c) => ({ href: `${base}${c.slug}`, label:
       </div>
 
       {clinic.locations.map((l) => (
-        <address class="not-italic lg:col-span-3 text-[15px] space-y-1.5">
+        <address class="not-italic lg:col-span-4 text-[15px] space-y-1.5">
           <p class="eyebrow eyebrow-light mb-4">{l.name}</p>
           <p class="text-white">{l.postalCode} Budapest, {l.street}</p>
           <p>{l.transit}</p>
@@ -42,17 +42,22 @@ const conditionLinks = conditions.map((c) => ({ href: `${base}${c.slug}`, label:
         </address>
       ))}
 
-      <nav class="lg:col-span-2 text-[15px]" aria-label="Lábléc navigáció">
-        <p class="eyebrow eyebrow-light mb-4">Oldalak</p>
-        <ul class="space-y-2">
-          {links.map((l) => <li><a href={l.href} class="hover:text-white">{l.label}</a></li>)}
-        </ul>
-        <p class="eyebrow eyebrow-light mt-8 mb-4">Panaszok</p>
-        <ul class="space-y-2">
+    </div>
+
+    <nav class="mt-10 pt-8 border-t border-white/10 grid gap-x-10 gap-y-8 lg:grid-cols-12 text-[15px]" aria-label="Lábléc navigáció">
+      <div class="lg:col-span-8">
+        <p class="eyebrow eyebrow-light mb-4">Panaszok</p>
+        <ul class="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-2">
           {conditionLinks.map((l) => <li><a href={l.href} class="hover:text-white">{l.label}</a></li>)}
         </ul>
-      </nav>
-    </div>
+      </div>
+      <div class="lg:col-span-4">
+        <p class="eyebrow eyebrow-light mb-4">Oldalak</p>
+        <ul class="grid grid-cols-2 gap-x-8 gap-y-2">
+          {links.map((l) => <li><a href={l.href} class="hover:text-white">{l.label}</a></li>)}
+        </ul>
+      </div>
+    </nav>
 
     <div class="mt-7 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 justify-between text-[13px] text-white/50">
       <p>&copy; {year} {clinic.legalName} &middot; {clinic.name}</p>
