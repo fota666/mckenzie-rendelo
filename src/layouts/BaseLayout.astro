@@ -39,8 +39,8 @@ const isPreview = !PRODUCTION_HOSTS.includes(Astro.site?.hostname ?? '');
 const orgId = `${siteRoot}#org`;
 const SERVICES = [
   'McKenzie-módszer (Mechanikai Diagnózis és Terápia, MDT)', 'Manuálterápia (Maitland, Mulligan)', 'Stabilizációs tréning',
-  'Schroth-terápia', 'Műtét előtti és utáni rehabilitáció', 'Tartásjavítás', 'Kineziológiai taping', 'Gyógyászati nyújtás',
-  'Ízületi fájdalmak gyógytornája',
+  'Schroth-terápia', 'Műtét előtti és utáni rehabilitáció', 'Tartásjavítás', 'Gyógyászati nyújtás',
+  'Ízületi fájdalmak gyógytornája', 'Kineziológiai taping',
 ];
 const pagePath = Astro.url.pathname.replace(base, '').replace(/\/$/, '');
 const breadcrumb = pagePath
@@ -65,7 +65,7 @@ const schema = {
       logo: `${siteRoot}images/logo.png`,
       telephone: clinic.phone,
       email: clinic.email,
-      foundingDate: '1993',
+      foundingDate: '2001',
       sameAs: clinic.sameAs,
       medicalSpecialty: 'https://schema.org/Physiotherapy',
       founder: { '@id': `${siteRoot}#relle-eva` },
@@ -81,8 +81,7 @@ const schema = {
         {
           '@type': 'Offer',
           name: clinic.prices.pass.label,
-          price: clinic.prices.pass.value,
-          priceCurrency: 'HUF',
+          priceSpecification: { '@type': 'PriceSpecification', minPrice: clinic.prices.pass.min, maxPrice: clinic.prices.pass.max, priceCurrency: 'HUF' },
           itemOffered: { '@type': 'MedicalTherapy', name: '5 egyéni gyógytorna-kezelés' },
         },
       ],
@@ -99,7 +98,7 @@ const schema = {
       priceRange: `${clinic.prices.single.min}-${clinic.prices.single.max} HUF`,
       openingHours: clinic.hours.schema,
       isAcceptingNewPatients: true,
-      paymentAccepted: 'Készpénz, bankkártya',
+      paymentAccepted: 'Készpénz, banki átutalás',
       currenciesAccepted: 'HUF',
       areaServed: { '@type': 'City', name: 'Budapest' },
       availableService: SERVICES.map((name) => ({ '@type': 'MedicalTherapy', name })),

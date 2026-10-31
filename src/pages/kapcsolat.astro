@@ -14,26 +14,19 @@ const mapQuery = (l: (typeof clinic.locations)[number]) =>
 ---
 
 <BaseLayout
-  title="Kapcsolat és időpontfoglalás | McKenzie Gyógytorna Rendelő Budapest"
-  description={`Időpontfoglalás telefonon (${clinic.bookingHoursShort}): ${clinic.phoneDisplay}, vagy visszahívás-kérés. Két rendelő: 1051 Budapest, Sas u. 7. és 1111 Budapest, Bartók Béla út 34.`}
+  title="Kapcsolat, címek és időpontfoglalás | McKenzie Gyógytorna Rendelő Budapest"
+  description={`Két rendelő metró közelében: 1051 Budapest, Sas u. 7. és 1111 Budapest, Bartók Béla út 34. Időpontfoglalás telefonon (${clinic.bookingHoursShort}): ${clinic.phoneDisplay}, vagy visszahívás-kérés.`}
 >
-  <PageHeader eyebrow="Kapcsolat">
-    <Fragment slot="title">Időpontot telefonon vagy visszahívással foglalhat.</Fragment>
-    Hívjon minket, vagy hagyja meg a számát: a visszahívás általában még aznap vagy a következő munkanapon megtörténik. A szabad időpont ezt követően általában 1-2 napon belülre kapható. Mindkét rendelőben csak előzetes bejelentkezéssel fogadunk pácienseket.
+  <PageHeader eyebrow="Kapcsolat és címek">
+    <Fragment slot="title">Két rendelő, mindkettő metró közelében.</Fragment>
+    A Sas utcai rendelő az M3 Arany János utca, a Bartók Béla úti az M4 Móricz Zsigmond körtér megállótól kb. 5 percre van gyalog. Időpontot telefonon vagy visszahívással foglalhat, a visszahívás általában még aznap vagy a következő munkanapon megtörténik. A szabad időpont ezt követően általában 1-2 napon belülre kapható. Mindkét rendelőben csak előzetes bejelentkezéssel fogadunk pácienseket.
   </PageHeader>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
     <img src={`${base}images/csapat/csapat-csoportkep.jpg`} alt="A McKenzie Gyógytorna Rendelő gyógytornász csapata" class="w-full aspect-[16/8] object-cover object-[50%_20%]" width="2000" height="1336" loading="eager" />
   </div>
 
-  <section id="idopontfoglalas" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16 grid lg:grid-cols-12 gap-6">
-    <div class="lg:col-span-5"><CtaCard label="Időpontfoglalás telefonon" email /></div>
-    <div class="lg:col-span-7">
-      <CallbackForm />
-    </div>
-  </section>
-
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 lg:pb-28 grid md:grid-cols-2 gap-6">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 lg:pb-16 grid md:grid-cols-2 gap-6">
     {clinic.locations.map((l) => (
       <article id={l.id} class="scroll-mt-28 bg-white border border-[var(--color-line)] flex flex-col">
         <div class="aspect-[16/10] bg-[var(--color-paper-2)]">
@@ -54,6 +47,8 @@ const mapQuery = (l: (typeof clinic.locations)[number]) =>
             <dd>{l.transit}<br />{l.transitMore}</dd>
             <dt class="text-[var(--color-ink-2)]">Parkolás</dt>
             <dd>{l.parking}</dd>
+            <dt class="text-[var(--color-ink-2)]">Fizetés</dt>
+            <dd>Készpénzzel vagy banki átutalással</dd>
           </dl>
           <a href={l.mapsUrl} target="_blank" rel="noopener" class="link-arrow mt-8 self-start text-[var(--color-navy-800)]">Útvonaltervezés <span aria-hidden="true">&rarr;</span></a>
         </div>
@@ -61,10 +56,18 @@ const mapQuery = (l: (typeof clinic.locations)[number]) =>
     ))}
   </section>
 
+  <section id="idopontfoglalas" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 lg:pb-28 grid lg:grid-cols-12 gap-6">
+    <div class="lg:col-span-5"><CtaCard label="Időpontfoglalás telefonon" email /></div>
+    <div class="lg:col-span-7">
+      <CallbackForm />
+    </div>
+  </section>
+
   <section class="bg-[var(--color-navy-900)] text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <p class="eyebrow eyebrow-light">Az első alkalom</p>
       <h2 class="display mt-5 text-3xl lg:text-4xl max-w-2xl">Mire számítson az első 55 percben?</h2>
+      <p class="mt-4 text-white/65 max-w-2xl">Az első alkalom 55 perc, a további alkalmak 50-55 percesek, az ár ugyanaz.</p>
       <ol class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 border-t border-white/15">
         {firstVisit.map((s, i) => (
           <li class="pt-8">

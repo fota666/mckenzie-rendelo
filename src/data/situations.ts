@@ -20,8 +20,8 @@ export const situations: Situation[] = [
   {
     id: 'most-faj',
     tag: 'Most fáj',
-    title: 'Napok óta fáj a dereka vagy a nyaka, és nem múlik.',
-    voice: 'Napok óta fáj a derekam vagy a nyakam, és nem múlik.',
+    title: 'Napok, akár hetek óta fáj a dereka vagy a nyaka, és nem múlik el.',
+    voice: 'Napok, akár hetek óta fáj a derekam vagy a nyakam, és nem múlik el.',
     body: 'Az első alkalommal ismételt mozgások segítségével megnézzük, hogyan változik a fájdalom különböző mozgásokra. Már az első alkalom után hazavisz egy gyakorlatot, amelyet otthon is végezhet.',
     link: { path: 'modszerek#mckenzie', label: 'McKenzie-módszer' },
     methods: [{ path: 'modszerek#mckenzie', label: 'McKenzie-módszer' }],
@@ -46,13 +46,13 @@ export const situations: Situation[] = [
   {
     id: 'sferv',
     tag: 'Porckorongsérv',
-    title: 'Az MRI-vizsgálat sérvet mutatott ki, és most felmerült a műtét lehetősége.',
-    voice: 'Az MRI sérvet mutatott ki, és felmerült a műtét.',
-    body: 'A porckorongsérv sok esetben műtét nélkül is kezelhető, de nem minden állapot alkalmas konzervatív terápiára. A vizsgálat megmutatja, hogy a gyógytorna Önnek megfelelő-e, vagy előbb orvosi kivizsgálás kell. Ha műtétre kerül sor, felkészítjük rá, majd segítjük a műtét utáni rehabilitációját.',
+    title: 'Az MRI-vizsgálat sérvet mutatott ki, és most felmerült akár a műtét lehetősége is.',
+    voice: 'Az MRI sérvet mutatott ki, és felmerült akár a műtét lehetősége is.',
+    body: 'A porckorongsérv sok esetben műtét nélkül is kezelhető, de nem minden állapot alkalmas konzervatív terápiára. A vizsgálat megmutatja, hogy a gyógytorna Önnek megfelelő-e, vagy előbb orvosi kivizsgálás kell. Ha műtétre mégis szükség van, felkészítjük rá, majd segítjük a műtét utáni rehabilitációját.',
     link: { path: 'modszerek#mckenzie', label: 'McKenzie-módszer' },
     methods: [
       { path: 'modszerek#mckenzie', label: 'McKenzie-módszer', when: 'konzervatív kezelés' },
-      { path: 'modszerek#mutet-utani', label: 'Műtét előtti és utáni rehabilitáció', when: 'ha műtét lesz' },
+      { path: 'modszerek#mutet-utani', label: 'Műtét előtti és utáni rehabilitáció', when: 'ha műtétre szükség van' },
     ],
     pages: [{ path: 'porckorongserv', label: 'Porckorongsérv' }, { path: 'isiasz', label: 'Isiász' }, { path: 'muteti-rehabilitacio', label: 'Műtét előtt és után' }],
     media: { video: 'kezeles', image: 'video/kezeles.jpg', alt: 'Manuális kezelés fekvő páciensen' },

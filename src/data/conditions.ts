@@ -118,10 +118,10 @@ export const conditions: Condition[] = [
     slug: 'porckorongserv',
     clip: { name: 'derek-nyak-ulve-gyakorlat', label: 'Ülve végzett derék- és nyakgyakorlatok a terapeuta mellett' },
     name: 'Porckorongsérv',
-    h1: 'Porckorongsérv kezelése gyógytornával Budapesten, műtét előtt és után',
+    h1: 'Porckorongsérv kezelése gyógytornával Budapesten, műtét nélkül vagy szükség esetén műtét előtt és után',
     metaTitle: 'Porckorongsérv gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
-    metaDescription: 'Porckorongsérv (gerincsérv) konzervatív kezelése McKenzie-módszerrel, műtét előtti felkészítés és műtét utáni rehabilitáció Budapesten. Beutaló nem kell.',
-    answer: 'A porckorongsérv sok esetben műtét nélkül is kezelhető, de nem minden állapot alkalmas konzervatív terápiára. Ha az orvosa nem lát sürgős műtéti okot, McKenzie-vizsgálattal és célzott gyakorlatokkal kezdjük, a vizsgálat pedig megmutatja, hogy a gyógytorna Önnek megfelelő-e. Ha műtét lesz, felkészítjük rá, és segítjük a műtét utáni rehabilitációt.',
+    metaDescription: 'Porckorongsérv (gerincsérv) kezelése McKenzie-módszerrel műtét nélkül, szükség esetén műtét előtti felkészítéssel és műtét utáni rehabilitációval Budapesten. Beutaló nem kell.',
+    answer: 'A porckorongsérv sok esetben műtét nélkül is kezelhető, de nem minden állapot alkalmas konzervatív terápiára. Ha az orvosa nem lát sürgős műtéti okot, McKenzie-vizsgálattal és célzott gyakorlatokkal kezdjük, a vizsgálat pedig megmutatja, hogy a gyógytorna Önnek megfelelő-e. Ha műtétre mégis szükség van, felkészítjük rá, és segítjük a műtét utáni rehabilitációt.',
     whenToCome: [
       'a derékból vagy a nyakból a lábába vagy a karjába sugárzik a fájdalom, vagy zsibbad',
       'a panasza bizonyos mozgásokra vagy testhelyzetekre erősödik, másokra enyhül',
@@ -134,7 +134,7 @@ export const conditions: Condition[] = [
     approach: [
       { title: 'Vizsgálat', text: 'A tünetek és a mozgásvizsgálat az irányadó: figyeljük, hogy bizonyos mozgásokra a végtagba sugárzó fájdalom visszahúzódik-e a gerinc felé (centralizáció). A leleteket is megnézzük, de a kezelést a tünetek és a vizsgálat alapján tervezzük.' },
       { title: 'Konzervatív kezelés', text: 'A kedvező mozgásirányra épülő gyakorlatok, testtartási tanácsok és fokozatos terhelés. A terapeuta minden alkalommal ellenőrzi, hogyan változnak a tünetek.' },
-      { title: 'Műtét előtt és után', text: 'Ha műtétre kerül sor, a műtét előtti tornával felkészítjük az izmokat, utána pedig fokozatosan visszaállítjuk a mozgást és az erőt.' },
+      { title: 'Műtét nélkül, vagy szükség esetén műtét előtt és után', text: 'A porckorongsérv sok esetben műtét nélkül is kezelhető. Ha műtétre mégis szükség van, a műtét előtti tornával felkészítjük az izmokat, utána pedig fokozatosan visszaállítjuk a mozgást és az erőt.' },
     ],
     methods: [
       { path: 'modszerek#mckenzie', label: 'McKenzie-módszer' },
@@ -394,7 +394,7 @@ export const conditions: Condition[] = [
   {
     slug: 'ulomunka-tartashibak',
     clip: { name: 'ulomunka-tartaskorrekcio', label: 'Tartáskorrekció íróasztali munka közben' },
-    name: 'Ülőmunka okozta panaszok',
+    name: 'Ülőmunka és tartáshibák',
     h1: 'Ülőmunka okozta nyak-, váll- és derékfájás kezelése Budapesten',
     metaTitle: 'Ülőmunka okozta fájdalom, tartásjavítás | McKenzie',
     metaDescription: 'Íróasztali munka okozta nyak-, váll- és derékfájás kezelése, tartásjavítás és ergonómiai tanácsok Budapesten. Beutaló nem kell, időpont 1-2 napon belül.',
@@ -405,6 +405,7 @@ export const conditions: Condition[] = [
       'laptop- vagy telefonhasználat közben előrebillen a feje, és fáj a nyaka',
       'a fájdalom munka közben erősödik, pihenőnapon enyhül',
       'nyakból kiinduló fejfájása van',
+      'rossz a tartása, ettől fáj a nyaka vagy a háta, és szeretne rajta javítani',
     ],
     urgent: commonUrgent,
     consult: commonConsult,

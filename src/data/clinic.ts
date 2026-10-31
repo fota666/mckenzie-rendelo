@@ -35,7 +35,7 @@ export const clinic = {
       bell: null,
       parking: 'Bazilika garázs, Gödör',
       geo: { lat: 47.4999675, lng: 19.0523906 },
-      mapsUrl: 'https://www.google.com/maps/place/Belv%C3%A1rosi+Gy%C3%B3gytorna-rendel%C5%91/@47.4999675,19.0523906,17z/data=!4m6!3m5!1s0x4741dc6ab4464053:0xb82144f0993e13d9!8m2!3d47.4999675!4d19.0523906',
+      mapsUrl: 'https://www.google.com/maps?cid=13267961777364014041',
       // Google rating as shown on the Maps profile on 2026-10-29.
       rating: { value: 5.0, count: 78, checked: '2026-10-29' },
     },
@@ -52,7 +52,7 @@ export const clinic = {
       bell: '18-as kapucsengő',
       parking: 'Allee garázs, 6-8 perc',
       geo: { lat: 47.4791083, lng: 19.051651 },
-      mapsUrl: 'https://www.google.com/maps/place/McKenzie+Bel-budai+Gy%C3%B3gytorna-rendel%C5%91/@47.4791083,19.051651,17z/data=!4m6!3m5!1s0x4741dc4d51a69d69:0xcf869fdf34a92480!8m2!3d47.4791083!4d19.051651',
+      mapsUrl: 'https://www.google.com/maps?cid=14953815393740334208',
       rating: { value: 5.0, count: 103, checked: '2026-10-29' },
     },
   ],
@@ -68,10 +68,13 @@ export const clinic = {
     },
     pass: {
       label: '5 alkalmas bérlet',
-      amount: `65${NBSP}000${NBSP}Ft`,
-      perVisit: `13${NBSP}000${NBSP}Ft / alkalom`,
-      saving: `5${NBSP}000-10${NBSP}000${NBSP}Ft megtakarítás a terapeuta díjától függően`,
-      value: 65000,
+      amount: `65${NBSP}000-70${NBSP}000${NBSP}Ft`,
+      perVisit: `13${NBSP}000-14${NBSP}000${NBSP}Ft / alkalom`,
+      saving: 'a terapeuta díjától függően',
+      min: 65000,
+      max: 70000,
+      // Confirmed by Relle Éva (2026-10-31): same in both clinics, transferable, no fixed expiry.
+      terms: 'Mindkét rendelőben felhasználható, és másra is átruházható. Érvényességi határidőt nem szabunk, de szakmai szempontból 3 hónapon belüli felhasználást javaslunk.',
     },
   },
 } as const;

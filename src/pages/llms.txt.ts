@@ -14,7 +14,7 @@ export const GET: APIRoute = ({ site }) => {
 
   const body = `# ${clinic.name}
 
-> Magánrendelő Budapesten, két helyszínen (V. és XI. kerület). Gyógytorna derékfájásra, nyakfájásra, isiászra, porckorongsérvre és gerincferdülésre, elsősorban McKenzie-módszerrel (MDT). Alapító, vezető gyógytornász: Relle Éva (1992-ben diplomázott, a rendelőt 1993-ban alapította, McKenzie nemzetközi minősítővizsga, a Magyarországi McKenzie Intézet kuratóriumának tagja, 2000 óta a Semmelweis Egyetem Egészségtudományi Karán is oktat).
+> Magánrendelő Budapesten, két helyszínen (V. és XI. kerület). Gyógytorna derékfájásra, nyakfájásra, isiászra, porckorongsérvre és gerincferdülésre, elsősorban McKenzie-módszerrel (MDT). Alapító, vezető gyógytornász: Relle Éva (1992-ben diplomázott, a rendelőt 2001-ben alapította, McKenzie nemzetközi minősítővizsga, a Magyarországi McKenzie Intézet kuratóriumának tagja, 2000 óta a Semmelweis Egyetem Egészségtudományi Karán is oktat).
 
 ## Tények
 - ${clinic.therapists} gyógytornász, mindannyian McKenzie-képzéssel
@@ -22,7 +22,8 @@ export const GET: APIRoute = ({ site }) => {
 - Időpontfoglalás: telefonon [${clinic.phoneDisplay}](tel:${clinic.phone}), ${clinic.bookingHours.toLowerCase()}, vagy visszahívás-kérés a weboldalon
 - Időpont általában 1-2 napon belül, beutaló nem kell, egészségpénztárra számlát adnak
 - ${clinic.prices.single.label} (${clinic.prices.single.duration}): ${clinic.prices.single.amount}, ${clinic.prices.single.note}
-- ${clinic.prices.pass.label}: ${clinic.prices.pass.amount} (${clinic.prices.pass.perVisit}, ${clinic.prices.pass.saving})
+- ${clinic.prices.pass.label}: ${clinic.prices.pass.amount} (${clinic.prices.pass.perVisit}, ${clinic.prices.pass.saving}). ${clinic.prices.pass.terms}
+- Fizetés: készpénz vagy banki átutalás. Lemondás: legalább 24 órával korábban, különben a teljes díj fizetendő
 - Google-értékelés összesen: ${reviewTotalText} vélemény
 - E-mail: ${clinic.email}
 

@@ -18,7 +18,7 @@ const rows = [
   {
     name: clinic.prices.pass.label,
     meta: 'kedvezményes',
-    detail: `${clinic.prices.pass.perVisit}, ${clinic.prices.pass.saving}. A bérlet felhasználásának feltételeiről telefonon tájékoztatunk.`,
+    detail: `${clinic.prices.pass.perVisit}, ${clinic.prices.pass.saving}. ${clinic.prices.pass.terms}`,
     price: clinic.prices.pass.amount,
     priceNote: '5 egyéni kezelés',
     link: null,
@@ -29,8 +29,8 @@ const notes = [
   { t: 'Beutaló', d: 'Nem kell, magánrendelésről van szó.' },
   { t: 'Társadalombiztosítás', d: 'A TB nem fedezi. Magánbiztosítónál érdemes előre érdeklődni.' },
   { t: 'Egészségpénztár', d: `${healthFundNote}, a feltételekről előzetesen érdemes egyeztetni a pénztárral.` },
-  { t: 'Fizetés', d: 'Készpénzzel és bankkártyával.' },
-  { t: 'Lemondás', d: 'Legalább 24 órával korábban, telefonon. A 24 órán belüli lemondás vagy meg nem jelenés esetén a kezelés díját ki kell fizetni.' },
+  { t: 'Fizetés', d: 'Készpénzzel vagy banki átutalással.' },
+  { t: 'Lemondás', d: 'Legalább 24 órával korábban, telefonon. A 24 órán belüli lemondás vagy a meg nem jelenés esetén a kezelés teljes díját ki kell fizetni.' },
 ];
 ---
 

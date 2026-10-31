@@ -14,6 +14,7 @@ export const terapeutak: Therapist[] = [
     title: 'Gyógytornász',
     diploma: '2016',
     quals: [
+      'McKenzie nemzetközi minősítővizsga',
       'McKenzie A, B, C, D és E',
       'Manuálterápiás diploma',
       'Idegmobilizáció: neurodinamika',
@@ -24,6 +25,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     photo: `${base}images/csapat/bognar_zsofia.jpg`,
+    // Returns in January 2027 (Relle Éva, 2026-10-31): drop the status and add the clinic to locationOf then.
     status: 'GYES',
   },
   {
@@ -78,7 +80,7 @@ export const terapeutak: Therapist[] = [
     status: 'GYES',
   },
   {
-    name: 'Horváth Judit',
+    name: 'Kiss-Horváth Judit',
     title: 'Gyógytornász',
     diploma: '2009',
     quals: [
@@ -163,7 +165,7 @@ export const terapeutak: Therapist[] = [
     photo: `${base}images/csapat/kokai_zsuzsa.jpg`,
   },
   {
-    name: 'Lipták Noémi',
+    name: 'Almási Lipták Noémi',
     title: 'Gyógytornász, fizioterapeuta (BSc, MSc)',
     diploma: 'BSc 2013, MSc 2019',
     quals: [
@@ -382,13 +384,13 @@ export const locationOf: Record<string, ClinicId[]> = {
   'Kókai Zsuzsa': ['belvaros'],
   'Dr. Várköviné Gergely Éva': ['belvaros'],
   'Horváthné Kucsera Ildikó': ['belvaros'],
-  'Lipták Noémi': ['belvaros', 'buda'],
+  'Almási Lipták Noémi': ['belvaros', 'buda'],
   'Nagy Tünde Éva': ['belvaros'],
   'Dörnyeiné Rozs Mariann': ['belvaros'],
   'Polyefkó Petra': ['buda'],
   'Cseh Ágnes': ['buda'],
   'Takács Dóra': ['buda'],
-  'Horváth Judit': ['buda'],
+  'Kiss-Horváth Judit': ['buda'],
   'Várhegyi Tímea': ['buda'],
   'Jungwirth Sylvia': ['buda'],
   'Szabó Éva Bernadett': ['buda'],

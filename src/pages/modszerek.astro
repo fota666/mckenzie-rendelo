@@ -59,7 +59,7 @@ const methods = [
     image: `${base}images/modszerek/stabilizacio.png`,
     description: 'Célzott gyakorlatokkal erősítjük a gerincet és a törzset támasztó mély izmokat, és megtanítjuk a helyes mozgásmintákat.',
     details: 'A gyakorlatokat a terapeuta mutatja meg és ellenőrzi, majd otthoni programként is folytatható. A rendszeres erősítés segíthet csökkenteni a panaszok visszatérésének esélyét.',
-    conditions: ['Porckorongsérv utáni állapot', 'Lumbágó, visszatérő derékfájás', 'A gerinc terhelhetőségének javítása', 'Csigolyacsúszás (spondylolisthesis)'],
+    conditions: ['Csigolyacsúszás (spondylolisthesis)', 'Porckorongsérv utáni állapot', 'Lumbágó, visszatérő derékfájás', 'A gerinc terhelhetőségének javítása'],
   },
   {
     id: 'stretching',
@@ -69,15 +69,6 @@ const methods = [
     description: 'Nyújtással és lazítással segítünk az izomfeszülés oldásában és a mozgásterjedelem növelésében.',
     details: 'A nyújtást a terapeuta a panaszhoz igazítja, és megtanítja azokat a gyakorlatokat, amelyeket otthon is végezhet. Gyakran más kezelésekkel együtt alkalmazzuk.',
     conditions: ['Izomgörcsök, izomfeszülés', 'Csökkent ízületi mozgásterjedelem', 'Izommerevség'],
-  },
-  {
-    id: 'taping',
-    clip: { name: 'kinesio-taping-derek', label: 'Kineziológiai tape felhelyezése a derékra', wide: true },
-    title: 'Kineziológiai taping',
-    image: `${base}images/modszerek/taping.png`,
-    description: 'Rugalmas, gyógyszert nem tartalmazó ragasztószalag, amelyet kiegészítő kezelésként alkalmazunk a gyakorlatok és a manuális kezelés mellett. A szalag általában néhány napig, legfeljebb 5-7 napig viselhető.',
-    details: 'A kineziológiai tapinget Kenzo Kase fejlesztette ki Japánban. A hatásmechanizmusáról a szakirodalom nem egységes, ezért nem önálló kezelésként, hanem a mozgás- és gyakorlatterápia kiegészítőjeként használjuk. Egyes pácienseknek a mozgás közbeni biztonságérzetet és a testtudatot segítheti. A felhelyezéséhez képzett szakember szükséges.',
-    conditions: ['Sportsérülések', 'Ficamok, rándulások', 'Tenisz- és golfkönyök', 'Tartáshibák', 'Ízületi mozgásproblémák', 'Achilles-ín rehabilitáció'],
   },
   {
     id: 'mutet-utani',
@@ -115,12 +106,21 @@ const methods = [
     details: 'A Katharina Schroth által kifejlesztett háromdimenziós gerincferdülés-terápia (3DST). Aszimmetrikus testhelyzetekkel és háromdimenziós légzéssel dolgozik, hogy javuljon a törzs tartása és szimmetriája, és a páciens önállóan is megtanulja a gyakorlatokat. A görbület alakulását orvosi kontroll követi, az eredmény egyénenként eltér.',
     conditions: ['Gerincferdülés (scoliosis)', 'Scheuermann-betegség', 'Tartáshibák', 'A törzs aszimmetriája, bordapúp'],
   },
+  {
+    id: 'taping',
+    clip: { name: 'kinesio-taping-derek', label: 'Kineziológiai tape felhelyezése a derékra', wide: true },
+    title: 'Kineziológiai taping',
+    image: `${base}images/modszerek/taping.png`,
+    description: 'Rugalmas, gyógyszert nem tartalmazó ragasztószalag, amelyet kiegészítő kezelésként alkalmazunk a gyakorlatok és a manuális kezelés mellett. A szalag általában néhány napig, legfeljebb 5-7 napig viselhető.',
+    details: 'A kineziológiai tapinget Kenzo Kase fejlesztette ki Japánban. A hatásmechanizmusáról a szakirodalom nem egységes, ezért nem önálló kezelésként, hanem a mozgás- és gyakorlatterápia kiegészítőjeként használjuk. Egyes pácienseknek a mozgás közbeni biztonságérzetet és a testtudatot segítheti. A felhelyezéséhez képzett szakember szükséges.',
+    conditions: ['Sportsérülések', 'Ficamok, rándulások', 'Tenisz- és golfkönyök', 'Tartáshibák', 'Ízületi mozgásproblémák', 'Achilles-ín rehabilitáció'],
+  },
 ];
 ---
 
 <BaseLayout
   title="Kezelési módszereink | McKenzie Gyógytorna Rendelő Budapest"
-  description="9 kezelési módszer: McKenzie-módszer, manuálterápia, stabilizációs tréning, Schroth-terápia, kineziológiai taping és műtét utáni rehabilitáció. Mikor melyiket ajánljuk."
+  description="9 kezelési módszer: McKenzie-módszer, manuálterápia, stabilizációs tréning, Schroth-terápia, műtét utáni rehabilitáció és kineziológiai taping. Mikor melyiket ajánljuk."
 >
   <PageHeader eyebrow="Kezelési módszerek">
     <Fragment slot="title">Kilenc kezelési módszer, amelyek közül a vizsgálat alapján választunk.</Fragment>
