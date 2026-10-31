@@ -493,7 +493,3 @@ body.calm {
 .calm .k-faqgrid { display: grid; gap: 40px; align-items: start; }
 @media (min-width: 960px) { .calm .k-faqgrid { grid-template-columns: 7fr 5fr; gap: 64px; } }
 .calm .k-vb--rel { grid-template-columns: repeat(2, 1fr) !important; }
-
-/* compact question list */
-.calm .k-faq summary { padding: 14px 0; font-size: 1rem; }
-.calm .k-faq details p { padding-bottom: 16px; font-size: 0.97rem; }

@@ -21,9 +21,7 @@ const reviews = [
   { text: 'Nincs gerincsérvből eredő kilátástalanság. A McKenzie-módszerrel gyakorlatilag visszakaptam az életem.', name: 'Kulcsár Krisztián', role: 'világbajnok vívó' },
   { text: 'A fájdalommentes életet jelenti az itt kapott kezelés. Professzionális ellátás, barátságos légkör, rendkívül hozzáértő gyógytornász!', name: 'Dr. Utassyné Kormos Zsuzsa', role: 'páciens' },
 ];
-// The homepage shows the eight most asked questions; the FAQ page has the full list.
-const shownFaqs = homeFaqs.filter((f) => (f as { home?: boolean }).home !== false);
-const half = Math.ceil(shownFaqs.length / 2);
+const half = Math.ceil(homeFaqs.length / 2);
 // FAQ answers are plain text (they feed the schema elsewhere); the phone number becomes a call link when rendered.
 const withPhoneLink = (t: string) => t.split(clinic.phoneDisplay).join(`<a href="tel:${clinic.phone}" class="k-link" style="white-space:nowrap">${clinic.phoneDisplay}</a>`);
 const initials = (n: string) => { const w = n.replace(/^Dr\.\s*/, '').split(' '); return w[0][0] + w[w.length - 1][0]; };
@@ -275,10 +273,10 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
         <h2 class="k-h2">Amit a betegek leggyakrabban kérdeznek.</h2>
       </div>
       <div class="k-faq">
-        {[shownFaqs.slice(0, half), shownFaqs.slice(half)].map((col, c) => (
+        {[homeFaqs.slice(0, half), homeFaqs.slice(half)].map((col, c) => (
           <div>
             {col.map((f, i) => (
-              <details>
+              <details open={c === 0 && i === 0}>
                 <summary>{f.q}</summary>
                 <p set:html={withPhoneLink(f.a)} />
               </details>
