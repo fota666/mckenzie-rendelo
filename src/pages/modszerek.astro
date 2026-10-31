@@ -56,6 +56,7 @@ const methods = [
   },
   {
     id: 'taping',
+    clip: { name: 'kinesio-taping-derek', label: 'Kineziológiai tape felhelyezése a derékra', wide: true },
     title: 'Kineziológiai taping',
     image: `${base}images/modszerek/taping.png`,
     description: 'Speciális ragasztószalag segítségével befolyásoljuk a mozgásszervrendszer működését. A szalag 5-7 napig viselhető, gyógyszert nem tartalmaz.',
@@ -123,7 +124,7 @@ const methods = [
     {methods.map((m, i) => (
       <article id={m.id} class="scroll-mt-36 py-14 lg:py-20 border-b border-[var(--color-line)] grid lg:grid-cols-12 gap-10 lg:gap-12">
         <div class={`lg:col-span-5 ${i % 2 ? 'lg:order-2' : ''}`}>
-          <div class:list={['relative overflow-hidden bg-white lg:sticky lg:top-40', m.clip ? 'aspect-[3/4] max-w-xs lg:max-w-none' : 'aspect-[4/3]']}>
+          <div class:list={['relative overflow-hidden bg-white lg:sticky lg:top-40', m.clip?.wide ? 'aspect-[4/3]' : m.clip ? 'aspect-[3/4] max-w-xs lg:max-w-none' : 'aspect-[4/3]']}>
             {m.clip ? (
               <LoopVideo name={`rendelo/${m.clip.name}`} label={m.clip.label} class="absolute inset-0 w-full h-full object-cover" />
             ) : m.featured ? (
