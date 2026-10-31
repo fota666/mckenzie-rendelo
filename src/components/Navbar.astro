@@ -39,9 +39,10 @@ const isActive = (href: string) => path === href.replace(/\/$/, '');
         <details class="nav-dd" data-dd>
           <summary>Tudnivalók</summary>
           <div class="nav-dd__panel">
-            {navLinks.filter((l) => !/modszerek|csapatunk/.test(l.href)).map((l) => <a href={l.href}>{l.label}</a>)}
+            {navLinks.filter((l) => !/modszerek|csapatunk|kapcsolat/.test(l.href)).map((l) => <a href={l.href}>{l.label}</a>)}
           </div>
         </details>
+        <a href={`${base}kapcsolat`} aria-current={isActive(`${base}kapcsolat`) ? 'page' : undefined} class="nav-link">Kapcsolat</a>
       </nav>
 
       <div class="hidden lg:flex items-center gap-5">

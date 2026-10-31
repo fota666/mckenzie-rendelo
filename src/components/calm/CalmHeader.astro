@@ -7,7 +7,6 @@ const info = [
   { href: `${base}araink`, label: 'Árak' },
   { href: `${base}velemenyek`, label: 'Vélemények' },
   { href: `${base}gyik`, label: 'GYIK' },
-  { href: `${base}kapcsolat`, label: 'Kapcsolat' },
 ];
 ---
 
@@ -34,6 +33,7 @@ const info = [
           {info.map((n) => <a href={n.href}>{n.label}</a>)}
         </div>
       </details>
+      <a href={`${base}kapcsolat`}>Kapcsolat</a>
     </nav>
 
     <div class="k-actions">
@@ -60,6 +60,7 @@ const info = [
         <a href={`${base}modszerek`}>Módszerek</a>
         <a href={`${base}csapatunk`}>Csapatunk</a>
         {info.map((n) => <a href={n.href}>{n.label}</a>)}
+        <a href={`${base}kapcsolat`}>Kapcsolat</a>
         <nav class="k-lang k-lang--mobile" data-lang-switch data-notranslate aria-label="Language">
           <a href="#lang-hu" data-lang="hu" hreflang="hu" lang="hu">HU</a>
           <a href="#lang-en" data-lang="en" hreflang="en" lang="en">EN</a>
