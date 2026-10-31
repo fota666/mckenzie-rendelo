@@ -2,6 +2,7 @@
 // Only reviews that name the complaint or the treatment. Cut-off reviews are quoted up to a full sentence, marked with an ellipsis.
 // Names are shortened to surname plus initial. Pages without an entry simply show no review block.
 export interface ConditionReview { text: string; name: string; place: 'belvaros' | 'buda'; lang?: 'en' }
+// `place` records which Google profile the review comes from (for our own checking, not shown).
 
 export const conditionReviews: Record<string, ConditionReview[]> = {
   derekfajas: [
