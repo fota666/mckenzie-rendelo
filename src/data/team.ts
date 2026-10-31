@@ -44,7 +44,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '14 000 Ft',
-    photo: `${base}images/cseh_agnes.jpg`,
+    photo: `${base}images/csapat/cseh_agnes.jpg`,
   },
   {
     name: 'Dörnyeiné Rozs Mariann',
@@ -349,7 +349,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '14 000 Ft',
-    photo: `${base}images/varhegyi_timea.png`,
+    photo: `${base}images/csapat/varhegyi_timea.jpg`,
   },
   {
     name: 'Dr. Várköviné Gergely Éva',
