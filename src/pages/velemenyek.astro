@@ -1,117 +1,55 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeader from '../components/PageHeader.astro';
+// Reviews page (calm design): rating cards, two featured voices, phrases from the reviews,
+// a wall of patient reviews, press and TV, closing call to action.
+import CalmLayout from '../layouts/CalmLayout.astro';
+import CalmCta from '../components/calm/CalmCta.astro';
 import { clinic, reviewTotal, ratingText } from '../data/clinic';
-const base = import.meta.env.BASE_URL;
-
-const starSvg = '<svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
 
 const featured = [
   {
     text: 'Mostanában semmi bajom. Mégis jövök. Miért? Kelleni kell valakinek. Testileg is, lelkileg is. Relle Éva az, aki mindkettőt adja. Náluk megkapom a testileg és lelkileg egyaránt szükséges törődést.',
-    name: 'Havas Henrik',
-    role: 'újságíró',
-    initials: 'HH',
-    color: 'navy',
+    name: 'Havas Henrik', role: 'újságíró', initials: 'HH',
   },
   {
     text: 'Nincs gerincsérvből eredő kilátástalanság. A McKenzie-módszerrel gyakorlatilag visszakaptam az életem. Tiszta szívből ajánlom mindenkinek, aki hasonló problémával küzd!',
-    name: 'Kulcsár Krisztián',
-    role: 'világbajnok vívó',
-    initials: 'KK',
-    color: 'teal',
+    name: 'Kulcsár Krisztián', role: 'világbajnok vívó', initials: 'KK',
   },
+];
+
+// Short phrases, each copied from one of the reviews on this page.
+const phrases = [
+  'gyakorlatilag visszakaptam az életem',
+  'Professzionális ellátás, barátságos légkör',
+  'Két hét alatt járóképessé varázsolt',
+  'Eszterrel élmény a gyógytorna is!',
+  'Inspirál, támogat, buzdít',
+  'Magas színvonalú szolgáltatást kapok elérhető áron',
+  'Szívből ajánlom!',
+  'olyan gyakorlatokkal és tanácsokkal látott el, amiket a mai napig használok',
 ];
 
 const reviews = [
-  {
-    text: 'A fájdalommentes életet jelenti az itt kapott kezelés. Professzionális ellátás, barátságos légkör, rendkívül hozzáértő gyógytornász!',
-    name: 'Dr. Utassyné Kormos Zsuzsa',
-    role: 'páciens',
-    initials: 'UK',
-  },
-  {
-    text: 'Az izmokat újra feléleszteni segített, és a baleset előtti szintre hozni. Két kezelés után már éreztem a javulást, az otthoni gyakorlatok rendszeres végzésével azóta is panaszmentes vagyok.',
-    name: 'S. Attila',
-    role: 'páciens, 2009',
-    initials: 'SA',
-  },
-  {
-    text: 'Eszterrel élmény a gyógytorna is! Nagyon alapos és felkészült szakember. Először sport okozta deréksérüléssel kerestem fel. A közös munka lényegretörő és következetes volt, néhány hónapon belül érezhető volt a javulás. És a legfontosabb, hogy torna közben a nevetés sem marad el!',
-    name: 'Izsák Eszter',
-    role: 'páciens',
-    initials: 'IE',
-  },
-  {
-    text: 'Eszterhez egy évtizedes gerincfájdalom miatt jártam. Nagy körültekintéssel segített megtalálni a forrásokat, és olyan gyakorlatokkal és tanácsokkal látott el, amiket a mai napig használok, és működnek. Szívből ajánlom!',
-    name: 'Kele Zsolt',
-    role: 'páciens',
-    initials: 'KZ',
-  },
-  {
-    text: 'Deréktáji és vállpanaszokkal kerestem fel a rendelőt. Eszter professzionális felkészültségének és empatikus hozzáállásának köszönhetően rengeteg gyakorlatot tanultam. A gyakorlatsor a visszajelzéseim alapján minden alkalommal aktualizálva lett.',
-    name: 'Szabó Péter',
-    role: 'páciens',
-    initials: 'SZP',
-  },
-  {
-    text: 'Hihetetlenül hálás vagyok, nagyon sokat segítettek az eredeti problémámon. Eszter mély tudással rendelkezik, nagyon profi. Mindent elmagyaráz a „miértről" a „hogyanig". Inspirál, támogat, buzdít. Nagyon jó érzés ilyen jó kezekben lenni!',
-    name: 'Audrey',
-    role: 'páciens',
-    initials: 'A',
-  },
-  {
-    text: 'Eszti szuper szaktudással rendelkezik. Két hét alatt járóképessé varázsolt két kiszakadt porckorong sérvvel. Már három éve járok hozzá karbantartásra. Összeállította az otthoni gyakorlataimat, figyelembe véve az állapotom változásait.',
-    name: 'Balla Zoltán',
-    role: 'páciens',
-    initials: 'BZ',
-  },
-  {
-    text: 'Magas színvonalú szolgáltatást kapok elérhető áron. Csak ajánlani és dicsérni tudom a rendelőt és az összes gyógytornászt!',
-    name: 'Anonim páciens',
-    role: 'visszajelző kérdőív',
-    initials: '★',
-  },
-  {
-    text: 'Vágó Eszternél volt a lányom. Alapos, jó szakember és nagyon kedves.',
-    name: 'Füzesi Katalin',
-    role: 'páciens',
-    initials: 'FK',
-  },
+  { text: 'A fájdalommentes életet jelenti az itt kapott kezelés. Professzionális ellátás, barátságos légkör, rendkívül hozzáértő gyógytornász!', name: 'Dr. Utassyné Kormos Zsuzsa', role: 'páciens', initials: 'UK' },
+  { text: 'Az izmokat újra feléleszteni segített, és a baleset előtti szintre hozni. Két kezelés után már éreztem a javulást, az otthoni gyakorlatok rendszeres végzésével azóta is panaszmentes vagyok.', name: 'S. Attila', role: 'páciens, 2009', initials: 'SA' },
+  { text: 'Eszterrel élmény a gyógytorna is! Nagyon alapos és felkészült szakember. Először sport okozta deréksérüléssel kerestem fel. A közös munka lényegretörő és következetes volt, néhány hónapon belül érezhető volt a javulás. És a legfontosabb, hogy torna közben a nevetés sem marad el!', name: 'Izsák Eszter', role: 'páciens', initials: 'IE' },
+  { text: 'Eszterhez egy évtizedes gerincfájdalom miatt jártam. Nagy körültekintéssel segített megtalálni a forrásokat, és olyan gyakorlatokkal és tanácsokkal látott el, amiket a mai napig használok, és működnek. Szívből ajánlom!', name: 'Kele Zsolt', role: 'páciens', initials: 'KZ' },
+  { text: 'Deréktáji és vállpanaszokkal kerestem fel a rendelőt. Eszter professzionális felkészültségének és empatikus hozzáállásának köszönhetően rengeteg gyakorlatot tanultam. A gyakorlatsor a visszajelzéseim alapján minden alkalommal aktualizálva lett.', name: 'Szabó Péter', role: 'páciens', initials: 'SP' },
+  { text: 'Hihetetlenül hálás vagyok, nagyon sokat segítettek az eredeti problémámon. Eszter mély tudással rendelkezik, nagyon profi. Mindent elmagyaráz a „miértről" a „hogyanig". Inspirál, támogat, buzdít. Nagyon jó érzés ilyen jó kezekben lenni!', name: 'Audrey', role: 'páciens', initials: 'A' },
+  { text: 'Eszti szuper szaktudással rendelkezik. Két hét alatt járóképessé varázsolt két kiszakadt porckorong sérvvel. Már három éve járok hozzá karbantartásra. Összeállította az otthoni gyakorlataimat, figyelembe véve az állapotom változásait.', name: 'Balla Zoltán', role: 'páciens', initials: 'BZ' },
+  { text: 'Magas színvonalú szolgáltatást kapok elérhető áron. Csak ajánlani és dicsérni tudom a rendelőt és az összes gyógytornászt!', name: 'Anonim páciens', role: 'visszajelző kérdőív', initials: '★' },
+  { text: 'Vágó Eszternél volt a lányom. Alapos, jó szakember és nagyon kedves.', name: 'Füzesi Katalin', role: 'páciens', initials: 'FK' },
 ];
+// Mix the voices: reviews about one therapist go last so the page does not read as her advertisement.
+const wall = [...reviews].sort((a, b) => Number(/Eszt/.test(a.text)) - Number(/Eszt/.test(b.text)));
 
 const press = [
-  {
-    title: 'McKenzie módszer a gerincproblémák gyógyítására',
-    source: 'Sikeres Nők',
-    issue: 'XI. évf. 2008. április, 123. szám',
-    quote: 'Ha időben lépünk, elkerülhetjük a bajt, megelőzhetjük a kiújuló fájdalmakat.',
-  },
-  {
-    title: 'Gyakorlatok derékfájás ellen',
-    source: 'Nők Lapja Egészség',
-    issue: 'V. évf. 4-5-6. szám, 2011',
-    quote: 'Az esetek 80%-ában a derékfájás kiújuló jellegű betegség.',
-  },
-  {
-    title: 'Derék dolog hátfájásra',
-    source: 'Elixír Magazin',
-    issue: '2011. szeptember',
-    quote: 'A McKenzie-módszer a gerincproblémák speciális vizsgálati és kezelési rendszere.',
-  },
-  {
-    title: 'McKenzie-módszer: Egyszerű mozdulatokkal a fájdalommentes életért',
-    source: 'Phoenix Pharma',
-    issue: '2010. május',
-    quote: '',
-  },
-  {
-    title: 'Az irodai munka veszélyei',
-    source: 'Pályacsúcs Magazin',
-    issue: '2010. február',
-    quote: '',
-  },
+  { title: 'McKenzie módszer a gerincproblémák gyógyítására', source: 'Sikeres Nők', issue: 'XI. évf. 2008. április, 123. szám', quote: 'Ha időben lépünk, elkerülhetjük a bajt, megelőzhetjük a kiújuló fájdalmakat.' },
+  { title: 'Gyakorlatok derékfájás ellen', source: 'Nők Lapja Egészség', issue: 'V. évf. 4-5-6. szám, 2011', quote: 'Az esetek 80%-ában a derékfájás kiújuló jellegű betegség.' },
+  { title: 'Derék dolog hátfájásra', source: 'Elixír Magazin', issue: '2011. szeptember', quote: 'A McKenzie-módszer a gerincproblémák speciális vizsgálati és kezelési rendszere.' },
+  { title: 'McKenzie-módszer: Egyszerű mozdulatokkal a fájdalommentes életért', source: 'Phoenix Pharma', issue: '2010. május', quote: '' },
+  { title: 'Az irodai munka veszélyei', source: 'Pályacsúcs Magazin', issue: '2010. február', quote: '' },
 ];
+const year = (s: string) => s.match(/(20\d\d)/)?.[1] ?? '';
 
 const tv = [
   { title: 'Esésmegelőzés', date: '2014. november 10.' },
@@ -120,76 +58,103 @@ const tv = [
 ];
 ---
 
-<BaseLayout
+<CalmLayout
   title="Vélemények és sajtó | McKenzie Gyógytorna Rendelő Budapest"
   description={`${reviewTotal} Google-értékelés a két rendelőről, páciensvélemények, sajtómegjelenések és TV-szereplések.`}
 >
-  <PageHeader eyebrow="Vélemények">
-    <Fragment slot="title">{reviewTotal} Google-értékelés és a páciensek írásos véleményei.</Fragment>
-    {clinic.locations.map((l, i) => <>{i > 0 && ', '}<a href={l.mapsUrl} target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-[var(--color-teal-700)]">{l.name}: {ratingText(l.rating.value)} ({l.rating.count} vélemény)</a></>)}. A pontszámok a Google-profilokról származnak, utoljára 2026. októberben ellenőrizve.
-  </PageHeader>
-
-  <section class="bg-[var(--color-paper-2)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-2 gap-px bg-[var(--color-line)] border border-[var(--color-line)]">
-      {featured.map((r) => (
-        <figure class="bg-white p-10 lg:p-10 flex flex-col">
-          <blockquote class="font-heading text-[1.65rem] lg:text-[1.9rem] leading-snug text-[var(--color-navy-900)] flex-1">„{r.text}”</blockquote>
-          <figcaption class="mt-10 text-[15px]"><span class="font-medium">{r.name}</span> <span class="text-[var(--color-ink-2)]">&middot; {r.role}</span></figcaption>
-        </figure>
-      ))}
-    </div>
-  </section>
-
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
-    <h2 class="display text-3xl lg:text-4xl text-[var(--color-navy-900)]">Pácienseink mondják</h2>
-    <div class="mt-8 columns-1 md:columns-2 lg:columns-3 gap-6 [column-fill:_balance]">
-      {/* Mix the voices: reviews about one therapist go last so the page does not read as her ad. */}
-      {[...reviews].sort((a, b) => Number(/Eszt/.test(a.text)) - Number(/Eszt/.test(b.text))).map((r) => (
-        <figure class="break-inside-avoid mb-6 bg-white border border-[var(--color-line)] p-7">
-          <blockquote class="leading-relaxed text-[var(--color-ink)]">„{r.text}”</blockquote>
-          <figcaption class="mt-5 pt-4 border-t border-[var(--color-line)] text-[15px]"><span class="font-medium">{r.name}</span> <span class="text-[var(--color-ink-2)]">&middot; {r.role}</span></figcaption>
-        </figure>
-      ))}
-    </div>
-  </section>
-
-  <section class="bg-[var(--color-paper-2)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-12 gap-10">
-      <div class="lg:col-span-4">
-        <p class="eyebrow">Sajtó és TV</p>
-        <h2 class="display mt-5 text-3xl lg:text-4xl text-[var(--color-navy-900)]">Ahol a McKenzie-módszerről beszéltünk.</h2>
+  <!-- Rating cards -->
+  <section class="k-sec k-sec--pine" style="padding-bottom:clamp(48px,6vw,80px)">
+    <div class="k-wrap k-rhero">
+      <div>
+        <p class="k-eyebrow">Vélemények</p>
+        <h1 class="k-h1" style="color:#fff;margin:14px 0 20px">Így írnak rólunk a betegeink.</h1>
+        <p class="k-lead">{reviewTotal} Google-értékelés a két rendelőről, {ratingText(clinic.locations[0].rating.value)} átlaggal, és a páciensek saját szavai alább.</p>
+        <p class="k-small" style="margin-top:18px">A pontszámok a Google-profilokról származnak, utoljára 2026. októberben ellenőrizve.</p>
       </div>
-      <div class="lg:col-span-8">
-        <ul class="border-t border-[var(--color-line)]">
+      <div class="k-rcards">
+        {clinic.locations.map((l) => (
+          <a href={l.mapsUrl} target="_blank" rel="noopener" class="k-rcard">
+            <span class="k-rcard__n">{ratingText(l.rating.value)}</span>
+            <span class="k-rcard__m">
+              <i class="k-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</i>
+              <strong>{l.name}</strong>
+              <small>{l.rating.count} Google-vélemény</small>
+            </span>
+            <span class="k-rcard__go" aria-hidden="true">&rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Two featured voices -->
+  <section class="k-sec">
+    <div class="k-wrap k-voices">
+      {featured.map((r) => (
+        <figure class="k-voice">
+          <blockquote>{r.text}</blockquote>
+          <figcaption><span class="k-av k-av--lg">{r.initials}</span><span><strong>{r.name}</strong><small>{r.role}</small></span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <!-- Phrases -->
+  <section class="k-sec k-sec--sage" style="padding-bottom:0">
+    <div class="k-wrap">
+      <div class="k-head">
+        <p class="k-eyebrow">Mondatok a véleményekből</p>
+        <h2 class="k-h2">Amit a legtöbbször leírnak.</h2>
+      </div>
+      <ul class="k-phr">
+        {phrases.map((t) => <li>{t}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Wall of reviews -->
+  <section class="k-sec k-sec--sage" style="padding-top:clamp(32px,4vw,48px)">
+    <div class="k-wrap">
+      <div class="k-wall">
+        {wall.map((r) => (
+          <figure class="k-qcard">
+            <blockquote class="k-quote">{r.text}</blockquote>
+            <figcaption><span class="k-av">{r.initials}</span><span><strong>{r.name}</strong><small>{r.role}</small></span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Press and TV -->
+  <section class="k-sec k-sec--white">
+    <div class="k-wrap k-pressgrid">
+      <div class="k-pressgrid__head">
+        <p class="k-eyebrow">Sajtó és TV</p>
+        <h2 class="k-h2" style="margin-top:14px">Ahol a McKenzie-módszerről beszéltünk.</h2>
+        <p class="k-lead" style="margin-top:14px">Magazinok és televíziós megjelenések 2008 és 2015 között.</p>
+      </div>
+      <div>
+        <ul class="k-press">
           {press.map((p) => (
-            <li class="py-6 border-b border-[var(--color-line)] grid sm:grid-cols-[12rem_1fr] gap-2 sm:gap-6">
-              <p class="font-mono text-[13px] uppercase tracking-wider text-[var(--color-teal-700)] pt-1.5">{p.source}<br /><span class="text-[var(--color-ink-2)] normal-case tracking-normal">{p.issue}</span></p>
+            <li>
+              <span class="k-press__y">{year(p.issue)}</span>
               <div>
-                <h3 class="font-heading text-[1.65rem] text-[var(--color-navy-900)]">{p.title}</h3>
-                {p.quote && <p class="mt-2 text-[var(--color-ink-2)] italic">„{p.quote}”</p>}
+                <p class="k-press__s">{p.source} <span>&middot; {p.issue}</span></p>
+                <h3 class="k-h3" style="font-size:1.3rem">{p.title}</h3>
+                {p.quote && <p class="k-press__q">„{p.quote}”</p>}
               </div>
             </li>
           ))}
         </ul>
-        <h3 class="mt-10 font-mono text-[13px] uppercase tracking-wider text-[var(--color-ink-2)]">TV-szereplések</h3>
-        <ul class="mt-4 grid sm:grid-cols-3 gap-4">
+        <ul class="k-tv">
           {tv.map((t) => (
-            <li class="bg-white border border-[var(--color-line)] p-5">
-              <p class="font-heading text-[1.35rem] text-[var(--color-navy-900)]">{t.title}</p>
-              <p class="mt-1 text-[15px] text-[var(--color-ink-2)]">{t.date}</p>
-            </li>
+            <li><b>TV</b><span><strong>{t.title}</strong><small>{t.date}</small></span></li>
           ))}
         </ul>
       </div>
     </div>
   </section>
 
-  <section class="bg-[var(--color-navy-900)] text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid lg:grid-cols-12 gap-8 items-end">
-      <h2 class="lg:col-span-8 display text-3xl lg:text-4xl">Időpontot általában 1-2 napon belül tudunk adni.</h2>
-      <div class="lg:col-span-4 lg:text-right">
-        <a href={`tel:${clinic.phone}`} class="btn btn-copper font-mono">{clinic.phoneDisplay}</a>
-      </div>
-    </div>
-  </section>
-</BaseLayout>
+  <CalmCta tone="gold" title="Szeretne Ön is így beszélni a gyógytornáról? Hívjon." />
+</CalmLayout>

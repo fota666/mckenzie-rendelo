@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
-import ClosingCta from '../components/ClosingCta.astro';
+import CtaCard from '../components/CtaCard.astro';
 import { clinic } from '../data/clinic';
 const base = import.meta.env.BASE_URL;
 
@@ -73,16 +73,6 @@ const notes = [
       </dl>
     </div>
 
-    <aside class="lg:col-span-5 lg:sticky lg:top-28 bg-[var(--color-teal-700)] text-white p-6 lg:p-8">
-      <p class="eyebrow text-[var(--color-teal-100)]">Időpontfoglalás</p>
-      <a href={`tel:${clinic.phone}`} class="mt-3 block font-heading text-4xl hover:text-[var(--color-gold-200)]">{clinic.phoneDisplay}</a>
-      <p class="mt-2 text-white/85">{clinic.bookingHours}</p>
-      <p class="mt-4 text-[15px] text-white/70 leading-relaxed">Általában 1-2 napon belül tudunk időpontot adni. Ha munkaidőben nem tud telefonálni, kérjen visszahívást.</p>
-      <div class="mt-8 flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3">
-        <a href={`tel:${clinic.phone}`} class="btn btn-copper">Hívás most</a>
-        <a href={`${base}kapcsolat#visszahivas`} class="btn border border-white/30 hover:border-white">Visszahívást kérek</a>
-      </div>
-    </aside>
+    <aside class="lg:col-span-5 lg:sticky lg:top-28 self-start"><CtaCard label="Időpontfoglalás" /></aside>
   </section>
-  <ClosingCta />
 </BaseLayout>

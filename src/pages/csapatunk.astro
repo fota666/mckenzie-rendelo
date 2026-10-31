@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import ClosingCta from '../components/ClosingCta.astro';
 import { clinic } from '../data/clinic';
 import { terapeutak, locationOf, focusAreas } from '../data/team';
 const base = import.meta.env.BASE_URL;
@@ -35,7 +36,7 @@ const locName = (id: string) => clinic.locations.find((l) => l.id === id)?.name 
 
   <PageHeader eyebrow="Csapatunk">
     <Fragment slot="title">{active.length + 1} gyógytornász, mindannyian McKenzie-képzésben részesültek.</Fragment>
-    Nem kell előre terapeutát választania: telefonon a panasza alapján ajánlunk Önnek valakit ({clinic.phoneDisplay}, {clinic.bookingHoursShort}). Ha valakihez kifejezetten szeretne menni, a rendelő szerint szűrhet lent.
+    Nem kell előre terapeutát választania: hívja a <a href={`tel:${clinic.phone}`} class="underline underline-offset-4 whitespace-nowrap hover:text-[var(--color-teal-700)]">{clinic.phoneDisplay}</a> számot hétköznap 9 és 17 óra között, és a panasza alapján ajánlunk Önnek valakit. Ha valakihez kifejezetten szeretne menni, a rendelő szerint szűrhet lent.
   </PageHeader>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
@@ -107,18 +108,7 @@ const locName = (id: string) => clinic.locations.find((l) => l.id === id)?.name 
     </div>
   </section>
 
-  <section class="bg-[var(--color-navy-900)] text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid lg:grid-cols-12 gap-8 items-end">
-      <div class="lg:col-span-8">
-        <p class="eyebrow eyebrow-light">Időpontfoglalás</p>
-        <h2 class="display mt-5 text-3xl lg:text-4xl">Telefonon a panasza alapján ajánlunk Önnek terapeutát.</h2>
-      </div>
-      <div class="lg:col-span-4 flex flex-col sm:flex-row lg:justify-end gap-3">
-        <a href={`tel:${clinic.phone}`} class="btn btn-copper font-mono">{clinic.phoneDisplay}</a>
-        <a href={`${base}kapcsolat#visszahivas`} class="btn border border-white/30 hover:border-white">Visszahívást kérek</a>
-      </div>
-    </div>
-  </section>
+  <ClosingCta eyebrow="Terapeuta választás" title="Telefonon a panasza alapján ajánlunk Önnek terapeutát." lead="Mondja el, mi fáj, és megmondjuk, melyik kollégánk és melyik rendelő a legjobb választás." />
 </BaseLayout>
 
 <script>

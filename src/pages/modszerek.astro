@@ -3,12 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import LoopVideo from '../components/LoopVideo.astro';
 import ExpertBackground from '../components/ExpertBackground.astro';
+import ClosingCta from '../components/ClosingCta.astro';
 const base = import.meta.env.BASE_URL;
 
 const methods = [
   {
     id: 'mckenzie',
-    clip: { name: 'nyak-mckenzie-onkezeles', label: 'Ülve végzett nyaki mozgásvizsgálat McKenzie-módszerrel' },
+    clip: { name: 'derekfajas-hasonfekvo-mobilizalas', label: 'Hasonfekvő extenziós gyakorlat a gyógytornász irányításával' },
     title: 'McKenzie-módszer (MDT)',
     subtitle: 'Fő szakterületünk',
     image: `${base}images/modszerek/mckenzie.png`,
@@ -177,15 +178,9 @@ const methods = [
 
   <ExpertBackground />
 
-  <section class="bg-[var(--color-navy-900)] text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid lg:grid-cols-12 gap-8 items-end">
-      <div class="lg:col-span-8">
-        <p class="eyebrow eyebrow-light">Kezelési terv</p>
-        <h2 class="display mt-5 text-3xl lg:text-4xl">Az első vizsgálat után a terapeuta állítja össze a kezelési tervet.</h2>
-      </div>
-      <div class="lg:col-span-4 lg:text-right">
-        <a href={`${base}kapcsolat#idopontfoglalas`} class="btn btn-copper">Időpontot kérek <span aria-hidden="true">&rarr;</span></a>
-      </div>
-    </div>
-  </section>
+  <ClosingCta
+    eyebrow="Kezelési terv"
+    title="Az első vizsgálat után a terapeuta állítja össze a kezelési tervet."
+    lead="Nem kell előre kiválasztania a módszert: a vizsgálat mutatja meg, melyik kezelés illik a panaszához, és hogy kell-e kombinálni őket. Az első alkalom 55 perc, a végén megkapja az otthoni gyakorlatsort."
+  />
 </BaseLayout>

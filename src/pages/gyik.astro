@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
-import ClosingCta from '../components/ClosingCta.astro';
+import CtaCard from '../components/CtaCard.astro';
 import { clinic } from '../data/clinic';
 const base = import.meta.env.BASE_URL;
 
@@ -111,11 +111,7 @@ const faqSchema = {
 
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid lg:grid-cols-12 gap-10">
     <aside class="lg:col-span-4">
-      <div class="lg:sticky lg:top-28 bg-[var(--color-teal-700)] text-white p-6">
-        <p class="eyebrow text-[var(--color-teal-100)]">Nem találja a választ?</p>
-        <p class="mt-4 font-heading text-[1.65rem] leading-snug">Kérdezze meg telefonon, mielőtt időpontot kér.</p>
-        <a href={`tel:${clinic.phone}`} class="btn btn-copper mt-8 font-mono">{clinic.phoneDisplay}</a>
-      </div>
+      <div class="lg:sticky lg:top-28"><CtaCard label="Nem találja a választ?" title="Hívjon, és megválaszoljuk a kérdését." /></div>
     </aside>
     <div class="lg:col-span-8 border-t border-[var(--color-line)]">
       {faqs.map((faq, i) => (
@@ -129,5 +125,4 @@ const faqSchema = {
       ))}
     </div>
   </section>
-  <ClosingCta />
 </BaseLayout>

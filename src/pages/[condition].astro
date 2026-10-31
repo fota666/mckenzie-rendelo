@@ -2,6 +2,7 @@
 // Condition landing pages (calm design): /derekfajas, /nyakfajas, ... one per entry in data/conditions.ts
 import CalmLayout from '../layouts/CalmLayout.astro';
 import LoopVideo from '../components/LoopVideo.astro';
+import CalmCta from '../components/calm/CalmCta.astro';
 import { conditions, conditionBySlug, type Condition } from '../data/conditions';
 import { clinic } from '../data/clinic';
 
@@ -100,7 +101,7 @@ const schema = {
         </div>
         <div class="k-card">
           <h3 class="k-h3">Ár és foglalás</h3>
-          <p style="color:var(--c-mute)">Egyéni kezelés {clinic.prices.single.range} ({clinic.prices.single.duration}), 5 alkalmas bérlet {clinic.prices.pass.amount}. Beutaló nem kell. Telefonon {clinic.phoneDisplay}, {clinic.bookingHours.toLowerCase()}, vagy <a href={`${base}kapcsolat#visszahivas`} class="k-link">visszahívás-kérés</a>.</p>
+          <p style="color:var(--c-mute)">Egyéni kezelés {clinic.prices.single.range} ({clinic.prices.single.duration}), 5 alkalmas bérlet {clinic.prices.pass.amount}. Beutaló nem kell. Telefonon <a href={`tel:${clinic.phone}`} class="k-link" style="white-space:nowrap">{clinic.phoneDisplay}</a>, {clinic.bookingHours.toLowerCase()}, vagy <a href={`${base}kapcsolat#visszahivas`} class="k-link">visszahívás-kérés</a>.</p>
         </div>
       </div>
     </div>
@@ -128,18 +129,5 @@ const schema = {
     </div>
   </section>
 
-  <section class="k-sec k-sec--pine">
-    <div class="k-wrap k-cta">
-      <div>
-        <p class="k-eyebrow">Időpontfoglalás</p>
-        <h2 class="k-h2" style="margin:12px 0 16px">Hívjon, vagy kérjen visszahívást.</h2>
-        <a href={`tel:${clinic.phone}`} class="k-cta__tel">{clinic.phoneDisplay}</a>
-        <p class="k-small" style="margin-top:8px">{clinic.bookingHours}. Általában 1-2 napon belül kap időpontot.</p>
-      </div>
-      <div class="k-btns">
-        <a href={`tel:${clinic.phone}`} class="k-btn k-btn--clay">Hívás</a>
-        <a href={`${base}kapcsolat#visszahivas`} class="k-btn k-btn--light">Visszahívást kérek</a>
-      </div>
-    </div>
-  </section>
+  <CalmCta tone="gold" />
 </CalmLayout>

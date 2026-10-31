@@ -3,6 +3,7 @@
 // team, proof and price, locations, closing call to action, questions.
 import CalmLayout from '../layouts/CalmLayout.astro';
 import LoopVideo from '../components/LoopVideo.astro';
+import CalmCta from '../components/calm/CalmCta.astro';
 import { clinic, reviewTotal, ratingText } from '../data/clinic';
 import { situations } from '../data/situations';
 import { firstVisit } from '../data/firstVisit';
@@ -21,6 +22,13 @@ const reviews = [
   { text: 'A fájdalommentes életet jelenti az itt kapott kezelés. Professzionális ellátás, barátságos légkör, rendkívül hozzáértő gyógytornász!', name: 'Dr. Utassyné Kormos Zsuzsa', role: 'páciens' },
 ];
 const half = Math.ceil(homeFaqs.length / 2);
+// FAQ answers are plain text (they feed the schema elsewhere); the phone number becomes a call link when rendered.
+const withPhoneLink = (t: string) => t.split(clinic.phoneDisplay).join(`<a href="tel:${clinic.phone}" class="k-link" style="white-space:nowrap">${clinic.phoneDisplay}</a>`);
+const initials = (n: string) => { const w = n.replace(/^Dr\.\s*/, '').split(' '); return w[0][0] + w[w.length - 1][0]; };
+type Loc = (typeof clinic.locations)[number];
+// Directions to the exact coordinates of the Google profile, so the destination cannot be mistaken for a similar address.
+const routeUrl = (l: Loc) => `https://www.google.com/maps/dir/?api=1&destination=${l.geo.lat},${l.geo.lng}`;
+const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`${l.googleName}, ${l.postalCode} Budapest`)}&ll=${l.geo.lat},${l.geo.lng}&z=16&output=embed`;
 ---
 
 <CalmLayout title="McKenzie Gyógytorna Rendelő Budapest | Derék- és nyakfájás kezelése">
@@ -168,8 +176,12 @@ const half = Math.ceil(homeFaqs.length / 2);
   <!-- Proof and price -->
   <section class="k-sec k-sec--sage">
     <div class="k-wrap">
-      <div class="k-stats">
-        <div><b>{ratingText(clinic.locations[0].rating.value)}</b><span>átlag a Google-on</span></div>
+      <div class="k-head">
+        <p class="k-eyebrow">Vélemények és árak</p>
+        <h2 class="k-h2">Mit mondanak a betegek, és mennyibe kerül az első alkalom.</h2>
+      </div>
+      <div class="k-statband">
+        <div><b>{ratingText(clinic.locations[0].rating.value)}</b><i class="k-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</i><span>átlag a Google-on</span></div>
         <div><b>{reviewTotal}</b><span>Google-vélemény a két rendelőről</span></div>
         <div><b>{clinic.therapists}</b><span>gyógytornász</span></div>
         <div><b>1993</b><span>óta működik a rendelő</span></div>
@@ -177,13 +189,14 @@ const half = Math.ceil(homeFaqs.length / 2);
       <div class="k-proof">
         <div class="k-quotes">
           {reviews.map((r) => (
-            <figure>
-              <blockquote class="k-quote">„{r.text}”</blockquote>
-              <figcaption class="k-small"><strong style="color:var(--c-pine)">{r.name}</strong> &middot; {r.role}</figcaption>
+            <figure class="k-qcard">
+              <blockquote class="k-quote">{r.text}</blockquote>
+              <figcaption><span class="k-av">{initials(r.name)}</span><span><strong>{r.name}</strong><small>{r.role}</small></span></figcaption>
             </figure>
           ))}
         </div>
-        <div class="k-price">
+        <aside class="k-price k-price--dark">
+          <p class="k-eyebrow">Árak</p>
           <ul>
             <li>
               <div><h3 class="k-h3">{clinic.prices.single.label}</h3><p class="k-small">{clinic.prices.single.duration}, {clinic.prices.single.note}</p></div>
@@ -194,8 +207,9 @@ const half = Math.ceil(homeFaqs.length / 2);
               <b>{clinic.prices.pass.amount}</b>
             </li>
           </ul>
-          <p class="k-small" style="margin-top:16px">Beutaló nem kell. Egészségpénztárra számlát adunk. <a href={`${base}araink`} class="k-link">Árak és tudnivalók</a> &middot; <a href={`${base}velemenyek`} class="k-link">Összes vélemény</a></p>
-        </div>
+          <p class="k-small" style="margin-top:16px">Beutaló nem kell. Egészségpénztárra számlát adunk.</p>
+          <p style="margin-top:14px;font-size:0.95rem"><a href={`${base}araink`} class="k-link">Árak és tudnivalók</a> &nbsp;&middot;&nbsp; <a href={`${base}velemenyek`} class="k-link">Összes vélemény</a></p>
+        </aside>
       </div>
     </div>
   </section>
@@ -211,26 +225,32 @@ const half = Math.ceil(homeFaqs.length / 2);
       <div class="k-locs">
         {clinic.locations.map((l) => (
           <article class="k-loc">
-            <div class="k-loc__top">
-              <span class="k-loc__d">{l.district.split('.')[0]}.</span>
-              <div>
-                <h3 class="k-h3" style="font-size:1.45rem">{l.name}</h3>
-                <p class="k-small">{l.area}</p>
-              </div>
+            <div class="k-loc__map">
+              <iframe src={mapSrc(l)} loading="lazy" referrerpolicy="no-referrer-when-downgrade" title={`${l.name} térkép`}></iframe>
             </div>
-            <p class="k-loc__addr">{l.postalCode} Budapest,<br />{l.street}{l.bell && <>, {l.bell}</>}</p>
-            <ul class="k-loc__list">
-              {[l.transit, l.transitMore].map((t) => (
-                <li>
-                  {(t.match(/M\d/g) ?? []).map((m) => <b class={`k-line k-line--${m.toLowerCase()}`}>{m}</b>)}
-                  <span>{t.replace(/\s?M\d(, )?/g, ' ').replace(/\s+,/g, ',').replace(/\s{2,}/g, ' ').trim()}</span>
-                </li>
-              ))}
-              <li><b class="k-line k-line--p">P</b><span>Parkolás: {l.parking}</span></li>
-            </ul>
-            <div class="k-loc__foot">
-              <a href={l.mapsUrl} target="_blank" rel="noopener" class="k-btn k-btn--ghost">Útvonaltervezés</a>
-              <span class="k-small">{clinic.hoursText}</span>
+            <div class="k-loc__body">
+              <div class="k-loc__top">
+                <span class="k-loc__d">{l.district.split('.')[0]}.</span>
+                <div>
+                  <h3 class="k-h3" style="font-size:1.45rem">{l.name}</h3>
+                  <p class="k-small">{l.area}</p>
+                </div>
+              </div>
+              <p class="k-loc__addr">{l.postalCode} Budapest,<br />{l.street}{l.bell && <>, {l.bell}</>}</p>
+              <ul class="k-loc__list">
+                {[l.transit, l.transitMore].map((t) => (
+                  <li>
+                    {(t.match(/M\d/g) ?? []).map((m) => <b class={`k-line k-line--${m.toLowerCase()}`}>{m}</b>)}
+                    <span>{t.replace(/\s?M\d(, )?/g, ' ').replace(/\s+,/g, ',').replace(/\s{2,}/g, ' ').trim()}</span>
+                  </li>
+                ))}
+                <li><b class="k-line k-line--p">P</b><span>Parkolás: {l.parking}</span></li>
+              </ul>
+              <div class="k-loc__foot">
+                <a href={routeUrl(l)} target="_blank" rel="noopener" class="k-btn k-btn--clay">Útvonaltervezés</a>
+                <a href={l.mapsUrl} target="_blank" rel="noopener" class="k-btn k-btn--ghost">Google-profil, {l.rating.count} vélemény</a>
+              </div>
+              <p class="k-small">{clinic.hoursText}</p>
             </div>
           </article>
         ))}
@@ -238,29 +258,7 @@ const half = Math.ceil(homeFaqs.length / 2);
     </div>
   </section>
 
-  <!-- Closing call to action -->
-  <section class="k-sec k-sec--pine">
-    <div class="k-wrap k-cta2">
-      <div>
-        <p class="k-eyebrow">Időpontfoglalás</p>
-        <h2 class="k-h2" style="margin:14px 0 22px">Hívjon, és általában 1-2 napon belül időpontot kap.</h2>
-        <ul class="k-checks">
-          <li>Beutaló nem kell</li>
-          <li>{clinic.prices.single.range} egy alkalom, számlát adunk egészségpénztárra</li>
-          <li>Két rendelő, hétfőtől péntekig {clinic.hoursText.replace('hétfőtől péntekig, ', '')}</li>
-        </ul>
-      </div>
-      <div class="k-cta2__card">
-        <p class="k-small">Telefonos időpontfoglalás</p>
-        <a href={`tel:${clinic.phone}`} class="k-cta2__tel">{clinic.phoneDisplay}</a>
-        <p class="k-small">{clinic.bookingHours}</p>
-        <div class="k-btns" style="margin-top:20px">
-          <a href={`tel:${clinic.phone}`} class="k-btn k-btn--clay">Hívás most</a>
-          <a href={`${base}kapcsolat#visszahivas`} class="k-btn k-btn--ghost">Visszahívást kérek</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <CalmCta />
 
   <!-- FAQ -->
   <section class="k-sec k-sec--sage">
@@ -275,7 +273,7 @@ const half = Math.ceil(homeFaqs.length / 2);
             {col.map((f, i) => (
               <details open={c === 0 && i === 0}>
                 <summary>{f.q}</summary>
-                <p>{f.a}</p>
+                <p set:html={withPhoneLink(f.a)} />
               </details>
             ))}
           </div>
