@@ -287,3 +287,27 @@ body.calm {
 @media (min-width: 980px) { .calm .k-vd { grid-template-columns: 1fr 340px; gap: 64px; } .calm .k-vd__help { position: sticky; top: 100px; } .calm .k-vd__note { grid-column: 3; grid-row: 1; font-size: 0.9rem; text-align: right; padding-right: 8px; } .calm .k-vd__list a { grid-template-columns: 2.4rem 1fr auto auto; } .calm .k-vd__list i { grid-column: 4; grid-row: 1; } }
 .calm .k-vd__help .k-h3 { color: var(--c-pine); }
 .calm .k-vd__help .k-small { color: var(--c-mute); }
+
+/* founder: portrait beside her own sentence */
+.calm .k-fq { display: grid; gap: 32px; align-items: center; }
+.calm .k-fq__photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%; border-radius: 22px; }
+.calm .k-fq__txt { display: grid; gap: 20px; }
+.calm .k-fq__quote { font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; color: #fff; }
+.calm .k-fq__cite { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; color: #fff; }
+.calm .k-fq__cite strong { font-size: 1.1rem; }
+.calm .k-fq__cite span { font-size: 0.95rem; color: #b9cabf; }
+.calm .k-fq__intro { max-width: 38rem; color: #cfdcd3; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.16); }
+@media (min-width: 900px) { .calm .k-fq { grid-template-columns: 380px 1fr; gap: 72px; } }
+
+/* arrival */
+.calm .k-arr { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px 14px; }
+.calm .k-arr li { display: grid; gap: 4px; align-content: start; }
+.calm .k-arr img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; margin-bottom: 8px; }
+@media (min-width: 700px) { .calm .k-arr { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1080px) { .calm .k-arr { grid-template-columns: repeat(5, 1fr); gap: 20px; } }
+
+/* help bar under the complaint tiles */
+.calm .k-help { margin-top: 22px; display: grid; gap: 18px; align-items: center; background: var(--c-pine); border-radius: 22px; padding: clamp(20px, 3vw, 30px); }
+.calm .k-help .k-h3 { color: #fff; font-size: 1.3rem; }
+.calm .k-help .k-small { color: #b9cabf; margin-top: 4px; }
+@media (min-width: 800px) { .calm .k-help { grid-template-columns: 1fr auto; } }

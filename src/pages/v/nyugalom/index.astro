@@ -57,10 +57,21 @@ const half = Math.ceil(homeFaqs.length / 2);
         <p class="k-eyebrow">Mi a panasza?</p>
         <h2 class="k-h2">Válassza ki, mi fáj, és megmutatjuk, hogyan kezdünk hozzá.</h2>
       </div>
-      <div class="k-choose">
+      <div class="k-vb">
         {chooser.map((c) => (
-          <a href={`${v}${c.slug}`}><strong>{c.name}</strong><span>{c.note}</span></a>
+          <a href={`${v}${c.slug}`} class="k-vb__t">
+            <img src={`${base}video/rendelo/${c.poster}.jpg`} alt="" loading="lazy" />
+            <span class="k-vb__s"></span>
+            <span class="k-vb__x"><strong>{c.name}</strong><small>{c.note}</small></span>
+          </a>
         ))}
+      </div>
+      <div class="k-help">
+        <div>
+          <h3 class="k-h3">Nem biztos benne, melyik az Öné?</h3>
+          <p class="k-small">Hívjon, és a panasza alapján segítünk kiválasztani a megfelelő terapeutát. Telefonon {clinic.bookingHoursShort}.</p>
+        </div>
+        <a href={`tel:${clinic.phone}`} class="k-btn k-btn--clay">{clinic.phoneDisplay}</a>
       </div>
     </div>
   </section>
@@ -87,6 +98,38 @@ const half = Math.ceil(homeFaqs.length / 2);
             </div>
           </li>
         ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Arrival -->
+  <section class="k-sec k-sec--sage">
+    <div class="k-wrap">
+      <div class="k-head">
+        <p class="k-eyebrow">Az érkezés</p>
+        <h2 class="k-h2">Így érkezik meg hozzánk: az ajtótól a kezelőig.</h2>
+        <p class="k-lead">A terapeuta az ajtóban fogadja. Kabátot, cipőt és kényelmes ruhát a rendelőben is lehet cserélni, így az első alkalomra nem kell külön készülnie.</p>
+      </div>
+      <ol class="k-arr">
+        {[
+          { img: 'erkezes-fogadas', t: 'Fogadás', d: 'A terapeuta az ajtóban fogadja.' },
+          { img: 'erkezes-eloter', t: 'Előtér', d: 'Fogas a kabátnak, hely a cipőnek.' },
+          { img: 'erkezes-oltozo', t: 'Öltöző', d: 'Szekrények és ülőkék, ha át szeretne öltözni.' },
+          { img: 'erkezes-kezelo', t: 'Kezelő', d: 'Számozott kezelőszobák, itt kezdődik az első 55 perc.' },
+        ].map((x, i) => (
+          <li>
+            <img src={`${base}images/rendelo/${x.img}.jpg`} alt={x.d} loading="lazy" width="720" height="960" />
+            <p class="k-step__t">{i + 1}. {x.t}</p>
+            <p class="k-small">{x.d}</p>
+          </li>
+        ))}
+        <li>
+          <div class="k-clip" style="border-radius:16px">
+            <LoopVideo name="rendelo/rendelo-bejaras" label="Bejárás a rendelőben: fogadás, előtér, öltöző és a kezelők" />
+          </div>
+          <p class="k-step__t">A teljes út</p>
+          <p class="k-small">Az ajtótól a kezelőig, egyben.</p>
+        </li>
       </ol>
     </div>
   </section>
@@ -122,20 +165,18 @@ const half = Math.ceil(homeFaqs.length / 2);
     </div>
   </section>
 
-  <!-- Founder -->
+  <!-- Founder: the philosophy is her own sentence, portrait beside it -->
   <section class="k-sec k-sec--pine">
-    <div class="k-wrap">
-      <p class="k-eyebrow">A rendelő filozófiája</p>
-      <p class="k-founder__quote" style="margin-top:18px">„{founder.philosophy}”</p>
-      <div class="k-founder__card">
+    <div class="k-wrap k-fq">
+      <div class="k-fq__photo">
         <img src={`${base}${founder.photo}`} alt={founder.name} loading="lazy" />
-        <div class="k-founder__txt">
-          <p class="k-eyebrow">Bemutatkozás</p>
-          <h2 class="k-h2">{founder.headline}</h2>
-          <p style="color:var(--c-mute)">{founder.intro}</p>
-          <p><strong style="color:var(--c-pine)">{founder.name}</strong><br /><span class="k-small">{founder.role}</span></p>
-          <p><a href={`${base}csapatunk`} class="k-link">A csapat</a></p>
-        </div>
+      </div>
+      <div class="k-fq__txt">
+        <p class="k-eyebrow">A rendelő filozófiája</p>
+        <blockquote class="k-fq__quote">„{founder.philosophy}”</blockquote>
+        <p class="k-fq__cite"><strong>{founder.name}</strong> <span>{founder.role}</span></p>
+        <p class="k-fq__intro">{founder.intro}</p>
+        <p><a href={`${base}csapatunk`} class="k-link" style="color:#fff;text-decoration-color:rgba(255,255,255,0.4)">A csapat</a></p>
       </div>
     </div>
   </section>
