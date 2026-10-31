@@ -1,0 +1,120 @@
+---
+// Calm design variant of the condition pages. Same data as /derekfajas etc.
+import CalmLayout from '../../../layouts/CalmLayout.astro';
+import LoopVideo from '../../../components/LoopVideo.astro';
+import { conditions, conditionBySlug, type Condition } from '../../../data/conditions';
+import { clinic } from '../../../data/clinic';
+
+export function getStaticPaths() {
+  return conditions.map((c) => ({ params: { condition: c.slug } }));
+}
+
+const c = conditionBySlug[Astro.params.condition as string] as Condition;
+const base = import.meta.env.BASE_URL;
+const v = `${base}v/nyugalom/`;
+---
+
+<CalmLayout title={`${c.metaTitle} | nyugodt dizájn vázlat`} description={c.metaDescription}>
+  <section class="k-phero">
+    <div class="k-wrap k-phero__in">
+      <div class="k-phero__copy">
+        <p class="k-eyebrow">{c.name}</p>
+        <h1 class="k-h1" style="font-size:clamp(1.9rem,4vw,3rem)">{c.h1}</h1>
+        <p class="k-lead">{c.answer}</p>
+        <div class="k-btns">
+          <a href={`tel:${clinic.phone}`} class="k-btn k-btn--clay">Hívjon: {clinic.phoneDisplay}</a>
+          <a href={`${base}kapcsolat#visszahivas`} class="k-btn k-btn--ghost">Visszahívást kérek</a>
+        </div>
+      </div>
+      <div class="k-clip">
+        <LoopVideo name={`rendelo/${c.clip.name}`} eager label={c.clip.label} />
+      </div>
+    </div>
+  </section>
+
+  <section class="k-sec">
+    <div class="k-wrap">
+      <div class="k-head">
+        <p class="k-eyebrow">Mikor jöjjön</p>
+        <h2 class="k-h2">Mikor segíthet a gyógytorna?</h2>
+      </div>
+      <div class="k-two">
+        <div>
+          <h3 class="k-h3">Jöjjön hozzánk, ha</h3>
+          <ul class="k-list">{c.whenToCome.map((w) => <li>{w}</li>)}</ul>
+        </div>
+        <div class="k-flag">
+          <h3 class="k-h3">Előbb forduljon orvoshoz, ha</h3>
+          <ul>{c.redFlags.map((r) => <li>{r}</li>)}</ul>
+          <p class="k-small">Ezekben az esetekben sürgős orvosi vizsgálat szükséges, nem gyógytorna.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="k-sec k-sec--sage">
+    <div class="k-wrap">
+      <div class="k-head">
+        <p class="k-eyebrow">Hogyan kezeljük</p>
+        <h2 class="k-h2">Vizsgálat, gyakorlatok, önkezelés.</h2>
+        <p class="k-small">Módszerek: {c.methods.map((m, i) => <>{i > 0 && ', '}<a href={`${base}${m.path}`} class="k-link">{m.label}</a></>)}.</p>
+      </div>
+      <ol class="k-cards3">
+        {c.approach.map((a, i) => (
+          <li class="k-card">
+            <p class="k-step__t">{i + 1}. lépés</p>
+            <h3 class="k-h3" style="font-size:1.4rem">{a.title}</h3>
+            <p style="color:var(--c-mute)">{a.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="k-two" style="margin-top:28px">
+        <div class="k-card">
+          <h3 class="k-h3">Mennyi idő, hány alkalom?</h3>
+          <p style="color:var(--c-mute)">{c.timeline}</p>
+        </div>
+        <div class="k-card">
+          <h3 class="k-h3">Ár és foglalás</h3>
+          <p style="color:var(--c-mute)">Egyéni kezelés {clinic.prices.single.range} ({clinic.prices.single.duration}), 5 alkalmas bérlet {clinic.prices.pass.amount}. Beutaló nem kell. Telefonon {clinic.phoneDisplay}, {clinic.bookingHours.toLowerCase()}, vagy <a href={`${base}kapcsolat#visszahivas`} class="k-link">visszahívás-kérés</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="k-sec">
+    <div class="k-wrap">
+      <div class="k-head">
+        <p class="k-eyebrow">Gyakori kérdések</p>
+        <h2 class="k-h2">Kérdések: {c.name.toLowerCase()}</h2>
+      </div>
+      <div class="k-faq" style="grid-template-columns:1fr;max-width:46rem">
+        <div>
+          {c.faqs.map((f, i) => (
+            <details open={i === 0}>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+      <div style="margin-top:32px" class="k-chips">
+        {c.related.map((slug) => <a href={`${v}${slug}`}>{conditionBySlug[slug].name}</a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="k-sec k-sec--pine">
+    <div class="k-wrap k-cta">
+      <div>
+        <p class="k-eyebrow">Időpontfoglalás</p>
+        <h2 class="k-h2" style="margin:12px 0 16px">Hívjon, vagy kérjen visszahívást.</h2>
+        <a href={`tel:${clinic.phone}`} class="k-cta__tel">{clinic.phoneDisplay}</a>
+        <p class="k-small" style="margin-top:8px">{clinic.bookingHours}. Általában 1-2 napon belül kap időpontot.</p>
+      </div>
+      <div class="k-btns">
+        <a href={`tel:${clinic.phone}`} class="k-btn k-btn--clay">Hívás</a>
+        <a href={`${base}kapcsolat#visszahivas`} class="k-btn k-btn--light">Visszahívást kérek</a>
+      </div>
+    </div>
+  </section>
+</CalmLayout>

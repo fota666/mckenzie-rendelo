@@ -77,11 +77,11 @@ const locName = (id: string) => clinic.locations.find((l) => l.id === id)?.name 
 
       <ul class="mt-10 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-10">
         {active.map((t) => (
-          <li class="flex flex-col" data-loc={locationOf[t.name]}>
+          <li class="flex flex-col" data-loc={(locationOf[t.name] ?? []).join(' ')}>
             <div class="aspect-[4/5] overflow-hidden bg-[var(--color-paper-2)]">
               <img src={t.photo} alt={t.name} class="w-full h-full object-cover" loading="lazy" />
             </div>
-            <p class="mt-3 font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-700)]">{locName(locationOf[t.name])}</p>
+            <p class="mt-3 font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-700)]">{(locationOf[t.name] ?? []).map(locName).join(' és ')}</p>
             <h3 class="mt-1 font-heading text-[1.35rem] sm:text-[1.65rem] leading-tight text-[var(--color-navy-900)]">{t.name}</h3>
             <p class="mt-1 text-[13px] sm:text-sm text-[var(--color-ink-2)]">{t.title}{t.diploma && <> &middot; diploma {t.diploma}</>}</p>
             {t.price && <p class="mt-1 text-[15px] font-medium text-[var(--color-ink)] whitespace-nowrap">{t.price} / alkalom</p>}
@@ -127,7 +127,7 @@ const locName = (id: string) => clinic.locations.find((l) => l.id === id)?.name 
     buttons.forEach((b) => b.addEventListener('click', () => {
       buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
       root.querySelectorAll<HTMLElement>('[data-loc]').forEach((li) => {
-        li.hidden = b.dataset.filter !== 'all' && li.dataset.loc !== b.dataset.filter;
+        li.hidden = b.dataset.filter !== 'all' && !(li.dataset.loc ?? '').split(' ').includes(b.dataset.filter!);
       });
     }));
   });

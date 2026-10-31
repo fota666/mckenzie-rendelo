@@ -44,7 +44,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '14 000 Ft',
-    photo: `${base}images/csapat/cseh_agnes.jpg`,
+    photo: `${base}images/cseh_agnes.jpg`,
   },
   {
     name: 'Dörnyeiné Rozs Mariann',
@@ -160,7 +160,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '15 000 Ft',
-    photo: `${base}images/kokai_zsuzsa.jpg`,
+    photo: `${base}images/csapat/kokai_zsuzsa.jpg`,
   },
   {
     name: 'Lipták Noémi',
@@ -181,7 +181,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol', 'német'],
     price: '14 000 Ft',
-    photo: `${base}images/csapat/liptak_noemi.jpg`,
+    photo: `${base}images/liptak_noemi.jpg`,
   },
   {
     name: 'Nagy Tünde Éva',
@@ -226,7 +226,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '14 000 Ft',
-    photo: `${base}images/polyefko_petra.png`,
+    photo: `${base}images/csapat/polyefko_petra.jpg`,
   },
   {
     name: 'Pozsonyi Bognár Tímea',
@@ -349,7 +349,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     price: '14 000 Ft',
-    photo: `${base}images/csapat/varhegyi_timea.jpg`,
+    photo: `${base}images/varhegyi_timea.png`,
   },
   {
     name: 'Dr. Várköviné Gergely Éva',
@@ -375,7 +375,28 @@ export const terapeutak: Therapist[] = [
 
 // PLACEHOLDER: random split until the clinic confirms who works where.
 // Kókai Zsuzsa is listed for the Belvárosi rendelő on hu.mckenzieinstitute.org.
-export const locationOf: Record<string, 'belvaros' | 'buda'> = {'Kókai Zsuzsa': 'belvaros', 'Lipták Noémi': 'belvaros', 'Várhegyi Tímea': 'belvaros', 'Dörnyeiné Rozs Mariann': 'belvaros', 'Cseh Ágnes': 'belvaros', 'Polyefkó Petra': 'belvaros', 'Horváthné Kucsera Ildikó': 'belvaros', 'Vágó Eszter': 'buda', 'Nagy Tünde Éva': 'buda', 'Horváth Judit': 'buda', 'Szabó Éva Bernadett': 'buda', 'Dr. Várköviné Gergely Éva': 'buda', 'Jungwirth Sylvia': 'buda', 'Takács Dóra': 'buda'};
+/** Where each active therapist sees patients, as confirmed by Relle Éva (2026-10-31). Some work at both. */
+export type ClinicId = 'belvaros' | 'buda';
+export const locationOf: Record<string, ClinicId[]> = {
+  'Vágó Eszter': ['belvaros'],
+  'Kókai Zsuzsa': ['belvaros'],
+  'Dr. Várköviné Gergely Éva': ['belvaros'],
+  'Horváthné Kucsera Ildikó': ['belvaros'],
+  'Lipták Noémi': ['belvaros', 'buda'],
+  'Nagy Tünde Éva': ['belvaros'],
+  'Dörnyeiné Rozs Mariann': ['belvaros'],
+  'Polyefkó Petra': ['buda'],
+  'Cseh Ágnes': ['buda'],
+  'Takács Dóra': ['buda'],
+  'Horváth Judit': ['buda'],
+  'Várhegyi Tímea': ['buda'],
+  'Jungwirth Sylvia': ['buda'],
+  'Szabó Éva Bernadett': ['buda'],
+  'Relle Éva': ['buda'],
+};
+const CLINIC_SHORT: Record<ClinicId, string> = { belvaros: 'Belváros', buda: 'Buda' };
+/** Short label under a therapist's name, e.g. "Belváros" or "Belváros és Buda". */
+export const clinicLabel = (name: string) => (locationOf[name] ?? []).map((id) => CLINIC_SHORT[id]).join(' és ');
 
 
 /** Passed the McKenzie Institute International credentialing exam (Cert. MDT level). */

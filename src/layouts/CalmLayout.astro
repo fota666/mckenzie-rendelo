@@ -1,0 +1,103 @@
+---
+// Calm design variant: own head, header and footer, own stylesheet. Preview only (noindex).
+import LogoMark from '../components/LogoMark.astro';
+import { clinic } from '../data/clinic';
+import { conditions } from '../data/conditions';
+import '../styles/calm.css';
+const base = import.meta.env.BASE_URL;
+interface Props { title: string; description?: string }
+const { title, description = 'McKenzie Gyógytorna Rendelő Budapesten, a V. és a XI. kerületben.' } = Astro.props;
+const v = `${base}v/nyugalom/`;
+const nav = [
+  { href: `${base}modszerek`, label: 'Módszerek' },
+  { href: `${base}csapatunk`, label: 'Csapatunk' },
+  { href: `${base}araink`, label: 'Árak' },
+  { href: `${base}velemenyek`, label: 'Vélemények' },
+  { href: `${base}gyik`, label: 'Kérdések' },
+  { href: `${base}kapcsolat`, label: 'Kapcsolat' },
+];
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
+    <slot name="head" />
+  </head>
+  <body class="calm">
+    <header class="k-header">
+      <div class="k-wrap k-header__in">
+        <a href={v} class="k-brand">
+          <LogoMark class="k-logo" />
+          <span><strong>McKenzie</strong><small>Gyógytorna Rendelő</small></span>
+        </a>
+        <nav class="k-nav" aria-label="Főmenü">
+          {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+          <a href={`tel:${clinic.phone}`} class="k-tel">{clinic.phoneDisplay}</a>
+          <a href={`${base}kapcsolat#idopontfoglalas`} class="k-btn k-btn--clay">Időpontot kérek</a>
+        </nav>
+        <details class="k-menu">
+          <summary>Menü</summary>
+          <nav aria-label="Főmenü">
+            {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main><slot /></main>
+
+    <footer class="k-footer">
+      <div class="k-wrap">
+        <div class="k-footer__top">
+          <div>
+            <h3>McKenzie Gyógytorna Rendelő</h3>
+            <p>{clinic.therapists} gyógytornász, két rendelő, rendelés {clinic.hoursText}.</p>
+            <a href={`tel:${clinic.phone}`} style="display:inline-block;margin-top:12px;font-size:1.4rem;font-weight:600;color:#fff">{clinic.phoneDisplay}</a>
+          </div>
+          {clinic.locations.map((l) => (
+            <address>
+              <h3>{l.name}</h3>
+              <span style="color:#fff">{l.postalCode} Budapest, {l.street}</span>
+              <span>{l.transit}</span>
+              <span>Parkolás: {l.parking}</span>
+              <a href={l.mapsUrl} target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;text-underline-offset:4px">Útvonal</a>
+            </address>
+          ))}
+        </div>
+        <div class="k-footer__links">
+          <div>
+            <h3>Panaszok</h3>
+            <ul class="k-three">
+              {conditions.map((c) => <li><a href={`${v}${c.slug}`}>{c.name}</a></li>)}
+            </ul>
+          </div>
+          <div>
+            <h3>Oldalak</h3>
+            <ul>
+              {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+            </ul>
+          </div>
+        </div>
+        <div class="k-footer__bot">
+          <p>&copy; {year} {clinic.legalName} &middot; {clinic.name}</p>
+          <p><a href={`${base}adatvedelmi-tajekoztato`}>Adatvédelmi tájékoztató</a> &middot; <a href={clinic.sameAs[0]} target="_blank" rel="noopener">Facebook</a> &middot; <a href={clinic.sameAs[1]} target="_blank" rel="noopener">Instagram</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <div class="k-mbar">
+      <a href={`tel:${clinic.phone}`} class="k-btn k-btn--clay">Hívás</a>
+      <a href={`${base}kapcsolat#visszahivas`} class="k-btn k-btn--ghost">Visszahívás</a>
+    </div>
+  </body>
+</html>
