@@ -22,9 +22,15 @@ export const conditionReviews: Record<string, ConditionReview[]> = {
   ],
   isiasz: [
     { text: 'Előszőr 15 évvel ezelőtt jártam a rendelőbe. Gerincsérvem miatt a jobb lábam szinte érzéketlenné vàlt . Akkor a nagy szakértelemmel rendelkező gyógytornász …', name: 'Józsefné K.', place: 'belvaros' },
+    { text: '2021-ben a Covid oltás után neurológiai problémáim alakuktak ki pl.végtagok zsibbadása, ill. egyéb gerinc pananaszaim is voltak, ezért kértem gyógytornász …', name: 'Cruden E.', place: 'buda' },
+    { text: 'Gerincsérv után kerültem a gyógytornára. Az első találkozáson konkrétan nem tudtam állva maradni …', name: 'Rusznák A.', place: 'belvaros' },
+    { text: '5-ös csigolya elmozdulás 4-es csigolya kezdődő sérv. Semmelweis idegsebészeten műtétet javasoltak. Heti 1 alkalommal járok a belvárosba ,persze mindennap otthon …', name: 'Mátsik Z.', place: 'belvaros' },
   ],
   gerincferdules: [
     { text: '"Klasszikus", ülőmunkából és gyermekkori gerincferdülésből adódó problémák miatt kezdtem kezelésre járni és már az első alkalom után érezhető volt a különbség. …', name: 'Kalocsai T.', place: 'buda' },
+    { text: 'Eszterhez egy évtizedes gerincfájdalom miatt jártam. Nagy körültekintéssel segített megtalálni a forrásokat, és olyan gyakorlatokkal és tanácsokkal látott el, amiket a mai napig használok, és működnek. Szívből ajánlom!', name: 'Kele Zs.', place: 'belvaros' },
+    { text: 'Vágó Eszternél volt a lányom. Alapos, jó szakember és nagyon kedves.', name: 'Füzesi K.', place: 'belvaros' },
+    { text: 'Nagyon felkészült és tapasztalt szakemberek, nyugodt környezet jellemzi. A kislányunk Ágihoz jár, nyugodt szívvel ajánljuk és köszönjük folyamatos segítséget!', name: 'Guzmics K.', place: 'buda' },
   ],
   vallfajas: [
     { text: 'Professzionálisan felszerelt rendelő, Noémi szakmai tudása, hozzáértése nagyban segítette a vállsérülésből felépülésemet. Mindenkinek ajánlani tudom a helyet, a módszert-Mckenzie és Noémit ! Köszönöm', name: 'Almási J.', place: 'belvaros' },
