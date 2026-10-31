@@ -1,0 +1,33 @@
+---
+import LogoMark from '../LogoMark.astro';
+import { clinic } from '../../data/clinic';
+const base = import.meta.env.BASE_URL;
+const nav = [
+  { href: `${base}modszerek`, label: 'Módszerek' },
+  { href: `${base}csapatunk`, label: 'Csapatunk' },
+  { href: `${base}araink`, label: 'Árak' },
+  { href: `${base}velemenyek`, label: 'Vélemények' },
+  { href: `${base}gyik`, label: 'Kérdések' },
+  { href: `${base}kapcsolat`, label: 'Kapcsolat' },
+];
+---
+
+<header class="k-header">
+  <div class="k-wrap k-header__in">
+    <a href={base} class="k-brand">
+      <LogoMark class="k-logo" />
+      <span><strong>McKenzie</strong><small>Gyógytorna Rendelő</small></span>
+    </a>
+    <nav class="k-nav" aria-label="Főmenü">
+      {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+      <a href={`tel:${clinic.phone}`} class="k-tel">{clinic.phoneDisplay}</a>
+      <a href={`${base}kapcsolat#idopontfoglalas`} class="k-btn k-btn--clay">Időpontot kérek</a>
+    </nav>
+    <details class="k-menu">
+      <summary>Menü</summary>
+      <nav aria-label="Főmenü">
+        {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+      </nav>
+    </details>
+  </div>
+</header>
