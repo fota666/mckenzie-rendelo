@@ -33,6 +33,7 @@ function setLanguageLinks($, lang, rel) {
     $(a).attr('href', localizedPath(base, target, translated ? rel : (target === 'hu' ? rel : '')));
     if (target === lang) $(a).attr('aria-current', 'true'); else $(a).removeAttr('aria-current');
   });
+  $('[data-lang-current]').text(lang.toUpperCase());
   if (!translated) return;
   $('link[rel=alternate][hreflang]').remove();
   const links = LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${abs(l, rel)}" />`).join('\n  ')

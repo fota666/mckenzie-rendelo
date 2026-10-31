@@ -38,11 +38,14 @@ const isActive = (href: string) => path === href.replace(/\/$/, '');
       </nav>
 
       <div class="hidden lg:flex items-center gap-5">
-        <nav class="lang-switch" data-lang-switch data-notranslate aria-label="Language">
-          <a href="#lang-hu" data-lang="hu" hreflang="hu" lang="hu">HU</a>
-          <a href="#lang-en" data-lang="en" hreflang="en" lang="en">EN</a>
-          <a href="#lang-de" data-lang="de" hreflang="de" lang="de">DE</a>
-        </nav>
+        <details class="lang-dd" data-lang-switch data-lang-dd data-notranslate>
+          <summary aria-label="Language"><span data-lang-current>HU</span></summary>
+          <div>
+            <a href="#lang-hu" data-lang="hu" hreflang="hu" lang="hu">Magyar</a>
+            <a href="#lang-en" data-lang="en" hreflang="en" lang="en">English</a>
+            <a href="#lang-de" data-lang="de" hreflang="de" lang="de">Deutsch</a>
+          </div>
+        </details>
         <a href={`tel:${clinic.phone}`} class="hidden xl:inline font-mono text-[15px] whitespace-nowrap text-[var(--color-ink)] hover:text-[var(--color-teal-700)]">{clinic.phoneDisplay}</a>
         <a href={`${base}kapcsolat#idopontfoglalas`} class="btn btn-copper !py-2.5 !px-5 text-[15px] whitespace-nowrap">Időpontot kérek</a>
       </div>
@@ -78,5 +81,12 @@ const isActive = (href: string) => path === href.replace(/\/$/, '');
     btn.setAttribute('aria-expanded', String(open));
     document.getElementById('menu-icon')?.classList.toggle('hidden', open);
     document.getElementById('close-icon')?.classList.toggle('hidden', !open);
+  });
+</script>
+
+<script>
+  // close the language dropdown when clicking elsewhere
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('details[data-lang-dd][open]').forEach((d) => { if (!d.contains(e.target as Node)) d.removeAttribute('open'); });
   });
 </script>

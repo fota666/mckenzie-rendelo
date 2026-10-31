@@ -85,7 +85,10 @@ const schema = {
       <div class="k-head">
         <p class="k-eyebrow">Hogyan kezeljük</p>
         <h2 class="k-h2">Vizsgálat, gyakorlatok, önkezelés.</h2>
-        <p class="k-small">Szükség szerint szóba jövő módszerek: {c.methods.map((m, i) => <>{i > 0 && ', '}<a href={`${base}${m.path}`} class="k-link">{m.label}</a></>)}.</p>
+        <div class="k-methods">
+          <p class="k-small">Szükség szerint szóba jövő módszerek</p>
+          <div class="k-chips">{c.methods.map((m) => <a href={`${base}${m.path}`}>{m.label}</a>)}</div>
+        </div>
       </div>
       <ol class="k-cards3">
         {c.approach.map((a, i) => (

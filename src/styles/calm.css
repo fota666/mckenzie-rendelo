@@ -429,3 +429,17 @@ body.calm {
 .calm .k-lang a[aria-current='true'] { background: var(--c-pine); color: #fff; }
 .calm .k-lang a:hover:not([aria-current='true']) { color: var(--c-pine); }
 .calm .k-lang--mobile { margin: 8px 14px 6px; align-self: start; width: max-content; }
+
+/* language dropdown (desktop header) */
+.calm .k-langdd { position: relative; }
+.calm .k-langdd summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border: 1px solid var(--c-line); border-radius: 999px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; color: var(--c-pine); }
+.calm .k-langdd summary::-webkit-details-marker { display: none; }
+.calm .k-langdd summary::after { content: ''; width: 5px; height: 5px; border: solid currentColor; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg) translateY(-2px); }
+.calm .k-langdd[open] summary::after { transform: rotate(-135deg); }
+.calm .k-langdd > div { position: absolute; right: 0; top: calc(100% + 8px); min-width: 150px; display: grid; padding: 6px; background: var(--c-white); border: 1px solid var(--c-line); border-radius: 14px; box-shadow: 0 18px 40px -24px rgba(20, 48, 42, 0.4); z-index: 60; }
+.calm .k-langdd a { padding: 9px 12px; border-radius: 9px; font-size: 0.92rem; font-weight: 500; color: var(--c-ink); }
+.calm .k-langdd a:hover { background: var(--c-sage); }
+.calm .k-langdd a[aria-current='true'] { background: var(--c-sage); font-weight: 600; }
+
+/* methods row on the condition pages */
+.calm .k-methods { display: grid; gap: 10px; margin-top: 4px; }

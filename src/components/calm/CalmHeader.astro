@@ -21,11 +21,14 @@ const nav = [
     <nav class="k-nav" aria-label="Főmenü">
       {nav.map((n) => <a href={n.href}>{n.label}</a>)}
       <a href={`tel:${clinic.phone}`} class="k-tel">{clinic.phoneDisplay}</a>
-    <nav class="k-lang" data-lang-switch data-notranslate aria-label="Language">
-      <a href="#lang-hu" data-lang="hu" hreflang="hu" lang="hu">HU</a>
-      <a href="#lang-en" data-lang="en" hreflang="en" lang="en">EN</a>
-      <a href="#lang-de" data-lang="de" hreflang="de" lang="de">DE</a>
-    </nav>
+    <details class="k-langdd" data-lang-switch data-lang-dd data-notranslate>
+      <summary aria-label="Language"><span data-lang-current>HU</span></summary>
+      <div>
+        <a href="#lang-hu" data-lang="hu" hreflang="hu" lang="hu">Magyar</a>
+        <a href="#lang-en" data-lang="en" hreflang="en" lang="en">English</a>
+        <a href="#lang-de" data-lang="de" hreflang="de" lang="de">Deutsch</a>
+      </div>
+    </details>
       <a href={`${base}kapcsolat#idopontfoglalas`} class="k-btn k-btn--clay">Időpontot kérek</a>
     </nav>
     <details class="k-menu">
@@ -41,3 +44,10 @@ const nav = [
     </details>
   </div>
 </header>
+
+<script>
+  // close the language dropdown when clicking elsewhere
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('details[data-lang-dd][open]').forEach((d) => { if (!d.contains(e.target as Node)) d.removeAttribute('open'); });
+  });
+</script>
