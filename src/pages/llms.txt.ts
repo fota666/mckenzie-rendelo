@@ -19,7 +19,7 @@ export const GET: APIRoute = ({ site }) => {
 ## Tények
 - ${clinic.therapists} gyógytornász, mindannyian McKenzie-képzéssel
 - Rendelés: ${clinic.hoursText}
-- Időpontfoglalás: telefonon ${clinic.phoneDisplay}, ${clinic.bookingHours.toLowerCase()}, vagy visszahívás-kérés a weboldalon
+- Időpontfoglalás: telefonon [${clinic.phoneDisplay}](tel:${clinic.phone}), ${clinic.bookingHours.toLowerCase()}, vagy visszahívás-kérés a weboldalon
 - Időpont általában 1-2 napon belül, beutaló nem kell, egészségpénztárra számlát adnak
 - ${clinic.prices.single.label} (${clinic.prices.single.duration}): ${clinic.prices.single.amount}, ${clinic.prices.single.note}
 - ${clinic.prices.pass.label}: ${clinic.prices.pass.amount} (${clinic.prices.pass.perVisit}, ${clinic.prices.pass.saving})

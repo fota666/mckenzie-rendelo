@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: 'Hogyan foglalhatok időpontot, és mennyit kell várni?',
-    a: 'Telefonon foglalhat a (30) 487-8284 számon, hétköznap 9 és 17 óra között, vagy kérhet visszahívást a Kapcsolat oldalon. Általában 1-2 napon belül tudunk időpontot adni.'
+    a: `Telefonon foglalhat a ${clinic.phoneDisplay} számon, hétköznap 9 és 17 óra között, vagy kérhet visszahívást a Kapcsolat oldalon. Általában 1-2 napon belül tudunk időpontot adni.`
   },
   {
     q: 'Mennyibe kerül a kezelés?',
@@ -93,6 +93,8 @@ const faqSchema = {
     }
   }))
 };
+// Answers are plain text (they feed the FAQPage schema); the number becomes a call link when rendered.
+const withPhoneLink = (t: string) => t.split(clinic.phoneDisplay).join(`<a href="tel:${clinic.phone}" class="underline underline-offset-4 whitespace-nowrap hover:text-[var(--color-teal-700)]">${clinic.phoneDisplay}</a>`);
 ---
 
 <BaseLayout
@@ -120,7 +122,7 @@ const faqSchema = {
             <h2 class="font-heading text-[1.35rem] lg:text-[1.75rem] text-[var(--color-navy-900)]">{faq.q}</h2>
             <span class="plus text-[1.65rem] leading-none text-[var(--color-teal-600)]" aria-hidden="true">+</span>
           </summary>
-          <p class="pb-7 -mt-1 text-[var(--color-ink-2)] leading-relaxed measure">{faq.a}</p>
+          <p class="pb-7 -mt-1 text-[var(--color-ink-2)] leading-relaxed measure" set:html={withPhoneLink(faq.a)} />
         </details>
       ))}
     </div>

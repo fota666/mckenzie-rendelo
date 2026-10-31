@@ -6,7 +6,7 @@ import { clinic } from '../data/clinic';
 const base = import.meta.env.BASE_URL;
 ---
 
-<form id="visszahivas" action={`${base}visszahivas.php`} method="post" class="scroll-mt-28 bg-white border border-[var(--color-line)] p-6 sm:p-8 lg:p-8" data-callback data-phone={clinic.phoneDisplay} novalidate>
+<form id="visszahivas" action={`${base}visszahivas.php`} method="post" class="scroll-mt-28 bg-white border border-[var(--color-line)] p-6 sm:p-8 lg:p-8" data-callback data-phone={clinic.phoneDisplay} data-tel={clinic.phone} novalidate>
   <p class="eyebrow">Visszahívás-kérés</p>
   <h2 class="mt-3 font-heading text-[1.65rem] lg:text-3xl text-[var(--color-navy-900)]">Hagyja meg a számát, és visszahívjuk.</h2>
   <p class="mt-3 text-[15px] text-[var(--color-ink-2)]">Munkanapokon {clinic.bookingHours.replace('Hétköznap ', '')} között hívjuk vissza, általában még aznap vagy a következő munkanapon.</p>
@@ -61,6 +61,7 @@ const base = import.meta.env.BASE_URL;
     const status = form.querySelector<HTMLElement>('[data-status]')!;
     const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
     const phone = form.dataset.phone;
+    const tel = form.dataset.tel;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.reportValidity()) return;
@@ -75,7 +76,7 @@ const base = import.meta.env.BASE_URL;
         status.textContent = 'Köszönjük, hamarosan visszahívjuk.';
         status.className = 'text-sm text-[var(--color-teal-700)] font-medium';
       } catch (err) {
-        status.textContent = `Az üzenetet most nem sikerült elküldeni. Kérjük, hívjon minket: ${phone}.`;
+        status.innerHTML = `Az üzenetet most nem sikerült elküldeni. Kérjük, hívjon minket: <a href="tel:${tel}" style="text-decoration:underline;white-space:nowrap">${phone}</a>.`;
         status.className = 'text-sm text-red-700';
       } finally {
         button.disabled = false;
