@@ -994,5 +994,7 @@
  "Gerincferdülés (scoliosis) <t1>→</t1>": "Scoliosis <t1>→</t1>",
  "Scheuermann-betegség <t1>→</t1>": "Scheuermann's disease <t1>→</t1>",
  "A törzs aszimmetriája, bordapúp <t1>→</t1>": "Trunk asymmetry, rib hump <t1>→</t1>",
- "Gumiszalagos gyakorlat, amelyet otthon is lehet végezni": "Resistance band exercise that you can also do at home"
+ "Gumiszalagos gyakorlat, amelyet otthon is lehet végezni": "Resistance band exercise that you can also do at home",
+ "Az időpontot legalább 24 órával korábban, telefonon kell lemondani. A 24 órán belüli lemondás vagy a meg nem jelenés esetén a kezelés díját ki kell fizetni.": "Appointments must be cancelled by phone at least 24 hours in advance. If you cancel less than 24 hours before the appointment or do not show up, you must pay the fee for the session.",
+ "Legalább 24 órával korábban, telefonon. A 24 órán belüli lemondás vagy meg nem jelenés esetén a kezelés díját ki kell fizetni.": "At least 24 hours in advance, by phone. If you cancel less than 24 hours before the appointment or do not show up, you must pay the fee for the session."
 }
