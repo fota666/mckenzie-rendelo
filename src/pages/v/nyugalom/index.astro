@@ -23,10 +23,6 @@ const reviews = [
   { text: 'A fájdalommentes életet jelenti az itt kapott kezelés. Professzionális ellátás, barátságos légkör, rendkívül hozzáértő gyógytornász!', name: 'Dr. Utassyné Kormos Zsuzsa', role: 'páciens' },
 ];
 const half = Math.ceil(homeFaqs.length / 2);
-const visit = [
-  { min: 'Érkezés', title: 'Fogadás az ajtóban', body: 'A terapeuta az ajtóban fogad. Az előtérben leteheti a kabátját, az öltözőben átöltözhet.' },
-  ...firstVisit,
-];
 ---
 
 <CalmLayout title="McKenzie Gyógytorna Rendelő Budapest | Nyugodt dizájn vázlat">
@@ -111,15 +107,15 @@ const visit = [
     <div class="k-wrap">
       <div class="k-head">
         <p class="k-eyebrow">Az első alkalom</p>
-        <h2 class="k-h2">Az ajtótól az otthoni programig: így telik az első alkalom.</h2>
+        <h2 class="k-h2">55 perc: kikérdezés, vizsgálat, kezelés és saját gyakorlatsor.</h2>
       </div>
       <div class="k-visit">
         <ol class="k-steps">
-          {visit.map((s, i) => (
+          {firstVisit.map((s, i) => (
             <li class="k-step">
               <span class="k-step__n">{i + 1}</span>
               <div>
-                <p class="k-step__t">{/^\d/.test(s.min) ? `${s.min}. perc` : s.min}</p>
+                <p class="k-step__t">{s.min}. perc</p>
                 <h3 class="k-h3">{s.title}</h3>
                 <p class="k-small" style="margin-top:6px;font-size:1rem">{s.body}</p>
               </div>
@@ -128,9 +124,9 @@ const visit = [
         </ol>
         <aside>
           <div class="k-clip">
-            <LoopVideo name="rendelo/rendelo-bejaras" label="Bejárás a rendelőben: fogadás, előtér, öltöző és a kezelők" />
+            <LoopVideo name="rendelo/derekfajas-hasonfekvo-mobilizalas" label="Hasonfekvő páciens derekának kezelése a rendelőben" />
           </div>
-          <p class="k-cap">Bejárás a rendelőben: az ajtótól a kezelőig.</p>
+          <p class="k-cap">Kezelés a rendelőben. A módszert a vizsgálat dönti el.</p>
           <p style="margin-top:14px"><a href={`${base}modszerek`} class="k-link">Mind a 9 módszer és a szakmai háttér</a></p>
         </aside>
       </div>
@@ -216,20 +212,30 @@ const visit = [
       </div>
       <div class="k-locs">
         {clinic.locations.map((l) => (
-          <div class="k-loc">
-            <h3 class="k-h3" style="font-size:1.5rem">{l.name} <span class="k-small">{l.district}</span></h3>
-            <dl>
-              <dt>Cím</dt><dd>{l.postalCode} Budapest, {l.street}{l.bell && <>, {l.bell}</>}</dd>
-              <dt>Tömegközlekedés</dt><dd>{l.transit}<br />{l.transitMore}</dd>
-              <dt>Parkolás</dt><dd>{l.parking}</dd>
-            </dl>
-            <a href={l.mapsUrl} target="_blank" rel="noopener" class="k-link">Útvonaltervezés</a>
-          </div>
+          <article class="k-loc">
+            <div class="k-loc__top">
+              <span class="k-loc__d">{l.district.split('.')[0]}.</span>
+              <div>
+                <h3 class="k-h3" style="font-size:1.45rem">{l.name}</h3>
+                <p class="k-small">{l.area}</p>
+              </div>
+            </div>
+            <p class="k-loc__addr">{l.postalCode} Budapest,<br />{l.street}{l.bell && <>, {l.bell}</>}</p>
+            <ul class="k-loc__list">
+              {[l.transit, l.transitMore].map((t) => (
+                <li>
+                  {(t.match(/M\d/g) ?? []).map((m) => <b class={`k-line k-line--${m.toLowerCase()}`}>{m}</b>)}
+                  <span>{t.replace(/\s?M\d(, )?/g, ' ').replace(/\s+,/g, ',').replace(/\s{2,}/g, ' ').trim()}</span>
+                </li>
+              ))}
+              <li><b class="k-line k-line--p">P</b><span>Parkolás: {l.parking}</span></li>
+            </ul>
+            <div class="k-loc__foot">
+              <a href={l.mapsUrl} target="_blank" rel="noopener" class="k-btn k-btn--ghost">Útvonaltervezés</a>
+              <span class="k-small">{clinic.hoursText}</span>
+            </div>
+          </article>
         ))}
-        <div>
-          <div class="k-clip"><img src={`${base}images/rendelo/rendelo-szoba.jpg`} alt="Világos kezelőszoba a rendelőben" loading="lazy" /></div>
-          <p class="k-cap">Kezelőszoba.</p>
-        </div>
       </div>
     </div>
   </section>
