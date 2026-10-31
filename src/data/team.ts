@@ -23,7 +23,7 @@ export const terapeutak: Therapist[] = [
       'Gerinc stabilizációs tréning',
     ],
     langs: ['angol'],
-    photo: `${base}images/bognar_zsofia.jpg`,
+    photo: `${base}images/csapat/bognar_zsofia.jpg`,
     status: 'GYES',
   },
   {
@@ -61,7 +61,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: [],
     price: '14 000 Ft', // PLACEHOLDER: price not on the old site, confirm with the clinic
-    photo: `${base}images/dornyeine_rozs_mariann.jpg`,
+    photo: `${base}images/csapat/dornyeine_rozs_mariann.jpg`,
   },
   {
     name: 'Hanula Judit',
@@ -181,7 +181,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol', 'német'],
     price: '14 000 Ft',
-    photo: `${base}images/liptak_noemi.jpg`,
+    photo: `${base}images/csapat/liptak_noemi.jpg`,
   },
   {
     name: 'Nagy Tünde Éva',
