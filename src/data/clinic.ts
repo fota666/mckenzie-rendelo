@@ -14,6 +14,7 @@ export const clinic = {
   therapists: 15, // active; 3 more on GYES (see data/team.ts)
   bookingHours: 'Hétköznap 9:00-17:00', // phone line hours, as on the old kapcsolat page
   bookingHoursShort: 'H-P 9-17 óra',
+  bookingHoursSentence: 'hétköznap 9 és 17 óra között',
   hoursText: 'hétfőtől péntekig, 8:00 és 20:00 között',
   hours: { days: 'Hétfő-péntek', open: '08:00', close: '20:00', schema: 'Mo-Fr 08:00-20:00' },
   sameAs: [
@@ -80,3 +81,6 @@ export const ratingText = (v: number) => v.toFixed(1).replace('.', ',');
 /** Review counts are shown as a floor to the nearest ten ("180+"), so they only need an update when the next ten is passed. */
 export const moreThan = (n: number) => `${Math.floor(n / 10) * 10}+`;
 export const reviewTotalText = moreThan(reviewTotal);
+
+/** One wording for health-fund invoicing, used on every page. */
+export const healthFundNote = 'Egészségpénztárra számlát adunk';

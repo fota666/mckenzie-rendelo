@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import CtaCard from '../components/CtaCard.astro';
-import { clinic } from '../data/clinic';
+import { clinic, healthFundNote } from '../data/clinic';
 const base = import.meta.env.BASE_URL;
 
 const faqs = [
@@ -12,11 +12,11 @@ const faqs = [
   },
   {
     q: 'Mennyi ideig tart egy kezelés?',
-    a: 'Az első alkalom 50-55 perc, ez tartalmazza a mozgásvizsgálatot és az első kezelést. Az ára megegyezik a további alkalmakéval, azok is 50-55 percesek.'
+    a: 'Az első alkalom 55 perc, ez tartalmazza a mozgásvizsgálatot és az első kezelést. A további alkalmak 50-55 percesek, az ár az első alkalomra is ugyanaz.'
   },
   {
     q: 'Hogyan foglalhatok időpontot, és mennyit kell várni?',
-    a: `Telefonon foglalhat a ${clinic.phoneDisplay} számon, hétköznap 9 és 17 óra között, vagy kérhet visszahívást a Kapcsolat oldalon. Általában 1-2 napon belül tudunk időpontot adni.`
+    a: `Telefonon foglalhat a ${clinic.phoneDisplay} számon, ${clinic.bookingHoursSentence}, vagy kérhet visszahívást a Kapcsolat oldalon. Általában 1-2 napon belül tudunk időpontot adni.`
   },
   {
     q: 'Mennyibe kerül a kezelés?',
@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     q: 'Elszámolható egészségpénztárral?',
-    a: 'Igen, számlát adunk, amelyet az egészségpénztárnál lehet benyújtani. Kérjük, előzetesen egyeztessen a pénztárával a feltételekről.'
+    a: `Igen. ${healthFundNote}, a feltételekről előzetesen érdemes egyeztetni a pénztárral.`
   },
   {
     q: 'Kell beutaló a kezeléshez?',
@@ -40,7 +40,7 @@ const faqs = [
   },
   {
     q: 'Melyik rendelőt válasszam?',
-    a: 'Mindkét helyszínünkön egyformán képzett gyógytornászok dolgoznak. Válassza az Ön számára könnyebben megközelíthető rendelőt: Belváros (Sas u. 7.) vagy Bel-Buda (Bartók Béla út 34.).'
+    a: 'Mindkét helyszínünkön olyan gyógytornászok dolgoznak, akik mindannyian részesültek McKenzie-képzésben. Válassza az Ön számára könnyebben megközelíthető rendelőt: Belváros (Sas u. 7.) vagy Bel-Buda (Bartók Béla út 34.).'
   },
   {
     q: 'Porckorongsérvvel is lehet gyógytornára jönni?',
@@ -48,7 +48,7 @@ const faqs = [
   },
   {
     q: 'Mi a különbség a McKenzie-módszer és a hagyományos gyógytorna között?',
-    a: 'A McKenzie-módszer egy részletes mozgásvizsgálattal kezdődik: ismételt mozgások és testhelyzetek alatt figyeljük, hogyan változik a fájdalom. Ebből derül ki, milyen gyakorlatok segíthetnek. A kezelés célja, hogy a páciens maga is kezelni tudja a panaszát, és ne a terapeutától függjön.'
+    a: 'A McKenzie-módszer egy részletes mozgásvizsgálattal kezdődik: ismételt mozgások és testhelyzetek alatt figyeljük, hogyan változik a fájdalom. Ebből derül ki, milyen gyakorlatok segíthetnek. A kezelés egyik célja, hogy a páciens megtanulja azokat a gyakorlatokat, amelyekkel otthon is segítheti a javulását.'
   },
   {
     q: 'Mi az a McKenzie-módszer?',

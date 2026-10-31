@@ -1,6 +1,6 @@
 ---
 // Closing booking band for the pages that do not end with their own booking block.
-import { clinic } from '../data/clinic';
+import { clinic, healthFundNote } from '../data/clinic';
 import CtaCard from './CtaCard.astro';
 interface Props { eyebrow?: string; title?: string; lead?: string }
 const {
@@ -10,7 +10,7 @@ const {
 } = Astro.props;
 const checks = [
   'Beutaló nem kell',
-  `Egy alkalom ${clinic.prices.single.range}, számlát adunk egészségpénztárra`,
+  `Egy alkalom ${clinic.prices.single.range}. ${healthFundNote}.`,
   `Két rendelő, ${clinic.hoursText}`,
 ];
 ---

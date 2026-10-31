@@ -1,6 +1,6 @@
 ---
 // Closing call to action (calm design). `tone="gold"` keeps it apart from the dark footer on pages that end with it.
-import { clinic } from '../../data/clinic';
+import { clinic, healthFundNote } from '../../data/clinic';
 interface Props { eyebrow?: string; title?: string; tone?: 'pine' | 'gold' }
 const {
   eyebrow = 'Időpontfoglalás',
@@ -17,7 +17,7 @@ const base = import.meta.env.BASE_URL;
       <h2 class="k-h2" style="margin:14px 0 22px">{title}</h2>
       <ul class="k-checks">
         <li>Beutaló nem kell</li>
-        <li>{clinic.prices.single.range} egy alkalom, számlát adunk egészségpénztárra</li>
+        <li>{clinic.prices.single.range} egy alkalom. {healthFundNote}.</li>
         <li>Két rendelő, {clinic.hoursText}</li>
       </ul>
     </div>

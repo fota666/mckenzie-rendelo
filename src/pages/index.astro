@@ -4,7 +4,7 @@
 import CalmLayout from '../layouts/CalmLayout.astro';
 import LoopVideo from '../components/LoopVideo.astro';
 import CalmCta from '../components/calm/CalmCta.astro';
-import { clinic, reviewTotalText, moreThan, ratingText } from '../data/clinic';
+import { clinic, reviewTotalText, moreThan, ratingText, healthFundNote } from '../data/clinic';
 import { situations } from '../data/situations';
 import { firstVisit } from '../data/firstVisit';
 import { founder } from '../data/founder';
@@ -114,7 +114,7 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
     <div class="k-wrap">
       <div class="k-head">
         <p class="k-eyebrow">Az első alkalom</p>
-        <h2 class="k-h2">50-55 perc: kikérdezés, vizsgálat, kezelés és saját gyakorlatsor.</h2>
+        <h2 class="k-h2">55 perc: kikérdezés, vizsgálat, kezelés és saját gyakorlatsor.</h2>
       </div>
       <div class="k-visit">
         <div>
@@ -212,7 +212,7 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
               <b>{clinic.prices.pass.amount}</b>
             </li>
           </ul>
-          <p class="k-small" style="margin-top:16px">Az első alkalomra, a vizsgálatra is ugyanez az ár vonatkozik. Beutaló nem kell, egészségpénztárra számlát adunk.</p>
+          <p class="k-small" style="margin-top:16px">Az első alkalomra, a vizsgálatra is ugyanez az ár vonatkozik. Beutaló nem kell. {healthFundNote}.</p>
           <p style="margin-top:14px;font-size:0.95rem"><a href={`${base}araink`} class="k-link">Árak és tudnivalók</a> &nbsp;&middot;&nbsp; <a href={`${base}velemenyek`} class="k-link">Összes vélemény</a></p>
         </aside>
       </div>

@@ -70,9 +70,11 @@ const schema = {
           <ul class="k-list">{c.whenToCome.map((w) => <li>{w}</li>)}</ul>
         </div>
         <div class="k-flag">
-          <h3 class="k-h3">Előbb forduljon orvoshoz, ha</h3>
-          <ul>{c.redFlags.map((r) => <li>{r}</li>)}</ul>
-          <p class="k-small">Ezekben az esetekben sürgős orvosi vizsgálat szükséges, nem gyógytorna.</p>
+          <h3 class="k-h3">Azonnal forduljon orvoshoz, ha</h3>
+          <ul>{c.urgent.map((r) => <li>{r}</li>)}</ul>
+          <h3 class="k-h3" style="margin-top:14px">Előbb beszéljen orvosával, ha</h3>
+          <ul class="k-flag__consult">{c.consult.map((r) => <li>{r}</li>)}</ul>
+          <p class="k-small">Ezekben az esetekben a gyógytorna megkezdése előtt orvosi vizsgálat szükséges.</p>
         </div>
       </div>
     </div>
@@ -83,7 +85,7 @@ const schema = {
       <div class="k-head">
         <p class="k-eyebrow">Hogyan kezeljük</p>
         <h2 class="k-h2">Vizsgálat, gyakorlatok, önkezelés.</h2>
-        <p class="k-small">Módszerek: {c.methods.map((m, i) => <>{i > 0 && ', '}<a href={`${base}${m.path}`} class="k-link">{m.label}</a></>)}.</p>
+        <p class="k-small">Szükség szerint szóba jövő módszerek: {c.methods.map((m, i) => <>{i > 0 && ', '}<a href={`${base}${m.path}`} class="k-link">{m.label}</a></>)}.</p>
       </div>
       <ol class="k-cards3">
         {c.approach.map((a, i) => (

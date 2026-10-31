@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import CtaCard from '../components/CtaCard.astro';
-import { clinic } from '../data/clinic';
+import { clinic, healthFundNote } from '../data/clinic';
 const base = import.meta.env.BASE_URL;
 
 // A clinic price list, not a SaaS pricing table: two lines, what is included, practical notes.
@@ -18,7 +18,7 @@ const rows = [
   {
     name: clinic.prices.pass.label,
     meta: 'kedvezményes',
-    detail: `${clinic.prices.pass.perVisit}, ${clinic.prices.pass.saving}. Mindkét rendelőben érvényes, a felhasználás feltételeiről telefonon tájékoztatunk.`,
+    detail: `${clinic.prices.pass.perVisit}, ${clinic.prices.pass.saving}. A bérlet felhasználásának feltételeiről telefonon tájékoztatunk.`,
     price: clinic.prices.pass.amount,
     priceNote: '5 egyéni kezelés',
     link: null,
@@ -28,7 +28,7 @@ const rows = [
 const notes = [
   { t: 'Beutaló', d: 'Nem kell, magánrendelésről van szó.' },
   { t: 'Társadalombiztosítás', d: 'A TB nem fedezi. Magánbiztosítónál érdemes előre érdeklődni.' },
-  { t: 'Egészségpénztár', d: 'Számlát adunk, amelyet visszatérítés céljából be lehet nyújtani.' },
+  { t: 'Egészségpénztár', d: `${healthFundNote}, a feltételekről előzetesen érdemes egyeztetni a pénztárral.` },
   { t: 'Fizetés', d: 'Készpénzzel és bankkártyával.' },
   { t: 'Lemondás', d: 'Legalább 24 órával korábban, telefonon.' },
 ];
@@ -36,11 +36,11 @@ const notes = [
 
 <BaseLayout
   title="Gyógytorna árak 2026 | McKenzie Gyógytorna Rendelő Budapest"
-  description={`Egyéni gyógytorna ${clinic.prices.single.amount} / 50-55 perc, 5 alkalmas bérlet ${clinic.prices.pass.amount}. Egészségpénztárra számlát adunk, beutaló nem kell.`}
+  description={`Egyéni gyógytorna ${clinic.prices.single.amount} / 50-55 perc, 5 alkalmas bérlet ${clinic.prices.pass.amount}. ${healthFundNote}, beutaló nem kell.`}
 >
   <PageHeader eyebrow="Árak">
     <Fragment slot="title">Átlátható árak, rejtett költség nélkül.</Fragment>
-    Egyéni kezelés vagy kedvezményes bérlet. Az ár tartalmaz mindent, ami az alkalom alatt történik, az első vizsgálatot is.
+    Egyéni kezelés vagy kedvezményes bérlet. Az alkalom díja a kikérdezést, a mozgásvizsgálatot, a kezelést és az otthoni gyakorlatok betanítását foglalja magában. Az első alkalomra is ugyanez az ár vonatkozik.
   </PageHeader>
 
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 lg:pb-20 grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">

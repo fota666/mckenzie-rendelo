@@ -1,4 +1,5 @@
 // Condition landing pages, one per entry (slug = URL).
+import { clinic } from './clinic';
 // Answer-first copy for patients and answer engines. Only general, established physiotherapy
 // knowledge and the clinic's own facts; no outcome promises. Red flags follow common clinical
 // guidance (urgent medical assessment first).
@@ -13,7 +14,10 @@ export interface Condition {
   metaDescription: string;
   answer: string;          // first paragraph: the direct answer
   whenToCome: string[];
-  redFlags: string[];
+  /** Seek urgent medical care first. */
+  urgent: string[];
+  /** Talk to a doctor before starting physiotherapy. */
+  consult: string[];
   approach: { title: string; text: string }[];
   methods: { path: string; label: string }[];
   timeline: string;
@@ -21,11 +25,13 @@ export interface Condition {
   related: string[];       // other condition slugs
 }
 
-const commonRedFlags = [
+const commonUrgent = [
   'vizelet- vagy székletürítési zavar, vagy a gát környékén zsibbadás',
   'gyorsan erősödő izomgyengeség a lábban vagy a karban',
+  'baleset vagy esés után kezdődő erős fájdalom',
+];
+const commonConsult = [
   'láz, ismeretlen eredetű fogyás vagy korábbi daganatos betegség mellett jelentkező fájdalom',
-  'baleset, esés után kezdődő erős fájdalom',
   'éjszaka és nyugalomban sem csillapodó, egyre erősödő fájdalom',
 ];
 
@@ -34,10 +40,10 @@ export const conditions: Condition[] = [
     slug: 'derekfajas',
     clip: { name: 'derekfajas-hasonfekvo-mobilizalas', label: 'Hasonfekvő páciens derekának kezelése a rendelőben' },
     name: 'Derékfájás',
-    h1: 'Derékfájás gyógytorna Budapesten, McKenzie-módszerrel',
+    h1: 'Derékfájás kezelése gyógytornával Budapesten, McKenzie-módszerrel',
     metaTitle: 'Derékfájás gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Derékfájás és lumbágó kezelése McKenzie-módszerrel a V. és XI. kerületben. Mozgásvizsgálat, kezelés, otthoni gyakorlatsor. Beutaló nem kell, időpont 1-2 napon belül.',
-    answer: 'Derékfájással beutaló nélkül jöhet hozzánk. Az első, 50-55 perces alkalommal ismételt mozgásokkal és testhelyzetekkel megvizsgáljuk, hogyan változik a fájdalma, és ez alapján olyan gyakorlatsort kap, amelyet otthon egyedül is végezhet. A kezelés 14 000-15 000 Ft, időpont általában 1-2 napon belül, két budapesti rendelőben.',
+    answer: `Derékfájással beutaló nélkül jöhet hozzánk. Az első, 55 perces alkalommal ismételt mozgásokkal és testhelyzetekkel megvizsgáljuk, hogyan változik a fájdalma, és ez alapján olyan gyakorlatsort kap, amelyet otthon egyedül is végezhet. A kezelés ${clinic.prices.single.range}, időpont általában 1-2 napon belül, két budapesti rendelőben.`,
     whenToCome: [
       'napok vagy hetek óta fáj a dereka, és nem javul magától',
       'a fájdalom bizonyos mozdulatokra, üléskor vagy hajláskor erősödik',
@@ -45,7 +51,8 @@ export const conditions: Condition[] = [
       'a fájdalom a farba vagy a combba is kisugárzik',
       'ülőmunka mellett estére merev és fájós a dereka',
     ],
-    redFlags: commonRedFlags,
+    urgent: commonUrgent,
+    consult: commonConsult,
     approach: [
       { title: 'Vizsgálat', text: 'Megkérdezzük, mikor kezdődött a fájdalom, mitől rosszabb és mitől jobb. Utána ismételt előre- és hátrahajlással, oldalirányú mozgásokkal és tartott testhelyzetekkel figyeljük, hogyan változik a fájdalom helye és erőssége.' },
       { title: 'Gyakorlatok', text: 'A vizsgálat alapján kiválasztjuk azokat a mozgásokat, amelyek a panaszát kedvezően befolyásolják. Ezeket a rendelőben megtanulja, és otthon naponta többször végzi.' },
@@ -61,7 +68,7 @@ export const conditions: Condition[] = [
     faqs: [
       { q: 'Pihentessem a derekamat, vagy mozogjak?', a: 'A legtöbb nem specifikus derékfájásnál a teljes ágynyugalom nem javasolt, a megszokott tevékenységek óvatos folytatása általában jobb. Hogy pontosan milyen mozgás jó Önnek, azt az első vizsgálaton megnézzük.' },
       { q: 'Kell MRI a gyógytorna előtt?', a: 'Általában nem. Ha nincs a fenti figyelmeztető jelek közül egyik sem, a gyógytorna képalkotó vizsgálat nélkül is elkezdhető. Ha van korábbi lelete, hozza magával.' },
-      { q: 'Mennyibe kerül a derékfájás kezelése?', a: 'Egy 50-55 perces egyéni kezelés 14 000 vagy 15 000 Ft, a terapeutától függően. Az 5 alkalmas bérlet 65 000 Ft. Egészségpénztárra számlát adunk.' },
+      { q: 'Mennyibe kerül a derékfájás kezelése?', a: `Egy ${clinic.prices.single.duration}es egyéni kezelés ${clinic.prices.single.amount}, a terapeutától függően. Az 5 alkalmas bérlet ${clinic.prices.pass.amount}. Egészségpénztárra számlát adunk.` },
     ],
     related: ['isiasz', 'porckorongserv', 'nyakfajas', 'ulomunka-tartashibak'],
   },
@@ -69,10 +76,10 @@ export const conditions: Condition[] = [
     slug: 'nyakfajas',
     clip: { name: 'nyak-mckenzie-onkezeles', label: 'Ülve végzett nyaki mozgásvizsgálat és gyakorlat' },
     name: 'Nyakfájás',
-    h1: 'Nyakfájás gyógytorna Budapesten, McKenzie-módszerrel',
+    h1: 'Nyakfájás kezelése gyógytornával Budapesten, McKenzie-módszerrel',
     metaTitle: 'Nyakfájás gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Nyakfájás, nyakból kiinduló fejfájás és karba sugárzó fájdalom kezelése McKenzie-módszerrel Budapesten. Beutaló nem kell, időpont 1-2 napon belül.',
-    answer: 'Nyakfájással beutaló nélkül jöhet hozzánk. Az első, 50-55 perces alkalommal megvizsgáljuk, hogyan reagál a nyaka ismételt mozgásokra és testhelyzetekre, és ehhez igazítva tanítunk otthon végezhető gyakorlatokat. A kezelés 14 000-15 000 Ft, időpont általában 1-2 napon belül.',
+    answer: `Nyakfájással beutaló nélkül jöhet hozzánk. Az első, 55 perces alkalommal megvizsgáljuk, hogyan reagál a nyaka ismételt mozgásokra és testhelyzetekre, és ehhez igazítva tanítunk otthon végezhető gyakorlatokat. A kezelés ${clinic.prices.single.range}, időpont általában 1-2 napon belül.`,
     whenToCome: [
       'merev, fájós a nyaka, nehezen fordítja a fejét',
       'a nyaki fájdalom a vállba, a lapockák közé vagy a karba sugárzik',
@@ -80,12 +87,14 @@ export const conditions: Condition[] = [
       'képernyő előtti munka után estére fáj a nyaka',
       'visszatérő nyaki panaszai vannak',
     ],
-    redFlags: [
-      'baleset, ostorcsapás-sérülés vagy esés után kezdődő fájdalom',
+    urgent: [
       'szédülés, látászavar, beszéd- vagy nyelési nehézség',
       'gyorsan erősödő gyengeség vagy ügyetlenség a karban, kézben',
       'járásbizonytalanság vagy zsibbadás mindkét kézben',
-      'láz, ismeretlen eredetű fogyás, éjszakai erős fájdalom',
+      'baleset, ostorcsapás-sérülés vagy esés után kezdődő fájdalom',
+    ],
+    consult: [
+      'láz, ismeretlen eredetű fogyás vagy éjszakai erős fájdalom',
     ],
     approach: [
       { title: 'Vizsgálat', text: 'Ismételt nyaki mozgásokkal (például az áll behúzásával, forgatással, oldalra döntéssel) figyeljük, hogyan változik a fájdalom és a kisugárzás.' },
@@ -101,7 +110,7 @@ export const conditions: Condition[] = [
     faqs: [
       { q: 'A nyakfájás okozhat fejfájást?', a: 'Igen, a fejfájás egy része a nyakból indul ki. Hogy az Ön fejfájása ilyen-e, azt a vizsgálat során próbáljuk kideríteni. Hirtelen, szokatlanul erős fejfájással viszont azonnal orvoshoz forduljon.' },
       { q: 'Mit tehetek otthon, amíg nincs időpontom?', a: 'Kerülje a hosszú, azonos testhelyzetet, gyakran tartson szünetet a képernyő előtt. Ha a fájdalom erősödik, a kar zsibbad vagy gyengül, ne várjon, kérjen orvosi vizsgálatot.' },
-      { q: 'Mennyibe kerül a nyakfájás kezelése?', a: 'Egy 50-55 perces egyéni kezelés 14 000 vagy 15 000 Ft, a terapeutától függően. Az 5 alkalmas bérlet 65 000 Ft.' },
+      { q: 'Mennyibe kerül a nyakfájás kezelése?', a: `Egy ${clinic.prices.single.duration}es egyéni kezelés ${clinic.prices.single.amount}, a terapeutától függően. Az 5 alkalmas bérlet ${clinic.prices.pass.amount}.` },
     ],
     related: ['derekfajas', 'porckorongserv', 'vallfajas', 'ulomunka-tartashibak'],
   },
@@ -109,19 +118,21 @@ export const conditions: Condition[] = [
     slug: 'porckorongserv',
     clip: { name: 'derek-nyak-ulve-gyakorlat', label: 'Ülve végzett derék- és nyakgyakorlatok a terapeuta mellett' },
     name: 'Porckorongsérv',
-    h1: 'Porckorongsérv gyógytorna Budapesten, műtét előtt és után',
+    h1: 'Porckorongsérv kezelése gyógytornával Budapesten, műtét előtt és után',
     metaTitle: 'Porckorongsérv gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Porckorongsérv (gerincsérv) konzervatív kezelése McKenzie-módszerrel, műtét előtti felkészítés és műtét utáni rehabilitáció Budapesten. Beutaló nem kell.',
     answer: 'A porckorongsérv sok esetben műtét nélkül is kezelhető, de nem minden állapot alkalmas konzervatív terápiára. Ha az orvosa nem lát sürgős műtéti okot, McKenzie-vizsgálattal és célzott gyakorlatokkal kezdjük, a vizsgálat pedig megmutatja, hogy a gyógytorna Önnek megfelelő-e. Ha műtét lesz, felkészítjük rá, és segítjük a műtét utáni rehabilitációt.',
     whenToCome: [
-      'MRI-n porckorongsérvet vagy porckorong-előboltosulást írtak le',
-      'a derékból vagy a nyakból a lábba vagy a karba sugárzik a fájdalom',
-      'felmerült a műtét, de előbb szeretné a konzervatív kezelést kipróbálni',
+      'a derékból vagy a nyakból a lábába vagy a karjába sugárzik a fájdalom, vagy zsibbad',
+      'a panasza bizonyos mozgásokra vagy testhelyzetekre erősödik, másokra enyhül',
+      'a lelet (MRI vagy röntgen) porckorongsérvet vagy előboltosulást említ',
+      'felmerült a műtét, és szeretné tudni, megfelelő lehet-e Önnek a konzervatív kezelés',
       'műtét előtt áll, vagy nemrég műtötték',
     ],
-    redFlags: commonRedFlags,
+    urgent: commonUrgent,
+    consult: commonConsult,
     approach: [
-      { title: 'Vizsgálat', text: 'A leletek mellett mozgásvizsgálatot végzünk: figyeljük, hogy bizonyos mozgásokra a végtagba sugárzó fájdalom visszahúzódik-e a gerinc felé (centralizáció). Ez kedvező jel, és segít a gyakorlatok kiválasztásában.' },
+      { title: 'Vizsgálat', text: 'A tünetek és a mozgásvizsgálat az irányadó: figyeljük, hogy bizonyos mozgásokra a végtagba sugárzó fájdalom visszahúzódik-e a gerinc felé (centralizáció). A leleteket is megnézzük, de a kezelést a tünetek és a vizsgálat alapján tervezzük.' },
       { title: 'Konzervatív kezelés', text: 'A kedvező mozgásirányra épülő gyakorlatok, testtartási tanácsok és fokozatos terhelés. A terapeuta minden alkalommal ellenőrzi, hogyan változnak a tünetek.' },
       { title: 'Műtét előtt és után', text: 'Ha műtétre kerül sor, a műtét előtti tornával felkészítjük az izmokat, utána pedig fokozatosan visszaállítjuk a mozgást és az erőt.' },
     ],
@@ -132,8 +143,8 @@ export const conditions: Condition[] = [
     ],
     timeline: 'A javulás üteme a sérv helyétől, a tünetektől és az otthoni gyakorlástól is függ, ezért előre nem ígérünk alkalomszámot. A terapeuta minden alkalommal értékeli a változást, és ha a konzervatív kezelés nem hoz javulást, orvosi kontrollt javasol.',
     faqs: [
-      { q: 'Kell-e műteni a porckorongsérvet?', a: 'Erről mindig az orvos dönt. Sok porckorongsérv műtét nélkül is javul, ezért ha nincs sürgős műtéti ok, érdemes konzervatív kezeléssel kezdeni.' },
-      { q: 'Hozzam az MRI-leletet?', a: 'Igen, kérjük, hozza magával az MRI-leletet és a korábbi orvosi zárójelentéseket az első alkalomra.' },
+      { q: 'Kell-e műteni a porckorongsérvet?', a: 'Erről mindig az orvos dönt. Sok porckorongsérv műtét nélkül is javul, de nem minden állapot alkalmas konzervatív kezelésre. Ha nincs sürgős műtéti ok, a vizsgálat után megbeszéljük, hogy a gyógytorna Önnek megfelelő-e.' },
+      { q: 'Hozzam a leleteimet?', a: 'Igen, ha vannak, hozza magával az MRI-leletet és a korábbi orvosi zárójelentéseket. A kezelést azonban a tünetei és a mozgásvizsgálat alapján tervezzük, nem pusztán a lelet alapján.' },
       { q: 'Lehet gyógytornára járni a műtét után?', a: 'Igen, a műtét utáni rehabilitáció is a szakterületünk. Az orvosa által megadott időponttól kezdjük, fokozatos terheléssel.' },
     ],
     related: ['isiasz', 'derekfajas', 'muteti-rehabilitacio'],
@@ -142,17 +153,18 @@ export const conditions: Condition[] = [
     slug: 'isiasz',
     clip: { name: 'csipo-mobilizalas-hanyatt', label: 'Hanyatt fekvő páciens csípőjének és lábának mozgatása' },
     name: 'Isiász',
-    h1: 'Isiász gyógytorna Budapesten, McKenzie-módszerrel',
+    h1: 'Isiász kezelése gyógytornával Budapesten, McKenzie-módszerrel',
     metaTitle: 'Isiász gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Isiász, lábba sugárzó derékfájás kezelése McKenzie-módszerrel Budapesten, a V. és XI. kerületben. Beutaló nem kell, időpont 1-2 napon belül.',
-    answer: 'Isiásszal, vagyis a derékból a farba és a lábba sugárzó fájdalommal beutaló nélkül jöhet hozzánk. Az első, 50-55 perces alkalommal megvizsgáljuk, hogyan változik a kisugárzó fájdalom különböző mozgásokra, és ehhez igazítjuk az otthoni gyakorlatokat. A kezelés 14 000-15 000 Ft.',
+    answer: `Isiásszal, vagyis a derékból a farba és a lábba sugárzó fájdalommal beutaló nélkül jöhet hozzánk. Az első, 55 perces alkalommal megvizsgáljuk, hogyan változik a kisugárzó fájdalom különböző mozgásokra, és ehhez igazítjuk az otthoni gyakorlatokat. A kezelés ${clinic.prices.single.range}.`,
     whenToCome: [
       'a fájdalom a derékból a farba, a comb hátsó részébe vagy a lábszárba sugárzik',
       'a lábában zsibbadást vagy bizsergést érez',
       'üléskor vagy előrehajláskor erősödik a lábfájdalom',
-      'az orvos isiászt vagy ülőideg-gyulladást állapított meg',
+      'az orvos isiászt állapított meg, vagyis az ülőideg lefutása mentén jelentkező fájdalmat',
     ],
-    redFlags: commonRedFlags,
+    urgent: commonUrgent,
+    consult: commonConsult,
     approach: [
       { title: 'Vizsgálat', text: 'Ismételt mozgásokkal figyeljük, hogy a lábba sugárzó fájdalom visszahúzódik-e a derék felé. Ha igen, ez segít megtalálni a kedvező mozgásirányt.' },
       { title: 'Gyakorlatok', text: 'Rövid, naponta többször végzendő gyakorlatokat tanítunk, és megbeszéljük, mely testhelyzeteket érdemes átmenetileg kerülni.' },
@@ -167,7 +179,7 @@ export const conditions: Condition[] = [
     faqs: [
       { q: 'Mi okozza az isiászt?', a: 'Az isiász tünet, nem önálló betegség: az ülőideg lefutása mentén jelentkező fájdalom. Gyakori oka a porckorong érintettsége, de más okok is lehetnek, ezért fontos a vizsgálat.' },
       { q: 'Jó-e, ha a fájdalom a lábból a derekamba húzódik vissza?', a: 'Általában igen, ezt centralizációnak hívjuk, és kedvező jelnek tartjuk. A vizsgálat során pont ezt figyeljük.' },
-      { q: 'Mennyibe kerül az isiász kezelése?', a: 'Egy 50-55 perces egyéni kezelés 14 000 vagy 15 000 Ft, a terapeutától függően. Az 5 alkalmas bérlet 65 000 Ft.' },
+      { q: 'Mennyibe kerül az isiász kezelése?', a: `Egy ${clinic.prices.single.duration}es egyéni kezelés ${clinic.prices.single.amount}, a terapeutától függően. Az 5 alkalmas bérlet ${clinic.prices.pass.amount}.` },
     ],
     related: ['porckorongserv', 'derekfajas', 'nyakfajas'],
   },
@@ -176,19 +188,21 @@ export const conditions: Condition[] = [
     slug: 'gerincferdules',
     clip: { name: 'labdan-ules-szalaghuzas', label: 'Ülő gyakorlat labdán, szalaggal, a bordásfal mellett' },
     name: 'Gerincferdülés',
-    h1: 'Gerincferdülés (scoliosis) gyógytorna Budapesten, Schroth-terápiával',
+    h1: 'Gerincferdülés gyógytornája Budapesten, Schroth-terápiával',
     metaTitle: 'Gerincferdülés gyógytorna Budapest | Schroth-terápia',
     metaDescription: 'Gerincferdülés (scoliosis) és Scheuermann-betegség kezelése Schroth-terápiával gyermekeknek és felnőtteknek Budapesten. Beutaló nem kell, időpont 1-2 napon belül.',
-    answer: 'Gerincferdüléssel gyermeket és felnőttet is várunk, beutaló nélkül. Háromdimenziós Schroth-gyakorlatokkal és légzéstechnikával dolgozunk a testtartás és a törzs aszimmetriájának javításán, otthon is végezhető programmal. A gyógytorna az orvosi kontroll mellett történik, nem helyettesíti azt. Egy alkalom 14 000-15 000 Ft, időpont általában 1-2 napon belül.',
+    answer: `Gerincferdüléssel gyermeket és felnőttet is várunk, beutaló nélkül. Háromdimenziós Schroth-gyakorlatokkal és légzéstechnikával dolgozunk a testtartás és a törzs aszimmetriájának javításán, otthon is végezhető programmal. A gyógytorna az orvosi kontroll mellett történik, nem helyettesíti azt. Egy alkalom ${clinic.prices.single.range}, időpont általában 1-2 napon belül.`,
     whenToCome: [
       'Önnél vagy gyermekénél gerincferdülést (scoliosist) vagy Scheuermann-betegséget állapítottak meg',
       'az orvos gyógytornát javasolt a görbület mellé',
       'felnőttként a gerincferdülés miatt fáj a háta vagy a dereka',
       'tartáshibája van, és célzott gyakorlatsort szeretne',
     ],
-    redFlags: [
-      'gyermeknél a görbület gyorsan romlik, vagy a törzs alakja feltűnően változott a legutóbbi kontroll óta',
+    urgent: [
       'zsibbadás, gyengeség vagy járászavar jelentkezik',
+    ],
+    consult: [
+      'gyermeknél a görbület gyorsan romlik, vagy a törzs alakja feltűnően változott a legutóbbi kontroll óta',
       'éjszaka is fennálló, egyre erősödő hátfájdalom',
       'még nincs orvosi diagnózis a görbületről: ilyenkor először ortopédiai vagy gerincgyógyászati vizsgálat kell',
     ],
@@ -213,10 +227,10 @@ export const conditions: Condition[] = [
     slug: 'vallfajas',
     clip: { name: 'vall-manualis-kezeles', label: 'Váll manuális kezelése a rendelőben' },
     name: 'Vállfájás',
-    h1: 'Vállfájás gyógytorna Budapesten, manuálterápiával és célzott gyakorlatokkal',
+    h1: 'Vállfájás kezelése gyógytornával Budapesten',
     metaTitle: 'Vállfájás gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Vállfájdalom, beszűkült vállmozgás és fagyott váll kezelése manuálterápiával és gyakorlatokkal Budapesten. Beutaló nem kell, időpont 1-2 napon belül.',
-    answer: 'Vállpanasszal beutaló nélkül jöhet hozzánk. A vállat és a nyaki gerincet is megvizsgáljuk, mert a vállfájdalom a nyakból is eredhet, majd manuális technikákkal és célzott gyakorlatokkal kezeljük. Egy alkalom 14 000-15 000 Ft, időpont általában 1-2 napon belül.',
+    answer: `Vállpanasszal beutaló nélkül jöhet hozzánk. A vállat és a nyaki gerincet is megvizsgáljuk, mert a vállfájdalom a nyakból is eredhet, majd manuális technikákkal és célzott gyakorlatokkal kezeljük. Egy alkalom ${clinic.prices.single.range}, időpont általában 1-2 napon belül.`,
     whenToCome: [
       'fáj a karemelés, a hátra- vagy a fejre nyúlás',
       'a fájó vállon fekve nem tud aludni',
@@ -224,16 +238,18 @@ export const conditions: Condition[] = [
       'sérülés vagy műtét után szeretné visszanyerni a váll mozgását',
       'a nyaktól a vállig és a karig húzódik a fájdalom',
     ],
-    redFlags: [
+    urgent: [
+      'mellkasi szorító fájdalom, légszomj, hidegverejték, vagy a bal karba és az állkapocsba sugárzó fájdalom: hívjon mentőt (112)',
       'baleset vagy esés után hirtelen kezdődő erős fájdalom, és a kar nem mozdítható',
-      'mellkasi szorító fájdalom, légszomj, hidegverejték, vagy a bal karba és az állkapocsba sugárzó fájdalom: ilyenkor hívjon mentőt',
       'láz mellett meleg, vörös, duzzadt ízület',
       'a karban gyorsan erősödő gyengeség vagy zsibbadás',
+    ],
+    consult: [
       'ismeretlen eredetű fogyás vagy korábbi daganatos betegség mellett jelentkező fájdalom',
     ],
     approach: [
       { title: 'Vizsgálat', text: 'Megnézzük a váll és a nyaki gerinc mozgását, és ismételt mozgásokkal ellenőrizzük, hogy a nyak befolyásolja-e a panaszt.' },
-      { title: 'Kezelés', text: 'Manuális technikákkal, például Mulligan-mobilizációval javítjuk az ízület mozgását, és lazítjuk a feszes izmokat.' },
+      { title: 'Kezelés', text: 'Ha indokolt, manuális technikákkal, például Mulligan-mobilizációval segítjük az ízület mozgását, és lazítjuk a feszes izmokat.' },
       { title: 'Gyakorlatok', text: 'Mozgásterjedelmet növelő és gumiszalagos erősítő gyakorlatokat kap, amelyeket otthon is végezhet.' },
     ],
     methods: [
@@ -253,10 +269,10 @@ export const conditions: Condition[] = [
     slug: 'terdfajdalom',
     clip: { name: 'terd-csipo-vizsgalat', label: 'A terapeuta a térd és a csípő mozgását vizsgálja' },
     name: 'Térdfájdalom',
-    h1: 'Térdfájdalom gyógytorna Budapesten',
+    h1: 'Térdfájdalom kezelése gyógytornával Budapesten',
     metaTitle: 'Térdfájdalom gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Térdfájdalom, sportsérülés és térdműtét utáni mozgásproblémák kezelése gyógytornával Budapesten. Beutaló nem kell, időpont 1-2 napon belül.',
-    answer: 'Térdfájdalommal beutaló nélkül jöhet hozzánk. A térd mellett a csípőt és a derekat is megvizsgáljuk, mert a panasz forrása ott is lehet, majd manuális technikákkal és erősítő gyakorlatokkal kezeljük. Egy alkalom 14 000-15 000 Ft, időpont általában 1-2 napon belül.',
+    answer: `Térdfájdalommal beutaló nélkül jöhet hozzánk. A térd mellett a csípőt és a derekat is megvizsgáljuk, mert a panasz forrása ott is lehet, majd manuális technikákkal és erősítő gyakorlatokkal kezeljük. Egy alkalom ${clinic.prices.single.range}, időpont általában 1-2 napon belül.`,
     whenToCome: [
       'lépcsőzéskor, felálláskor vagy guggoláskor fáj a térde',
       'sportolás után jelentkezik a térdfájdalom',
@@ -264,17 +280,19 @@ export const conditions: Condition[] = [
       'merev vagy gyenge a térde',
       'nem tudja, hogy a térd, a csípő vagy a derék okozza-e a panaszt',
     ],
-    redFlags: [
-      'baleset után a térd hirtelen kidagad, és nem tud ráállni a lábára',
-      'a térd bezáródik, nem hajlítható vagy nem nyújtható',
+    urgent: [
+      'baleset után a térd hirtelen megduzzad, és nem tud ráállni a lábára',
+      'a térd elakad, nem hajlítható vagy nem nyújtható',
       'láz mellett meleg, vörös, duzzadt a térd',
       'a vádli megduzzad és fáj, különösen hosszú ülés vagy műtét után',
+    ],
+    consult: [
       'éjszaka és nyugalomban sem csillapodó, egyre erősödő fájdalom',
     ],
     approach: [
       { title: 'Vizsgálat', text: 'Megnézzük a térd, a csípő és a derék mozgását és erejét, mert a térdfájdalom hátterében ezek is állhatnak.' },
-      { title: 'Kezelés', text: 'Manuális technikákkal és mozgatással javítjuk az ízület mozgását, és csökkentjük a fájdalmat.' },
-      { title: 'Erősítés', text: 'Egyéni gyakorlatokkal, például gumiszalaggal erősítjük a combot és a csípő körüli izmokat, hogy a térd terhelése csökkenjen.' },
+      { title: 'Kezelés', text: 'Ha indokolt, manuális technikákkal és mozgatással segítjük az ízület mozgását, és csökkentjük a fájdalmat.' },
+      { title: 'Erősítés', text: 'Szükség szerint egyéni gyakorlatokkal, például gumiszalaggal erősítjük a combot és a csípő körüli izmokat, hogy csökkenjen a térd terhelése.' },
     ],
     methods: [
       { path: 'modszerek#izuleti-fajdalmak', label: 'Ízületi fájdalmak gyógytornája' },
@@ -293,10 +311,10 @@ export const conditions: Condition[] = [
     slug: 'csipofajdalom',
     clip: { name: 'csipo-mobilizalas-ovvel', label: 'Csípő mobilizálása övvel a rendelőben' },
     name: 'Csípőfájdalom',
-    h1: 'Csípőfájdalom gyógytorna Budapesten',
+    h1: 'Csípőfájdalom kezelése gyógytornával Budapesten',
     metaTitle: 'Csípőfájdalom gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Csípőfájdalom, merev csípő és csípőműtét előtti vagy utáni mozgásproblémák kezelése gyógytornával Budapesten. Beutaló nem kell, időpont 1-2 napon belül.',
-    answer: 'Csípőfájdalommal beutaló nélkül jöhet hozzánk. A csípő mellett a derekat is megvizsgáljuk, mert a fájdalom a derékból is sugározhat, majd manuális technikákkal és erősítő gyakorlatokkal kezeljük. Egy alkalom 14 000-15 000 Ft, időpont általában 1-2 napon belül.',
+    answer: `Csípőfájdalommal beutaló nélkül jöhet hozzánk. A csípő mellett a derekat is megvizsgáljuk, mert a fájdalom a derékból is sugározhat, majd manuális technikákkal és erősítő gyakorlatokkal kezeljük. Egy alkalom ${clinic.prices.single.range}, időpont általában 1-2 napon belül.`,
     whenToCome: [
       'járáskor vagy ülésből felálláskor fáj a csípője',
       'a fájdalom a farba, a lágyékba vagy a combba húzódik',
@@ -304,17 +322,19 @@ export const conditions: Condition[] = [
       'hosszú ülés vagy sport után merev a csípője',
       'tisztázni szeretné, hogy a derék vagy a csípő okozza-e a panaszt',
     ],
-    redFlags: [
+    urgent: [
       'esés után nem tud ráállni a lábára, vagy a láb rövidebbnek vagy elfordultnak látszik',
       'láz mellett meleg, fájdalmas a csípő',
-      'ismeretlen eredetű fogyás vagy éjszakai nyugalmi fájdalom',
       'vizelet- vagy székletürítési zavar, gáttáji zsibbadás',
       'a vádli megduzzad és fáj műtét után',
     ],
+    consult: [
+      'ismeretlen eredetű fogyás vagy éjszakai nyugalmi fájdalom',
+    ],
     approach: [
-      { title: 'Vizsgálat', text: 'Megnézzük a csípő, a derék és az ágyéki gerinc mozgását, mert a fájdalom forrása többféle lehet, és a derékból sugárzó fájdalom is érezhető a csípőtájon.' },
-      { title: 'Kezelés', text: 'Manuális technikákkal, mozgatással és övvel segített mobilizációval javítjuk a csípő mozgását.' },
-      { title: 'Erősítés', text: 'Gumiszalagos és stabilizáló gyakorlatokkal erősítjük a csípő körüli izmokat, amelyeket otthon is végezhet.' },
+      { title: 'Vizsgálat', text: 'Megnézzük a csípő és a derék mozgását, mert a fájdalom forrása többféle lehet, és a derékból sugárzó fájdalom is érezhető a csípőtájon.' },
+      { title: 'Kezelés', text: 'Ha indokolt, manuális technikákkal, mozgatással és övvel segített mobilizációval javítjuk a csípő mozgását.' },
+      { title: 'Erősítés', text: 'Szükség szerint gumiszalagos vagy stabilizáló gyakorlatokkal erősítjük a csípő körüli izmokat, ezeket otthon is végezheti.' },
     ],
     methods: [
       { path: 'modszerek#izuleti-fajdalmak', label: 'Ízületi fájdalmak gyógytornája' },
@@ -334,9 +354,9 @@ export const conditions: Condition[] = [
     clip: { name: 'gluteus-gumiszalag-terd', label: 'Gumiszalagos erősítő gyakorlat a terapeuta mellett' },
     name: 'Műtét előtti és utáni rehabilitáció',
     h1: 'Műtét előtti és utáni rehabilitáció Budapesten',
-    metaTitle: 'Műtét utáni rehabilitáció Budapest | McKenzie Gyógytorna Rendelő',
+    metaTitle: 'Műtét előtti és utáni rehabilitáció Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Gerinc-, csípő- és térdműtét előtti felkészítés és műtét utáni gyógytorna Budapesten. A kezelést a műtétet végző orvos előírásaihoz igazítjuk. Beutaló nem kell.',
-    answer: 'Gerinc-, csípő- vagy térdműtét előtt felkészítjük, utána pedig a mozgásképesség és az erő visszaállításában segítünk. A kezelést a műtétet végző orvos előírásaihoz igazítjuk, ezért hozza magával a zárójelentést és a rehabilitációs javaslatot. Egy alkalom 14 000-15 000 Ft, beutaló nem kell.',
+    answer: `Gerinc-, csípő- vagy térdműtét előtt felkészíthetjük, utána pedig a mozgásképesség és az erő fokozatos visszanyerésében segítünk. A kezelést a műtétet végző orvos előírásaihoz igazítjuk, ezért hozza magával a zárójelentést és a rehabilitációs javaslatot. Egy alkalom ${clinic.prices.single.range}, beutaló nem kell.`,
     whenToCome: [
       'műtétre vár, és fel szeretne készülni',
       'gerinc-, csípő- vagy térdműtéten esett át',
@@ -344,16 +364,18 @@ export const conditions: Condition[] = [
       'sportsérülés után szeretne visszatérni az eredeti terheléshez',
       'a műtét után a mozgása vagy az ereje nem tér vissza',
     ],
-    redFlags: [
+    urgent: [
       'láz mellett a műtéti seb vörös, fájdalmas, duzzadt vagy váladékozik',
-      'a vádli megduzzad, fáj vagy meleg, esetleg légszomj jelentkezik: ez azonnali orvosi ellátást igényel',
+      'a vádli megduzzad, fáj vagy meleg, esetleg légszomj jelentkezik: azonnali orvosi ellátás kell',
       'gerincműtét után vizelet- vagy székletürítési zavar, gáttáji zsibbadás',
       'hirtelen jelentkező erős fájdalom, vagy a láb vagy a kar gyengül',
-      'a műtétet végző orvos még nem engedélyezte a mozgásterápiát, ilyenkor először az ő jóváhagyását kérje',
+    ],
+    consult: [
+      'a műtétet végző orvos még nem engedélyezte a mozgásterápiát: először az ő jóváhagyását kérje',
     ],
     approach: [
-      { title: 'Műtét előtt', text: 'Felkészítjük az ízületeket és az izmokat a műtétre, hogy a műtét utáni időszakot jobb állapotból kezdje.' },
-      { title: 'Műtét után', text: 'Visszaállítjuk az erőt és a mozgásképességet, és megelőzzük a szövődményeket, az orvosi előírásokhoz igazodva.' },
+      { title: 'Műtét előtt', text: 'Felkészíthetjük az ízületeket és az izmokat a műtétre, ami segíthet a műtét utáni időszak kezdetén.' },
+      { title: 'Műtét után', text: 'Az orvosi előírásokhoz igazodva fokozatosan visszanyerjük az erőt és a mozgásképességet, és figyeljük a felépülés menetét. Ha a felépülés a vártnál lassabb, vagy új panasz jelentkezik, orvosi kontrollt javaslunk.' },
       { title: 'Visszatérés', text: 'Fokozatosan emeljük a terhelést, ha a cél a sport, egészen a sportolói szintig.' },
     ],
     methods: [
@@ -376,7 +398,7 @@ export const conditions: Condition[] = [
     h1: 'Ülőmunka okozta nyak-, váll- és derékfájás kezelése Budapesten',
     metaTitle: 'Ülőmunka okozta fájdalom, tartásjavítás Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Íróasztali munka okozta nyak-, váll- és derékfájás kezelése, tartásjavítás és ergonómiai tanácsok Budapesten. Beutaló nem kell, időpont 1-2 napon belül.',
-    answer: 'Íróasztali munkából eredő nyak-, váll- és derékpanaszokkal beutaló nélkül jöhet hozzánk. Megnézzük, mely testhelyzetek váltják ki a fájdalmat, és tartásjavító gyakorlatokat, ergonómiai tanácsokat adunk, amelyeket a munkahelyen is végezhet. Egy alkalom 14 000-15 000 Ft, időpont általában 1-2 napon belül.',
+    answer: `Íróasztali munkából eredő nyak-, váll- és derékpanaszokkal beutaló nélkül jöhet hozzánk. Megnézzük, mely testhelyzetek váltják ki a fájdalmat, és tartásjavító gyakorlatokat és ergonómiai tanácsokat adunk, amelyeket a munkahelyen is alkalmazhat. Egy alkalom ${clinic.prices.single.range}, időpont általában 1-2 napon belül.`,
     whenToCome: [
       'a nap végére feszes a nyaka és a válla',
       'estére fáj vagy merev a dereka',
@@ -384,7 +406,8 @@ export const conditions: Condition[] = [
       'a fájdalom munka közben erősödik, pihenőnapon enyhül',
       'nyakból kiinduló fejfájása van',
     ],
-    redFlags: commonRedFlags,
+    urgent: commonUrgent,
+    consult: commonConsult,
     approach: [
       { title: 'Vizsgálat', text: 'Megnézzük, mely testhelyzetek és mozgások váltják ki vagy enyhítik a fájdalmat, és hogyan ül és dolgozik.' },
       { title: 'Gyakorlatok', text: 'Rövid, több helyen elvégezhető gyakorlatokat kap, amelyeket a munkahelyen is végezhet.' },

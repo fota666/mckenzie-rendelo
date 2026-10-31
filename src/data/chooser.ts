@@ -12,5 +12,5 @@ export const chooser: Complaint[] = [
   { slug: 'vallfajas', name: 'Váll', note: 'Beszűkült mozgás, fagyott váll', group: 'Ízületek', poster: 'vall-manualis-kezeles' },
   { slug: 'terdfajdalom', name: 'Térd', note: 'Sport, sérülés, műtét után', group: 'Ízületek', poster: 'terd-csipo-vizsgalat' },
   { slug: 'csipofajdalom', name: 'Csípő', note: 'Fájó, merev csípő', group: 'Ízületek', poster: 'csipo-mobilizalas-ovvel' },
-  { slug: 'muteti-rehabilitacio', name: 'Műtét előtt vagy után', note: 'Gerinc, csípő, térd', group: 'Műtét után', poster: 'gluteus-gumiszalag-terd' },
+  { slug: 'muteti-rehabilitacio', name: 'Műtét előtti és utáni rehabilitáció', note: 'Gerinc, csípő, térd', group: 'Műtét után', poster: 'gluteus-gumiszalag-terd' },
 ];

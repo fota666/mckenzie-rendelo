@@ -418,3 +418,5 @@ body.calm {
   .calm .k-vb__x strong { font-size: 0.95rem; }
   .calm .k-vb__x small { font-size: 0.74rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 }
+
+.calm .k-flag__consult li { border-left-color: var(--c-sage-2); background: rgba(255,255,255,0.45); padding-top: 4px; padding-bottom: 4px; }
