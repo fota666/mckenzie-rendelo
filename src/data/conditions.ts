@@ -354,7 +354,7 @@ export const conditions: Condition[] = [
     clip: { name: 'gluteus-gumiszalag-terd', label: 'Gumiszalagos erősítő gyakorlat a terapeuta mellett' },
     name: 'Műtét előtti és utáni rehabilitáció',
     h1: 'Műtét előtti és utáni rehabilitáció Budapesten',
-    metaTitle: 'Műtét előtti és utáni rehabilitáció Budapest | McKenzie Gyógytorna Rendelő',
+    metaTitle: 'Műtét előtti és utáni rehabilitáció Budapest | McKenzie',
     metaDescription: 'Gerinc-, csípő- és térdműtét előtti felkészítés és műtét utáni gyógytorna Budapesten. A kezelést a műtétet végző orvos előírásaihoz igazítjuk. Beutaló nem kell.',
     answer: `Gerinc-, csípő- vagy térdműtét előtt felkészíthetjük, utána pedig a mozgásképesség és az erő fokozatos visszanyerésében segítünk. A kezelést a műtétet végző orvos előírásaihoz igazítjuk, ezért hozza magával a zárójelentést és a rehabilitációs javaslatot. Egy alkalom ${clinic.prices.single.range}, beutaló nem kell.`,
     whenToCome: [
@@ -396,7 +396,7 @@ export const conditions: Condition[] = [
     clip: { name: 'ulomunka-tartaskorrekcio', label: 'Tartáskorrekció íróasztali munka közben' },
     name: 'Ülőmunka okozta panaszok',
     h1: 'Ülőmunka okozta nyak-, váll- és derékfájás kezelése Budapesten',
-    metaTitle: 'Ülőmunka okozta fájdalom, tartásjavítás Budapest | McKenzie Gyógytorna Rendelő',
+    metaTitle: 'Ülőmunka okozta fájdalom, tartásjavítás | McKenzie',
     metaDescription: 'Íróasztali munka okozta nyak-, váll- és derékfájás kezelése, tartásjavítás és ergonómiai tanácsok Budapesten. Beutaló nem kell, időpont 1-2 napon belül.',
     answer: `Íróasztali munkából eredő nyak-, váll- és derékpanaszokkal beutaló nélkül jöhet hozzánk. Megnézzük, mely testhelyzetek váltják ki a fájdalmat, és tartásjavító gyakorlatokat és ergonómiai tanácsokat adunk, amelyeket a munkahelyen is alkalmazhat. Egy alkalom ${clinic.prices.single.range}, időpont általában 1-2 napon belül.`,
     whenToCome: [

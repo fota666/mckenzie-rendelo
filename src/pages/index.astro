@@ -24,6 +24,7 @@ const reviews = [
 const half = Math.ceil(homeFaqs.length / 2);
 // FAQ answers are plain text (they feed the schema elsewhere); the phone number becomes a call link when rendered.
 const withPhoneLink = (t: string) => t.split(clinic.phoneDisplay).join(`<a href="tel:${clinic.phone}" class="k-link" style="white-space:nowrap">${clinic.phoneDisplay}</a>`);
+const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 const initials = (n: string) => { const w = n.replace(/^Dr\.\s*/, '').split(' '); return w[0][0] + w[w.length - 1][0]; };
 type Loc = (typeof clinic.locations)[number];
 // Directions to the exact coordinates of the Google profile, so the destination cannot be mistaken for a similar address.
@@ -32,6 +33,9 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
 ---
 
 <CalmLayout title="McKenzie Gyógytorna Rendelő Budapest | Derék- és nyakfájás kezelése">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
   <!-- Hero: light, the clip fades into the paper -->
   <section class="k-hero">
     <div class="k-wrap">
