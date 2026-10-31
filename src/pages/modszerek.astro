@@ -6,6 +6,21 @@ import ExpertBackground from '../components/ExpertBackground.astro';
 import ClosingCta from '../components/ClosingCta.astro';
 const base = import.meta.env.BASE_URL;
 
+// Chips under each method link to the complaint page when there is one (first matching rule wins).
+const PAGE_RULES: [RegExp, string][] = [
+  [/Porckorongsérv/i, 'porckorongserv'],
+  [/Isiász|Végtagba sugárzó/i, 'isiasz'],
+  [/Gerinceredetű fejfájás|Nyaki|Nyak/i, 'nyakfajas'],
+  [/Váll|Fagyott váll/i, 'vallfajas'],
+  [/Csípő/i, 'csipofajdalom'],
+  [/Térd/i, 'terdfajdalom'],
+  [/Gerincferdülés|Scheuermann|aszimmetria|bordapúp/i, 'gerincferdules'],
+  [/műtét|rehabilitáció|Szalagszakadás|Csonttörés/i, 'muteti-rehabilitacio'],
+  [/Irodai ülőmunka|ülőmunka|Tartáshib|Munkahelyi|Ergonómiai/i, 'ulomunka-tartashibak'],
+  [/Derékfájás|Lumbágó/i, 'derekfajas'],
+];
+const pageFor = (label: string) => PAGE_RULES.find(([re]) => re.test(label))?.[1];
+
 const methods = [
   {
     id: 'mckenzie',
@@ -168,7 +183,11 @@ const methods = [
           <h3 class="mt-10 font-mono text-[0.8rem] tracking-wider uppercase text-[var(--color-ink-2)]">Mikor jöhet szóba</h3>
           <ul class="mt-3 flex flex-wrap gap-2">
             {m.conditions.map((c) => (
-              <li class="px-3 py-1.5 text-[15px] bg-[var(--color-teal-50)] text-[var(--color-teal-700)] border border-[var(--color-teal-100)]">{c}</li>
+              <li>
+                {pageFor(c)
+                  ? <a href={`${base}${pageFor(c)}`} class="block px-3 py-1.5 text-[15px] bg-[var(--color-teal-50)] text-[var(--color-teal-700)] border border-[var(--color-teal-100)] hover:bg-[var(--color-teal-700)] hover:text-white hover:border-[var(--color-teal-700)] transition-colors">{c} <span aria-hidden="true">&rarr;</span></a>
+                  : <span class="block px-3 py-1.5 text-[15px] bg-[var(--color-teal-50)] text-[var(--color-teal-700)] border border-[var(--color-teal-100)]">{c}</span>}
+              </li>
             ))}
           </ul>
         </div>

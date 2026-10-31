@@ -1,10 +1,13 @@
 ---
-// Condition landing pages (calm design): /derekfajas, /nyakfajas, ... one per entry in data/conditions.ts
+// Condition landing pages (calm design): /derekfajas, /nyakfajas, ... one per entry in data/conditions.ts.
+// Same components as the homepage: hero with clip, tick list and two alert boxes, timeline with a sticky clip,
+// dark price card, accordion, photo tiles for related complaints, closing call to action.
 import CalmLayout from '../layouts/CalmLayout.astro';
 import LoopVideo from '../components/LoopVideo.astro';
 import CalmCta from '../components/calm/CalmCta.astro';
 import { conditions, conditionBySlug, type Condition } from '../data/conditions';
-import { clinic } from '../data/clinic';
+import { chooser } from '../data/chooser';
+import { clinic, ratingText, reviewTotalText, healthFundNote } from '../data/clinic';
 
 export function getStaticPaths() {
   return conditions.map((c) => ({ params: { condition: c.slug } }));
@@ -14,6 +17,21 @@ const c = conditionBySlug[Astro.params.condition as string] as Condition;
 const base = import.meta.env.BASE_URL;
 const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 const orgId = `${new URL(base, Astro.site).href}#org`;
+// The timeline clip is a second, different clip (the hero already shows the first one).
+const SECOND: Record<string, { name: string; label: string }> = {
+  derekfajas: { name: 'stabilizacio-labdan-negykezlabon', label: 'Stabilizáló gyakorlat labdán, terapeuta irányításával' },
+  nyakfajas: { name: 'ulomunka-tartaskorrekcio', label: 'Tartáskorrekció íróasztali munka közben' },
+  porckorongserv: { name: 'derekfajas-hasonfekvo-mobilizalas', label: 'Hasonfekvő extenziós gyakorlat a gyógytornász irányításával' },
+  isiasz: { name: 'derekfajas-hasonfekvo-mobilizalas', label: 'Hasonfekvő extenziós gyakorlat a gyógytornász irányításával' },
+  gerincferdules: { name: 'stabilizacio-labdan-negykezlabon', label: 'Stabilizáló gyakorlat labdán, terapeuta irányításával' },
+  vallfajas: { name: 'vall-gumiszalag-gyakorlat', label: 'Gumiszalagos gyakorlat, amelyet otthon is lehet végezni' },
+  terdfajdalom: { name: 'gluteus-gumiszalag-terd', label: 'Gumiszalagos erősítő gyakorlat a terapeuta mellett' },
+  csipofajdalom: { name: 'csipo-mobilizalas-hanyatt', label: 'Hanyatt fekvő páciens csípőjének és lábának mozgatása' },
+  'muteti-rehabilitacio': { name: 'stabilizacio-labdan-negykezlabon', label: 'Stabilizáló gyakorlat labdán, terapeuta irányításával' },
+  'ulomunka-tartashibak': { name: 'nyak-mckenzie-onkezeles', label: 'Ülve végzett nyaki mozgásvizsgálat és gyakorlat' },
+};
+const clip2 = SECOND[c.slug] ?? c.clip;
+const related = c.related.map((slug) => ({ slug, name: conditionBySlug[slug].name, poster: chooser.find((x) => x.slug === slug)?.poster, note: chooser.find((x) => x.slug === slug)?.note ?? '' }));
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -41,23 +59,31 @@ const schema = {
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </Fragment>
 
-  <section class="k-phero">
-    <div class="k-wrap k-phero__in">
-      <div class="k-phero__copy">
-        <p class="k-eyebrow">{c.name}</p>
+  <!-- Hero -->
+  <section class="k-chero">
+    <div class="k-wrap k-chero__in">
+      <div class="k-chero__copy">
+        <nav class="k-crumb" aria-label="Morzsamenü"><a href={base}>Főoldal</a><span>/</span><a href={`${base}#panaszok`}>Panaszok</a><span>/</span><span>{c.name}</span></nav>
         <h1 class="k-h1" style="font-size:clamp(1.9rem,4vw,3rem)">{c.h1}</h1>
         <p class="k-lead">{c.answer}</p>
         <div class="k-btns">
           <a href={`tel:${clinic.phone}`} class="k-btn k-btn--clay">Hívjon: {clinic.phoneDisplay}</a>
           <a href={`${base}kapcsolat#visszahivas`} class="k-btn k-btn--ghost">Visszahívást kérek</a>
         </div>
+        <div class="k-trust">
+          <span><b>{clinic.prices.single.range}</b>egy alkalom</span>
+          <span><b>Beutaló nem kell</b>magánrendelés</span>
+          <span><b>{ratingText(clinic.locations[0].rating.value)} / 5</b>{reviewTotalText} Google-vélemény</span>
+        </div>
       </div>
-      <div class="k-clip">
-        <LoopVideo name={`rendelo/${c.clip.name}`} eager label={c.clip.label} />
+      <div>
+        <div class="k-clip"><LoopVideo name={`rendelo/${c.clip.name}`} eager label={c.clip.label} /></div>
+        <p class="k-cap">{c.clip.label}</p>
       </div>
     </div>
   </section>
 
+  <!-- When to come, and when to see a doctor first -->
   <section class="k-sec">
     <div class="k-wrap">
       <div class="k-head">
@@ -67,69 +93,120 @@ const schema = {
       <div class="k-two">
         <div>
           <h3 class="k-h3">Jöjjön hozzánk, ha</h3>
-          <ul class="k-list">{c.whenToCome.map((w) => <li>{w}</li>)}</ul>
+          <ul class="k-ticks">{c.whenToCome.map((w) => <li>{w}</li>)}</ul>
         </div>
-        <div class="k-flag">
-          <h3 class="k-h3">Azonnal forduljon orvoshoz, ha</h3>
-          <ul>{c.urgent.map((r) => <li>{r}</li>)}</ul>
-          <h3 class="k-h3" style="margin-top:14px">Előbb beszéljen orvosával, ha</h3>
-          <ul class="k-flag__consult">{c.consult.map((r) => <li>{r}</li>)}</ul>
-          <p class="k-small">Ezekben az esetekben a gyógytorna megkezdése előtt orvosi vizsgálat szükséges.</p>
+        <div class="k-alerts">
+          <div class="k-alert k-alert--urgent">
+            <h3 class="k-h3">Azonnal forduljon orvoshoz, ha</h3>
+            <ul>{c.urgent.map((r) => <li>{r}</li>)}</ul>
+          </div>
+          <div class="k-alert k-alert--consult">
+            <h3 class="k-h3">Előbb beszéljen orvosával, ha</h3>
+            <ul>{c.consult.map((r) => <li>{r}</li>)}</ul>
+            <p class="k-small">Ezekben az esetekben a gyógytorna megkezdése előtt orvosi vizsgálat szükséges.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- How we treat: timeline plus a sticky clip -->
   <section class="k-sec k-sec--sage">
     <div class="k-wrap">
       <div class="k-head">
         <p class="k-eyebrow">Hogyan kezeljük</p>
         <h2 class="k-h2">Vizsgálat, gyakorlatok, önkezelés.</h2>
-        <div class="k-methods">
-          <p class="k-small">Szükség szerint szóba jövő módszerek</p>
-          <div class="k-chips">{c.methods.map((m) => <a href={`${base}${m.path}`}>{m.label}</a>)}</div>
-        </div>
       </div>
-      <ol class="k-cards3">
-        {c.approach.map((a, i) => (
-          <li class="k-card">
-            <p class="k-step__t">{i + 1}. lépés</p>
-            <h3 class="k-h3" style="font-size:1.4rem">{a.title}</h3>
-            <p style="color:var(--c-mute)">{a.text}</p>
-          </li>
-        ))}
-      </ol>
-      <div class="k-two" style="margin-top:28px">
-        <div class="k-card">
-          <h3 class="k-h3">Mennyi idő, hány alkalom?</h3>
-          <p style="color:var(--c-mute)">{c.timeline}</p>
+      <div class="k-visit">
+        <div>
+          <ol class="k-steps">
+            {c.approach.map((a, i) => (
+              <li class="k-step">
+                <span class="k-step__n">{i + 1}</span>
+                <div>
+                  <h3 class="k-h3">{a.title}</h3>
+                  <p class="k-small" style="margin-top:6px;font-size:1rem">{a.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <div class="k-methods" style="margin-top:32px">
+            <p class="k-small">Szükség szerint szóba jövő módszerek</p>
+            <div class="k-chips">{c.methods.map((m) => <a href={`${base}${m.path}`}>{m.label}</a>)}</div>
+          </div>
         </div>
-        <div class="k-card">
-          <h3 class="k-h3">Ár és foglalás</h3>
-          <p style="color:var(--c-mute)">Egyéni kezelés {clinic.prices.single.range} ({clinic.prices.single.duration}), 5 alkalmas bérlet {clinic.prices.pass.amount}. Beutaló nem kell. Telefonon <a href={`tel:${clinic.phone}`} class="k-link" style="white-space:nowrap">{clinic.phoneDisplay}</a>, {clinic.bookingHours.toLowerCase()}, vagy <a href={`${base}kapcsolat#visszahivas`} class="k-link">visszahívás-kérés</a>.</p>
-        </div>
+        <aside>
+          <div class="k-clip"><LoopVideo name={`rendelo/${clip2.name}`} label={clip2.label} /></div>
+          <p class="k-cap">{clip2.label}</p>
+        </aside>
       </div>
     </div>
   </section>
 
+  <!-- Time and price -->
+  <section class="k-sec k-sec--white">
+    <div class="k-wrap k-pricegrid">
+      <div>
+        <p class="k-eyebrow">Idő és ár</p>
+        <h2 class="k-h2" style="margin:14px 0 18px">Mennyi idő, hány alkalom?</h2>
+        <p class="k-lead">{c.timeline}</p>
+        <ul class="k-loc__list" style="margin-top:26px;max-width:32rem">
+          {clinic.locations.map((l) => (
+            <li><b class={`k-line k-line--${(l.transit.match(/M\d/)?.[0] ?? 'p').toLowerCase()}`}>{l.transit.match(/M\d/)?.[0] ?? 'P'}</b><span>{l.name}: {l.postalCode} Budapest, {l.street}</span></li>
+          ))}
+        </ul>
+      </div>
+      <aside class="k-price k-price--dark">
+        <p class="k-eyebrow">Ár és foglalás</p>
+        <ul>
+          <li>
+            <div><h3 class="k-h3">{clinic.prices.single.label}</h3><p class="k-small">{clinic.prices.single.duration}, {clinic.prices.single.note}</p></div>
+            <b>{clinic.prices.single.range}</b>
+          </li>
+          <li>
+            <div><h3 class="k-h3">{clinic.prices.pass.label}</h3><p class="k-small">{clinic.prices.pass.perVisit}</p></div>
+            <b>{clinic.prices.pass.amount}</b>
+          </li>
+        </ul>
+        <p class="k-small" style="margin-top:16px">Beutaló nem kell. {healthFundNote}. Telefonon <a href={`tel:${clinic.phone}`} class="k-link" style="white-space:nowrap">{clinic.phoneDisplay}</a>, {clinic.bookingHours.toLowerCase()}.</p>
+        <div class="k-btns" style="margin-top:20px">
+          <a href={`tel:${clinic.phone}`} class="k-btn k-btn--clay">Hívás most</a>
+          <a href={`${base}kapcsolat#visszahivas`} class="k-btn k-btn--light">Visszahívást kérek</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Questions and related complaints -->
   <section class="k-sec">
     <div class="k-wrap">
       <div class="k-head">
         <p class="k-eyebrow">Gyakori kérdések</p>
         <h2 class="k-h2">Kérdések: {c.name.toLowerCase()}</h2>
       </div>
-      <div class="k-faq" style="grid-template-columns:1fr;max-width:46rem">
-        <div>
-          {c.faqs.map((f, i) => (
-            <details open={i === 0}>
-              <summary>{f.q}</summary>
-              <p>{f.a}</p>
-            </details>
-          ))}
+      <div class="k-faqgrid">
+        <div class="k-faq" style="grid-template-columns:1fr">
+          <div>
+            {c.faqs.map((f, i) => (
+              <details open={i === 0}>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
         </div>
-      </div>
-      <div style="margin-top:32px" class="k-chips">
-        {c.related.map((slug) => <a href={`${base}${slug}`}>{conditionBySlug[slug].name}</a>)}
+        <div>
+          <p class="k-eyebrow" style="margin-bottom:14px">Kapcsolódó panaszok</p>
+          <div class="k-vb k-vb--rel">
+            {related.map((r) => (
+              <a href={`${base}${r.slug}`} class="k-vb__t">
+                {r.poster && <img src={`${base}video/rendelo/${r.poster}.jpg`} alt="" loading="lazy" />}
+                <span class="k-vb__s"></span>
+                <span class="k-vb__x"><strong>{r.name}</strong><small>{r.note}</small></span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </section>

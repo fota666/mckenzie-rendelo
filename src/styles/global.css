@@ -199,3 +199,18 @@ html, body { overflow-x: clip; }
 .lang-dd a { padding: 9px 12px; border-radius: 8px; font-size: 0.92rem; font-weight: 500; color: var(--color-ink); }
 .lang-dd a:hover { background: var(--color-paper-2); }
 .lang-dd a[aria-current='true'] { background: var(--color-paper-2); font-weight: 600; }
+
+/* old header: grouped navigation */
+.nav-link, .nav-dd summary { font-size: 0.92rem; color: var(--color-ink-2); transition: color 0.2s; }
+.nav-link:hover, .nav-dd summary:hover, .nav-dd[open] summary { color: var(--color-ink); }
+.nav-link[aria-current='page'] { color: var(--color-ink); font-weight: 500; }
+.nav-dd { position: relative; }
+.nav-dd summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; }
+.nav-dd summary::-webkit-details-marker { display: none; }
+.nav-dd summary::after { content: ''; width: 5px; height: 5px; border: solid currentColor; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg) translateY(-2px); }
+.nav-dd[open] summary::after { transform: rotate(-135deg); }
+.nav-dd__panel { position: absolute; left: -14px; top: calc(100% + 16px); min-width: 190px; display: grid; padding: 8px; background: #fff; border: 1px solid var(--color-line); box-shadow: 0 22px 44px -26px rgba(10, 33, 24, 0.45); z-index: 60; }
+.nav-dd__panel--wide { grid-template-columns: 1fr 1fr; min-width: 480px; gap: 2px 8px; }
+.nav-dd__panel a { padding: 10px 14px; color: var(--color-ink); font-size: 0.95rem; }
+.nav-dd__panel a:hover { background: var(--color-paper-2); }
+.nav-dd__all { grid-column: 1 / -1; margin-top: 4px; border-top: 1px solid var(--color-line); color: var(--color-teal-700) !important; font-weight: 600; }

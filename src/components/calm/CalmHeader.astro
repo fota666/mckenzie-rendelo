@@ -1,10 +1,9 @@
 ---
 import LogoMark from '../LogoMark.astro';
 import { clinic } from '../../data/clinic';
+import { conditions } from '../../data/conditions';
 const base = import.meta.env.BASE_URL;
-const nav = [
-  { href: `${base}modszerek`, label: 'Módszerek' },
-  { href: `${base}csapatunk`, label: 'Csapatunk' },
+const info = [
   { href: `${base}araink`, label: 'Árak' },
   { href: `${base}velemenyek`, label: 'Vélemények' },
   { href: `${base}gyik`, label: 'GYIK' },
@@ -18,23 +17,49 @@ const nav = [
       <LogoMark class="k-logo" />
       <span><strong>McKenzie</strong><small>Gyógytorna Rendelő</small></span>
     </a>
+
     <nav class="k-nav" aria-label="Főmenü">
-      {nav.map((n) => <a href={n.href}>{n.label}</a>)}
-      <a href={`tel:${clinic.phone}`} class="k-tel">{clinic.phoneDisplay}</a>
-    <details class="k-langdd" data-lang-switch data-lang-dd data-notranslate>
-      <summary aria-label="Language"><span data-lang-current>HU</span></summary>
-      <div>
-        <a href="#lang-hu" data-lang="hu" hreflang="hu" lang="hu">Magyar</a>
-        <a href="#lang-en" data-lang="en" hreflang="en" lang="en">English</a>
-        <a href="#lang-de" data-lang="de" hreflang="de" lang="de">Deutsch</a>
-      </div>
-    </details>
-      <a href={`${base}kapcsolat#idopontfoglalas`} class="k-btn k-btn--clay">Időpontot kérek</a>
+      <details class="k-dd" data-dd>
+        <summary>Panaszok</summary>
+        <div class="k-dd__panel k-dd__panel--wide">
+          {conditions.map((c) => <a href={`${base}${c.slug}`}>{c.name}</a>)}
+          <a href={`${base}#panaszok`} class="k-dd__all">Az összes panasz &rarr;</a>
+        </div>
+      </details>
+      <a href={`${base}modszerek`}>Módszerek</a>
+      <a href={`${base}csapatunk`}>Csapatunk</a>
+      <details class="k-dd" data-dd>
+        <summary>Tudnivalók</summary>
+        <div class="k-dd__panel">
+          {info.map((n) => <a href={n.href}>{n.label}</a>)}
+        </div>
+      </details>
     </nav>
+
+    <div class="k-actions">
+      <details class="k-langdd" data-lang-switch data-lang-dd data-notranslate>
+        <summary aria-label="Language"><span data-lang-current>HU</span></summary>
+        <div>
+          <a href="#lang-hu" data-lang="hu" hreflang="hu" lang="hu">Magyar</a>
+          <a href="#lang-en" data-lang="en" hreflang="en" lang="en">English</a>
+          <a href="#lang-de" data-lang="de" hreflang="de" lang="de">Deutsch</a>
+        </div>
+      </details>
+      <a href={`tel:${clinic.phone}`} class="k-btn k-btn--clay">Hívjon: {clinic.phoneDisplay}</a>
+    </div>
+
     <details class="k-menu">
       <summary>Menü</summary>
       <nav aria-label="Főmenü">
-        {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+        <details class="k-sub">
+          <summary>Panaszok</summary>
+          <div>
+            {conditions.map((c) => <a href={`${base}${c.slug}`}>{c.name}</a>)}
+          </div>
+        </details>
+        <a href={`${base}modszerek`}>Módszerek</a>
+        <a href={`${base}csapatunk`}>Csapatunk</a>
+        {info.map((n) => <a href={n.href}>{n.label}</a>)}
         <nav class="k-lang k-lang--mobile" data-lang-switch data-notranslate aria-label="Language">
           <a href="#lang-hu" data-lang="hu" hreflang="hu" lang="hu">HU</a>
           <a href="#lang-en" data-lang="en" hreflang="en" lang="en">EN</a>
@@ -46,8 +71,8 @@ const nav = [
 </header>
 
 <script>
-  // close the language dropdown when clicking elsewhere
+  // close the dropdowns when clicking elsewhere
   document.addEventListener('click', (e) => {
-    document.querySelectorAll('details[data-lang-dd][open]').forEach((d) => { if (!d.contains(e.target as Node)) d.removeAttribute('open'); });
+    document.querySelectorAll('details[data-dd][open], details[data-lang-dd][open]').forEach((d) => { if (!d.contains(e.target as Node)) d.removeAttribute('open'); });
   });
 </script>
