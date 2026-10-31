@@ -7,6 +7,7 @@ import LoopVideo from '../components/LoopVideo.astro';
 import CalmCta from '../components/calm/CalmCta.astro';
 import { conditions, conditionBySlug, type Condition } from '../data/conditions';
 import { chooser } from '../data/chooser';
+import { conditionReviews } from '../data/conditionReviews';
 import { clinic, ratingText, reviewTotalText, healthFundNote } from '../data/clinic';
 
 export function getStaticPaths() {
@@ -30,6 +31,8 @@ const SECOND: Record<string, { name: string; label: string }> = {
   'muteti-rehabilitacio': { name: 'stabilizacio-labdan-negykezlabon', label: 'Stabilizáló gyakorlat labdán, terapeuta irányításával' },
   'ulomunka-tartashibak': { name: 'nyak-mckenzie-onkezeles', label: 'Ülve végzett nyaki mozgásvizsgálat és gyakorlat' },
 };
+const patientReviews = conditionReviews[c.slug] ?? [];
+const placeOf = (id: string) => clinic.locations.find((l) => l.id === id)!;
 const clip2 = SECOND[c.slug] ?? c.clip;
 const related = c.related.map((slug) => ({ slug, name: conditionBySlug[slug].name, poster: chooser.find((x) => x.slug === slug)?.poster, note: chooser.find((x) => x.slug === slug)?.note ?? '' }));
 const schema = {
@@ -176,6 +179,27 @@ const schema = {
       </aside>
     </div>
   </section>
+
+  <!-- Public Google reviews that name this complaint -->
+  {patientReviews.length > 0 && (
+    <section class="k-sec k-sec--sage">
+      <div class="k-wrap">
+        <div class="k-head">
+          <p class="k-eyebrow">Páciensek erről a panaszról</p>
+          <h2 class="k-h2">Ezzel jöttek, ezt írták.</h2>
+        </div>
+        <div class="k-quotes">
+          {patientReviews.map((r) => (
+            <figure>
+              <blockquote class="k-quote" lang={r.lang ?? 'hu'} data-notranslate>{r.text}</blockquote>
+              <p class="k-small"><span data-notranslate>{r.name}</span>, <a href={placeOf(r.place).mapsUrl} class="k-link" rel="noopener" target="_blank">Google-vélemény, {placeOf(r.place).name}</a></p>
+            </figure>
+          ))}
+        </div>
+        <p class="k-small" style="margin-top:22px">Egyéni páciensélmények a nyilvános Google-profilokról, szó szerint idézve. Az eredmény mindenkinél más.</p>
+      </div>
+    </section>
+  )}
 
   <!-- Questions and related complaints -->
   <section class="k-sec">
