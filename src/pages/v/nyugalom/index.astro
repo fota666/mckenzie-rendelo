@@ -10,21 +10,9 @@ import { firstVisit } from '../../../data/firstVisit';
 import { founder } from '../../../data/founder';
 import { terapeutak, clinicLabel } from '../../../data/team';
 import { homeFaqs } from '../../../data/homeFaq';
+import { chooser } from '../../../data/chooser';
 const base = import.meta.env.BASE_URL;
 const v = `${base}v/nyugalom/`;
-
-const chooser = [
-  { slug: 'derekfajas', name: 'Derékfájás', note: 'Lumbágó, visszatérő derékfájás' },
-  { slug: 'nyakfajas', name: 'Nyakfájás', note: 'Nyaki fájdalom, nyakból induló fejfájás' },
-  { slug: 'porckorongserv', name: 'Porckorongsérv', note: 'Konzervatív kezelés, műtét előtt' },
-  { slug: 'isiasz', name: 'Isiász', note: 'Lábba sugárzó fájdalom' },
-  { slug: 'gerincferdules', name: 'Gerincferdülés', note: 'Gyermekeknek és felnőtteknek' },
-  { slug: 'vallfajas', name: 'Váll', note: 'Beszűkült mozgás, fagyott váll' },
-  { slug: 'terdfajdalom', name: 'Térd', note: 'Sport, sérülés, műtét után' },
-  { slug: 'csipofajdalom', name: 'Csípő', note: 'Fájó, merev csípő' },
-  { slug: 'muteti-rehabilitacio', name: 'Műtét előtt vagy után', note: 'Gerinc, csípő, térd' },
-  { slug: 'ulomunka-tartashibak', name: 'Ülőmunka okozta fájdalom', note: 'Nyak, váll, derék' },
-];
 
 const people = terapeutak
   .filter((t) => !t.status && t.name !== founder.name)
