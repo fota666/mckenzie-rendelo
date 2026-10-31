@@ -23,6 +23,10 @@ const reviews = [
   { text: 'A fájdalommentes életet jelenti az itt kapott kezelés. Professzionális ellátás, barátságos légkör, rendkívül hozzáértő gyógytornász!', name: 'Dr. Utassyné Kormos Zsuzsa', role: 'páciens' },
 ];
 const half = Math.ceil(homeFaqs.length / 2);
+const visit = [
+  { min: 'Érkezés', title: 'Fogadás az ajtóban', body: 'A terapeuta az ajtóban fogad. Az előtérben leteheti a kabátját, az öltözőben átöltözhet.' },
+  ...firstVisit,
+];
 ---
 
 <CalmLayout title="McKenzie Gyógytorna Rendelő Budapest | Nyugodt dizájn vázlat">
@@ -102,52 +106,20 @@ const half = Math.ceil(homeFaqs.length / 2);
     </div>
   </section>
 
-  <!-- Arrival -->
-  <section class="k-sec k-sec--sage">
-    <div class="k-wrap">
-      <div class="k-head">
-        <p class="k-eyebrow">Az érkezés</p>
-        <h2 class="k-h2">Így érkezik meg hozzánk: az ajtótól a kezelőig.</h2>
-        <p class="k-lead">A terapeuta az ajtóban fogadja. Kabátot, cipőt és kényelmes ruhát a rendelőben is lehet cserélni, így az első alkalomra nem kell külön készülnie.</p>
-      </div>
-      <ol class="k-arr">
-        {[
-          { img: 'erkezes-fogadas', t: 'Fogadás', d: 'A terapeuta az ajtóban fogadja.' },
-          { img: 'erkezes-eloter', t: 'Előtér', d: 'Fogas a kabátnak, hely a cipőnek.' },
-          { img: 'erkezes-oltozo', t: 'Öltöző', d: 'Szekrények és ülőkék, ha át szeretne öltözni.' },
-          { img: 'erkezes-kezelo', t: 'Kezelő', d: 'Számozott kezelőszobák, itt kezdődik az első 55 perc.' },
-        ].map((x, i) => (
-          <li>
-            <img src={`${base}images/rendelo/${x.img}.jpg`} alt={x.d} loading="lazy" width="720" height="960" />
-            <p class="k-step__t">{i + 1}. {x.t}</p>
-            <p class="k-small">{x.d}</p>
-          </li>
-        ))}
-        <li>
-          <div class="k-clip" style="border-radius:16px">
-            <LoopVideo name="rendelo/rendelo-bejaras" label="Bejárás a rendelőben: fogadás, előtér, öltöző és a kezelők" />
-          </div>
-          <p class="k-step__t">A teljes út</p>
-          <p class="k-small">Az ajtótól a kezelőig, egyben.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
   <!-- First visit -->
   <section class="k-sec k-sec--white">
     <div class="k-wrap">
       <div class="k-head">
         <p class="k-eyebrow">Az első alkalom</p>
-        <h2 class="k-h2">55 perc: kikérdezés, vizsgálat, kezelés és saját gyakorlatsor.</h2>
+        <h2 class="k-h2">Az ajtótól az otthoni programig: így telik az első alkalom.</h2>
       </div>
       <div class="k-visit">
         <ol class="k-steps">
-          {firstVisit.map((s, i) => (
+          {visit.map((s, i) => (
             <li class="k-step">
               <span class="k-step__n">{i + 1}</span>
               <div>
-                <p class="k-step__t">{s.min}. perc</p>
+                <p class="k-step__t">{/^\d/.test(s.min) ? `${s.min}. perc` : s.min}</p>
                 <h3 class="k-h3">{s.title}</h3>
                 <p class="k-small" style="margin-top:6px;font-size:1rem">{s.body}</p>
               </div>
@@ -156,9 +128,9 @@ const half = Math.ceil(homeFaqs.length / 2);
         </ol>
         <aside>
           <div class="k-clip">
-            <LoopVideo name="rendelo/derekfajas-hasonfekvo-mobilizalas" label="Hasonfekvő páciens derekának kezelése a rendelőben" />
+            <LoopVideo name="rendelo/rendelo-bejaras" label="Bejárás a rendelőben: fogadás, előtér, öltöző és a kezelők" />
           </div>
-          <p class="k-cap">Kezelés a rendelőben. A módszert a vizsgálat dönti el.</p>
+          <p class="k-cap">Bejárás a rendelőben: az ajtótól a kezelőig.</p>
           <p style="margin-top:14px"><a href={`${base}modszerek`} class="k-link">Mind a 9 módszer és a szakmai háttér</a></p>
         </aside>
       </div>
@@ -255,10 +227,8 @@ const half = Math.ceil(homeFaqs.length / 2);
           </div>
         ))}
         <div>
-          <div class="k-clip">
-            <LoopVideo name="rendelo/rendelo-bejaras" label="Bejárás a rendelőben: öltöző, váró és a kezelők" />
-          </div>
-          <p class="k-cap">Bejárás a rendelőben.</p>
+          <div class="k-clip"><img src={`${base}images/rendelo/rendelo-szoba.jpg`} alt="Világos kezelőszoba a rendelőben" loading="lazy" /></div>
+          <p class="k-cap">Kezelőszoba.</p>
         </div>
       </div>
     </div>

@@ -299,13 +299,6 @@ body.calm {
 .calm .k-fq__intro { max-width: 38rem; color: #cfdcd3; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.16); }
 @media (min-width: 900px) { .calm .k-fq { grid-template-columns: 380px 1fr; gap: 72px; } }
 
-/* arrival */
-.calm .k-arr { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px 14px; }
-.calm .k-arr li { display: grid; gap: 4px; align-content: start; }
-.calm .k-arr img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; margin-bottom: 8px; }
-@media (min-width: 700px) { .calm .k-arr { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 1080px) { .calm .k-arr { grid-template-columns: repeat(5, 1fr); gap: 20px; } }
-
 /* help bar under the complaint tiles */
 .calm .k-help { margin-top: 22px; display: grid; gap: 18px; align-items: center; background: var(--c-pine); border-radius: 22px; padding: clamp(20px, 3vw, 30px); }
 .calm .k-help .k-h3 { color: #fff; font-size: 1.3rem; }
