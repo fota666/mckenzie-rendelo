@@ -43,6 +43,11 @@ export const conditionReviews: Record<string, ConditionReview[]> = {
     { text: "I had a knee pain for years. Zsuzsa's expertise helped me to fix my movements. I'm very satisfied with the place.", name: 'Bombolya L.', place: 'belvaros', lang: 'en' },
     { text: 'Nagyon sok gyógytornásznál voltam sport sérülések miatt, rengeteg negatív tapasztalat után kerültem ide. De ezen a helyen a tökéletes szakértelem és a kedvesség teljesen megváltoztatta a negatív tapasztalataimat. Csak ajánlani tudom a helyet.', name: 'Michl G.', place: 'belvaros' },
   ],
+  csipofajdalom: [
+    { text: 'Igazi gyógyulási lehetőség, kedves, figyelmes, tanítás. Kulturált tiszta terem, öltöző. Köszönöm szépen. Ajánlani tudom azoknak akik szeretnének szabadulni a fájdalomtól.', name: 'Horváth J.', place: 'belvaros' },
+    { text: 'Timi szakértelme,kedvessége,biztatása nagyon sokat segített. Erős fájdalmam elmúlt. …', name: 'Nagy E.', place: 'buda' },
+    { text: 'Az utcára sem volt erőm lemenni a fájdalmaim miatt, de Ildikó kitartó, empatikus és szakszerű segítségének hála, rendkívül sokat segített rajtam. Minden …', name: 'Hadi A.', place: 'belvaros' },
+  ],
   'muteti-rehabilitacio': [
     { text: 'Akut probléma kezelésére, vagy megelőző terápiára is kiváló ez a rendelő. Kellemes, jól felszerelt környezetben profi, figyelmes gyógytornász segítette a műtét utáni rehabilitációmat, azóta pedig a prevenciós tornámat. A családom is ide jár, ha panasza van.', name: 'Pados G.', place: 'buda' },
     { text: 'A műtétem után jártam ide és nagyon elégedett voltam. Sajnos azonban egyéb gond is adódott és újra felkerestem őket és egyáltalán nem bántam meg! Éva nagyon kedves, segítőkész, empatikus. Kaptam otthonra is feladatot bőven. Ajánlom mindenkinek!', name: 'gkrizo', place: 'buda' },
