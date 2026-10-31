@@ -8,7 +8,7 @@ const navLinks = [
   { href: `${base}csapatunk`, label: 'Csapatunk' },
   { href: `${base}araink`, label: 'Árak' },
   { href: `${base}velemenyek`, label: 'Vélemények' },
-  { href: `${base}gyik`, label: 'Kérdések' },
+  { href: `${base}gyik`, label: 'GYIK' },
   { href: `${base}kapcsolat`, label: 'Kapcsolat' },
 ];
 const isActive = (href: string) => path === href.replace(/\/$/, '');
@@ -38,6 +38,11 @@ const isActive = (href: string) => path === href.replace(/\/$/, '');
       </nav>
 
       <div class="hidden lg:flex items-center gap-5">
+        <nav class="lang-switch" data-lang-switch data-notranslate aria-label="Language">
+          <a href="#lang-hu" data-lang="hu" hreflang="hu" lang="hu">HU</a>
+          <a href="#lang-en" data-lang="en" hreflang="en" lang="en">EN</a>
+          <a href="#lang-de" data-lang="de" hreflang="de" lang="de">DE</a>
+        </nav>
         <a href={`tel:${clinic.phone}`} class="hidden xl:inline font-mono text-[15px] whitespace-nowrap text-[var(--color-ink)] hover:text-[var(--color-teal-700)]">{clinic.phoneDisplay}</a>
         <a href={`${base}kapcsolat#idopontfoglalas`} class="btn btn-copper !py-2.5 !px-5 text-[15px] whitespace-nowrap">Időpontot kérek</a>
       </div>
@@ -56,6 +61,11 @@ const isActive = (href: string) => path === href.replace(/\/$/, '');
           {link.label}<span aria-hidden="true">&rarr;</span>
         </a>
       ))}
+      <nav class="lang-switch lang-switch--mobile" data-lang-switch data-notranslate aria-label="Language">
+        <a href="#lang-hu" data-lang="hu" hreflang="hu" lang="hu">HU</a>
+        <a href="#lang-en" data-lang="en" hreflang="en" lang="en">EN</a>
+        <a href="#lang-de" data-lang="de" hreflang="de" lang="de">DE</a>
+      </nav>
     </nav>
   </div>
 </header>

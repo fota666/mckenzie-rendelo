@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/i18n/build.mjs",
+    "i18n:extract": "node scripts/i18n/extract.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -13,5 +14,8 @@
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.17.1",
     "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0"
   }
 }

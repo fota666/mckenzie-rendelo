@@ -7,7 +7,7 @@ const nav = [
   { href: `${base}csapatunk`, label: 'Csapatunk' },
   { href: `${base}araink`, label: 'Árak' },
   { href: `${base}velemenyek`, label: 'Vélemények' },
-  { href: `${base}gyik`, label: 'Kérdések' },
+  { href: `${base}gyik`, label: 'GYIK' },
   { href: `${base}kapcsolat`, label: 'Kapcsolat' },
 ];
 ---
@@ -21,12 +21,22 @@ const nav = [
     <nav class="k-nav" aria-label="Főmenü">
       {nav.map((n) => <a href={n.href}>{n.label}</a>)}
       <a href={`tel:${clinic.phone}`} class="k-tel">{clinic.phoneDisplay}</a>
+    <nav class="k-lang" data-lang-switch data-notranslate aria-label="Language">
+      <a href="#lang-hu" data-lang="hu" hreflang="hu" lang="hu">HU</a>
+      <a href="#lang-en" data-lang="en" hreflang="en" lang="en">EN</a>
+      <a href="#lang-de" data-lang="de" hreflang="de" lang="de">DE</a>
+    </nav>
       <a href={`${base}kapcsolat#idopontfoglalas`} class="k-btn k-btn--clay">Időpontot kérek</a>
     </nav>
     <details class="k-menu">
       <summary>Menü</summary>
       <nav aria-label="Főmenü">
         {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+        <nav class="k-lang k-lang--mobile" data-lang-switch data-notranslate aria-label="Language">
+          <a href="#lang-hu" data-lang="hu" hreflang="hu" lang="hu">HU</a>
+          <a href="#lang-en" data-lang="en" hreflang="en" lang="en">EN</a>
+          <a href="#lang-de" data-lang="de" hreflang="de" lang="de">DE</a>
+        </nav>
       </nav>
     </details>
   </div>
