@@ -37,7 +37,7 @@ export const conditions: Condition[] = [
     h1: 'Derékfájás gyógytorna Budapesten, McKenzie-módszerrel',
     metaTitle: 'Derékfájás gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Derékfájás és lumbágó kezelése McKenzie-módszerrel a V. és XI. kerületben. Mozgásvizsgálat, kezelés, otthoni gyakorlatsor. Beutaló nem kell, időpont 1-2 napon belül.',
-    answer: 'Derékfájással beutaló nélkül jöhet hozzánk. Az első 55 perces alkalommal ismételt mozgásokkal és testhelyzetekkel megvizsgáljuk, hogyan változik a fájdalma, és ez alapján olyan gyakorlatsort kap, amelyet otthon egyedül is végezhet. A kezelés 14 000-15 000 Ft, időpont általában 1-2 napon belül, két budapesti rendelőben.',
+    answer: 'Derékfájással beutaló nélkül jöhet hozzánk. Az első, 50-55 perces alkalommal ismételt mozgásokkal és testhelyzetekkel megvizsgáljuk, hogyan változik a fájdalma, és ez alapján olyan gyakorlatsort kap, amelyet otthon egyedül is végezhet. A kezelés 14 000-15 000 Ft, időpont általában 1-2 napon belül, két budapesti rendelőben.',
     whenToCome: [
       'napok vagy hetek óta fáj a dereka, és nem javul magától',
       'a fájdalom bizonyos mozdulatokra, üléskor vagy hajláskor erősödik',
@@ -72,7 +72,7 @@ export const conditions: Condition[] = [
     h1: 'Nyakfájás gyógytorna Budapesten, McKenzie-módszerrel',
     metaTitle: 'Nyakfájás gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Nyakfájás, nyakból kiinduló fejfájás és karba sugárzó fájdalom kezelése McKenzie-módszerrel Budapesten. Beutaló nem kell, időpont 1-2 napon belül.',
-    answer: 'Nyakfájással beutaló nélkül jöhet hozzánk. Az első 55 perces alkalommal megvizsgáljuk, hogyan reagál a nyaka ismételt mozgásokra és testhelyzetekre, és ehhez igazítva tanítunk otthon végezhető gyakorlatokat. A kezelés 14 000-15 000 Ft, időpont általában 1-2 napon belül.',
+    answer: 'Nyakfájással beutaló nélkül jöhet hozzánk. Az első, 50-55 perces alkalommal megvizsgáljuk, hogyan reagál a nyaka ismételt mozgásokra és testhelyzetekre, és ehhez igazítva tanítunk otthon végezhető gyakorlatokat. A kezelés 14 000-15 000 Ft, időpont általában 1-2 napon belül.',
     whenToCome: [
       'merev, fájós a nyaka, nehezen fordítja a fejét',
       'a nyaki fájdalom a vállba, a lapockák közé vagy a karba sugárzik',
@@ -112,7 +112,7 @@ export const conditions: Condition[] = [
     h1: 'Porckorongsérv gyógytorna Budapesten, műtét előtt és után',
     metaTitle: 'Porckorongsérv gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Porckorongsérv (gerincsérv) konzervatív kezelése McKenzie-módszerrel, műtét előtti felkészítés és műtét utáni rehabilitáció Budapesten. Beutaló nem kell.',
-    answer: 'A porckorongsérv nem jelent automatikusan műtétet, sok esetben konzervatív kezeléssel is javul. Ha az orvosa nem lát sürgős műtéti okot, McKenzie-vizsgálattal és célzott gyakorlatokkal kezdjük a kezelést. Ha mégis műtét lesz, felkészítjük rá, és segítjük a műtét utáni rehabilitációt.',
+    answer: 'A porckorongsérv sok esetben műtét nélkül is kezelhető, de nem minden állapot alkalmas konzervatív terápiára. Ha az orvosa nem lát sürgős műtéti okot, McKenzie-vizsgálattal és célzott gyakorlatokkal kezdjük, a vizsgálat pedig megmutatja, hogy a gyógytorna Önnek megfelelő-e. Ha műtét lesz, felkészítjük rá, és segítjük a műtét utáni rehabilitációt.',
     whenToCome: [
       'MRI-n porckorongsérvet vagy porckorong-előboltosulást írtak le',
       'a derékból vagy a nyakból a lábba vagy a karba sugárzik a fájdalom',
@@ -145,7 +145,7 @@ export const conditions: Condition[] = [
     h1: 'Isiász gyógytorna Budapesten, McKenzie-módszerrel',
     metaTitle: 'Isiász gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
     metaDescription: 'Isiász, lábba sugárzó derékfájás kezelése McKenzie-módszerrel Budapesten, a V. és XI. kerületben. Beutaló nem kell, időpont 1-2 napon belül.',
-    answer: 'Isiásszal, vagyis a derékból a farba és a lábba sugárzó fájdalommal beutaló nélkül jöhet hozzánk. Az első 55 perces alkalommal megvizsgáljuk, hogyan változik a kisugárzó fájdalom különböző mozgásokra, és ehhez igazítjuk az otthoni gyakorlatokat. A kezelés 14 000-15 000 Ft.',
+    answer: 'Isiásszal, vagyis a derékból a farba és a lábba sugárzó fájdalommal beutaló nélkül jöhet hozzánk. Az első, 50-55 perces alkalommal megvizsgáljuk, hogyan változik a kisugárzó fájdalom különböző mozgásokra, és ehhez igazítjuk az otthoni gyakorlatokat. A kezelés 14 000-15 000 Ft.',
     whenToCome: [
       'a fájdalom a derékból a farba, a comb hátsó részébe vagy a lábszárba sugárzik',
       'a lábában zsibbadást vagy bizsergést érez',
@@ -179,7 +179,7 @@ export const conditions: Condition[] = [
     h1: 'Gerincferdülés (scoliosis) gyógytorna Budapesten, Schroth-terápiával',
     metaTitle: 'Gerincferdülés gyógytorna Budapest | Schroth-terápia',
     metaDescription: 'Gerincferdülés (scoliosis) és Scheuermann-betegség kezelése Schroth-terápiával gyermekeknek és felnőtteknek Budapesten. Beutaló nem kell, időpont 1-2 napon belül.',
-    answer: 'Gerincferdüléssel gyermeket és felnőttet is várunk, beutaló nélkül. Háromdimenziós Schroth-gyakorlatokkal és légzéstechnikával dolgozunk a gerincgörbület és a bordapúp korrekcióján, otthon is végezhető programmal. A gyógytorna az orvosi kontroll mellett történik, nem helyettesíti azt. Egy alkalom 14 000-15 000 Ft, időpont általában 1-2 napon belül.',
+    answer: 'Gerincferdüléssel gyermeket és felnőttet is várunk, beutaló nélkül. Háromdimenziós Schroth-gyakorlatokkal és légzéstechnikával dolgozunk a testtartás és a törzs aszimmetriájának javításán, otthon is végezhető programmal. A gyógytorna az orvosi kontroll mellett történik, nem helyettesíti azt. Egy alkalom 14 000-15 000 Ft, időpont általában 1-2 napon belül.',
     whenToCome: [
       'Önnél vagy gyermekénél gerincferdülést (scoliosist) vagy Scheuermann-betegséget állapítottak meg',
       'az orvos gyógytornát javasolt a görbület mellé',
@@ -194,7 +194,7 @@ export const conditions: Condition[] = [
     ],
     approach: [
       { title: 'Vizsgálat', text: 'Megnézzük a törzs és a gerinc tartását és mozgását, és átnézzük a korábbi leleteket, például a röntgent. Az orvosi javaslatot és kontrollt figyelembe vesszük.' },
-      { title: 'Schroth-gyakorlatok', text: 'Aszimmetrikus testhelyzetekkel és háromdimenziós légzéssel aktiváljuk a törzs izmait, a görbület és a csigolyák rotációjából eredő bordapúp korrekciója érdekében.' },
+      { title: 'Schroth-gyakorlatok', text: 'Aszimmetrikus testhelyzetekkel és háromdimenziós légzéssel aktiváljuk a törzs izmait, hogy javuljon a testtartás és a törzs szimmetriája.' },
       { title: 'Otthoni program', text: 'A gyakorlatokat a mindennapi mozgásba illesztve otthon is végezheti. Gyermeknél a szülővel is átbeszéljük a feladatokat.' },
     ],
     methods: [
@@ -203,7 +203,7 @@ export const conditions: Condition[] = [
     ],
     timeline: 'A gerincferdülés gyógytornája hosszabb folyamat, az ütemet az orvosi kontroll és a gyakorlatok rendszeressége határozza meg. Az első vizsgálat után a terapeuta elmondja, milyen gyakorisággal érdemes jönni.',
     faqs: [
-      { q: 'Mi az a Schroth-terápia?', a: 'A Katharina Schroth által kifejlesztett háromdimenziós gerincferdülés-terápia (3DST). Aszimmetrikus testhelyzetekkel és háromdimenziós légzéssel a görbület mellett a csigolyák rotációjából eredő bordapúpot is célozza.' },
+      { q: 'Mi az a Schroth-terápia?', a: 'A Katharina Schroth által kifejlesztett háromdimenziós gerincferdülés-terápia (3DST). Aszimmetrikus testhelyzetekkel és háromdimenziós légzéssel a testtartás és a törzs aszimmetriájának javítására törekszik.' },
       { q: 'Gyermeknek is jó a Schroth-terápia?', a: 'Gyermekeknél és felnőtteknél is alkalmazzuk. Időpontkéréskor jelezze a gyermek korát és a diagnózist, és megfelelő terapeutát ajánlunk.' },
       { q: 'Kell hozzá orvosi diagnózis vagy röntgen?', a: 'Beutaló nem kell. Ha van korábbi röntgen- vagy orvosi lelet a görbületről, hozza magával, mert segíti a tervezést. Diagnózis nélkül először ortopédiai vagy gerincgyógyászati vizsgálatot javaslunk.' },
     ],

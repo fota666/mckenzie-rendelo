@@ -30,9 +30,9 @@ const methods = [
     title: 'Manuálterápia',
     image: `${base}images/modszerek/manual.png`,
     description: 'Kézzel végzett diagnosztikai és terápiás fogások összessége, amelyek a mozgásszervrendszer működési zavarainak felismerésére és kezelésére irányulnak.',
-    details: 'Sérülések, gyulladások, degeneratív betegségek és az életkorral járó változások esetén alkalmazzuk. A vizsgálat során felmérjük az izom-, a szalag- és a bőrreflexeket, valamint az ízületi mechanikát és az izomfunkciót.',
+    details: 'Sérülések, gyulladások, degeneratív betegségek és az életkorral járó változások esetén alkalmazzuk. A vizsgálat során felmérjük az ízületek mozgását, az izmok működését és a szövetek állapotát.',
     subtypes: [
-      { name: 'Maitland manuálterápia', desc: 'Páciensközpontú, bizonyítékokon alapuló módszer. Az idegrendszer, az izomzat és az ízületek vizsgálatára épül. Specifikus tesztekkel azonosítjuk a fájdalmat okozó struktúrákat.' },
+      { name: 'Maitland manuálterápia', desc: 'Páciensközpontú módszer, amely az idegrendszer, az izomzat és az ízületek vizsgálatára épül. A tesztek segítenek eldönteni, mely mozgások és kezelések illenek a panaszhoz.' },
       { name: 'Mulligan manuálterápia', desc: 'Az ízületek helyzeti eltéréseire épül. A terapeuta egy adott helyzetben tartja az ízületet, miközben a páciens aktívan mozog. A kivitelezés során a fájdalommentességre törekszünk.' },
     ],
     conditions: ['Derékfájás', 'Nyaki és háti fájdalom', 'Vállpanaszok', 'Csípő-, térd-, bokafájdalom', 'Tenisz- és golfkönyök', 'Fagyott váll'],
@@ -42,36 +42,36 @@ const methods = [
     clip: { name: 'stabilizacio-labdan-negykezlabon', label: 'Stabilizáló gyakorlat labdán, terapeuta irányításával' },
     title: 'Stabilizációs tréning',
     image: `${base}images/modszerek/stabilizacio.png`,
-    description: 'A gerinc stabilitásának megbomlása esetén a gerinc melletti mély izmok erejének helyreállítására törekszünk, precíz irányítással.',
-    details: 'A tréning során a megrövidült izmokat megnyújtjuk, és helyreállítjuk az optimális izom-ízületi egyensúlyt. A mély stabilizáló izmok célzott erősítése segíthet megelőzni a panaszok visszatérését.',
-    conditions: ['Porckorongsérv utáni állapot', 'Lumbágó', 'Instabil gerinc', 'Túlterhelt gerinc', 'Csigolyacsúszás (spondylolisthesis)'],
+    description: 'Célzott gyakorlatokkal erősítjük a gerincet és a törzset támasztó mély izmokat, és megtanítjuk a helyes mozgásmintákat.',
+    details: 'A gyakorlatokat a terapeuta mutatja meg és ellenőrzi, majd otthoni programként is folytatható. A rendszeres erősítés segíthet csökkenteni a panaszok visszatérésének esélyét.',
+    conditions: ['Porckorongsérv utáni állapot', 'Lumbágó, visszatérő derékfájás', 'A gerinc terhelhetőségének javítása', 'Csigolyacsúszás (spondylolisthesis)'],
   },
   {
     id: 'stretching',
     clip: { name: 'mellkasi-nyujtas-hengerrel', label: 'Mellkasi nyújtás habhengeren' },
     title: 'Gyógyászati nyújtás (stretching)',
     image: `${base}images/modszerek/stretching.png`,
-    description: 'A fájdalom okozta izomfeszülések terápiás nyújtása és lazítása, valamint az ízületi mozgásterjedelem növelése mechanikus izomnyújtással.',
-    details: 'Az enyhe, elnyújtott stretching fenntartja a nyújtás hatását, nyújtja a kötőszövetet, növeli a szövetek hőmérsékletét, és alacsony izom-elektromos aktivitás mellett elősegíti az izmok ellazulását.',
-    conditions: ['Izomgörcsök, izomfeszülés', 'Csökkent ízületi mozgásterjedelem', 'Izommerevség', 'Keringési zavarok', 'Regeneráció gyorsítása'],
+    description: 'Nyújtással és lazítással segítünk az izomfeszülés oldásában és a mozgásterjedelem növelésében.',
+    details: 'A nyújtást a terapeuta a panaszhoz igazítja, és megtanítja azokat a gyakorlatokat, amelyeket otthon is végezhet. Gyakran más kezelésekkel együtt alkalmazzuk.',
+    conditions: ['Izomgörcsök, izomfeszülés', 'Csökkent ízületi mozgásterjedelem', 'Izommerevség'],
   },
   {
     id: 'taping',
     clip: { name: 'kinesio-taping-derek', label: 'Kineziológiai tape felhelyezése a derékra', wide: true },
     title: 'Kineziológiai taping',
     image: `${base}images/modszerek/taping.png`,
-    description: 'Speciális ragasztószalag segítségével befolyásoljuk a mozgásszervrendszer működését. A szalag 5-7 napig viselhető, gyógyszert nem tartalmaz.',
-    details: 'Japánban, Koreában és Németországban fejlesztették ki. A bőr, az izmok és az ízületi tok receptoraira, valamint a szalagokra és a nyirokrendszerre hat. Hatékonysága a képzett szakember által végzett korrekt felhelyezéstől függ.',
-    conditions: ['Sportsérülések', 'Ficamok, rándulások', 'Tenisz- és golfkönyök', 'Tartáshibák', 'Ízületi mozgásproblémák', 'Fejfájás', 'Achilles-ín rehabilitáció'],
+    description: 'Rugalmas, gyógyszert nem tartalmazó ragasztószalag, amelyet kiegészítő kezelésként alkalmazunk a gyakorlatok és a manuális kezelés mellett. A szalag általában néhány napig, legfeljebb 5-7 napig viselhető.',
+    details: 'A kineziológiai tapinget Kenzo Kase fejlesztette ki Japánban. A hatásmechanizmusáról a szakirodalom nem egységes, ezért nem önálló kezelésként, hanem a mozgás- és gyakorlatterápia kiegészítőjeként használjuk. Egyes pácienseknek a mozgás közbeni biztonságérzetet és a testtudatot segítheti. A felhelyezéséhez képzett szakember szükséges.',
+    conditions: ['Sportsérülések', 'Ficamok, rándulások', 'Tenisz- és golfkönyök', 'Tartáshibák', 'Ízületi mozgásproblémák', 'Achilles-ín rehabilitáció'],
   },
   {
     id: 'mutet-utani',
     clip: { name: 'gluteus-gumiszalag-terd', label: 'Gumiszalagos erősítő gyakorlat a terapeuta mellett' },
     title: 'Műtét utáni rehabilitáció',
     image: `${base}images/modszerek/mutet_utani_rehab.png`,
-    description: 'A cél a mozgásképesség visszaállítása, az izmok erősítése és a szükséges ízületi funkciók helyreállítása, egészen a sportolói szintig.',
-    details: 'A műtét előtti terápia felkészíti az ízületeket és az izmokat. A műtét utáni terápia visszaállítja az erőt és a mozgásképességet, valamint megelőzi a szövődményeket. Célunk a maximális felépülés, akár a sérülés előtti szintig.',
-    conditions: ['Csonttörések', 'Szalagszakadások', 'Gerinc-, csípő-, térdműtét', 'Sportsérülések', 'Bütyök, kalapácsujj', 'Alagút-szindróma', 'Nyakcsigolya ostor-sérülés'],
+    description: 'A cél a mozgásképesség és az erő fokozatos visszanyerése a műtétet végző orvos előírásainak megfelelően. Ha a páciens sportol, a terhelést fokozatosan emeljük.',
+    details: 'A műtét előtti terápia felkészítheti az ízületeket és az izmokat. A műtét utáni terápiát az orvosi előírásokhoz igazítjuk, és a felépülés üteme egyénenként eltér. Célunk, hogy a lehető legjobb állapotot érje el, teljes felépülést azonban nem ígérhetünk.',
+    conditions: ['Gerinc-, csípő-, térdműtét utáni rehabilitáció', 'Szalagszakadás műtéti ellátása után', 'Csonttörés műtéti ellátása után', 'Bütyök, kalapácsujj műtét után', 'Alagút-szindróma műtét után'],
   },
   {
     id: 'izuleti-fajdalmak',
@@ -96,9 +96,9 @@ const methods = [
     clip: { name: 'labdan-ules-szalaghuzas', label: 'Ülő gyakorlat labdán, szalaggal, a bordásfal mellett' },
     title: 'Schroth-terápia',
     image: `${base}images/modszerek/schroth.png`,
-    description: 'A gerincferdülés (scoliosis), a Scheuermann-betegség és egyes tartáshibák speciális kezelési módszere, amely jól beilleszthető a mindennapi mozgásba.',
-    details: 'A Katharina Schroth által kifejlesztett háromdimenziós scoliosisterápia (3DST). A hagyományos 2D megközelítéssel szemben a csigolyák rotációjából eredő bordapúpot is korrigálja. Aszimmetrikus pozíciókkal aktiválja a törzs izmait, háromdimenziós légzéssel korrigálja a rotációt és a görbületet.',
-    conditions: ['Gerincferdülés (scoliosis)', 'Scheuermann-betegség', 'Tartáshibák', 'Bordapúp korrekció'],
+    description: 'Gerincferdülés (scoliosis), Scheuermann-betegség és egyes tartáshibák esetén alkalmazott gyakorlatterápia, amely a testtartás és a törzs aszimmetriájának javítását segíti, és beilleszthető a mindennapi mozgásba.',
+    details: 'A Katharina Schroth által kifejlesztett háromdimenziós scoliosisterápia (3DST). Aszimmetrikus testhelyzetekkel és háromdimenziós légzéssel dolgozik, hogy javuljon a törzs tartása és szimmetriája, és a páciens önállóan is megtanulja a gyakorlatokat. A görbület alakulását orvosi kontroll követi, az eredmény egyénenként eltér.',
+    conditions: ['Gerincferdülés (scoliosis)', 'Scheuermann-betegség', 'Tartáshibák', 'A törzs aszimmetriája, bordapúp'],
   },
 ];
 ---
@@ -108,8 +108,8 @@ const methods = [
   description="9 kezelési módszer: McKenzie-módszer, manuálterápia, stabilizációs tréning, Schroth-terápia, kineziológiai taping és műtét utáni rehabilitáció. Mikor melyiket ajánljuk."
 >
   <PageHeader eyebrow="Kezelési módszerek">
-    <Fragment slot="title">Kilenc módszer, a kezelést egy vizsgálat előzi meg.</Fragment>
-    A McKenzie-módszer a fő szakterületünk. Az első alkalom vizsgálata alapján a terapeuta dönti el, melyik módszert kombinálja vele, ezt nem kell előre kiválasztania.
+    <Fragment slot="title">Kilenc kezelési módszer, amelyek közül a vizsgálat alapján választunk.</Fragment>
+    Nem kell előre eldöntenie, melyikre van szüksége: az első alkalmon a terapeuta megvizsgálja, és azt javasolja, ami a panaszához illik. A fő szakterületünk a McKenzie-módszer. Ha a vizsgálat alapján más kezelés vagy orvosi kivizsgálás indokolt, azt is megmondjuk.
   </PageHeader>
 
   <!-- In-page index -->
@@ -165,7 +165,7 @@ const methods = [
             </div>
           )}
 
-          <h3 class="mt-10 font-mono text-[0.8rem] tracking-wider uppercase text-[var(--color-ink-2)]">Mikor ajánljuk</h3>
+          <h3 class="mt-10 font-mono text-[0.8rem] tracking-wider uppercase text-[var(--color-ink-2)]">Mikor jöhet szóba</h3>
           <ul class="mt-3 flex flex-wrap gap-2">
             {m.conditions.map((c) => (
               <li class="px-3 py-1.5 text-[15px] bg-[var(--color-teal-50)] text-[var(--color-teal-700)] border border-[var(--color-teal-100)]">{c}</li>
@@ -181,6 +181,6 @@ const methods = [
   <ClosingCta
     eyebrow="Kezelési terv"
     title="Az első vizsgálat után a terapeuta állítja össze a kezelési tervet."
-    lead="Nem kell előre kiválasztania a módszert: a vizsgálat mutatja meg, melyik kezelés illik a panaszához, és hogy kell-e kombinálni őket. Az első alkalom 55 perc, a végén megkapja az otthoni gyakorlatsort."
+    lead="Nem kell előre kiválasztania a módszert: a vizsgálat mutatja meg, melyik kezelés illik a panaszához, és hogy kell-e kombinálni őket. Az első alkalom 50-55 perc, a végén megkapja az otthoni gyakorlatsort."
   />
 </BaseLayout>

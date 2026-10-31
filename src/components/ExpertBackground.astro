@@ -1,12 +1,13 @@
 ---
 // Short professional background on MDT for patients, referring doctors and answer engines.
 // Only general, well-established MDT concepts; team facts come from data/team.ts.
-import { credentialed } from '../data/team';
+import { credentialed, clinicLabel } from '../data/team';
+const base = import.meta.env.BASE_URL;
 
 const blocks = [
   {
-    t: 'Mechanikai diagnózis és terápia',
-    d: 'A McKenzie-módszer hivatalos neve Mechanical Diagnosis and Therapy (MDT). Robin McKenzie (1931-2013) új-zélandi gyógytornász dolgozta ki. Nem egy gyakorlatsor, hanem egy vizsgálati és kezelési rendszer, amely a panaszt a mozgásra adott válasz alapján osztályozza.',
+    t: 'Mechanikai Diagnózis és Terápia',
+    d: 'A McKenzie-módszer hivatalos magyar neve Mechanikai Diagnózis és Terápia (MDT). Robin McKenzie (1931-2013) új-zélandi gyógytornász dolgozta ki. Nem egy gyakorlatsor, hanem egy vizsgálati és kezelési rendszer, amely a panaszt a mozgásra adott válasz alapján osztályozza.',
   },
   {
     t: 'Ismételt mozgások és centralizáció',
@@ -14,7 +15,7 @@ const blocks = [
   },
   {
     t: 'Osztályozás',
-    d: 'A mozgásvizsgálat alapján a panaszt mechanikai csoportba soroljuk (elmozdulásos, diszfunkciós vagy tartási szindróma), és ehhez igazítjuk a gyakorlatokat. Ha a vizsgálat nem talál mechanikai mintázatot, más módszert vagy orvosi kivizsgálást javaslunk.',
+    d: 'A mozgásvizsgálat alapján a panaszt mechanikai csoportba soroljuk (elmozdulásos, diszfunkciós vagy tartási szindróma), vagy az egyéb kategóriába, ha nem illik ezek egyikébe sem. Ehhez igazítjuk a gyakorlatokat. Ha a vizsgálat nem talál mechanikai mintázatot, más módszert vagy orvosi kivizsgálást javaslunk.',
   },
   {
     t: 'Képzés és minősítés',
@@ -29,6 +30,7 @@ const blocks = [
       <p class="eyebrow">Szakmai háttér</p>
       <h2 class="display mt-3 text-3xl lg:text-4xl text-[var(--color-navy-900)]">Mi a McKenzie-módszer (MDT)?</h2>
       <p class="mt-4 text-[15px] leading-relaxed text-[var(--color-ink-2)]">Röviden azoknak, akik pontosan tudni szeretnék, mi történik a vizsgálaton, és orvosoknak, akik hozzánk küldenének pácienst.</p>
+      <img src={`${base}images/rendelo/mckenzie-gyakorlat.jpg`} alt="Hasra fekvő gerincnyújtó McKenzie-gyakorlat gyógytornász irányításával a rendelőben" class="mt-8 w-full aspect-[4/3] object-cover" loading="lazy" />
     </div>
     <div class="lg:col-span-8">
       <dl class="grid sm:grid-cols-2 gap-x-10 gap-y-7">
@@ -39,15 +41,33 @@ const blocks = [
           </div>
         ))}
       </dl>
-      <div class="mt-8 bg-[var(--color-paper-2)] p-6">
-        <p class="font-medium text-[var(--color-ink)]">Nálunk minden gyógytornász elvégezte a McKenzie-kurzusok legalább első három részét. A nemzetközi minősítővizsgát {credentialed.length} terapeutánk tette le:</p>
-        <p class="mt-2 text-[15px] text-[var(--color-ink-2)]">{credentialed.map((t) => t.name).join(', ')}.</p>
-        <p class="mt-4 text-[15px]">
+    </div>
+  </div>
+
+  <!-- Internationally credentialed therapists -->
+  <div class="bg-[var(--color-paper-2)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 grid lg:grid-cols-12 gap-10 items-start">
+      <div class="lg:col-span-4">
+        <p class="eyebrow">Minősített terapeuták</p>
+        <h2 class="display mt-3 text-3xl lg:text-4xl text-[var(--color-navy-900)]">Nemzetközi McKenzie-minősítéssel rendelkező terapeutáink</h2>
+        <p class="mt-4 leading-relaxed text-[var(--color-ink-2)]">Nálunk minden gyógytornász elvégezte a McKenzie-kurzusok legalább első három részét. A nemzetközi minősítővizsgát {credentialed.length} terapeutánk tette le.</p>
+        <p class="mt-5 text-[15px] flex flex-wrap gap-x-5 gap-y-2">
+          <a href={`${base}csapatunk`} class="link-arrow text-[var(--color-navy-800)]">Minden terapeuta <span aria-hidden="true">&rarr;</span></a>
           <a href="https://www.mckenzieinstitute.org" target="_blank" rel="noopener" class="link-arrow text-[var(--color-navy-800)]">McKenzie Institute International <span aria-hidden="true">&rarr;</span></a>
-          <span class="mx-3 text-[var(--color-line)]">|</span>
           <a href="https://hu.mckenzieinstitute.org" target="_blank" rel="noopener" class="link-arrow text-[var(--color-navy-800)]">Magyarországi McKenzie Intézet <span aria-hidden="true">&rarr;</span></a>
         </p>
       </div>
+      <ul class="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-6">
+        {credentialed.map((t) => (
+          <li>
+            <div class="aspect-[4/5] overflow-hidden bg-white">
+              <img src={t.photo} alt={t.name} class="w-full h-full object-cover object-top" loading="lazy" />
+            </div>
+            <p class="mt-3 font-heading text-[1.35rem] leading-tight text-[var(--color-navy-900)]">{t.name}</p>
+            <p class="text-[13px] text-[var(--color-ink-2)]">{t.title.split(',')[0]} &middot; {clinicLabel(t.name)}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   </div>
 </section>
