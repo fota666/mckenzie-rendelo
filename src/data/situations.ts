@@ -33,7 +33,7 @@ export const situations: Situation[] = [
     tag: 'Évek óta visszatér',
     title: 'A fájdalom újra és újra előjön, a gyógyszer csak tompítja.',
     voice: 'A fájdalom újra és újra előjön, a gyógyszer csak tompítja.',
-    body: 'Megkeressük, mi váltja ki a visszaesést, és McKenzie-gyakorlatokkal megtanítjuk, hogyan kezelje a következő rohamot maga. A visszaesések megelőzésére stabilizációs tréninget és tartásjavítást kapcsolunk hozzá.',
+    body: 'Megnézzük, mely helyzetek és mozgások váltják ki a panaszt, és olyan gyakorlatokat tanítunk, amelyekkel otthon is tehet a fájdalom enyhítéséért. Szükség esetén stabilizációs tréninggel és tartásjavítással egészítjük ki, ami csökkentheti a panasz visszatérésének esélyét.',
     link: { path: 'modszerek#mckenzie', label: 'McKenzie-módszer' },
     methods: [
       { path: 'modszerek#mckenzie', label: 'McKenzie-módszer', when: 'önkezelés' },
@@ -48,7 +48,7 @@ export const situations: Situation[] = [
     tag: 'Porckorongsérv',
     title: 'Az MRI-vizsgálat sérvet mutatott ki, és most felmerült a műtét lehetősége.',
     voice: 'Az MRI sérvet mutatott ki, és felmerült a műtét.',
-    body: 'A sérv nem jelent automatikusan műtétet. Először McKenzie-vizsgálattal és konzervatív kezeléssel megnézzük, javul-e az állapota. Ha mégis műtétre kerül sor, felkészítjük rá, majd segítjük a műtét utáni rehabilitációját.',
+    body: 'A porckorongsérv sok esetben műtét nélkül is kezelhető, de nem minden állapot alkalmas konzervatív terápiára. A vizsgálat megmutatja, hogy a gyógytorna Önnek megfelelő-e, vagy előbb orvosi kivizsgálás kell. Ha műtétre kerül sor, felkészítjük rá, majd segítjük a műtét utáni rehabilitációját.',
     link: { path: 'modszerek#mckenzie', label: 'McKenzie-módszer' },
     methods: [
       { path: 'modszerek#mckenzie', label: 'McKenzie-módszer', when: 'konzervatív kezelés' },
@@ -60,9 +60,9 @@ export const situations: Situation[] = [
   {
     id: 'gerincferdules',
     tag: 'Gerincferdülés',
-    title: 'Gyermeknél vagy felnőttnél scoliosist, Scheuermann-betegséget állapítottak meg.',
+    title: 'Önnél vagy gyermekénél gerincferdülést vagy Scheuermann-betegséget állapítottak meg.',
     voice: 'Nálam vagy a gyermekemnél gerincferdülést állapítottak meg.',
-    body: 'Háromdimenziós Schroth-gyakorlatokkal és légzéstechnikával dolgozunk a gerincgörbület és a bordapúp korrekcióján, otthon is végezhető programmal.',
+    body: 'Háromdimenziós Schroth-gyakorlatokkal és légzéstechnikával dolgozunk a gerincgörbület és a törzs aszimmetriájának kezelésén, otthon is végezhető programmal. Hogy mire számíthat, azt a vizsgálat és az orvosi leletek alapján beszéljük meg.',
     link: { path: 'modszerek#schroth', label: 'Schroth-terápia' },
     methods: [
       { path: 'modszerek#schroth', label: 'Schroth-terápia' },

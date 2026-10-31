@@ -8,7 +8,7 @@ import { clinic, reviewTotalText, moreThan, ratingText } from '../data/clinic';
 import { situations } from '../data/situations';
 import { firstVisit } from '../data/firstVisit';
 import { founder } from '../data/founder';
-import { terapeutak, clinicLabel } from '../data/team';
+import { terapeutak, clinicLabel, credentialed } from '../data/team';
 import { homeFaqs } from '../data/homeFaq';
 import { chooser } from '../data/chooser';
 const base = import.meta.env.BASE_URL;
@@ -38,7 +38,7 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
       <div class="k-hero__copy">
         <p class="k-eyebrow">Gyógytorna Budapesten &middot; V. és XI. kerület &middot; 1993 óta</p>
         <h1 class="k-h1">Gerinc- és ízületi fájdalom kezelése McKenzie-módszerrel.</h1>
-        <p class="k-lead">Először megvizsgáljuk, mitől változik a fájdalma, aztán megtanítjuk, hogyan kezelje maga. Beutaló nem kell, időpont általában 1-2 napon belül.</p>
+        <p class="k-lead">Először megvizsgáljuk, mely mozgások enyhítik vagy erősítik a fájdalmát, majd megmutatjuk, milyen gyakorlatokkal segítheti Ön is a javulását. Beutaló nem kell, időpont általában 1-2 napon belül.</p>
         <div class="k-btns">
           <a href={`tel:${clinic.phone}`} class="k-btn k-btn--clay">Hívjon: {clinic.phoneDisplay}</a>
           <a href={`${base}kapcsolat#visszahivas`} class="k-btn k-btn--ghost">Visszahívást kérek</a>
@@ -48,6 +48,7 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
           <span><b>{ratingText(clinic.locations[0].rating.value)} / 5</b>{reviewTotalText} Google-vélemény</span>
           <span><b>{clinic.therapists} gyógytornász</b>két rendelőben</span>
           <span><b>{clinic.prices.single.range}</b>egy alkalom</span>
+          <a href="#alapito"><b>Relle Éva alapította</b>1993-ban, McKenzie nemzetközi minősítővizsgával</a>
         </div>
       </div>
     </div>
@@ -87,7 +88,7 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
     <div class="k-wrap">
       <div class="k-head">
         <p class="k-eyebrow">Kik jönnek hozzánk</p>
-        <h2 class="k-h2">Négy helyzet, amellyel hozzánk fordulnak.</h2>
+        <h2 class="k-h2">Négy gyakori helyzet, amikor hozzánk fordulnak.</h2>
       </div>
       <ol class="k-rows">
         {situations.map((s) => (
@@ -113,21 +114,24 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
     <div class="k-wrap">
       <div class="k-head">
         <p class="k-eyebrow">Az első alkalom</p>
-        <h2 class="k-h2">55 perc: kikérdezés, vizsgálat, kezelés és saját gyakorlatsor.</h2>
+        <h2 class="k-h2">50-55 perc: kikérdezés, vizsgálat, kezelés és saját gyakorlatsor.</h2>
       </div>
       <div class="k-visit">
+        <div>
         <ol class="k-steps">
           {firstVisit.map((s, i) => (
             <li class="k-step">
               <span class="k-step__n">{i + 1}</span>
               <div>
-                <p class="k-step__t">{s.min}. perc</p>
+                <p class="k-step__t">kb. {s.min} perc</p>
                 <h3 class="k-h3">{s.title}</h3>
                 <p class="k-small" style="margin-top:6px;font-size:1rem">{s.body}</p>
               </div>
             </li>
           ))}
         </ol>
+          <p class="k-note">Az időbeosztás tájékoztató jellegű, az alkalom menete a panaszától függ. A vizsgálat alapján más kezelést, szükség esetén orvosi vizsgálatot is javasolhatunk.</p>
+        </div>
         <aside>
           <div class="k-clip">
             <LoopVideo name="rendelo/csipo-mobilizalas-hanyatt" label="A gyógytornász a hanyatt fekvő páciens csípőjét és lábát mozgatja a rendelőben" />
@@ -140,7 +144,7 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
   </section>
 
   <!-- Founder: the philosophy is her own sentence, portrait beside it -->
-  <section class="k-sec k-sec--pine">
+  <section id="alapito" class="k-sec k-sec--pine">
     <div class="k-wrap k-fq">
       <div class="k-fq__photo">
         <img src={`${base}${founder.photo}`} alt={founder.name} loading="lazy" />
@@ -161,7 +165,7 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
       <div class="k-head">
         <p class="k-eyebrow">Csapatunk</p>
         <h2 class="k-h2">{clinic.therapists - 1} gyógytornász Relle Éva mellett, két rendelőben.</h2>
-        <p class="k-lead">Minden terapeutánk McKenzie-képzésben részesült. Telefonon a panasza alapján ajánlunk Önnek valakit.</p>
+        <p class="k-lead">Minden terapeutánk elvégezte a McKenzie-kurzusok legalább első három részét, a nemzetközi minősítővizsgát {credentialed.length} terapeutánk tette le. Telefonon a panasza alapján ajánlunk Önnek valakit.</p>
       </div>
       <img src={`${base}images/csapat/csapat-csoportkep.jpg`} alt="A McKenzie Gyógytorna Rendelő teljes gyógytornász csapata" class="k-group" width="2000" height="1336" loading="lazy" />
       <ul class="k-scroll">
