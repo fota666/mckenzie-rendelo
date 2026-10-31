@@ -77,3 +77,6 @@ export const clinic = {
 
 export const reviewTotal = clinic.locations.reduce((n, l) => n + l.rating.count, 0);
 export const ratingText = (v: number) => v.toFixed(1).replace('.', ',');
+/** Review counts are shown as a floor to the nearest ten ("180+"), so they only need an update when the next ten is passed. */
+export const moreThan = (n: number) => `${Math.floor(n / 10) * 10}+`;
+export const reviewTotalText = moreThan(reviewTotal);

@@ -1,6 +1,6 @@
 ---
 import LoopVideo from './LoopVideo.astro';
-import { clinic, reviewTotal, ratingText } from '../data/clinic';
+import { clinic, reviewTotalText, ratingText } from '../data/clinic';
 interface Props { compact?: boolean }
 const { compact = false } = Astro.props;
 const base = import.meta.env.BASE_URL;
@@ -55,7 +55,7 @@ const complaints = [
         )}
 
         <dl class="mt-8 pt-5 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 text-[15px]">
-          <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Google</dt><dd class="mt-1 text-white/90">{ratingText(clinic.locations[0].rating.value)} / 5, {reviewTotal} vélemény</dd></div>
+          <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Google</dt><dd class="mt-1 text-white/90">{ratingText(clinic.locations[0].rating.value)} / 5, {reviewTotalText} vélemény</dd></div>
           <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Csapat</dt><dd class="mt-1 text-white/90">{clinic.therapists} gyógytornász</dd></div>
           <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Ár</dt><dd class="mt-1 text-white/90">{clinic.prices.single.range}</dd></div>
           <div><dt class="font-mono text-[0.78rem] uppercase tracking-wider text-[var(--color-teal-300)]">Beutaló</dt><dd class="mt-1 text-white/90">Nem kell</dd></div>

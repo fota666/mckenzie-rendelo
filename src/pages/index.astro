@@ -4,7 +4,7 @@
 import CalmLayout from '../layouts/CalmLayout.astro';
 import LoopVideo from '../components/LoopVideo.astro';
 import CalmCta from '../components/calm/CalmCta.astro';
-import { clinic, reviewTotal, ratingText } from '../data/clinic';
+import { clinic, reviewTotalText, moreThan, ratingText } from '../data/clinic';
 import { situations } from '../data/situations';
 import { firstVisit } from '../data/firstVisit';
 import { founder } from '../data/founder';
@@ -45,7 +45,7 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
         </div>
         <p class="k-small">Telefonon {clinic.bookingHoursShort}, a visszahívás-kérést bármikor elküldheti.</p>
         <div class="k-trust">
-          <span><b>{ratingText(clinic.locations[0].rating.value)} / 5</b>{reviewTotal} Google-vélemény</span>
+          <span><b>{ratingText(clinic.locations[0].rating.value)} / 5</b>{reviewTotalText} Google-vélemény</span>
           <span><b>{clinic.therapists} gyógytornász</b>két rendelőben</span>
           <span><b>{clinic.prices.single.range}</b>egy alkalom</span>
         </div>
@@ -130,7 +130,7 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
         </ol>
         <aside>
           <div class="k-clip">
-            <LoopVideo name="rendelo/derekfajas-hasonfekvo-mobilizalas" label="Hasonfekvő páciens derekának kezelése a rendelőben" />
+            <LoopVideo name="rendelo/csipo-mobilizalas-hanyatt" label="A gyógytornász a hanyatt fekvő páciens csípőjét és lábát mozgatja a rendelőben" />
           </div>
           <p class="k-cap">Kezelés a rendelőben. A módszert a vizsgálat dönti el.</p>
           <p style="margin-top:14px"><a href={`${base}modszerek`} class="k-link">Mind a 9 módszer és a szakmai háttér</a></p>
@@ -182,7 +182,7 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
       </div>
       <div class="k-statband">
         <div><b>{ratingText(clinic.locations[0].rating.value)}</b><i class="k-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</i><span>átlag a Google-on</span></div>
-        <div><b>{reviewTotal}</b><span>Google-vélemény a két rendelőről</span></div>
+        <div><b>{reviewTotalText}</b><span>Google-vélemény a két rendelőről</span></div>
         <div><b>{clinic.therapists}</b><span>gyógytornász</span></div>
         <div><b>1993</b><span>óta működik a rendelő</span></div>
       </div>
@@ -194,6 +194,7 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
               <figcaption><span class="k-av">{initials(r.name)}</span><span><strong>{r.name}</strong><small>{r.role}</small></span></figcaption>
             </figure>
           ))}
+          <a href={`${base}velemenyek`} class="k-btn k-btn--ghost" style="justify-self:start">További vélemények, sajtó és TV <span aria-hidden="true">&rarr;</span></a>
         </div>
         <aside class="k-price k-price--dark">
           <p class="k-eyebrow">Árak</p>
@@ -248,7 +249,7 @@ const mapSrc = (l: Loc) => `https://www.google.com/maps?q=${encodeURIComponent(`
               </ul>
               <div class="k-loc__foot">
                 <a href={routeUrl(l)} target="_blank" rel="noopener" class="k-btn k-btn--clay">Útvonaltervezés</a>
-                <a href={l.mapsUrl} target="_blank" rel="noopener" class="k-btn k-btn--ghost">Google-profil, {l.rating.count} vélemény</a>
+                <a href={l.mapsUrl} target="_blank" rel="noopener" class="k-btn k-btn--ghost">Google-profil: {moreThan(l.rating.count)} vélemény, {ratingText(l.rating.value)} csillag</a>
               </div>
               <p class="k-small">{clinic.hoursText}</p>
             </div>

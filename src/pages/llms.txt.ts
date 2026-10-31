@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { clinic, reviewTotal, ratingText } from '../data/clinic';
+import { clinic, reviewTotalText, moreThan, ratingText } from '../data/clinic';
 import { conditions } from '../data/conditions';
 
 // Plain-text summary for AI answer engines (llmstxt.org convention).
@@ -7,7 +7,7 @@ import { conditions } from '../data/conditions';
 export const GET: APIRoute = ({ site }) => {
   const root = new URL(import.meta.env.BASE_URL, site).href;
   const loc = clinic.locations
-    .map((l) => `- ${l.name} (Google: ${l.googleName}): ${l.postalCode} Budapest, ${l.street} (${l.district}). ${l.transit}. Parkolás: ${l.parking}. Google-értékelés: ${ratingText(l.rating.value)} (${l.rating.count} vélemény). Térkép: ${l.mapsUrl}`)
+    .map((l) => `- ${l.name} (Google: ${l.googleName}): ${l.postalCode} Budapest, ${l.street} (${l.district}). ${l.transit}. Parkolás: ${l.parking}. Google-értékelés: ${ratingText(l.rating.value)} (${moreThan(l.rating.count)} vélemény). Térkép: ${l.mapsUrl}`)
     .join('\n');
 
   const pages = conditions.map((c) => `- [${c.name}](${root}${c.slug}): mikor segít a gyógytorna, mikor kell előbb orvos, hogyan kezeljük`).join('\n');
@@ -23,7 +23,7 @@ export const GET: APIRoute = ({ site }) => {
 - Időpont általában 1-2 napon belül, beutaló nem kell, egészségpénztárra számlát adnak
 - ${clinic.prices.single.label} (${clinic.prices.single.duration}): ${clinic.prices.single.amount}, ${clinic.prices.single.note}
 - ${clinic.prices.pass.label}: ${clinic.prices.pass.amount} (${clinic.prices.pass.perVisit}, ${clinic.prices.pass.saving})
-- Google-értékelés összesen: ${reviewTotal} vélemény
+- Google-értékelés összesen: ${reviewTotalText} vélemény
 - E-mail: ${clinic.email}
 
 ## Rendelők

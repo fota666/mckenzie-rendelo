@@ -3,7 +3,7 @@
 // a wall of patient reviews, press and TV, closing call to action.
 import CalmLayout from '../layouts/CalmLayout.astro';
 import CalmCta from '../components/calm/CalmCta.astro';
-import { clinic, reviewTotal, ratingText } from '../data/clinic';
+import { clinic, reviewTotalText, moreThan, ratingText } from '../data/clinic';
 
 const featured = [
   {
@@ -60,7 +60,7 @@ const tv = [
 
 <CalmLayout
   title="Vélemények és sajtó | McKenzie Gyógytorna Rendelő Budapest"
-  description={`${reviewTotal} Google-értékelés a két rendelőről, páciensvélemények, sajtómegjelenések és TV-szereplések.`}
+  description={`${reviewTotalText} Google-értékelés a két rendelőről, páciensvélemények, sajtómegjelenések és TV-szereplések.`}
 >
   <!-- Rating cards -->
   <section class="k-sec k-sec--pine" style="padding-bottom:clamp(48px,6vw,80px)">
@@ -68,7 +68,7 @@ const tv = [
       <div>
         <p class="k-eyebrow">Vélemények</p>
         <h1 class="k-h1" style="color:#fff;margin:14px 0 20px">Így írnak rólunk a betegeink.</h1>
-        <p class="k-lead">{reviewTotal} Google-értékelés a két rendelőről, {ratingText(clinic.locations[0].rating.value)} átlaggal, és a páciensek saját szavai alább.</p>
+        <p class="k-lead">{reviewTotalText} Google-értékelés a két rendelőről, {ratingText(clinic.locations[0].rating.value)} átlaggal, és a páciensek saját szavai alább.</p>
         <p class="k-small" style="margin-top:18px">A pontszámok a Google-profilokról származnak, utoljára 2026. októberben ellenőrizve.</p>
       </div>
       <div class="k-rcards">
@@ -78,7 +78,7 @@ const tv = [
             <span class="k-rcard__m">
               <i class="k-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</i>
               <strong>{l.name}</strong>
-              <small>{l.rating.count} Google-vélemény</small>
+              <small>{moreThan(l.rating.count)} Google-vélemény</small>
             </span>
             <span class="k-rcard__go" aria-hidden="true">&rarr;</span>
           </a>
