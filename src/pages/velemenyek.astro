@@ -80,7 +80,7 @@ const press = [
 const year = (s: string) => s.match(/(20\d\d)/)?.[1] ?? '';
 
 const tv = [
-  { title: 'RTL+: A McKenzie-módszerről (3 perces összeállítás a rendelőben forgatva)', date: '2026. június' },
+  { title: 'RTL+: A McKenzie-módszerről', date: '2026. június', note: '3 perces összeállítás, a rendelőben forgatva', featured: true },
   { title: 'Esésmegelőzés', date: '2014. november 10.' },
   { title: 'Csontrikula', date: '2015. január 15.' },
   { title: 'Térdsérülések', date: '2015. október 13.' },
@@ -177,7 +177,7 @@ const tv = [
         </ul>
         <ul class="k-tv">
           {tv.map((t) => (
-            <li><b>TV</b><span><strong>{t.title}</strong><small>{t.date}</small></span></li>
+            <li class:list={[t.featured && 'k-tv--feat']}><b>TV</b><span><strong>{t.title}</strong>{t.note && <em>{t.note}</em>}<small>{t.date}</small></span></li>
           ))}
         </ul>
       </div>

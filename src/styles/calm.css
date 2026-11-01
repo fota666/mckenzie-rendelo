@@ -503,3 +503,11 @@ body.calm {
 .calm .k-fchips button[aria-pressed="true"] span { color: rgba(255, 255, 255, 0.7); }
 .calm .k-qcard[hidden], .calm .k-more[hidden], .calm .k-more [hidden] { display: none; }
 .calm .k-more { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; margin-top: 12px; }
+
+/* Reviews page: latest TV appearance as a wide card */
+.calm .k-tv b { flex: 0 0 auto; }
+.calm .k-tv li.k-tv--feat { grid-column: 1 / -1; padding: 26px 30px; background: var(--c-pine); }
+.calm .k-tv li.k-tv--feat b { width: 56px; height: 56px; background: var(--c-gold); color: var(--c-pine); }
+.calm .k-tv li.k-tv--feat strong { color: #fff; font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 600; letter-spacing: -0.02em; }
+.calm .k-tv li.k-tv--feat em { display: block; margin-top: 4px; font-style: normal; color: rgba(255, 255, 255, 0.85); }
+.calm .k-tv li.k-tv--feat small { display: block; margin-top: 6px; color: var(--c-gold); font-weight: 600; }
