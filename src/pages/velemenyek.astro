@@ -36,7 +36,35 @@ const reviews = [
   { text: 'Vágó Eszternél volt a lányom. Alapos, jó szakember és nagyon kedves.', name: 'Füzesi Katalin', role: 'páciens', initials: 'FK' },
 ];
 // Mix the voices: reviews about one therapist go last so the page does not read as her advertisement.
-const wall = [...reviews].sort((a, b) => Number(/Eszt/.test(a.text)) - Number(/Eszt/.test(b.text)));
+const wallMixed = [...reviews].sort((a, b) => Number(/Eszt/.test(a.text)) - Number(/Eszt/.test(b.text)));
+
+// Public Google reviews of both clinics, copied word for word (full reviews only, no cut-off ones). Names shortened to surname and initial.
+const googleReviews = [
+  { text: 'Hozzáértő, rátermett gyógytornász szakemberek. Támogató légkör, kedves, gondos, személyre szabott törődés a páciensekkel. Kiváló lokáció, tiszta, korrekt, jól felszerelt rendelő.', name: 'Halasi Á.' },
+  { text: 'Profi csapat, nagy empátiával és szaktudással rendelkeznek. Többször visszatértem különböző mozgásszervi problémákkal, és mindig tökéletesen "összeraktak". Hálás vagyok nekik, nem mennék máshova :-)', name: 'Román M.' },
+  { text: 'Várkövi Évához járok már 5. éve. Szakmailag kimagasló, empatikus, segítőkész. A problémához igazodó, az egész testet átmozgató gyakorlatai változatosak.', name: 'Biczó I.' },
+  { text: 'Empatikus, kedves, lelkiismeretes gyógytornász Takács Dóra. Több éve hozzájárok és nagyon sokat segít az állapotom szinten tartásában. A rendelőben az ott dolgozók mindegyike barátságos, udvarias. Szeretek oda járni. Szívből ajánlom mindenkinek.', name: 'Hanker K.' },
+  { text: 'Szakmailag és emberileg is szuper hely, maximális elkötelezettséggel végzi Judit a munkáját, jó szívvel tudom ajánlani.', name: 'Kunné Porkoláb A.' },
+  { text: 'Porckorongsérvvel fordultam a rendelőhöz. A bejelentkezés egyszerűen és gyorsan ment. A rendelő tiszta, a gyógytornász pedig időben fogadott. Már pár alkalom után nagy javulást érzek. Köszönöm a segítséget!', name: 'Nyerges B.' },
+  { text: 'Nagyon felkészült és tapasztalt szakemberek, nyugodt környezet jellemzi. A kislányunk Ágihoz jár, nyugodt szívvel ajánljuk és köszönjük folyamatos segítséget!', name: 'Guzmics K.' },
+  { text: 'Nagyon profi a támogatás, itt lehet gyógyulni! Az udvariasság, a nyugalom, a szakszerűség lengi be a helyet, jól érzi magát az ember.', name: 'Kun T.' },
+  { text: 'Kétszer jártam náluk, mindkétszer megoldották a problámat. Felkészültek, kedvesek, hatékonyak - csak ajánlani tudom őket! Köszönöm', name: 'Csepregi M.' },
+  { text: 'Több, mint egy éve járok rendszeresen órákra, maximálisan elégedett vagyok, sokat tanultam magamról és a mozgásról, fizikai állapotom gyorsan javulásnak indult.', name: 'Ober Gy.' },
+  { text: 'Egyértelműen csakis csillagos ötös. Kedvesség, szakszerű segítség, külön figyelem minden egyes pácienshez és az állapotához. Csak ajánlani tudom.', name: 'Tkacsuk A.' },
+  { text: 'Kiváló szakemberek, nagy fokú segítségnyújtás és problémamegoldás, remek hangulatú kezelések! Szívből ajánlom!', name: 'Blaskó T.' },
+  { text: 'Nagyon sok gyógytornásznál voltam sport sérülések miatt, rengeteg negatív tapasztalat után kerültem ide. De ezen a helyen a tökéletes szakértelem és a kedvesség teljesen megváltoztatta a negatív tapasztalataimat. Csak ajánlani tudom a helyet.', name: 'Michl G.' },
+  { text: 'A mckenzie gerinctorna mesterei. Évek óta lumbagós vagyok, amint kiújul mindig elmegyek a Bartók Béla úti rendelőbe egy kis utókezelésre. Szakszerű és kedves gyógytornászok, csak ajánlani tudom.', name: 'Bölcső G.' },
+  { text: 'Évek óta ide járok, bármilyen sérülésem is van. Mindig van megoldás és érthető magyarázatot is kapok. Csak ajánlani tudom!', name: 'Hofmann-Kováts Á.' },
+  { text: 'Nagyon kedves, jó ellátást kaptam Sylviától, minden porcikámmal foglalkozott rendkívüli odafigyeléssel és szakértelemmel. Köszönöm a gondoskodást.', name: 'Káldi K.' },
+  { text: 'Akut probléma kezelésére, vagy megelőző terápiára is kiváló ez a rendelő. Kellemes, jól felszerelt környezetben profi, figyelmes gyógytornász segítette a műtét utáni rehabilitációmat, azóta pedig a prevenciós tornámat. A családom is ide jár, ha panasza van.', name: 'Pados G.' },
+  { text: 'A helyet nagyon szeretem, a szakszerűség, sok figyelem, precizitás és nagyon pozitív hozzáállás illtve légkör miatt.', name: 'Nyéki A.' },
+  { text: 'Kulturált rendelő a belvárosban, komoly felkészültséggel bíró gyógytornászokkal. Csak ajánlani tudom!', name: 'Bors G.' },
+  { text: 'Igényes környezet . Szakértelem ,hozzáértés , precizitás , alaposság , tökéletes gyakorlatok. Köszönöm!', name: 'Dósa L.' },
+].map((r) => {
+  const w = r.name.replace('.', '').split(' ');
+  return { ...r, role: 'Google-vélemény', initials: w[0][0] + w[w.length - 1][0], verbatim: true };
+});
+const wall = [...wallMixed.map((r) => ({ ...r, verbatim: false })), ...googleReviews];
 
 const press = [
   { title: 'McKenzie módszer a gerincproblémák gyógyítására', source: 'Sikeres Nők', issue: 'XI. évf. 2008. április, 123. szám', quote: 'Ha időben lépünk, elkerülhetjük a bajt, megelőzhetjük a kiújuló fájdalmakat.' },
@@ -114,7 +142,7 @@ const tv = [
     <div class="k-wrap">
       <div class="k-wall">
         {wall.map((r) => (
-          <figure class="k-qcard">
+          <figure class="k-qcard" data-notranslate={r.verbatim ? '' : undefined}>
             <blockquote class="k-quote">{r.text}</blockquote>
             <figcaption><span class="k-av">{r.initials}</span><span><strong>{r.name}</strong><small>{r.role}</small></span></figcaption>
           </figure>
