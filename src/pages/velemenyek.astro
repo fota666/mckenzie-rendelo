@@ -1,5 +1,5 @@
 ---
-// Reviews page (calm design): rating cards, two featured voices, phrases from the reviews,
+// Reviews page (calm design): rating cards, two featured voices,
 // a wall of patient reviews, press and TV, closing call to action.
 import CalmLayout from '../layouts/CalmLayout.astro';
 import CalmCta from '../components/calm/CalmCta.astro';
@@ -14,14 +14,6 @@ const featured = [
     text: 'Nincs gerincsérvből eredő kilátástalanság. A McKenzie-módszerrel gyakorlatilag visszakaptam az életem. Tiszta szívből ajánlom mindenkinek, aki hasonló problémával küzd!',
     name: 'Kulcsár Krisztián', role: 'világbajnok vívó', initials: 'KK',
   },
-];
-
-// Short phrases, each copied from one of the reviews on this page.
-const phrases = [
-  'Professzionális ellátás, barátságos légkör',
-  'Inspirál, támogat, buzdít',
-  'Magas színvonalú szolgáltatást kapok elérhető áron',
-  'Szívből ajánlom!',
 ];
 
 const reviews = [
@@ -65,7 +57,18 @@ const googleReviews = [
   const w = r.name.replace('.', '').split(' ');
   return { ...r, role: 'Google-vélemény', initials: w[0][0] + w[w.length - 1][0], verbatim: true };
 });
-const wall = [...wallMixed.map((r) => ({ ...r, verbatim: false })), ...googleReviews];
+const TOPICS = [
+  { id: 'gerinc', label: 'Derék és gerinc', re: /derék|gerinc|sérv|lumbag|ülőmunka|csigolya/i },
+  { id: 'nyak', label: 'Nyak és váll', re: /nyak|váll/i },
+  { id: 'mutet', label: 'Műtét után, sérülés után', re: /műtét|keresztszalag|gipsz|rehabilit|baleset|sérülés/i },
+  { id: 'gyerek', label: 'Gyerekek', re: /gyerek|lány|kislány|fiam|gyermek/i },
+];
+const wall = [...wallMixed.map((r) => ({ ...r, verbatim: false })), ...googleReviews].map((r) => ({
+  ...r,
+  tags: TOPICS.filter((t) => t.re.test(r.text)).map((t) => t.id).join(' '),
+}));
+const topicCount = (id: string) => wall.filter((r) => r.tags.split(' ').includes(id)).length;
+const FIRST = 9;
 
 const press = [
   { title: 'McKenzie módszer a gerincproblémák gyógyítására', source: 'Sikeres Nők', issue: 'XI. évf. 2008. április, 123. szám', quote: 'Ha időben lépünk, elkerülhetjük a bajt, megelőzhetjük a kiújuló fájdalmakat.' },
@@ -125,29 +128,28 @@ const tv = [
     </div>
   </section>
 
-  <!-- Phrases -->
-  <section class="k-sec k-sec--sage" style="padding-bottom:0">
-    <div class="k-wrap">
+  <!-- Wall of reviews: topic filter, first nine, then "show more" -->
+  <section class="k-sec k-sec--sage" id="velemenyek-lista">
+    <div class="k-wrap" data-wall>
       <div class="k-head">
-        <p class="k-eyebrow">Mondatok a véleményekből</p>
-        <h2 class="k-h2">Néhány mondat a véleményekből</h2>
+        <p class="k-eyebrow">Páciensvélemények</p>
+        <h2 class="k-h2">Mit írnak a pácienseink?</h2>
       </div>
-      <ul class="k-phr">
-        {phrases.map((t) => <li>{t}</li>)}
-      </ul>
-    </div>
-  </section>
-
-  <!-- Wall of reviews -->
-  <section class="k-sec k-sec--sage" style="padding-top:clamp(32px,4vw,48px)">
-    <div class="k-wrap">
+      <div class="k-fchips" role="group" aria-label="Szűrés témára">
+        <button type="button" data-topic="all" aria-pressed="true">Mind <span>{wall.length}</span></button>
+        {TOPICS.map((t) => <button type="button" data-topic={t.id} aria-pressed="false">{t.label} <span>{topicCount(t.id)}</span></button>)}
+      </div>
       <div class="k-wall">
-        {wall.map((r) => (
-          <figure class="k-qcard">
+        {wall.map((r, i) => (
+          <figure class="k-qcard" data-tags={r.tags} data-i={i}>
             <blockquote class="k-quote">{r.text}</blockquote>
             <figcaption><span class="k-av" data-notranslate>{r.initials}</span><span><strong data-notranslate>{r.name}</strong><small>{r.role}</small></span></figcaption>
           </figure>
         ))}
+      </div>
+      <div class="k-more">
+        <button type="button" class="k-btn k-btn--ghost" data-more>Továbbiak megjelenítése</button>
+        {clinic.locations.map((l) => <a href={l.mapsUrl} target="_blank" rel="noopener" class="k-link">{l.name}: összes Google-vélemény</a>)}
       </div>
     </div>
   </section>
@@ -184,3 +186,26 @@ const tv = [
 
   <CalmCta tone="gold" title="Szeretne segítséget kapni a panaszaira? Kérjen időpontot!" />
 </CalmLayout>
+
+<script define:vars={{ FIRST }}>
+  document.querySelectorAll('[data-wall]').forEach((root) => {
+    const cards = [...root.querySelectorAll('.k-qcard')];
+    const btns = [...root.querySelectorAll('[data-topic]')];
+    const more = root.querySelector('[data-more]');
+    let topic = 'all';
+    let shown = FIRST;
+    const render = () => {
+      const match = cards.filter((c) => topic === 'all' || (c.dataset.tags || '').split(' ').includes(topic));
+      cards.forEach((c) => { c.hidden = true; });
+      match.slice(0, shown).forEach((c) => { c.hidden = false; });
+      more.hidden = match.length <= shown;
+    };
+    btns.forEach((b) => b.addEventListener('click', () => {
+      topic = b.dataset.topic; shown = FIRST;
+      btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      render();
+    }));
+    more.addEventListener('click', () => { shown += 9; render(); });
+    render();
+  });
+</script>

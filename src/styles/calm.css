@@ -493,3 +493,13 @@ body.calm {
 .calm .k-faqgrid { display: grid; gap: 40px; align-items: start; }
 @media (min-width: 960px) { .calm .k-faqgrid { grid-template-columns: 7fr 5fr; gap: 64px; } }
 .calm .k-vb--rel { grid-template-columns: repeat(2, 1fr) !important; }
+
+/* Reviews page: topic filter and "show more" */
+.calm .k-fchips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.calm .k-fchips button { padding: 9px 18px; border-radius: 999px; background: var(--c-white); border: 1.5px solid var(--c-line); font: inherit; font-size: 0.95rem; font-weight: 500; color: var(--c-pine); cursor: pointer; transition: background 0.2s, border-color 0.2s, color 0.2s; }
+.calm .k-fchips button span { margin-left: 4px; color: var(--c-mute); font-weight: 400; }
+.calm .k-fchips button:hover { border-color: var(--c-pine); }
+.calm .k-fchips button[aria-pressed="true"] { background: var(--c-pine); border-color: var(--c-pine); color: #fff; }
+.calm .k-fchips button[aria-pressed="true"] span { color: rgba(255, 255, 255, 0.7); }
+.calm .k-qcard[hidden], .calm .k-more[hidden], .calm .k-more [hidden] { display: none; }
+.calm .k-more { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; margin-top: 12px; }
