@@ -190,7 +190,7 @@ const schema = {
         <div class="k-quotes">
           {patientReviews.map((r) => (
             <figure>
-              <blockquote class="k-quote" lang={r.lang ?? 'hu'} data-notranslate>{r.text}</blockquote>
+              <blockquote class="k-quote">{r.text}</blockquote>
               <p class="k-small" data-notranslate>{r.name}</p>
             </figure>
           ))}

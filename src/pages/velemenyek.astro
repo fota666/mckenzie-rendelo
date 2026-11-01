@@ -59,6 +59,7 @@ const googleReviews = [
   { text: 'Akut probléma kezelésére, vagy megelőző terápiára is kiváló ez a rendelő. Kellemes, jól felszerelt környezetben profi, figyelmes gyógytornász segítette a műtét utáni rehabilitációmat, azóta pedig a prevenciós tornámat. A családom is ide jár, ha panasza van.', name: 'Pados G.' },
   { text: 'A helyet nagyon szeretem, a szakszerűség, sok figyelem, precizitás és nagyon pozitív hozzáállás illtve légkör miatt.', name: 'Nyéki A.' },
   { text: 'Kulturált rendelő a belvárosban, komoly felkészültséggel bíró gyógytornászokkal. Csak ajánlani tudom!', name: 'Bors G.' },
+  { text: 'Vágó Eszter kiváló munkát végzett a fájó nyakammal. Csak ajánlani tudom!', name: 'Buza Zs.' },
   { text: 'Igényes környezet . Szakértelem ,hozzáértés , precizitás , alaposság , tökéletes gyakorlatok. Köszönöm!', name: 'Dósa L.' },
 ].map((r) => {
   const w = r.name.replace('.', '').split(' ');
@@ -142,9 +143,9 @@ const tv = [
     <div class="k-wrap">
       <div class="k-wall">
         {wall.map((r) => (
-          <figure class="k-qcard" data-notranslate={r.verbatim ? '' : undefined}>
+          <figure class="k-qcard">
             <blockquote class="k-quote">{r.text}</blockquote>
-            <figcaption><span class="k-av">{r.initials}</span><span><strong>{r.name}</strong><small>{r.role}</small></span></figcaption>
+            <figcaption><span class="k-av" data-notranslate>{r.initials}</span><span><strong data-notranslate>{r.name}</strong><small>{r.role}</small></span></figcaption>
           </figure>
         ))}
       </div>
