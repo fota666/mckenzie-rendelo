@@ -17,7 +17,7 @@ body.calm {
   --c-gold: #cc8e56;
   --c-gold-2: #ddaa7a;
   --r: 14px;
-  --wrap: 1240px;
+  --wrap: 1320px;
   margin: 0;
   font-family: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-size: 17px;
@@ -66,12 +66,12 @@ body.calm {
 
 /* header */
 .calm .k-header { position: sticky; top: 0; z-index: 40; background: rgba(250, 248, 244, 0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--c-line); }
-.calm .k-header__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+.calm .k-header__in { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 72px; max-width: 1480px; }
 .calm .k-brand { display: flex; align-items: center; gap: 12px; color: var(--c-pine); }
 .calm .k-logo { width: 38px; height: 38px; }
 .calm .k-brand strong { display: block; font-size: 1.25rem; font-weight: 600; line-height: 1.1; }
 .calm .k-brand small { display: block; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-mute); }
-.calm .k-nav { display: none; align-items: center; gap: 22px; font-size: 0.97rem; font-weight: 500; color: var(--c-mute); }
+.calm .k-nav { display: none; align-items: center; gap: clamp(14px, 1.5vw, 24px); font-size: 0.97rem; font-weight: 500; color: var(--c-mute); }
 .calm .k-nav a:hover { color: var(--c-pine); }
 .calm .k-nav .k-btn { padding: 10px 20px; font-size: 0.95rem; color: var(--c-pine); }
 .calm .k-nav .k-tel { color: var(--c-pine); font-weight: 600; }
@@ -515,3 +515,12 @@ body.calm {
 .calm .k-tv li.k-tv--feat small { display: block; margin-top: 6px; color: var(--c-gold); font-weight: 600; }
 .calm .k-press__d { margin-top: 8px; color: var(--c-ink); }
 .calm .k-tv li:not(.k-tv--feat) em { display: block; margin-top: 4px; font-style: normal; font-size: 0.9rem; color: var(--c-mute); }
+
+/* header: tighter nav between 1200 and 1360px so the longer German labels still fit */
+@media (min-width: 1200px) and (max-width: 1359px) {
+  .calm .k-header__in { gap: 14px; }
+  .calm .k-nav { font-size: 0.9rem; gap: 14px; }
+  .calm .k-actions { gap: 10px; }
+  .calm .k-actions .k-btn { padding: 9px 14px; font-size: 0.88rem; }
+  .calm .k-brand small { letter-spacing: 0.1em; }
+}
