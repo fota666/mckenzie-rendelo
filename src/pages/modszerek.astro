@@ -8,15 +8,16 @@ const base = import.meta.env.BASE_URL;
 
 // Chips under each method link to the complaint page when there is one (first matching rule wins).
 const PAGE_RULES: [RegExp, string][] = [
+  [/Sérülések utáni/i, ''],
   [/Porckorongsérv/i, 'porckorongserv'],
   [/Isiász|Végtagba sugárzó/i, 'isiasz'],
   [/Gerinceredetű fejfájás|Nyaki|Nyak/i, 'nyakfajas'],
-  [/Váll|Fagyott váll/i, 'vallfajas'],
+  [/Váll|Befagyott váll/i, 'vallfajas'],
   [/Csípő/i, 'csipofajdalom'],
   [/Térd/i, 'terdfajdalom'],
   [/Gerincferdülés|Scheuermann|aszimmetria|bordapúp/i, 'gerincferdules'],
   [/műtét|rehabilitáció|Szalagszakadás|Csonttörés/i, 'muteti-rehabilitacio'],
-  [/Irodai ülőmunka|ülőmunka|Tartáshib|Munkahelyi|Ergonómiai/i, 'ulomunka-tartashibak'],
+  [/Irodai ülőmunka|ülőmunka|Tartáshib|Rossz tartás|Munkahelyi|Ergonómiai/i, 'ulomunka-tartashibak'],
   [/Derékfájás|Lumbágó/i, 'derekfajas'],
 ];
 const pageFor = (label: string) => PAGE_RULES.find(([re]) => re.test(label))?.[1];
@@ -37,7 +38,7 @@ const methods = [
       'Önkezelési stratégia megtanítása: a páciens képessé válik saját panaszai kezelésére',
       'Rendszeres kontroll és a program finomhangolása',
     ],
-    conditions: ['Derékfájás (lumbágó)', 'Nyaki fájdalom', 'Porckorongsérv', 'Isiász', 'Végtagba sugárzó fájdalom', 'Gerinceredetű fejfájás'],
+    conditions: ['Derékfájás (lumbágó)', 'Nyaki fájdalom', 'Porckorongsérv', 'Isiász', 'Végtagba sugárzó fájdalom', 'Gerinceredetű fejfájás', 'Rossz tartás okozta panaszok'],
   },
   {
     id: 'manualterapia',
@@ -50,7 +51,7 @@ const methods = [
       { name: 'Maitland manuálterápia', desc: 'Páciensközpontú módszer, amely az idegrendszer, az izomzat és az ízületek vizsgálatára épül. A tesztek segítenek eldönteni, mely mozgások és kezelések illenek a panaszhoz.' },
       { name: 'Mulligan manuálterápia', desc: 'Az ízületek helyzeti eltéréseire épül. A terapeuta egy adott helyzetben tartja az ízületet, miközben a páciens aktívan mozog. A kivitelezés során a fájdalommentességre törekszünk.' },
     ],
-    conditions: ['Derékfájás', 'Nyaki és háti fájdalom', 'Vállpanaszok', 'Csípő-, térd-, bokafájdalom', 'Tenisz- és golfkönyök', 'Fagyott váll'],
+    conditions: ['Derékfájás', 'Nyaki és háti fájdalom', 'Vállpanaszok', 'Csípő-, térd-, bokafájdalom', 'Tenisz- és golfkönyök', 'Befagyott váll'],
   },
   {
     id: 'stabilizacio',
@@ -59,16 +60,16 @@ const methods = [
     image: `${base}images/modszerek/stabilizacio.png`,
     description: 'Célzott gyakorlatokkal erősítjük a gerincet és a törzset támasztó mély izmokat, és megtanítjuk a helyes mozgásmintákat.',
     details: 'A gyakorlatokat a terapeuta mutatja meg és ellenőrzi, majd otthoni programként is folytatható. A rendszeres erősítés segíthet csökkenteni a panaszok visszatérésének esélyét.',
-    conditions: ['Csigolyacsúszás (spondylolisthesis)', 'Porckorongsérv utáni állapot', 'Lumbágó, visszatérő derékfájás', 'A gerinc terhelhetőségének javítása'],
+    conditions: ['Csigolyacsúszás (spondylolisthesis)', 'Porckorongsérv utáni állapot', 'Lumbágó, visszatérő derékfájás', 'A gerinc terhelhetőségének javítása', 'Rossz tartás'],
   },
   {
     id: 'stretching',
     clip: { name: 'mellkasi-nyujtas-hengerrel', label: 'Mellkasi nyújtás habhengeren' },
-    title: 'Gyógyászati nyújtás (stretching)',
+    title: 'Terápiás nyújtás (stretching)',
     image: `${base}images/modszerek/stretching.png`,
     description: 'Nyújtással és lazítással segítünk az izomfeszülés oldásában és a mozgásterjedelem növelésében.',
     details: 'A nyújtást a terapeuta a panaszhoz igazítja, és megtanítja azokat a gyakorlatokat, amelyeket otthon is végezhet. Gyakran más kezelésekkel együtt alkalmazzuk.',
-    conditions: ['Izomgörcsök, izomfeszülés', 'Csökkent ízületi mozgásterjedelem', 'Izommerevség'],
+    conditions: ['Izomgörcsök, izomfeszülés', 'Csökkent ízületi mozgásterjedelem', 'Izommerevség', 'Rossz tartás', 'Sérülések utáni rehabilitáció'],
   },
   {
     id: 'mutet-utani',
@@ -86,7 +87,7 @@ const methods = [
     image: `${base}images/modszerek/izuleti_fajdalmak.png`,
     description: 'A fájdalom okainak és eredetének feltárása után egyéni mozgásterápia segítségével javítjuk az ízület mozgását és funkcióját, valamint csökkentjük az ízületi fájdalmat.',
     details: 'Akut sportsérülések és a tartósan helytelen mozgás következményeinek kezelése. Passzív mozgatás, aktív erősítés és nyújtás kombinálása. Kiemelt figyelmet fordítunk az újrasérülés megelőzésére is.',
-    conditions: ['Térdfájdalom', 'Vállfájdalom', 'Csípőfájdalom', 'Bokafájdalom', 'Csuklófájdalom', 'Gerinceredetű ízületi panaszok'],
+    conditions: ['Térdfájdalom', 'Vállfájdalom', 'Csípőfájdalom', 'Bokafájdalom', 'Csuklófájdalom', 'Gerinceredetű ízületi panaszok', 'Sérülések utáni rehabilitáció'],
   },
   {
     id: 'tartasjavitas',

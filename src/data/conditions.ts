@@ -229,12 +229,12 @@ export const conditions: Condition[] = [
     name: 'Vállfájás',
     h1: 'Vállfájás kezelése gyógytornával Budapesten',
     metaTitle: 'Vállfájás gyógytorna Budapest | McKenzie Gyógytorna Rendelő',
-    metaDescription: 'Vállfájdalom, beszűkült vállmozgás és fagyott váll kezelése manuálterápiával és gyakorlatokkal Budapesten. Beutaló nem kell, időpont 1-2 napon belül.',
+    metaDescription: 'Vállfájdalom, beszűkült vállmozgás és befagyott váll kezelése manuálterápiával és gyakorlatokkal Budapesten. Beutaló nem kell, időpont 1-2 napon belül.',
     answer: `Vállpanasszal beutaló nélkül jöhet hozzánk. A vállat és a nyaki gerincet is megvizsgáljuk, mert a vállfájdalom a nyakból is eredhet, majd manuális technikákkal és célzott gyakorlatokkal kezeljük. Egy alkalom ${clinic.prices.single.range}, időpont általában 1-2 napon belül.`,
     whenToCome: [
       'fáj a karemelés, a hátra- vagy a fejre nyúlás',
       'a fájó vállon fekve nem tud aludni',
-      'a váll mozgása beszűkült, vagy fagyott vállat gyanítanak',
+      'a váll mozgása beszűkült, vagy befagyott vállat gyanítanak',
       'sérülés vagy műtét után szeretné visszanyerni a váll mozgását',
       'a nyaktól a vállig és a karig húzódik a fájdalom',
     ],
@@ -259,7 +259,7 @@ export const conditions: Condition[] = [
     ],
     timeline: 'A javulás üteme egyénenként eltér, és függ attól, mióta áll fenn a panasz. Az első vizsgálat után a terapeuta elmondja, mire számíthat, és az otthoni gyakorlatok rendszeressége sokat számít.',
     faqs: [
-      { q: 'Mi a fagyott váll?', a: 'A váll mozgásterjedelmének fájdalmas, fokozatos beszűkülése. A diagnózist orvos állítja fel, a gyógytorna a mozgásterjedelem és a funkció visszaállítását segíti.' },
+      { q: 'Mi a befagyott váll?', a: 'A váll mozgásterjedelmének fájdalmas, fokozatos beszűkülése. A diagnózist orvos állítja fel, a gyógytorna a mozgásterjedelem és a funkció visszaállítását segíti.' },
       { q: 'A nyakból is jöhet a vállfájás?', a: 'Igen, a nyaki gerinc panaszai a vállba és a karba is sugározhatnak, ezért a vizsgálat a nyakat is magában foglalja.' },
       { q: 'Kell ultrahang vagy MRI a gyógytornához?', a: 'A gyógytorna megkezdéséhez beutaló és képalkotó vizsgálat nem szükséges. Ha van korábbi lelete, hozza magával. Ha a vizsgálat alapján szükségesnek látjuk, orvosi kivizsgálást javaslunk.' },
     ],

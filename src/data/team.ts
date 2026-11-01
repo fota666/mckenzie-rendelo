@@ -25,8 +25,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     photo: `${base}images/csapat/bognar_zsofia.jpg`,
-    // Returns in January 2027 (Relle Éva, 2026-10-31): drop the status and add the clinic to locationOf then.
-    status: 'GYES',
+    // Back at work from 2027-01-11; Relle Éva asked to show her before that (2026-11-01). Clinic still missing in locationOf.
   },
   {
     name: 'Cseh Ágnes',
@@ -257,7 +256,7 @@ export const terapeutak: Therapist[] = [
     title: 'Vezető gyógytornász',
     diploma: '1992',
     quals: [
-      'Magyarországi McKenzie Intézet, kuratóriumi tag',
+      'A Magyarországi McKenzie Intézet vezetője',
       'Semmelweis Egyetem ETK, oktató (2000 óta)',
       'McKenzie nemzetközi minősítővizsga',
       'McKenzie A, B, C, D és E végzettség',

@@ -13,7 +13,7 @@ export const founder = {
   photo: 'images/csapat/relle_eva.jpg',
   headline: 'Relle Éva 2001-ben alapította a rendelőt, hogy a McKenzie-módszer itthon is elérhető legyen.',
   intro:
-    'Az alapító gyógytornász 1992-ben diplomázott, és letette a McKenzie nemzetközi minősítővizsgát. A Magyarországi McKenzie Intézet kuratóriumának tagja, 2000 óta a Semmelweis Egyetem Egészségtudományi Karán is oktat. A rendelőben ma 15 gyógytornász dolgozik a vezetésével, két budapesti helyszínen.',
+    'Az alapító gyógytornász 1992-ben diplomázott, és letette a McKenzie nemzetközi minősítővizsgát. A Magyarországi McKenzie Intézet vezetője, 2000 óta a Semmelweis Egyetem Egészségtudományi Karán is oktat. A rendelőben ma 16 gyógytornász dolgozik a vezetésével, két budapesti helyszínen.',
   philosophy:
     'Nem elég kezelni a fájdalmat. A páciensnek meg kell tanulnia, hogyan előzze meg annak visszatérését.',
   credentials: ['Diploma 1992', 'McKenzie A-E', 'Nemzetközi minősítővizsga', 'Semmelweis Egyetem, oktató', 'Magyar, angol, német'],
@@ -21,7 +21,7 @@ export const founder = {
     { year: '1992', text: 'Gyógytornász diploma' },
     { year: '2000', text: 'Oktatni kezd a Semmelweis Egyetem Egészségtudományi Karán' },
     { year: '2001', text: 'Megalapítja a McKenzie Gyógytorna Rendelőt' },
-    { year: 'ma', text: '15 gyógytornász, két rendelő Budapesten' },
+    { year: 'ma', text: '16 gyógytornász, két rendelő Budapesten' },
   ],
   links: {
     institute: 'https://hu.mckenzieinstitute.org/rolunk/',

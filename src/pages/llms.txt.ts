@@ -14,7 +14,7 @@ export const GET: APIRoute = ({ site }) => {
 
   const body = `# ${clinic.name}
 
-> Magánrendelő Budapesten, két helyszínen (V. és XI. kerület). Gyógytorna derékfájásra, nyakfájásra, isiászra, porckorongsérvre és gerincferdülésre, elsősorban McKenzie-módszerrel (MDT). Alapító, vezető gyógytornász: Relle Éva (1992-ben diplomázott, a rendelőt 2001-ben alapította, McKenzie nemzetközi minősítővizsga, a Magyarországi McKenzie Intézet kuratóriumának tagja, 2000 óta a Semmelweis Egyetem Egészségtudományi Karán is oktat).
+> Magánrendelő Budapesten, két helyszínen (V. és XI. kerület). Gyógytorna derékfájásra, nyakfájásra, isiászra, porckorongsérvre és gerincferdülésre, elsősorban McKenzie-módszerrel (MDT). Alapító, vezető gyógytornász: Relle Éva (1992-ben diplomázott, a rendelőt 2001-ben alapította, McKenzie nemzetközi minősítővizsga, a Magyarországi McKenzie Intézet vezetője, 2000 óta a Semmelweis Egyetem Egészségtudományi Karán is oktat).
 
 ## Tények
 - ${clinic.therapists} gyógytornász, mindannyian McKenzie-képzéssel

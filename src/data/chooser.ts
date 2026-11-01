@@ -9,7 +9,7 @@ export const chooser: Complaint[] = [
   { slug: 'isiasz', name: 'Isiász', note: 'Lábba sugárzó fájdalom', group: 'Gerinc', poster: 'csipo-mobilizalas-hanyatt' },
   { slug: 'gerincferdules', name: 'Gerincferdülés', note: 'Gyermekeknek és felnőtteknek', group: 'Gerinc', poster: 'labdan-ules-szalaghuzas' },
   { slug: 'ulomunka-tartashibak', name: 'Ülőmunka és tartáshibák', note: 'Rossz tartás, nyak, váll, derék', group: 'Gerinc', poster: 'ulomunka-tartaskorrekcio' },
-  { slug: 'vallfajas', name: 'Váll', note: 'Beszűkült mozgás, fagyott váll', group: 'Ízületek', poster: 'vall-manualis-kezeles' },
+  { slug: 'vallfajas', name: 'Váll', note: 'Beszűkült mozgás, befagyott váll', group: 'Ízületek', poster: 'vall-manualis-kezeles' },
   { slug: 'terdfajdalom', name: 'Térd', note: 'Sport, sérülés, műtét után', group: 'Ízületek', poster: 'terd-csipo-vizsgalat' },
   { slug: 'csipofajdalom', name: 'Csípő', note: 'Fájó, merev csípő', group: 'Ízületek', poster: 'csipo-mobilizalas-ovvel' },
   { slug: 'muteti-rehabilitacio', name: 'Műtét előtti és utáni rehabilitáció', note: 'Gerinc, csípő, térd', group: 'Műtét után', poster: 'gluteus-gumiszalag-terd' },

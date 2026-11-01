@@ -39,7 +39,7 @@ const isPreview = !PRODUCTION_HOSTS.includes(Astro.site?.hostname ?? '');
 const orgId = `${siteRoot}#org`;
 const SERVICES = [
   'McKenzie-módszer (Mechanikai Diagnózis és Terápia, MDT)', 'Manuálterápia (Maitland, Mulligan)', 'Stabilizációs tréning',
-  'Schroth-terápia', 'Műtét előtti és utáni rehabilitáció', 'Tartásjavítás', 'Gyógyászati nyújtás',
+  'Schroth-terápia', 'Műtét előtti és utáni rehabilitáció', 'Tartásjavítás', 'Terápiás nyújtás',
   'Ízületi fájdalmak gyógytornája', 'Kineziológiai taping',
 ];
 const pagePath = Astro.url.pathname.replace(base, '').replace(/\/$/, '');
@@ -74,7 +74,7 @@ const schema = {
       makesOffer: [
         {
           '@type': 'Offer',
-          name: `${clinic.prices.single.label}, ${clinic.prices.single.duration}`,
+          name: `Egyéni kezelés alkalmanként, ${clinic.prices.single.duration}`,
           priceSpecification: { '@type': 'PriceSpecification', minPrice: clinic.prices.single.min, maxPrice: clinic.prices.single.max, priceCurrency: 'HUF' },
           itemOffered: { '@type': 'MedicalTherapy', name: 'Egyéni gyógytorna McKenzie-módszerrel (mozgásvizsgálat, kezelés, otthoni gyakorlatsor)' },
         },

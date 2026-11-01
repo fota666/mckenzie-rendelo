@@ -11,7 +11,7 @@ export const clinic = {
   phone: '+36304878284',
   phoneDisplay: '(30) 487-8284',
   email: 'mck.relle@t-online.hu',
-  therapists: 15, // active; 3 more on GYES (see data/team.ts)
+  therapists: 16, // active; 2 more on GYES (see data/team.ts)
   bookingHours: 'Hétköznap 9:00-17:00', // phone line hours, as on the old kapcsolat page
   bookingHoursShort: 'H-P 9-17 óra',
   bookingHoursSentence: 'hétköznap 9 és 17 óra között',
@@ -58,7 +58,7 @@ export const clinic = {
   ],
   prices: {
     single: {
-      label: 'Egyéni kezelés',
+      label: 'Alkalmanként',
       duration: '50-55 perc',
       amount: `14${NBSP}000 vagy 15${NBSP}000${NBSP}Ft`,
       range: `14${NBSP}000-15${NBSP}000${NBSP}Ft`,
