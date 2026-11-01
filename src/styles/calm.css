@@ -511,3 +511,5 @@ body.calm {
 .calm .k-tv li.k-tv--feat strong { color: #fff; font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 600; letter-spacing: -0.02em; }
 .calm .k-tv li.k-tv--feat em { display: block; margin-top: 4px; font-style: normal; color: rgba(255, 255, 255, 0.85); }
 .calm .k-tv li.k-tv--feat small { display: block; margin-top: 6px; color: var(--c-gold); font-weight: 600; }
+.calm .k-press__d { margin-top: 8px; color: var(--c-ink); }
+.calm .k-tv li:not(.k-tv--feat) em { display: block; margin-top: 4px; font-style: normal; font-size: 0.9rem; color: var(--c-mute); }

@@ -71,19 +71,19 @@ const topicCount = (id: string) => wall.filter((r) => r.tags.split(' ').includes
 const FIRST = 9;
 
 const press = [
-  { title: 'McKenzie módszer a gerincproblémák gyógyítására', source: 'Sikeres Nők', issue: 'XI. évf. 2008. április, 123. szám', quote: 'Ha időben lépünk, elkerülhetjük a bajt, megelőzhetjük a kiújuló fájdalmakat.' },
-  { title: 'Gyakorlatok derékfájás ellen', source: 'Nők Lapja Egészség', issue: 'V. évf. 4-5-6. szám, 2011', quote: 'Az esetek 80%-ában a derékfájás kiújuló jellegű betegség.' },
-  { title: 'Derék dolog hátfájásra', source: 'Elixír Magazin', issue: '2011. szeptember', quote: 'A McKenzie-módszer a gerincproblémák speciális vizsgálati és kezelési rendszere.' },
-  { title: 'McKenzie-módszer: Egyszerű mozdulatokkal a fájdalommentes életért', source: 'Phoenix Pharma', issue: '2010. május', quote: '' },
-  { title: 'Az irodai munka veszélyei', source: 'Pályacsúcs Magazin', issue: '2010. február', quote: '' },
+  { title: 'McKenzie módszer a gerincproblémák gyógyítására', source: 'Sikeres Nők', issue: 'XI. évf. 2008. április, 123. szám', quote: 'Ha időben lépünk, elkerülhetjük a bajt, megelőzhetjük a kiújuló fájdalmakat.', desc: 'Interjú Relle Évával a McKenzie-módszerről, a gerincproblémák mozgásalapú kezeléséről.' },
+  { title: 'Gyakorlatok derékfájás ellen', source: 'Nők Lapja Egészség', issue: 'V. évf. 4-5-6. szám, 2011', quote: 'Az esetek 80%-ában a derékfájás kiújuló jellegű betegség.', desc: 'A cikk egyéni mozgásvizsgálatra épülő megelőző gyakorlatokat mutat be, például ülőmunkát végzőknek.' },
+  { title: 'Derék dolog hátfájásra', source: 'Elixír Magazin', issue: '2011. szeptember', quote: 'A McKenzie-módszer a gerincproblémák speciális vizsgálati és kezelési rendszere.', desc: 'A McKenzie-módszer bemutatása Relle Éva nyilatkozatával. A módszert Robin McKenzie új-zélandi gyógytornász dolgozta ki.' },
+  { title: 'McKenzie-módszer: Egyszerű mozdulatokkal a fájdalommentes életért', source: 'Phoenix Pharma', issue: '2010. május', quote: '', desc: 'Kérdések és válaszok Relle Évával arról, hogyan enyhíthető a hát- és derékfájás egyszerű mozdulatokkal.' },
+  { title: 'Az irodai munka veszélyei', source: 'Pályacsúcs Magazin', issue: '2010. február', quote: '', desc: 'Az irodai munkához kapcsolódó egészségi problémák és megelőzésük.' },
 ];
 const year = (s: string) => s.match(/(20\d\d)/)?.[1] ?? '';
 
 const tv = [
   { title: 'RTL+: A McKenzie-módszerről', date: '2026. június', note: '3 perces összeállítás, a rendelőben forgatva', featured: true },
-  { title: 'Esésmegelőzés', date: '2014. november 10.' },
-  { title: 'Csontrikula', date: '2015. január 15.' },
-  { title: 'Térdsérülések', date: '2015. október 13.' },
+  { title: 'Esésmegelőzés', date: '2014. november 10.', note: 'MTV1 Családbarát: hogyan segíthet a gyógytorna az esések megelőzésében' },
+  { title: 'Csontritkulás', date: '2015. január 15.', note: 'MTV1 Családbarát: a csontritkulással kapcsolatos gyógytorna teendők' },
+  { title: 'Térdsérülések', date: '2015. október 13.', note: 'MTV1 Családbarát: a térdsérülések gyógytornája' },
 ];
 ---
 
@@ -170,6 +170,7 @@ const tv = [
               <div>
                 <p class="k-press__s">{p.source} <span>&middot; {p.issue}</span></p>
                 <h3 class="k-h3" style="font-size:1.3rem">{p.title}</h3>
+                {p.desc && <p class="k-press__d">{p.desc}</p>}
                 {p.quote && <p class="k-press__q">„{p.quote}”</p>}
               </div>
             </li>
