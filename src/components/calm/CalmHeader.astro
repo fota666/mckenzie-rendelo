@@ -4,7 +4,6 @@ import { clinic } from '../../data/clinic';
 import { conditions } from '../../data/conditions';
 const base = import.meta.env.BASE_URL;
 const info = [
-  { href: `${base}araink`, label: 'Árak' },
   { href: `${base}velemenyek`, label: 'Vélemények' },
   { href: `${base}gyik`, label: 'GYIK' },
 ];
@@ -18,6 +17,7 @@ const info = [
     </a>
 
     <nav class="k-nav" aria-label="Főmenü">
+      <a href={base}>Főoldal</a>
       <details class="k-dd" data-dd>
         <summary>Panaszok</summary>
         <div class="k-dd__panel k-dd__panel--wide">
@@ -27,6 +27,7 @@ const info = [
       </details>
       <a href={`${base}modszerek`}>Módszerek</a>
       <a href={`${base}csapatunk`}>Csapatunk</a>
+      <a href={`${base}araink`}>Árak</a>
       <details class="k-dd" data-dd>
         <summary>Tudnivalók</summary>
         <div class="k-dd__panel">
@@ -51,6 +52,7 @@ const info = [
     <details class="k-menu">
       <summary>Menü</summary>
       <nav aria-label="Főmenü">
+        <a href={base}>Főoldal</a>
         <details class="k-sub">
           <summary>Panaszok</summary>
           <div>
@@ -59,6 +61,7 @@ const info = [
         </details>
         <a href={`${base}modszerek`}>Módszerek</a>
         <a href={`${base}csapatunk`}>Csapatunk</a>
+        <a href={`${base}araink`}>Árak</a>
         {info.map((n) => <a href={n.href}>{n.label}</a>)}
         <a href={`${base}kapcsolat`}>Kapcsolat</a>
         <nav class="k-lang k-lang--mobile" data-lang-switch data-notranslate aria-label="Language">
