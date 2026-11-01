@@ -25,7 +25,7 @@ export const terapeutak: Therapist[] = [
     ],
     langs: ['angol'],
     photo: `${base}images/csapat/bognar_zsofia.jpg`,
-    // Back at work from 2027-01-11; Relle Éva asked to show her before that (2026-11-01). Clinic still missing in locationOf.
+    // Back at work from 2027-01-11; Relle Éva asked to show her before that (2026-11-01). Bartók Béla úti rendelő (Éva, 2026-11-01), ár még nincs.
   },
   {
     name: 'Cseh Ágnes',
@@ -394,6 +394,7 @@ export const locationOf: Record<string, ClinicId[]> = {
   'Jungwirth Sylvia': ['buda'],
   'Szabó Éva Bernadett': ['buda'],
   'Relle Éva': ['buda'],
+  'Bognár Zsófia': ['buda'],
 };
 const CLINIC_SHORT: Record<ClinicId, string> = { belvaros: 'Belváros', buda: 'Buda' };
 /** Short label under a therapist's name, e.g. "Belváros" or "Belváros és Buda". */
